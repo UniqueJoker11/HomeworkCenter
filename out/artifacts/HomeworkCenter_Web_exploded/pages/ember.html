@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="${ctxPath}/resources/css/bootstrap.min.css">
+    <script src="${ctxPath}/resources/js/jquery.min.js"></script>
+<!--    <script src="${ctxPath}/resources/js/bootstrap.min.js"></script>-->
+    <script src="${ctxPath}/resources/js/handlebars.js"></script>
+    <script src="${ctxPath}/resources/js/ember.js"></script>
+    <script src="${ctxPath}/resources/js/ember-data.js"></script>
+    <title>Ember小例子</title>
+</head>
+<body>
+
+<script type="text/x-handlebars" data-template-name="ember">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+        </div>
+        <ul class="list-group">
+        {{#each appdata in model}}
+            <li class="list-group-item">{{appdata.title}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+</script>
+
+<script>
+    //创建模板对象
+    window.App=Ember.Application.create();
+    //创建数据适配器
+    App.ApplicationAdapter = DS.FixtureAdapter.extend();
+    //创建当前的路由
+    App.Router.map(function(){
+        this.resource("ember",{path:'/'});
+    });
+    //创建rote使用静态数据
+    App.EmberRoute=Ember.Route.extend({
+        model:function(){
+            return this.store.find("appdata");
+        }
+    });
+    //建立模型
+    App.Appdata=DS.Model.extend({
+        title: DS.attr('string'),
+        isCompleted: DS.attr('boolean')
+    });
+    //使用静态数据
+    App.Appdata.FIXTURES = [
+        {
+            id: 1,
+            title: 'Learn Ember.js',
+            isCompleted: true
+        },
+        {
+            id: 2,
+            title: '...',
+            isCompleted: false
+        },
+        {
+            id: 3,
+            title: 'Profit!',
+            isCompleted: false
+        }
+    ];
+</script>
+</body>
+</html>
