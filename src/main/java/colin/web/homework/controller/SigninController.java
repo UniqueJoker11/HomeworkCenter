@@ -1,6 +1,6 @@
-package colin.web.homework.controller.signin;
+package colin.web.homework.controller;
 
-import colin.web.homework.controller.BaseController;
+import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.service.SigninService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by ASUS on 2015/7/11.
  */
 @Controller
-@RequestMapping(value = "homework")
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
 public class SigninController extends BaseController {
 
     @Autowired
@@ -27,9 +27,9 @@ public class SigninController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/signin.html")
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN)
     public String showSigninPage() {
-        return "signin";
+        return HomeworkConstants.PAGE_SIGNIN;
     }
 
     /**
@@ -39,20 +39,17 @@ public class SigninController extends BaseController {
      * @param password
      * @return
      */
-    @RequestMapping(value = "/userSignin.html",method = RequestMethod.POST)
-    public ModelAndView userSignin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN_FORM,method = RequestMethod.POST)
+    public String userSignin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
         Map<String, Object> searchParams = new HashMap<>();
         searchParams.put("user_name", username);
         searchParams.put("user_password", password);
         Map<String, Object> searchResult = signinService.valdiateUserSignin(searchParams);
-        ModelAndView userIndex = new ModelAndView();
         if ((Boolean) searchResult.get("isExists")) {
             //TODO 存放用户信息到session
-            userIndex.setViewName("index");
-            return userIndex;
+            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER+HomeworkConstants.CONTROLLER_DASHBOARD;
         }else{
-            userIndex.setViewName("signin");
-            return userIndex;
+            return HomeworkConstants.PAGE_SIGNIN;
         }
 
     }

@@ -23,14 +23,14 @@
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
     <!--配置统一的错误处理机制,也可以自己重写这个类，通过集成HandlerExceptionResolverAdapter-->
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+  <!--  <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.Exception">/server_error</prop>
                 <prop key="java.lang.Throwable">server_theread_error</prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
     <!--处理JSON请求-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">

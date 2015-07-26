@@ -1,6 +1,6 @@
 package colin.web.homework.service;
 
-import colin.web.homework.core.dao.SigninDao;
+import colin.web.homework.core.dao.decoratedao.SigninDao;
 import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.rowmapper.Homework_User_Rowmapper;
 import org.springframework.beans.factory.annotation.Autowired;

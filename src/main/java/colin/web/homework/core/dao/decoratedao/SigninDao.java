@@ -1,4 +1,4 @@
-package colin.web.homework.core.dao;
+package colin.web.homework.core.dao.decoratedao;
 
 import colin.web.homework.core.dao.decoratedao.DecorateCommnDao;
 import org.springframework.stereotype.Repository;

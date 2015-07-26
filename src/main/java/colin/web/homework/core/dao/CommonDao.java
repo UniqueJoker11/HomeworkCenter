@@ -1,5 +1,6 @@
 package colin.web.homework.core.dao;
 
+import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.tools.HomeworkLogOperate;
 import org.springframework.jdbc.core.RowMapper;
@@ -83,8 +84,18 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
     public boolean updateObjInfo(T t) {
         StringBuilder updateSql=new StringBuilder("update ");
         updateSql.append(this.getEntityTableName(t)).append(" set ");
-
-        return false;
+        Map<String, Object> updateMap=this.getEntityParamsGroup(t,2);
+        if(!updateMap.get("updateSql").toString().equals("")){
+            updateSql.append(updateMap.get("updateSql").toString()).append(" where ").append(updateMap.get("updateSqlCondition").toString());
+           int result= this.getNamedParameterJdbcTemplate().update(updateSql.toString(),(Map<String, Object>)updateMap.get("params"));
+           if(result==1){
+               return true;
+           }else{
+               return false;
+           }
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -122,13 +133,12 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         //拼接查詢參數
         searchSql.append(this.fetchSearchSqlFragment(map));
         //开始查询
-        System.out.println(this.getNamedParameterJdbcTemplate()==null);
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
     }
 
     /**
      * 排序+分页功能+条件查询
-     *
+     * 语句默认按照升序对记录进行排序
      * @param cl       当前操作对象
      * @param map      条件参数
      * @param orderstr 排序字段 如果为null不排序
@@ -137,24 +147,31 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper) {
-        return null;
+    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper,boolean isAsc) {
+        StringBuilder searchSql=new StringBuilder("select * from ");
+        //获取表名
+        searchSql.append(this.getEntityTableNameByClazz(cl));
+        //添加查询列表
+        if(map!=null&&!map.isEmpty()){
+            searchSql.append(" where ").append(this.fetchSearchSqlFragment(map));
+        }
+        //假如需要分页
+        if(beginpos!=null&&beginpos>=1){
+            if(count==null||count<1){
+                count= HomeworkConstants.PAGE_SIZE;
+            }
+            searchSql.append(" limit ").append((beginpos-1)*count).append(" ").append(count);
+        }
+        //假如需要排序
+        if(!orderstr.equals("")){
+            searchSql.append(" order by ").append(orderstr);
+            if(isAsc){
+                searchSql.append(" asc");
+            }
+        }
+        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
     }
 
-    /**
-     * 排序(升序)+分页功能+条件查询
-     *
-     * @param cl       当前操作对象
-     * @param map      条件参数
-     * @param orderstr 排序字段 如果为null不排序
-     * @param beginpos 分页起点 如果为null不分页
-     * @param count    每页的记录总数 如果为null不分页
-     * @return 返回List集合
-     */
-    @Override
-    public List<T> getOrderAscObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper) {
-        return null;
-    }
 
     /**
      * 根絕類來獲取表名
@@ -243,9 +260,10 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
                     try {
                         if (field.get(t) != null) {
                             String columnName = field.getAnnotation(Column.class).name();
-                            updateSql.append(columnName).append("=:").append(columnName).append(",");
                             if (field.getAnnotation(Id.class) != null) {
                                 updateSqlCondition.append(columnName).append("=:").append(columnName);
+                            }else{
+                                updateSql.append(columnName).append("=:").append(columnName).append(",");
                             }
                             params.put(columnName, field.get(t));
                         }

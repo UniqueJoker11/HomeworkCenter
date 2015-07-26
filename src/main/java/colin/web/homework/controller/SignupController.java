@@ -1,5 +1,6 @@
-package colin.web.homework.controller.signin;
+package colin.web.homework.controller;
 
+import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by ASUS on 2015/7/12.
  */
 @Controller
-@RequestMapping(value = "homework")
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
 public class SignupController extends BaseController {
 
     /**
@@ -18,11 +19,12 @@ public class SignupController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/signup.html", method = RequestMethod.GET)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNUP, method = RequestMethod.GET)
     public String showSignupPage() {
-        return "signup";
+        return HomeworkConstants.PAGE_SIGNUP;
     }
-@RequestMapping(value = "/userSignup.html",method = RequestMethod.POST)
+
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNUP_FORM, method = RequestMethod.POST)
     public Object userSignup(@RequestParam String username, @RequestParam String password, @RequestParam String codeParam) {
         return null;
     }

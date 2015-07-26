@@ -82,22 +82,8 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String,Object> map, String orderstr, Integer beginpos, Integer count,RowMapper<T> rowMapper) {
-        return commonDao.getOrderObjects(cl,map,orderstr,beginpos,count,rowMapper);
+    public List<T> getOrderObjects(Class cl, Map<String,Object> map, String orderstr, Integer beginpos, Integer count,RowMapper<T> rowMapper,boolean isAsc) {
+        return commonDao.getOrderObjects(cl,map,orderstr,beginpos,count,rowMapper,isAsc);
     }
 
-    /**
-     * 排序(升序)+分页功能+条件查询
-     *
-     * @param cl       当前操作对象
-     * @param map      条件参数
-     * @param orderstr 排序字段 如果为null不排序
-     * @param beginpos 分页起点 如果为null不分页
-     * @param count    每页的记录总数 如果为null不分页
-     * @return 返回List集合
-     */
-    @Override
-    public List<T> getOrderAscObjects(Class cl, Map<String,Object> map, String orderstr, Integer beginpos, Integer count,RowMapper<T> rowMapper) {
-       return commonDao.getOrderAscObjects(cl,map,orderstr,beginpos,count,rowMapper);
-    }
 }

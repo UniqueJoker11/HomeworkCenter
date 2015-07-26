@@ -1,5 +1,6 @@
-package colin.web.homework.controller.email;
+package colin.web.homework.controller;
 
+import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by ASUS on 2015/7/19.
  */
 @Controller
-@RequestMapping(value="homework")
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
 public class EmailController extends BaseController {
 
     /**
