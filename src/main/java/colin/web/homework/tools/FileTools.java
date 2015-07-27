@@ -26,4 +26,14 @@ public class FileTools {
         return properties.get(propertyVal).toString();
     }
 
+    /**
+     * 根据命令获取当前工程或系统的信息
+     * @param commond
+     * @return
+     */
+    public static String fetchSystemInfo(String commond){
+        return System.getProperty(commond);
+    }
+
+
 }

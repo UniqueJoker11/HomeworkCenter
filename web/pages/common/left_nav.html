@@ -28,17 +28,17 @@
         </div>
 
         <h5 class="sidebartitle">Navigation</h5>
-        <ul class="nav nav-pills nav-stacked nav-bracket">
-            <li class="active"><a href="dashboard.html"><i class="fa fa-home"></i> <span>系统首页</span></a></li>
+        <ul id="colin-dashboard-menu" class="nav nav-pills nav-stacked nav-bracket">
+            <li class="active"><a href="./dashboard.html"><i class="fa fa-home"></i> <span>系统首页</span></a></li>
             <%for(menu in menuList){%>
             <%if(isEmpty(menu.childMenuList)){%>
-            <li><a href="${menu.menu_url}"><i class="${menu.menu_icon}"></i> <span>${menu.menu_name}</span></a></li>
+            <li><a href=".${menu.menu_url}"><i class="${menu.menu_icon}"></i> <span>${menu.menu_name}</span></a></li>
             <%}else{%>
-            <li class="nav-parent"><a href="${menu.menu_url}"><i class="${menu.menu_icon}"></i>
+            <li class="nav-parent"><a href=".${menu.menu_url}"><i class="${menu.menu_icon}"></i>
                 <span>${menu.menu_name}</span></a>
                 <ul class="children">
                     <%for(subMenu in menu.childMenuList){%>
-                    <li><a href="${subMenu.menu_url}"><i class="${subMenu.menu_icon}"></i> ${subMenu.menu_name}</a></li>
+                    <li><a href=".${subMenu.menu_url}"><i class="${subMenu.menu_icon}"></i> ${subMenu.menu_name}</a></li>
                     <%}%>
                 </ul>
             </li>
