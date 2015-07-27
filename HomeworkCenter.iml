@@ -80,6 +80,6 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.29" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.61" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.53" level="application_server_libraries" />
   </component>
 </module>

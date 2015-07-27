@@ -1,5 +1,7 @@
 package colin.web.homework.common;
 
+import java.io.File;
+
 /**
  * Created by ASUS on 2015/7/26.
  * 系统常量
@@ -44,5 +46,7 @@ public class HomeworkConstants {
      * 默认的分页数据
      */
     public static final int PAGE_SIZE = 10;
+    public static final String RESOURCES_STORE_DIR="upload"+ File.pathSeparator+"resources";
+    public static final String IMAGE_STORE_DIR="upload"+File.pathSeparator+"images";
 
 }

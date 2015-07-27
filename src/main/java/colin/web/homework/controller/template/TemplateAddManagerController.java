@@ -62,13 +62,9 @@ public class TemplateAddManagerController {
     public class UploadResource implements Runnable {
 
         private InputStream inputStream;
-        private String fileName;
-        private String storeDir;
 
-        UploadResource(InputStream inputStream, String fileName, String storeDir) {
-            this.fileName = fileName;
+        UploadResource(InputStream inputStream) {
             this.inputStream = inputStream;
-            this.storeDir = storeDir;
         }
 
         /**
@@ -87,8 +83,16 @@ public class TemplateAddManagerController {
             //读取缓存资源
             BufferedInputStream snapshotUploadStream = new BufferedInputStream(inputStream);
             //构建资源的存储路径
-            StringBuilder storeRoute=new StringBuilder(FileTools.fetchSystemInfo("user.dir"));
-            // FileOutputStream resourceFile=new FileOutputStream();
+            StringBuilder storeRoute=new StringBuilder(HomeworkConstants.IMAGE_STORE_DIR);
+            storeRoute.append(File.pathSeparator).append(FileTools.fetchImageFileName());
+            File imageFile=new File(storeRoute.toString());
+            try {
+                FileOutputStream resourceFile=new FileOutputStream(imageFile);
+                //开始写文件
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

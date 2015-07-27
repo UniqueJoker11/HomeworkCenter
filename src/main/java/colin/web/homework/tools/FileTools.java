@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  * Created by ASUS on 2015/7/19.
@@ -35,5 +36,15 @@ public class FileTools {
         return System.getProperty(commond);
     }
 
+    /**
+     * 返回一个随机的图片名称
+     * @return
+     */
+    public static String fetchImageFileName(){
+        String pattern="YYYYMMddhhmmss";
+        String dateResult=DateToolsUtils.getSpecificDate(pattern);
+        Random random=new Random();
+        return (dateResult+Math.floor(random.nextDouble()*10000)).split(".")[0];
+    }
 
 }
