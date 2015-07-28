@@ -16,6 +16,7 @@ public class TemplateService {
     private TemplateDao templateDao;
     @Autowired
     private Homework_Template_Entity homework_template_entity;
+    public List<Template>
 
     /**
      * 保存模板对象
