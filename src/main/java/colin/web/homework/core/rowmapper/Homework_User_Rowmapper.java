@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * Created by ASUS on 2015/7/11.
  */
-public class Homework_User_Rowmapper<Homework_User_Entity> implements RowMapper<Homework_User_Entity>{
+public class Homework_User_Rowmapper<Homework_User_Entity> implements RowMapper<Homework_User_Entity> {
     /**
      * Implementations must implement this method to map each row of data
      * in the ResultSet. This method should not call {@code next()} on
@@ -20,11 +20,11 @@ public class Homework_User_Rowmapper<Homework_User_Entity> implements RowMapper<
      * @param rowNum the number of the current row
      * @return the result object for the current row
      * @throws java.sql.SQLException if a SQLException is encountered getting
-     *                      column values (that is, there's no need to catch SQLException)
+     *                               column values (that is, there's no need to catch SQLException)
      */
     @Override
     public Homework_User_Entity mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Homework_User_Entity entity=new Homework_User_Entity();
+        Homework_User_Entity entity = new Homework_User_Entity();
         entity.setUser_id(rs.getString("user_id"));
         entity.setUser_password(rs.getString("user_password"));
         entity.setUser_name(rs.getString("user_name"));

@@ -25,8 +25,8 @@ public class DashboardController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD, method = RequestMethod.GET)
     public String showDashboardPage(HttpServletRequest request) {
         //加载左侧导航菜单内容
-        List<HomeworkMenuVo> menuList=menuService.getMenuInfoService();
-        request.setAttribute("menuList",menuList);
+        List<HomeworkMenuVo> menuList = menuService.getMenuInfoService();
+        request.setAttribute("menuList", menuList);
         return HomeworkConstants.PAGE_DASHBOARD;
     }
 }

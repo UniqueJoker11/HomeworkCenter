@@ -38,7 +38,8 @@
                 <span>${menu.menu_name}</span></a>
                 <ul class="children">
                     <%for(subMenu in menu.childMenuList){%>
-                    <li><a href=".${subMenu.menu_url}"><i class="${subMenu.menu_icon}"></i> ${subMenu.menu_name}</a></li>
+                    <li><a href=".${subMenu.menu_url}"><i class="${subMenu.menu_icon}"></i> ${subMenu.menu_name}</a>
+                    </li>
                     <%}%>
                 </ul>
             </li>

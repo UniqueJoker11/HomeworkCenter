@@ -14,14 +14,14 @@ import javax.persistence.Table;
 public class Homework_User_Entity {
     @Id
     @Column(name = "user_id")
-    private  String user_id;
-    @Column(name="user_name")
+    private String user_id;
+    @Column(name = "user_name")
     private String user_name;
-    @Column(name="user_password")
+    @Column(name = "user_password")
     private String user_password;
-    @Column(name="user_role")
+    @Column(name = "user_role")
     private String user_role;
-    @Column(name="user_callname")
+    @Column(name = "user_callname")
     private String user_callname;
 
     public String getUser_id() {

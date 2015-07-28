@@ -62,7 +62,7 @@ public class FileTools {
         String pattern = "YYYYMMddhhmmss";
         String dateResult = DateToolsUtils.getSpecificDate(pattern);
         Random random = new Random();
-        return (dateResult + Math.floor(random.nextDouble() * 10000)).replace(".0","");
+        return (dateResult + Math.floor(random.nextDouble() * 10000)).replace(".0", "");
     }
 
     /**
@@ -74,7 +74,7 @@ public class FileTools {
         String pattern = "YYYYMMddhhmmss";
         String dateResult = DateToolsUtils.getSpecificDate(pattern);
         Random random = new Random();
-        return (dateResult + Math.floor(random.nextDouble() * 100000)).replace(".0","");
+        return (dateResult + Math.floor(random.nextDouble() * 100000)).replace(".0", "");
     }
 
     /**

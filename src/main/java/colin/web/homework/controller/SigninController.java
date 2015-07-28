@@ -24,6 +24,7 @@ public class SigninController extends BaseController {
 
     @Autowired
     private SigninService signinService;
+
     /**
      * 显示登陆页面
      *
@@ -33,6 +34,7 @@ public class SigninController extends BaseController {
     public String showSigninPage() {
         return HomeworkConstants.PAGE_SIGNIN;
     }
+
     /**
      * 方法描述：验证用户的用户名是否存在
      * 注意事项：
@@ -59,6 +61,7 @@ public class SigninController extends BaseController {
             }
         }
     }
+
     /**
      * 驗證用戶登錄的方法
      *
@@ -66,7 +69,7 @@ public class SigninController extends BaseController {
      * @param password
      * @return
      */
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN_FORM,method = RequestMethod.POST)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN_FORM, method = RequestMethod.POST)
     public String userSignin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
         Map<String, Object> searchParams = new HashMap<>();
         searchParams.put("user_name", username);
@@ -75,15 +78,16 @@ public class SigninController extends BaseController {
         if ((Boolean) searchResult.get("isExists")) {
             Homework_User_Entity homework_user_entity = (Homework_User_Entity) searchResult.get("userEntity");
             //初始化用户信息
-            HomeworkUserInfo userInfo=this.initUserInfo(homework_user_entity);
+            HomeworkUserInfo userInfo = this.initUserInfo(homework_user_entity);
             //存放Session
             super.getSessionObj().setAttribute(HomeworkConstants.SESSION_USERINFO, userInfo);
-            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER+HomeworkConstants.CONTROLLER_DASHBOARD;
-        }else{
+            return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER + HomeworkConstants.CONTROLLER_DASHBOARD;
+        } else {
             return HomeworkConstants.PAGE_SIGNIN;
         }
 
     }
+
     /**
      * 初始化用户的信息
      *
@@ -91,16 +95,16 @@ public class SigninController extends BaseController {
      * @return
      */
     public HomeworkUserInfo initUserInfo(Homework_User_Entity homework_user_entity) {
-        HomeworkUserInfo userInfo=new HomeworkUserInfo();
+        HomeworkUserInfo userInfo = new HomeworkUserInfo();
         userInfo.setUser_id(homework_user_entity.getUser_id());
-       // userInfo.setUser_phone(homework_user_entity.getUser_phone());
+        // userInfo.setUser_phone(homework_user_entity.getUser_phone());
         userInfo.setUser_password(homework_user_entity.getUser_password());
         userInfo.setUser_callname(homework_user_entity.getUser_callname());
         //userInfo.setUser_createtime(homework_user_entity.getUser_createtime());
-       // userInfo.setUser_email(homework_user_entity.getUser_email());
-       // userInfo.setUser_logintime(homework_user_entity.getUser_logintime());
+        // userInfo.setUser_email(homework_user_entity.getUser_email());
+        // userInfo.setUser_logintime(homework_user_entity.getUser_logintime());
         userInfo.setUser_name(homework_user_entity.getUser_name());
-      //  userInfo.setUser_organize_id(homework_user_entity.getUser_organize_id());
+        //  userInfo.setUser_organize_id(homework_user_entity.getUser_organize_id());
         return userInfo;
     }
 }

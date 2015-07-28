@@ -29,15 +29,16 @@ public class MenuService {
     public List<HomeworkMenuVo> getMenuInfoService() {
         RowMapper entityMapper = new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName());
         //获取所有的菜单
-        List<Homework_Menu_Entity> menuList = menuDao.getOrderObjects(Homework_Menu_Entity.class, null, "menu_order", null, null,entityMapper, false);
+        List<Homework_Menu_Entity> menuList = menuDao.getOrderObjects(Homework_Menu_Entity.class, null, "menu_order", null, null, entityMapper, false);
         //开始整理菜单
-        List<HomeworkMenuVo> resultList=this.reformatMenuList(menuList);
+        List<HomeworkMenuVo> resultList = this.reformatMenuList(menuList);
         return resultList;
 
     }
 
     /**
      * 重新构造返回结果
+     *
      * @param menuList
      * @return
      */
@@ -50,14 +51,14 @@ public class MenuService {
                 subList.add(this.transferMenu(menu_entity));
             }
         }
-        return rebulidMenuList(rootList,subList);
+        return rebulidMenuList(rootList, subList);
     }
 
-    public List<HomeworkMenuVo> rebulidMenuList(List<HomeworkMenuVo> rootList,List<HomeworkMenuVo> subList){
-        for(HomeworkMenuVo homeworkMenuVo :rootList){
-            List<HomeworkMenuVo> childMenuList=new ArrayList<>();
-            for(HomeworkMenuVo childMenu:subList){
-                if(homeworkMenuVo.getMenu_id().equals(childMenu.getMenu_parent_id())){
+    public List<HomeworkMenuVo> rebulidMenuList(List<HomeworkMenuVo> rootList, List<HomeworkMenuVo> subList) {
+        for (HomeworkMenuVo homeworkMenuVo : rootList) {
+            List<HomeworkMenuVo> childMenuList = new ArrayList<>();
+            for (HomeworkMenuVo childMenu : subList) {
+                if (homeworkMenuVo.getMenu_id().equals(childMenu.getMenu_parent_id())) {
                     childMenuList.add(childMenu);
                 }
             }
@@ -65,8 +66,10 @@ public class MenuService {
         }
         return rootList;
     }
+
     /**
      * 转换Menu实体类
+     *
      * @param menu_entity
      * @return
      */

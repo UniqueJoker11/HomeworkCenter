@@ -13,21 +13,21 @@ import javax.persistence.Table;
 @Table(name = "homework_menu")
 public class Homework_Menu_Entity {
     @Id
-    @Column(name="menu_id")
+    @Column(name = "menu_id")
     private String menu_id;
-    @Column(name="menu_name")
+    @Column(name = "menu_name")
     private String menu_name;
-    @Column(name="menu_parent_id")
+    @Column(name = "menu_parent_id")
     private String menu_parent_id;
-    @Column(name="menu_url")
+    @Column(name = "menu_url")
     private String menu_url;
-    @Column(name="menu_create_user")
+    @Column(name = "menu_create_user")
     private String menu_create_user;
-    @Column(name="menu_create_time")
+    @Column(name = "menu_create_time")
     private String menu_create_time;
-    @Column(name="menu_icon")
+    @Column(name = "menu_icon")
     private String menu_icon;
-    @Column(name="menu_order")
+    @Column(name = "menu_order")
     private int menu_order;
 
     public String getMenu_id() {

@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class DecorateCommnDao<T> implements ICommonDao<T>{
+public class DecorateCommnDao<T> implements ICommonDao<T> {
     @Autowired
     private CommonDao commonDao;
 
@@ -24,7 +24,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      */
     @Override
     public boolean addObjInfo(T t) {
-        return  commonDao.addObjInfo(t);
+        return commonDao.addObjInfo(t);
     }
 
     /**
@@ -44,7 +44,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      */
     @Override
     public boolean updateObjInfo(T t) {
-        return  commonDao.updateObjInfo(t);
+        return commonDao.updateObjInfo(t);
     }
 
     /**
@@ -55,8 +55,8 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      * @return
      */
     @Override
-    public T selectObjectById(Class<T> c, String id,RowMapper<T> rowMapper) {
-        return (T) commonDao.selectObjectById(c,id,rowMapper);
+    public T selectObjectById(Class<T> c, String id, RowMapper<T> rowMapper) {
+        return (T) commonDao.selectObjectById(c, id, rowMapper);
     }
 
     /**
@@ -67,8 +67,8 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      * @return 返回一个list对象集合
      */
     @Override
-    public List<T> seletcObjectByMap(Class<T> c, Map<String,Object> map,RowMapper<T> rowMapper) {
-        return  commonDao.seletcObjectByMap(c,map,rowMapper);
+    public List<T> seletcObjectByMap(Class<T> c, Map<String, Object> map, RowMapper<T> rowMapper) {
+        return commonDao.seletcObjectByMap(c, map, rowMapper);
     }
 
     /**
@@ -82,8 +82,8 @@ public class DecorateCommnDao<T> implements ICommonDao<T>{
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class<T> cl, Map<String,Object> map, String orderstr, Integer beginpos, Integer count,RowMapper<T> rowMapper,boolean isAsc) {
-        return commonDao.getOrderObjects(cl,map,orderstr,beginpos,count,rowMapper,isAsc);
+    public List<T> getOrderObjects(Class<T> cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+        return commonDao.getOrderObjects(cl, map, orderstr, beginpos, count, rowMapper, isAsc);
     }
 
 }

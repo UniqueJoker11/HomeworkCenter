@@ -16,10 +16,11 @@ public class BaseController {
 
     /**
      * 获取基于应用程序的url绝对路径
+     *
      * @param request
      * @return
      */
-    protected final String getAppBaseUrl(HttpServletRequest request, String url){
+    protected final String getAppBaseUrl(HttpServletRequest request, String url) {
         Assert.hasLength(url, "url不能为空");
         Assert.isTrue(url.startsWith("/"), "必须以/打头");
         return request.getContextPath() + url;
@@ -27,32 +28,36 @@ public class BaseController {
 
     /**
      * 获取HttpServletRequest
+     *
      * @return
      */
-    protected HttpServletRequest getRequestObj(){
+    protected HttpServletRequest getRequestObj() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
     /**
      * 获取HttpSession
+     *
      * @return
      */
-    protected HttpSession getSessionObj(){
+    protected HttpSession getSessionObj() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
     }
+
     /**
      * 获取存放在Session中的用户信息
      */
-    protected HomeworkUserInfo fetchUserInfo(){
-        HomeworkUserInfo homeworkUserInfo= (HomeworkUserInfo) ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession().getAttribute("userInfo");
+    protected HomeworkUserInfo fetchUserInfo() {
+        HomeworkUserInfo homeworkUserInfo = (HomeworkUserInfo) ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession().getAttribute("userInfo");
         return homeworkUserInfo;
     }
 
     /**
      * 判断用户是否已经登录
+     *
      * @return
      */
-    protected boolean userIsLogin(){
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession().getAttribute(HomeworkConstants.SESSION_USERINFO)==null?false:true;
+    protected boolean userIsLogin() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession().getAttribute(HomeworkConstants.SESSION_USERINFO) == null ? false : true;
     }
 }

@@ -32,7 +32,8 @@ public interface ICommonDao<T> {
      * @param id
      * @return
      */
-    public T selectObjectById(final Class<T>  c, final String id,RowMapper<T> rowMapper);
+    public T selectObjectById(final Class<T> c, final String id, RowMapper<T> rowMapper);
+
     /**
      * 带条件的查询.返回list集合
      *
@@ -41,7 +42,7 @@ public interface ICommonDao<T> {
      * @param map 根据map里面放置的参数
      * @return 返回一个list对象集合
      */
-    public  List<T> seletcObjectByMap(Class<T> c, Map<String,Object> map,RowMapper<T> rowMapper);
+    public List<T> seletcObjectByMap(Class<T> c, Map<String, Object> map, RowMapper<T> rowMapper);
 
     /**
      * 排序+分页功能+条件查询
@@ -54,6 +55,6 @@ public interface ICommonDao<T> {
      * @param count    每页的记录总数 如果为null不分页
      * @return 返回List集合
      */
-    public List<T> getOrderObjects(final Class<T>  cl, final Map<String,Object> map,
-                                   final String orderstr, final Integer beginpos, final Integer count,RowMapper<T> rowMapper,boolean isAsc);
+    public List<T> getOrderObjects(final Class<T> cl, final Map<String, Object> map,
+                                   final String orderstr, final Integer beginpos, final Integer count, RowMapper<T> rowMapper, boolean isAsc);
 }

@@ -11,10 +11,12 @@ import java.sql.SQLException;
  * Created by ASUS on 2015/7/26.
  */
 public class DefaultRowmapper<T> implements RowMapper<T> {
-    private String className="";
-    public DefaultRowmapper(String className){
-        this.className=className;
+    private String className = "";
+
+    public DefaultRowmapper(String className) {
+        this.className = className;
     }
+
     /**
      * Implementations must implement this method to map each row of data
      * in the ResultSet. This method should not call {@code next()} on
@@ -24,11 +26,11 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
      * @param rowNum the number of the current row
      * @return the result object for the current row
      * @throws java.sql.SQLException if a SQLException is encountered getting
-     *                      column values (that is, there's no need to catch SQLException)
+     *                               column values (that is, there's no need to catch SQLException)
      */
     @Override
     public T mapRow(ResultSet rs, int rowNum) throws SQLException {
-        T t= null;
+        T t = null;
         try {
             t = (T) Class.forName(this.className).newInstance();
         } catch (InstantiationException e) {
@@ -38,11 +40,11 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Field[] fields= t.getClass().getDeclaredFields();
+        Field[] fields = t.getClass().getDeclaredFields();
 
-        for(Field field:fields){
-             field.setAccessible(true);//对于似有属性予以访问
-            String columnName=field.getAnnotation(Column.class).name();//获取列的名称
+        for (Field field : fields) {
+            field.setAccessible(true);//对于似有属性予以访问
+            String columnName = field.getAnnotation(Column.class).name();//获取列的名称
             try {
                 field.set(t, rs.getObject(columnName));
             } catch (IllegalAccessException e) {

@@ -14,27 +14,27 @@ jQuery(document).ready(function () {
      }*/
 
     $("#homework_signin").validate({
-        rules:{
-            username:{
-                required:true,
-                rangelength:[6,20]
+        rules: {
+            username: {
+                required: true,
+                rangelength: [6, 20]
             },
-            password:{
-                required:true,
-                minlength:6
+            password: {
+                required: true,
+                minlength: 6
             }
         },
-        messages:{
-            username:{
-                required:"用戶名不能爲空",
-                rangelength:"用戶名的長度在6~20個字符之間"
+        messages: {
+            username: {
+                required: "用戶名不能爲空",
+                rangelength: "用戶名的長度在6~20個字符之間"
             },
-            password:{
-                required:"密碼不能爲空！",
-                minlength:"密碼的長度不能少於6個字符"
+            password: {
+                required: "密碼不能爲空！",
+                minlength: "密碼的長度不能少於6個字符"
             }
         },
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             console.log(form);
             $(form).ajaxSubmit();
         }

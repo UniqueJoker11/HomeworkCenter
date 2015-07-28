@@ -19,6 +19,7 @@ public class TemplateService {
 
     /**
      * 保存模板对象
+     *
      * @param tamplateSnapshotUrl
      * @param templateResource
      * @param tamplateName
@@ -26,7 +27,7 @@ public class TemplateService {
      * @param tamplateDescribe
      * @return
      */
-    public boolean addTemplateService(String tamplateSnapshotUrl,String templateResource,String tamplateName,String templateTips,String tamplateDescribe,String accessUrl,String uploadUser){
+    public boolean addTemplateService(String tamplateSnapshotUrl, String templateResource, String tamplateName, String templateTips, String tamplateDescribe, String accessUrl, String uploadUser) {
         homework_template_entity.setTemplate_id(StringToolsUtils.getCommonUUID());
         homework_template_entity.setTemplate_access_url(accessUrl);
         homework_template_entity.setTemplate_create_time(DateToolsUtils.getTodayCurrentTime());
@@ -37,6 +38,6 @@ public class TemplateService {
         homework_template_entity.setTemplate_tip(templateTips);
         homework_template_entity.setTemplaye_browser_num(0);
         homework_template_entity.setTemplate_uplodad_user(uploadUser);
-       return templateDao.addObjInfo(homework_template_entity);
+        return templateDao.addObjInfo(homework_template_entity);
     }
 }

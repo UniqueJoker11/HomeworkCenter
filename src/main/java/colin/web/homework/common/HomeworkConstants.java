@@ -17,9 +17,9 @@ public class HomeworkConstants {
     //主页
     public static final String PAGE_DASHBOARD = "dashboard";
     //模板管理页面
-    public static final String PAGE_TEMPLATE_MANAGE="template";
+    public static final String PAGE_TEMPLATE_MANAGE = "template";
     //模板管理添加页面
-    public static final String PAGE_TEMPLATE_ADD_MANAGE="template_add";
+    public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
     /**
      * 页面拦截器名称
      */
@@ -39,9 +39,9 @@ public class HomeworkConstants {
     //模板提交的页面
     public static final String CONTROLLER_TEMPLATE_ADD = "/template_add.html";
     //模板编辑页面
-    public static final String CONTROLLER_TEMPLATE_EDIT="/template_edit.html";
+    public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
-    public static final String CONTROLLER_TEMPLATE_ADD_FORM="/template_add_form.html";
+    public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.html";
     /**
      * 默认的分页数据
      */
@@ -49,13 +49,13 @@ public class HomeworkConstants {
     /**
      * 默认的资源上传路径
      */
-    public static final String RESOURCES_STORE_DIR="upload"+ File.separator+"resources";
-    public static final String IMAGE_STORE_DIR="upload"+File.separator+"images";
-    public static final String RESOURCES_COMPRESS_DIR="upload"+ File.separator+"template";
+    public static final String RESOURCES_STORE_DIR = "upload" + File.separator + "resources";
+    public static final String IMAGE_STORE_DIR = "upload" + File.separator + "images";
+    public static final String RESOURCES_COMPRESS_DIR = "upload" + File.separator + "template";
 
     /**
      * 用户存放信息
      */
-    public static final String SESSION_USERINFO="userInfo";
+    public static final String SESSION_USERINFO = "userInfo";
 
 }

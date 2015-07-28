@@ -9,31 +9,34 @@ import java.util.Calendar;
 public class DateToolsUtils {
     /**
      * 以YYYY-MM-DD hh-mm-ss的形式返回当前的具体时间
+     *
      * @return
      */
-    public static String getTodayCurrentTime(){
-        Calendar calendar=Calendar.getInstance();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+    public static String getTodayCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
         return dateFormat.format(calendar.getTime());
     }
 
     /**
      * 以YYYY-MM-DD的形式返回当前的日期
+     *
      * @return
      */
-    public static String getTodayDate(){
-        Calendar calendar=Calendar.getInstance();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd");
+    public static String getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(calendar.getTime());
     }
-    public static String getSpecificDate(String timePattern){
-        Calendar calendar=Calendar.getInstance();
-        SimpleDateFormat dateFormat=new SimpleDateFormat(timePattern);
+
+    public static String getSpecificDate(String timePattern) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(timePattern);
         return dateFormat.format(calendar.getTime());
     }
 
     public static void main(String[] args) {
-        DateToolsUtils tools=new DateToolsUtils();
+        DateToolsUtils tools = new DateToolsUtils();
         System.out.println(tools.getTodayCurrentTime());
 
     }
