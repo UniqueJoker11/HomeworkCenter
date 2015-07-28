@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.context.support.ServletContextResource;
 
 import java.io.File;
 
@@ -16,7 +17,7 @@ import java.io.File;
 public class BaseSpringTest {
     @Test
     public void textFilePath(){
-        String path="/upload/images/1.jpg";
+        String path="upload/images/1.jpg";
         File file=new File(path);
         System.out.println(file.exists());
         FileSystemResource resource=new FileSystemResource(path);

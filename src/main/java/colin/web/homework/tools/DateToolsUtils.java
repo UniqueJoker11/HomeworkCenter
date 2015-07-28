@@ -11,7 +11,7 @@ public class DateToolsUtils {
      * 以YYYY-MM-DD hh-mm-ss的形式返回当前的具体时间
      * @return
      */
-    public String getTodayCurrentTime(){
+    public static String getTodayCurrentTime(){
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
         return dateFormat.format(calendar.getTime());
@@ -21,12 +21,12 @@ public class DateToolsUtils {
      * 以YYYY-MM-DD的形式返回当前的日期
      * @return
      */
-    public String getTodayDate(){
+    public static String getTodayDate(){
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(calendar.getTime());
     }
-    public String getSpecificDate(String timePattern){
+    public static String getSpecificDate(String timePattern){
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat dateFormat=new SimpleDateFormat(timePattern);
         return dateFormat.format(calendar.getTime());
