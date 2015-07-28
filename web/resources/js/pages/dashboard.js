@@ -208,16 +208,11 @@ $(function(){
             }]);
         plot.draw();
     }
-    $("#colin-dashboard-menu").children("li").bind("click",function(e){
-        $(this).addClass("active").siblings().removeClass("active");
-        var hrefVal=$(this).children("a").attr("href");
-        $("#rightPanel").load(hrefVal);
-        e.preventDefault();
-    });
     $("#colin-dashboard-menu").find(".children").children("li").bind("click",function(e){
         var hrefVal=$(this).children("a").attr("href");
         $("#rightPanel").load(hrefVal);
         e.preventDefault();
         return false;
     });
+
 });

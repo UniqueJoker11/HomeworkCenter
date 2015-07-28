@@ -43,4 +43,16 @@ public class SigninService {
         }
         return  userInfoMap;
     }
+    /**
+     *
+     * 方法描述：验证用户名是否存在
+     * 注意事项：
+     * @param params
+     * @return
+     * @Exception 异常对象
+     */
+    public Boolean validateUsernameService(Map<String,Object> params){
+        Map<String,Object> signinParams=signinDao.validateUserSignin(params);
+        return (Boolean)signinParams.get("isExists");
+    }
 }

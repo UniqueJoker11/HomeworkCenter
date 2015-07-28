@@ -26,7 +26,7 @@ public class Homework_Template_Entity {
     @Column(name="template_access_url")
     private String template_access_url;
     @Column(name = "templaye_browser_num")
-    private String templaye_browser_num;
+    private int templaye_browser_num;
     @Column(name = "template_describe")
     private String template_describe;
     @Column(name = "template_tip")
@@ -87,11 +87,11 @@ public class Homework_Template_Entity {
         this.template_access_url = template_access_url;
     }
 
-    public String getTemplaye_browser_num() {
+    public int getTemplaye_browser_num() {
         return templaye_browser_num;
     }
 
-    public void setTemplaye_browser_num(String templaye_browser_num) {
+    public void setTemplaye_browser_num(int templaye_browser_num) {
         this.templaye_browser_num = templaye_browser_num;
     }
 

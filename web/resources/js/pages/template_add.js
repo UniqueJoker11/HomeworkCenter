@@ -33,4 +33,12 @@ $(function(){
             }
         }
     });
+    $("#templateAddForm").ajaxForm(function(data){
+        console.log(data);
+    });
+    $("#submitTemplateBtn").click(function(){
+        $("#templateAddForm").ajaxForm(function(data){
+            console.log(data);
+        });
+    });
 });

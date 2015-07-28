@@ -38,7 +38,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         Map<String, Object> addParamsMap = getEntityParamsGroup(t, 0);
 
         insertSql.append(addParamsMap.get("insertSql").toString()).replace(insertSql.length() - 1, insertSql.length(), ")");
-        insertSqlVal.append(addParamsMap.get(insertSqlVal).toString()).replace(insertSqlVal.length() - 1, insertSqlVal.length(), ")");
+        insertSqlVal.append(addParamsMap.get("insertSqlCondition").toString()).replace(insertSqlVal.length()- 1,insertSqlVal.length(), ")");
         insertSql.append(insertSqlVal);
         try{
             int result = this.getNamedParameterJdbcTemplate().update(insertSql.toString(), (Map<String, Object>) addParamsMap.get("params"));
@@ -106,7 +106,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return
      */
     @Override
-    public T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
+    public T selectObjectById(Class<T> c, String id, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where id=:id");
         Map<String, Object> params = new HashMap<>();
@@ -127,7 +127,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回一个list对象集合
      */
     @Override
-    public List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
+    public List<T> seletcObjectByMap(Class<T> c, Map<String, Object> map, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where ");
         //拼接查詢參數
@@ -147,7 +147,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper,boolean isAsc) {
+    public List<T> getOrderObjects(Class<T> cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper,boolean isAsc) {
         StringBuilder searchSql=new StringBuilder("select * from ");
         //获取表名
         searchSql.append(this.getEntityTableNameByClazz(cl));

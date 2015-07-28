@@ -10,8 +10,7 @@ import java.sql.SQLException;
 /**
  * Created by ASUS on 2015/7/11.
  */
-@Component
-public class Homework_User_Rowmapper implements RowMapper{
+public class Homework_User_Rowmapper<Homework_User_Entity> implements RowMapper<Homework_User_Entity>{
     /**
      * Implementations must implement this method to map each row of data
      * in the ResultSet. This method should not call {@code next()} on
@@ -24,7 +23,7 @@ public class Homework_User_Rowmapper implements RowMapper{
      *                      column values (that is, there's no need to catch SQLException)
      */
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Homework_User_Entity mapRow(ResultSet rs, int rowNum) throws SQLException {
         Homework_User_Entity entity=new Homework_User_Entity();
         entity.setUser_id(rs.getString("user_id"));
         entity.setUser_password(rs.getString("user_password"));

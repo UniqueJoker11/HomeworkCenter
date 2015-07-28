@@ -23,4 +23,17 @@ public class BaseSpringTest {
         FileSystemResource resource=new FileSystemResource(path);
         System.out.println(resource.getFile().exists());
     }
+    @Test
+    public void testPath(){
+        String path="upload\\images\\2.txt";
+        String path2="upload"+File.separator+"images"+File.separator+"1.jpg";
+        FileSystemResource resource2=new FileSystemResource(path2);
+        File file=new File(path);
+        File file2=new File(path2);
+        System.out.println(file.exists());
+        FileSystemResource resource=new FileSystemResource(path);
+        System.out.println(resource.getPath().toString());
+        System.out.println(resource2.getPath());
+        System.out.println(resource2.exists()+"---"+file2.exists());
+    }
 }

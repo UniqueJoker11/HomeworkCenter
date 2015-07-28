@@ -2,8 +2,7 @@ package colin.web.homework.controller;
 
 import colin.web.homework.common.HomeworkConstants;
 
-import colin.web.homework.core.dao.decoratedao.MenuDao;
-import colin.web.homework.core.vo.MenuVo;
+import colin.web.homework.core.vo.HomeworkMenuVo;
 import colin.web.homework.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class DashboardController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD, method = RequestMethod.GET)
     public String showDashboardPage(HttpServletRequest request) {
         //加载左侧导航菜单内容
-        List<MenuVo> menuList=menuService.getMenuInfoService();
+        List<HomeworkMenuVo> menuList=menuService.getMenuInfoService();
         request.setAttribute("menuList",menuList);
         return HomeworkConstants.PAGE_DASHBOARD;
     }

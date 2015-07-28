@@ -6,13 +6,13 @@ import java.util.List;
  * Created by ASUS on 2015/7/26.
  * 菜单类
  */
-public class MenuVo {
+public class HomeworkMenuVo {
     private String menu_id;
     private String menu_name;
     private String menu_parent_id;
     private String menu_url;
     private String menu_icon;
-    private List<MenuVo> childMenuList;
+    private List<HomeworkMenuVo> childMenuList;
 
     public String getMenu_id() {
         return menu_id;
@@ -54,11 +54,11 @@ public class MenuVo {
         this.menu_icon = menu_icon;
     }
 
-    public List<MenuVo> getChildMenuList() {
+    public List<HomeworkMenuVo> getChildMenuList() {
         return childMenuList;
     }
 
-    public void setChildMenuList(List<MenuVo> childMenuList) {
+    public void setChildMenuList(List<HomeworkMenuVo> childMenuList) {
         this.childMenuList = childMenuList;
     }
 }
