@@ -26,6 +26,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_MANAGER = "/homework";
     //请求用户登陆页面
     public static final String CONTROLLER_SIGNIN = "/signin.html";
+    //验证用户名是否存在
+    public static final String CONTROLLER_USERINFO_VALIDATION="/usernamevalidate.action";
     //请求用户注册页面
     public static final String CONTROLLER_SIGNUP = "/signup.html";
     //请求用户的管理首页
@@ -41,7 +43,7 @@ public class HomeworkConstants {
     //模板编辑页面
     public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
-    public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.html";
+    public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
     /**
      * 默认的分页数据
      */

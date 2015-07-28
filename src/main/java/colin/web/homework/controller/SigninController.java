@@ -44,7 +44,7 @@ public class SigninController extends BaseController {
      * @Exception 异常对象
      */
     @ResponseBody
-    @RequestMapping(value = "/usernamevalidate.action", method = RequestMethod.POST)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_USERINFO_VALIDATION, method = RequestMethod.POST)
     public Boolean validateUserSigninUsername(
             @RequestParam(value = "username", required = true) String username) {
         Map<String, Object> resultMap = new HashMap<String, Object>();

@@ -55,7 +55,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return
      */
     @Override
-    public T selectObjectById(Class<T> c, String id, RowMapper<T> rowMapper) {
+    public T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
         return (T) commonDao.selectObjectById(c, id, rowMapper);
     }
 
@@ -67,7 +67,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return 返回一个list对象集合
      */
     @Override
-    public List<T> seletcObjectByMap(Class<T> c, Map<String, Object> map, RowMapper<T> rowMapper) {
+    public List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
         return commonDao.seletcObjectByMap(c, map, rowMapper);
     }
 
@@ -82,7 +82,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class<T> cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
         return commonDao.getOrderObjects(cl, map, orderstr, beginpos, count, rowMapper, isAsc);
     }
 
