@@ -1,11 +1,11 @@
 /**
  * Created by DELL on 2015/7/27.
  */
-$(function(){
+$(function () {
     "use strict";
 
     function showTooltip(x, y, contents) {
-        jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+        jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css({
             position: 'absolute',
             display: 'none',
             top: y + 5,
@@ -13,15 +13,17 @@ $(function(){
         }).appendTo("body").fadeIn(200);
     }
 
-    var uploads = [[0, 2], [1, 9], [2,5], [3, 13], [4, 6], [5, 13], [6, 8]];
-    var downloads = [[0, 0], [1, 6.5], [2,4], [3, 10], [4, 2], [5, 10], [6, 4]];
+    var uploads = [[0, 2], [1, 9], [2, 5], [3, 13], [4, 6], [5, 13], [6, 8]];
+    var downloads = [[0, 0], [1, 6.5], [2, 4], [3, 10], [4, 2], [5, 10], [6, 4]];
 
     var plot = jQuery.plot(jQuery("#basicflot"),
-        [{ data: uploads,
+        [{
+            data: uploads,
             label: "Uploads",
             color: "#1CAF9A"
         },
-            { data: downloads,
+            {
+                data: downloads,
                 label: "Downloads",
                 color: "#428BCA"
             }
@@ -68,7 +70,7 @@ $(function(){
         jQuery("#x").text(pos.x.toFixed(2));
         jQuery("#y").text(pos.y.toFixed(2));
 
-        if(item) {
+        if (item) {
             if (previousPoint != item.dataIndex) {
                 previousPoint = item.dataIndex;
 
@@ -103,7 +105,7 @@ $(function(){
             {label: "Safari", value: 20},
             {label: "Internet Explorer", value: 10}
         ],
-        colors: ['#D9534F','#1CAF9A','#428BCA','#5BC0DE','#428BCA']
+        colors: ['#D9534F', '#1CAF9A', '#428BCA', '#5BC0DE', '#428BCA']
     });
 
 
@@ -113,13 +115,13 @@ $(function(){
         // Chart data records -- each entry in this array corresponds to a point on
         // the chart.
         data: [
-            { y: '2006', a: 50, b: 0 },
-            { y: '2007', a: 60,  b: 25 },
-            { y: '2008', a: 45,  b: 30 },
-            { y: '2009', a: 40,  b: 20 },
-            { y: '2010', a: 50,  b: 35 },
-            { y: '2011', a: 60,  b: 50 },
-            { y: '2012', a: 65, b: 55 }
+            {y: '2006', a: 50, b: 0},
+            {y: '2007', a: 60, b: 25},
+            {y: '2008', a: 45, b: 30},
+            {y: '2009', a: 40, b: 20},
+            {y: '2010', a: 50, b: 35},
+            {y: '2011', a: 60, b: 50},
+            {y: '2012', a: 65, b: 55}
         ],
         xkey: 'y',
         ykeys: ['a', 'b'],
@@ -133,31 +135,31 @@ $(function(){
     });
 
     // Trigger Resize in Morris Chart
-    var delay = (function() {
+    var delay = (function () {
         var timer = 0;
-        return function(callback, ms) {
+        return function (callback, ms) {
             clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
     })();
 
-    jQuery(window).resize(function() {
-        delay(function() {
+    jQuery(window).resize(function () {
+        delay(function () {
             m1.redraw();
             m2.redraw();
         }, 200);
     }).trigger('resize');
 
-    jQuery('#sparkline').sparkline([4,3,3,1,4,3,2,2,3,10,9,6], {
+    jQuery('#sparkline').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
         type: 'bar',
-        height:'30px',
+        height: '30px',
         barColor: '#428BCA'
     });
 
 
-    jQuery('#sparkline2').sparkline([9,8,8,6,9,10,6,5,6,3,4,2], {
+    jQuery('#sparkline2').sparkline([9, 8, 8, 6, 9, 10, 6, 5, 6, 3, 4, 2], {
         type: 'bar',
-        height:'30px',
+        height: '30px',
         barColor: '#999'
     });
 
@@ -172,7 +174,7 @@ $(function(){
     // Do not use the code below. It's for demo purposes only
     var c = jQuery.cookie('change-skin');
     if (jQuery('.panel-stat').length > 0 && c == 'dodgerblue') {
-        jQuery('.panel-stat').each(function(){
+        jQuery('.panel-stat').each(function () {
             if ($(this).hasClass('panel-danger')) {
                 $(this).removeClass('panel-danger').addClass('panel-warning');
             }
@@ -208,16 +210,11 @@ $(function(){
             }]);
         plot.draw();
     }
-    $("#colin-dashboard-menu").children("li").bind("click",function(e){
-        $(this).addClass("active").siblings().removeClass("active");
-        var hrefVal=$(this).children("a").attr("href");
-        $("#rightPanel").load(hrefVal);
-        e.preventDefault();
-    });
-    $("#colin-dashboard-menu").find(".children").children("li").bind("click",function(e){
-        var hrefVal=$(this).children("a").attr("href");
+    $("#colin-dashboard-menu").find(".children").children("li").bind("click", function (e) {
+        var hrefVal = $(this).children("a").attr("href");
         $("#rightPanel").load(hrefVal);
         e.preventDefault();
         return false;
     });
+
 });

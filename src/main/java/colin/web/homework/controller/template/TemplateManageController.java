@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
-public class TemplateManageController extends BaseController{
+public class TemplateManageController extends BaseController {
 
     /**
      * 显示模板管理一览页面
+     *
      * @return
      */
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_MANAGE,method = RequestMethod.GET)
-    public String showTemplateManagePage(){
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_MANAGE, method = RequestMethod.GET)
+    public String showTemplateManagePage() {
         return HomeworkConstants.PAGE_TEMPLATE_MANAGE;
     }
 }

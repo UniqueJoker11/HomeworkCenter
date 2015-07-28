@@ -11,26 +11,27 @@ import javax.persistence.Table;
 @Component
 @Table(name = "homework_template")
 public class Homework_Template_Entity {
-    @Column(name="template_id")
+    @Column(name = "template_id")
     private String template_id;
-    @Column(name="template_name")
+    @Column(name = "template_name")
     private String template_name;
-    @Column(name="template_snapshot")
+    @Column(name = "template_snapshot")
     private String template_snapshot;
-    @Column(name="template_resource_url")
+    @Column(name = "template_resource_url")
     private String template_resource_url;
-    @Column(name="template_uplodad_user")
+    @Column(name = "template_uplodad_user")
     private String template_uplodad_user;
-    @Column(name="template_create_time")
+    @Column(name = "template_create_time")
     private String template_create_time;
-    @Column(name="template_access_url")
+    @Column(name = "template_access_url")
     private String template_access_url;
     @Column(name = "templaye_browser_num")
-    private String templaye_browser_num;
+    private int templaye_browser_num;
     @Column(name = "template_describe")
     private String template_describe;
     @Column(name = "template_tip")
     private String template_tip;
+
     public String getTemplate_id() {
         return template_id;
     }
@@ -87,11 +88,11 @@ public class Homework_Template_Entity {
         this.template_access_url = template_access_url;
     }
 
-    public String getTemplaye_browser_num() {
+    public int getTemplaye_browser_num() {
         return templaye_browser_num;
     }
 
-    public void setTemplaye_browser_num(String templaye_browser_num) {
+    public void setTemplaye_browser_num(int templaye_browser_num) {
         this.templaye_browser_num = templaye_browser_num;
     }
 

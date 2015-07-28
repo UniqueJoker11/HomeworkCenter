@@ -38,16 +38,16 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         Map<String, Object> addParamsMap = getEntityParamsGroup(t, 0);
 
         insertSql.append(addParamsMap.get("insertSql").toString()).replace(insertSql.length() - 1, insertSql.length(), ")");
-        insertSqlVal.append(addParamsMap.get(insertSqlVal).toString()).replace(insertSqlVal.length() - 1, insertSqlVal.length(), ")");
+        insertSqlVal.append(addParamsMap.get("insertSqlCondition").toString()).replace(insertSqlVal.length() - 1, insertSqlVal.length(), ")");
         insertSql.append(insertSqlVal);
-        try{
+        try {
             int result = this.getNamedParameterJdbcTemplate().update(insertSql.toString(), (Map<String, Object>) addParamsMap.get("params"));
             if (result != 1) {
                 return false;
             } else {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -61,15 +61,15 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      */
     @Override
     public boolean deleteObjInfo(T t) {
-        StringBuilder delSql=new StringBuilder("delete from ");
+        StringBuilder delSql = new StringBuilder("delete from ");
         delSql.append(this.getEntityTableName(t)).append(" where ");
-        Map<String,Object> delFragmentMap=this.getEntityParamsGroup(t,1);
+        Map<String, Object> delFragmentMap = this.getEntityParamsGroup(t, 1);
         delSql.append(delFragmentMap.get("delSql").toString());
-        Map<String,Object> params= (Map<String, Object>) delFragmentMap.get("params");
-        try{
-            this.getNamedParameterJdbcTemplate().update(delSql.toString(),params);
+        Map<String, Object> params = (Map<String, Object>) delFragmentMap.get("params");
+        try {
+            this.getNamedParameterJdbcTemplate().update(delSql.toString(), params);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -82,18 +82,18 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      */
     @Override
     public boolean updateObjInfo(T t) {
-        StringBuilder updateSql=new StringBuilder("update ");
+        StringBuilder updateSql = new StringBuilder("update ");
         updateSql.append(this.getEntityTableName(t)).append(" set ");
-        Map<String, Object> updateMap=this.getEntityParamsGroup(t,2);
-        if(!updateMap.get("updateSql").toString().equals("")){
+        Map<String, Object> updateMap = this.getEntityParamsGroup(t, 2);
+        if (!updateMap.get("updateSql").toString().equals("")) {
             updateSql.append(updateMap.get("updateSql").toString()).append(" where ").append(updateMap.get("updateSqlCondition").toString());
-           int result= this.getNamedParameterJdbcTemplate().update(updateSql.toString(),(Map<String, Object>)updateMap.get("params"));
-           if(result==1){
-               return true;
-           }else{
-               return false;
-           }
-        }else{
+            int result = this.getNamedParameterJdbcTemplate().update(updateSql.toString(), (Map<String, Object>) updateMap.get("params"));
+            if (result == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
@@ -111,9 +111,9 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where id=:id");
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
-        try{
+        try {
             return this.getNamedParameterJdbcTemplate().queryForObject(searchSql.toString(), params, rowMapper);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -133,12 +133,13 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         //拼接查詢參數
         searchSql.append(this.fetchSearchSqlFragment(map));
         //开始查询
-        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
+        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }
 
     /**
      * 排序+分页功能+条件查询
      * 语句默认按照升序对记录进行排序
+     *
      * @param cl       当前操作对象
      * @param map      条件参数
      * @param orderstr 排序字段 如果为null不排序
@@ -147,29 +148,29 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper,boolean isAsc) {
-        StringBuilder searchSql=new StringBuilder("select * from ");
+    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+        StringBuilder searchSql = new StringBuilder("select * from ");
         //获取表名
         searchSql.append(this.getEntityTableNameByClazz(cl));
         //添加查询列表
-        if(map!=null&&!map.isEmpty()){
+        if (map != null && !map.isEmpty()) {
             searchSql.append(" where ").append(this.fetchSearchSqlFragment(map));
         }
         //假如需要分页
-        if(beginpos!=null&&beginpos>=1){
-            if(count==null||count<1){
-                count= HomeworkConstants.PAGE_SIZE;
+        if (beginpos != null && beginpos >= 1) {
+            if (count == null || count < 1) {
+                count = HomeworkConstants.PAGE_SIZE;
             }
-            searchSql.append(" limit ").append((beginpos-1)*count).append(" ").append(count);
+            searchSql.append(" limit ").append((beginpos - 1) * count).append(" ").append(count);
         }
         //假如需要排序
-        if(!orderstr.equals("")){
+        if (!orderstr.equals("")) {
             searchSql.append(" order by ").append(orderstr);
-            if(isAsc){
+            if (isAsc) {
                 searchSql.append(" asc");
             }
         }
-        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
+        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }
 
 
@@ -262,7 +263,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
                             String columnName = field.getAnnotation(Column.class).name();
                             if (field.getAnnotation(Id.class) != null) {
                                 updateSqlCondition.append(columnName).append("=:").append(columnName);
-                            }else{
+                            } else {
                                 updateSql.append(columnName).append("=:").append(columnName).append(",");
                             }
                             params.put(columnName, field.get(t));

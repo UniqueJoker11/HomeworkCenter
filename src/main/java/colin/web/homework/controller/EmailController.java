@@ -17,18 +17,20 @@ public class EmailController extends BaseController {
 
     /**
      * 显示邮件主页面
+     *
      * @return
      */
-    @RequestMapping(value="email.html",method= RequestMethod.GET)
-    public String showEmailPage(){
+    @RequestMapping(value = "email.html", method = RequestMethod.GET)
+    public String showEmailPage() {
         return "email";
     }
 
     /**
      * 初始化邮件列表
+     *
      * @return
      */
-    public List<String> initMailList(){
+    public List<String> initMailList() {
 
         return null;
     }

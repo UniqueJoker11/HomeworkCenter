@@ -1,9 +1,12 @@
 package colin.web.homework.controller.template;
 
 import colin.web.homework.common.HomeworkConstants;
+import colin.web.homework.controller.BaseController;
+import colin.web.homework.service.TemplateService;
 import colin.web.homework.tools.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 模板添加管理Controller
@@ -21,9 +25,10 @@ import java.io.*;
  */
 @Controller
 @RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
-public class TemplateAddManagerController {
-    @Resource(name = "taskExecutor")
-    private ThreadPoolTaskExecutor taskExecutor;
+public class TemplateAddManagerController extends BaseController {
+
+    @Autowired
+    private TemplateService templateService;
 
     /**
      * 显示模板添加页面
@@ -37,62 +42,74 @@ public class TemplateAddManagerController {
     }
 
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_ADD_FORM, method = RequestMethod.POST)
-    public String uploadTemplateSnapshot(@RequestParam(value = "templateSnapshot", required = true) MultipartFile[] templateSnapshot, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "templateResource", required = true) MultipartFile templateResource) throws IOException {
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_ADD_FORM, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object uploadTemplateSnapshot(@RequestParam(value = "templateSnapshot", required = true) MultipartFile[] templateSnapshot, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "templateResource", required = true) MultipartFile templateResource) throws IOException {
         //处理上传图片的类
+        StringBuilder snapshotUrl = new StringBuilder("");
         for (MultipartFile snapshotFile : templateSnapshot) {
-            handleUplaodSnapshot(snapshotFile.getInputStream(), snapshotFile.getOriginalFilename());
+            String orginalFilename = snapshotFile.getOriginalFilename();
+            File snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
+            snapshotUrl.append(snapshotCopyFile.getPath()).append(",");
+            snapshotFile.transferTo(snapshotCopyFile);
         }
-        return null;
+        //处理上传的压缩包
+        String resourcesUrl = "";
+        String resourceOrignalName = templateResource.getOriginalFilename();
+        File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
+        resourcesUrl = resourcesCopyFile.getPath();
+        templateResource.transferTo(resourcesCopyFile);
+        //解压缩文件
+        String accessUrl = "";
+        if (templateResource.getOriginalFilename().endsWith(".rar")) {
+            FileTools.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+        } else {
+            FileTools.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+        }
+        accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
+
+        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (result) {
+            resultMap.put("isSuccess", true);
+        } else {
+            resultMap.put("isSuccess", false);
+        }
+        return resultMap;
     }
 
     /**
-     * 处理上传图片
+     * 返回上传图片的空文件
      *
-     * @param snapshotInputStream
-     * @param fileName
      * @return
+     * @throws IOException
      */
-    private boolean handleUplaodSnapshot(InputStream snapshotInputStream, String fileName) {
-        // taskExecutor.submit();
-        return true;
-
+    private File getUploadSnapshotFile(String suffix) throws IOException {
+        StringBuilder storeRoute = new StringBuilder(HomeworkConstants.IMAGE_STORE_DIR);
+        File storeDir = new File(storeRoute.toString());
+        if (!storeDir.exists()) {
+            storeDir.mkdirs();
+        }
+        storeRoute.append(File.separator).append(FileTools.fetchImageFileName()).append(suffix);
+        FileSystemResource imageFileResource = new FileSystemResource(storeRoute.toString());
+        if (!imageFileResource.exists()) {
+            imageFileResource.getFile().createNewFile();
+        }
+        return imageFileResource.getFile();
     }
 
-    public class UploadResource implements Runnable {
-
-        private InputStream inputStream;
-
-        UploadResource(InputStream inputStream) {
-            this.inputStream = inputStream;
+    private File getUploadResourceFile(String suffix) throws IOException {
+        StringBuilder storeRoute = new StringBuilder(HomeworkConstants.RESOURCES_STORE_DIR);
+        File storeDir = new File(storeRoute.toString());
+        if (!storeDir.exists()) {
+            storeDir.mkdirs();
         }
-
-        /**
-         * When an object implementing interface <code>Runnable</code> is used
-         * to create a thread, starting the thread causes the object's
-         * <code>run</code> method to be called in that separately executing
-         * thread.
-         * <p/>
-         * The general contract of the method <code>run</code> is that it may
-         * take any action whatsoever.
-         *
-         * @see Thread#run()
-         */
-        @Override
-        public void run() {
-            //读取缓存资源
-            BufferedInputStream snapshotUploadStream = new BufferedInputStream(inputStream);
-            //构建资源的存储路径
-            StringBuilder storeRoute=new StringBuilder(HomeworkConstants.IMAGE_STORE_DIR);
-            storeRoute.append(File.pathSeparator).append(FileTools.fetchImageFileName());
-            File imageFile=new File(storeRoute.toString());
-            try {
-                FileOutputStream resourceFile=new FileOutputStream(imageFile);
-                //开始写文件
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        storeRoute.append(File.separator).append(FileTools.fetchResourceFileName()).append(suffix);
+        FileSystemResource imageFileResource = new FileSystemResource(storeRoute.toString());
+        if (!imageFileResource.exists()) {
+            imageFileResource.getFile().createNewFile();
         }
+        return imageFileResource.getFile();
     }
+
+
 }

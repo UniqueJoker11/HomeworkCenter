@@ -42,7 +42,7 @@
         msgImageWidthLarge: '宽度的图像文件"{name}"不能超过{size}像素.',
         msgImageHeightLarge: '图像文件"{name}"的高度不能超过{size}像素.',
         dropZoneTitle: '拖拽文件到这里 &hellip;',
-        slugCallback: function(text) {
+        slugCallback: function (text) {
             return text ? text.split(/(\\|\/)/g).pop().replace(/[^\w\u4e00-\u9fa5\-.\\\/ ]+/g, '') : '';
         }
     };
