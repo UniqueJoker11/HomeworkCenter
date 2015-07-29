@@ -33,12 +33,17 @@ $(function () {
             }
         }
     });
-    $("#templateAddForm").ajaxForm(function (data) {
-        console.log(data);
-    });
     $("#submitTemplateBtn").click(function () {
         $("#templateAddForm").ajaxForm(function (data) {
-            console.log(data);
+            var result="";
+            if(data.isSuccess){
+                result="新增模板成功！";
+            }else{
+                result="新增模板失败！";
+            }
+            $("#add_template_result").html(result);
+            $("#add_template_modal").modal({keyboard: false});
+            $("#templateAddForm").clearForm();
         });
     });
 });

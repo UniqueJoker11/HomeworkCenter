@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
-public class TemplateManageController extends BaseController {
+public class TemplateViewManageController extends BaseController {
 
     /**
      * 显示模板管理一览页面
