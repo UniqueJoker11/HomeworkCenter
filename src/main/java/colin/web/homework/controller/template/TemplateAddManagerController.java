@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,14 +50,14 @@ public class TemplateAddManagerController extends BaseController {
         for (MultipartFile snapshotFile : templateSnapshot) {
             String orginalFilename = snapshotFile.getOriginalFilename();
             File snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
-            snapshotUrl.append(snapshotCopyFile.getPath()).append(",");
+            snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR+File.separator+snapshotCopyFile.getName()).append(",");
             snapshotFile.transferTo(snapshotCopyFile);
         }
         //处理上传的压缩包
         String resourcesUrl = "";
         String resourceOrignalName = templateResource.getOriginalFilename();
         File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-        resourcesUrl = resourcesCopyFile.getPath();
+        resourcesUrl =HomeworkConstants.IMAGE_STORE_DIR+File.separator+ resourcesCopyFile.getName();
         templateResource.transferTo(resourcesCopyFile);
         //解压缩文件
         String accessUrl = "";
@@ -66,7 +67,6 @@ public class TemplateAddManagerController extends BaseController {
             FileTools.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
         }
         accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
-
         boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (result) {
@@ -90,7 +90,7 @@ public class TemplateAddManagerController extends BaseController {
             storeDir.mkdirs();
         }
         storeRoute.append(File.separator).append(FileTools.fetchImageFileName()).append(suffix);
-        FileSystemResource imageFileResource = new FileSystemResource(storeRoute.toString());
+        ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!imageFileResource.exists()) {
             imageFileResource.getFile().createNewFile();
         }
@@ -104,7 +104,7 @@ public class TemplateAddManagerController extends BaseController {
             storeDir.mkdirs();
         }
         storeRoute.append(File.separator).append(FileTools.fetchResourceFileName()).append(suffix);
-        FileSystemResource imageFileResource = new FileSystemResource(storeRoute.toString());
+        ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!imageFileResource.exists()) {
             imageFileResource.getFile().createNewFile();
         }
