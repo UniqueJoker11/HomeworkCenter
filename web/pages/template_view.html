@@ -1,0 +1,67 @@
+<link href="${ctxPath}/css/jquery.datatables.css" rel="stylesheet">
+<script type="text/javascript" src="${ctxPath}/js/jquery.datatables.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/js/select2.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/js/pages/template_view.js"></script>
+<div class="pageheader">
+    <h2><i class="fa fa-table"></i> 模板管理 <span>模板详情一览.</span></h2>
+
+    <div class="breadcrumb-wrapper">
+        <span class="label">当前位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Bracket</a></li>
+            <li class="active">模板管理</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">模板详情一览</h3>
+
+            <p>采用列表展示上传的所有的网页模板，可以浏览、修改，删除网页模板的信息，但是上传需要点击左侧菜单在新页面进行操作。</p>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table  table-primary mb30 table-striped" id="template_view_table">
+                    <thead>
+                    <tr>
+                        <th>模板名称</th>
+                        <th>模板缩略图</th>
+                        <th>模板浏览次数</th>
+                        <th>模板描述</th>
+                        <th>模板标签</th>
+                        <th>模板操作</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+
+                    <%for(templateVo in templateList){
+                    if(templateVoLP.odd){%>
+                    <tr id="template_${templateVo.template_id}" class="odd gradeX">
+                        <%}else{%>
+                    <tr id="template_${templateVo.template_id}"  class="even gradeC">
+                       <%}%>
+                        <td class="center">${templateVo.template_name}</td>
+                        <td class="center col-xs-6 col-md-3"><a href="#" class="thumbnail"><img data-src="holder.js/100x100" alt="" src="${ctxPath}/${templateVo.template_snapshot}"/></a></td>
+
+                        <td class="center">${templateVo.templaye_browser_num}</td>
+                        <td class="center">${templateVo.template_describe}</td>
+                        <td class="center">${templateVo.template_tip}</td>
+                        <td class="center"> <a href="${ctxPath}/${templateVo.template_access_url}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                            <a href="./template_edit.action?templateId=${templateVo.template_id}"><i class="fa fa-pencil"></i></a>
+                            <a href="./template_delete.action?templateId=${templateVo.template_id}" class="delete-row"><i class="fa fa-trash-o"></i></a></td>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <!-- table-responsive -->
+
+        </div>
+        <!-- panel-body -->
+    </div>
+    <!-- panel -->
+
+</div><!-- contentpanel -->
+

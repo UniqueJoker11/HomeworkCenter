@@ -17,7 +17,7 @@ public class HomeworkConstants {
     //主页
     public static final String PAGE_DASHBOARD = "dashboard";
     //模板管理页面
-    public static final String PAGE_TEMPLATE_MANAGE = "template";
+    public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
     /**

@@ -129,9 +129,12 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
     @Override
     public List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
-        searchSql.append(this.getEntityTableNameByClazz(c)).append(" where ");
-        //拼接查詢參數
-        searchSql.append(this.fetchSearchSqlFragment(map));
+        searchSql.append(this.getEntityTableNameByClazz(c));
+        if(map!=null&&!map.isEmpty()){
+            searchSql.append(" where ");
+            //拼接查詢參數
+            searchSql.append(this.fetchSearchSqlFragment(map));
+        }
         //开始查询
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }

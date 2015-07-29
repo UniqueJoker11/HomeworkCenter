@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -35,6 +36,13 @@ public class BaseController {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
+    /**
+     * 获取ServletContext
+     * @return
+     */
+    protected ServletContext getServletContext(){
+        return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getServletContext();
+    }
     /**
      * 获取HttpSession
      *

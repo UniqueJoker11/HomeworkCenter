@@ -44,7 +44,13 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
 
         for (Field field : fields) {
             field.setAccessible(true);//对于似有属性予以访问
-            String columnName = field.getAnnotation(Column.class).name();//获取列的名称
+             Column column= field.getAnnotation(Column.class);
+            String columnName="";
+            if(column!=null){
+                columnName=column.name();//获取列的名称
+            }else{
+                columnName=field.getName();
+            }
             try {
                 field.set(t, rs.getObject(columnName));
             } catch (IllegalAccessException e) {
