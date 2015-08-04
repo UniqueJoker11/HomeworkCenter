@@ -10,7 +10,7 @@ $('#calendar').fullCalendar({
     editable: true,
     eventLimit: true, // allow "more" link when too many events
     events: {
-        url: './fetch_current_templer.action',
+        url: 'fetch_current_templer.action',
         error: function() {
             $('#script-warning').show();
         }

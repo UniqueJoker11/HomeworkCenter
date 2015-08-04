@@ -101,7 +101,7 @@ public class DecorateCommnDao implements ICommonDao {
      */
     @Override
     public <T> List<T> getAmongObjectWithOrder(Class cl, Map<String, Object> map, String orderstr, String searchField, RowMapper<T> rowMapper, boolean isAsc) {
-        return null;
+        return commonDao.getAmongObjectWithOrder(cl,map,orderstr,searchField,rowMapper,isAsc);
     }
 
     /**

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 
 /**
  * Created by DELL on 2015/8/4.
@@ -16,7 +17,7 @@ public class Homework_Temper_Entity {
     @Column(name = "temper_content",nullable = false)
     private String temper_content;
     @Column(name = "temper_date",nullable = false)
-    private String temper_date;
+    private Timestamp temper_date;
     @Column(name = "tmmper_user",nullable = false)
     private String tmmper_user;
 
@@ -36,11 +37,11 @@ public class Homework_Temper_Entity {
         this.temper_content = temper_content;
     }
 
-    public String getTemper_date() {
+    public Timestamp getTemper_date() {
         return temper_date;
     }
 
-    public void setTemper_date(String temper_date) {
+    public void setTemper_date(Timestamp temper_date) {
         this.temper_date = temper_date;
     }
 

@@ -191,9 +191,16 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
     public <T> List<T> getAmongObjectWithOrder(Class cl, Map<String, Object> map, String orderstr, String searchField, RowMapper<T> rowMapper, boolean isAsc) {
         StringBuilder searchSql=new StringBuilder("select * from ");
         //获取表名
-        searchSql.append(this.getEntityTableName(cl));
-        if(map==null||map.isEmpty()){
-
+        searchSql.append(this.getEntityTableNameByClazz(cl));
+        if(map!=null&&!map.isEmpty()){
+            //获取查询参数
+            searchSql.append(" where ").append(searchField).append(" between :").append(map.keySet()).append(" and :").append(map.get("end"));
+        }
+        if(orderstr!=null){
+            searchSql.append(" order by ").append(orderstr);
+        }
+        if(isAsc){
+            searchSql.append(" asc");
         }
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
     }
