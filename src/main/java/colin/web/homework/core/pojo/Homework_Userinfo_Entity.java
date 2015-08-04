@@ -17,8 +17,7 @@ public class Homework_Userinfo_Entity {
     private String user_info_firstname;
     @Column(name = "user_info_lastname")
     private String user_info_lastname;
-    @Column(name = "user_info_email")
-    private String user_info_email;
+
     @Column(name = "user_info_province")
     private String user_info_province;
     @Column(name = "user_info_city")
@@ -54,14 +53,6 @@ public class Homework_Userinfo_Entity {
 
     public void setUser_info_lastname(String user_info_lastname) {
         this.user_info_lastname = user_info_lastname;
-    }
-
-    public String getUser_info_email() {
-        return user_info_email;
-    }
-
-    public void setUser_info_email(String user_info_email) {
-        this.user_info_email = user_info_email;
     }
 
     public String getUser_info_province() {

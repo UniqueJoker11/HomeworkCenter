@@ -47,20 +47,21 @@
     <bean id="jdbcDaoSupport" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport"
           p:jdbcTemplate-ref="parameterJdbcTemplate">
     </bean>
-    <!-- 开启注解事务 只对当前配置文件有效 -->
-    <!--<bean id="txManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <!--开始配置事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
-    <tx:annotation-driven transaction-manager="txManager"/>
-    <tx:advice id="txAdvice" transaction-manager="txManager">
+    <!--使用Cglib来提供代理-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
+    <tx:advice id="txAdvicer" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="del*" propagation="REQUIRED"/>
-            <tx:method name="modify*" propagation="REQUIRED"/>
-            <tx:method name="*" read-only="false"/>
+            <tx:method name="get*" read-only="true" propagation="REQUIRED"/>
+            <tx:method name="fetch*" read-only="true" propagation="REQUIRED"/>
+            <tx:method name="add*" rollback-for="Exception" propagation="REQUIRED"/>
+            <tx:method name="edit*" rollback-for="Exception" propagation="REQUIRED"/>
+            <tx:method name="remove*" rollback-for="Exception" propagation="REQUIRED"/>
         </tx:attributes>
-    </tx:advice>-->
+    </tx:advice>
+
     <!--<import resource="applicationContext-security.xml"></import>-->
 </beans>

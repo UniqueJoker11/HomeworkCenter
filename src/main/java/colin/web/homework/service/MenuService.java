@@ -7,6 +7,7 @@ import colin.web.homework.core.vo.HomeworkMenuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by ASUS on 2015/7/26.
  */
+@Transactional
 @Service
 public class MenuService {
 
@@ -54,7 +56,7 @@ public class MenuService {
         return rebulidMenuList(rootList, subList);
     }
 
-    public List<HomeworkMenuVo> rebulidMenuList(List<HomeworkMenuVo> rootList, List<HomeworkMenuVo> subList) {
+    private List<HomeworkMenuVo> rebulidMenuList(List<HomeworkMenuVo> rootList, List<HomeworkMenuVo> subList) {
         for (HomeworkMenuVo homeworkMenuVo : rootList) {
             List<HomeworkMenuVo> childMenuList = new ArrayList<>();
             for (HomeworkMenuVo childMenu : subList) {

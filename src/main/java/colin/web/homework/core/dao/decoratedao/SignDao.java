@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class SigninDao extends DecorateCommnDao<Homework_User_Entity> {
+public class SignDao extends DecorateCommnDao {
     /**
      * 方法描述：验证用户登录
      * 注意事项：

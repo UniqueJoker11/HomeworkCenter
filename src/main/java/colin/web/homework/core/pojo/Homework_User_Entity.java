@@ -23,7 +23,8 @@ public class Homework_User_Entity {
     private String user_role;
     @Column(name = "user_callname")
     private String user_callname;
-
+    @Column(name = "user_email")
+    private String user_email;
     public String getUser_id() {
         return user_id;
     }
@@ -62,5 +63,13 @@ public class Homework_User_Entity {
 
     public void setUser_callname(String user_callname) {
         this.user_callname = user_callname;
+    }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 }

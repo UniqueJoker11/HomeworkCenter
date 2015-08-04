@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class DecorateCommnDao<T> implements ICommonDao<T> {
+public class DecorateCommnDao implements ICommonDao {
     @Autowired
     private CommonDao commonDao;
 
@@ -25,7 +25,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @param t
      */
     @Override
-    public boolean addObjInfo(T t) {
+    public<T> boolean addObjInfo(T t) {
         return commonDao.addObjInfo(t);
     }
 
@@ -35,7 +35,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @param t
      */
     @Override
-    public boolean deleteObjInfo(T t) {
+    public<T> boolean deleteObjInfo(T t) {
         return commonDao.deleteObjInfo(t);
     }
 
@@ -45,7 +45,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @param t
      */
     @Override
-    public boolean updateObjInfo(T t) {
+    public<T> boolean updateObjInfo(T t) {
         return commonDao.updateObjInfo(t);
     }
 
@@ -57,7 +57,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return
      */
     @Override
-    public T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
+    public<T> T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
         return (T) commonDao.selectObjectById(c, id, rowMapper);
     }
 
@@ -69,7 +69,7 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return 返回一个list对象集合
      */
     @Override
-    public List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
+    public<T> List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
         return commonDao.seletcObjectByMap(c, map, rowMapper);
     }
 
@@ -84,8 +84,24 @@ public class DecorateCommnDao<T> implements ICommonDao<T> {
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+    public<T> List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
         return commonDao.getOrderObjects(cl, map, orderstr, beginpos, count, rowMapper, isAsc);
+    }
+
+    /**
+     * 排序+区间查询
+     *
+     * @param cl
+     * @param map
+     * @param orderstr
+     * @param searchField
+     * @param rowMapper
+     * @param isAsc
+     * @return
+     */
+    @Override
+    public <T> List<T> getAmongObjectWithOrder(Class cl, Map<String, Object> map, String orderstr, String searchField, RowMapper<T> rowMapper, boolean isAsc) {
+        return null;
     }
 
     /**

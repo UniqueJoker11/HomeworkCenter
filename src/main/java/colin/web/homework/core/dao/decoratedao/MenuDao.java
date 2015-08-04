@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * Created by ASUS on 2015/7/26.
  */
 @Repository
-public class MenuDao extends DecorateCommnDao<Homework_Menu_Entity> {
+public class MenuDao extends DecorateCommnDao {
 
 
 }

@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
                         else
                             return false;
                     }
-                },
+                }
             },
             password : {
                 required : true,

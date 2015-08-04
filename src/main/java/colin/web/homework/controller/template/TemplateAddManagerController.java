@@ -5,7 +5,6 @@ import colin.web.homework.controller.BaseController;
 import colin.web.homework.service.TemplateService;
 import colin.web.homework.tools.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +42,7 @@ public class TemplateAddManagerController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_ADD_FORM, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ACTION_ADD_FORM, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object uploadTemplateSnapshot(@RequestParam(value = "templateSnapshot", required = true) MultipartFile[] templateSnapshot, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "templateResource", required = true) MultipartFile templateResource) throws IOException {
         //处理上传图片的类
         StringBuilder snapshotUrl = new StringBuilder("");
@@ -57,23 +56,31 @@ public class TemplateAddManagerController extends BaseController {
         String resourcesUrl = "";
         String resourceOrignalName = templateResource.getOriginalFilename();
         File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-        resourcesUrl =HomeworkConstants.IMAGE_STORE_DIR+File.separator+ resourcesCopyFile.getName();
+        resourcesUrl =HomeworkConstants.RESOURCES_STORE_DIR+File.separator+ resourcesCopyFile.getName();
         templateResource.transferTo(resourcesCopyFile);
-        //解压缩文件
-        String accessUrl = "";
-        if (templateResource.getOriginalFilename().endsWith(".rar")) {
-            FileTools.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
-        } else {
-            FileTools.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
-        }
-        accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
-        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        if (result) {
-            resultMap.put("isSuccess", true);
-        } else {
+        if(!resourcesCopyFile.exists()||resourcesCopyFile.getUsableSpace()<=0){
+            System.out.println("文件不存在或还没写完全");
             resultMap.put("isSuccess", false);
+        }else{
+            String accessUrl = "";
+
+            if (templateResource.getOriginalFilename().endsWith(".rar")) {
+                FileTools.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            } else {
+                FileTools.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            }
+            accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
+            boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
+
+            if (result) {
+                resultMap.put("isSuccess", true);
+            } else {
+                resultMap.put("isSuccess", false);
+            }
         }
+        //解压缩文件
+
         return resultMap;
     }
 

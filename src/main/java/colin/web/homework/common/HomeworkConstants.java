@@ -20,6 +20,9 @@ public class HomeworkConstants {
     public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
+    //模板每日心情
+    public static final String PAGE_TEMPLATE_TODAY_TEMPER="temper";
+
     /**
      * 页面拦截器名称
      */
@@ -43,7 +46,13 @@ public class HomeworkConstants {
     //模板编辑页面
     public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
-    public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
+    public static final String CONTROLLER_ACTION_ADD_FORM = "/template_add_form.action";
+    //模板每日心情页面
+    public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER="/today_temper.html";
+    //获取当日的心情
+    public static final String CONTROLLER_ACTION_FETCH_CURRENT_TEMPER ="/fetch_current_templer.action";
+    //发布当日的心情
+    public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_TEMPLER="/publish_current_templer.action";
     /**
      * 默认的分页数据
      */

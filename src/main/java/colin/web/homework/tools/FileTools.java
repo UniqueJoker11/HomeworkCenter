@@ -1,6 +1,7 @@
 package colin.web.homework.tools;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -11,12 +12,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipFile;
-import org.apache.tools.zip.ZipOutputStream;
-
 import com.github.junrar.Archive;
 import com.github.junrar.rarfile.FileHeader;
+import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -84,26 +82,7 @@ public class FileTools {
      * @param zipfile File 压缩后的文件
      */
     public static void ZipFiles(java.io.File[] srcfile, java.io.File zipfile) {
-        byte[] buf = new byte[1024];
-        try {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
-                    zipfile));
-            for (int i = 0; i < srcfile.length; i++) {
-                FileInputStream in = new FileInputStream(srcfile[i]);
-                out.putNextEntry(new ZipEntry(srcfile[i].getName()));
-                String str = srcfile[i].getName();
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-                out.closeEntry();
-                in.close();
-            }
-            out.close();
-            System.out.println("压缩完成.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       ZipUtil.packEntries(srcfile,zipfile);
     }
 
     /**
@@ -113,26 +92,8 @@ public class FileTools {
      * @param descDir String 解压后的目标目录
      */
     public static void unZipFiles(java.io.File zipfile, String descDir) {
-        try {
-            ZipFile zf = new ZipFile(zipfile);
-            for (Enumeration entries = zf.getEntries(); entries
-                    .hasMoreElements(); ) {
-                ZipEntry entry = ((ZipEntry) entries.nextElement());
-                String zipEntryName = entry.getName();
-                InputStream in = zf.getInputStream(entry);
-                OutputStream out = new FileOutputStream(descDir + zipEntryName);
-                byte[] buf1 = new byte[1024];
-                int len;
-                while ((len = in.read(buf1)) > 0) {
-                    out.write(buf1, 0, len);
-                }
-                in.close();
-                out.close();
-                //System.out.println("解压缩完成.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        File outputDir=new File(descDir);
+        ZipUtil.unpack(zipfile,outputDir);
     }
 
 
