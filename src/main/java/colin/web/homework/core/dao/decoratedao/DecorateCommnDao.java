@@ -5,6 +5,7 @@ import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -19,6 +20,9 @@ public class DecorateCommnDao implements ICommonDao {
     @Autowired
     private CommonDao commonDao;
 
+    public NamedParameterJdbcTemplate getJdbcTemplate(){
+        return commonDao.getNamedParameterJdbcTemplate();
+    }
     /**
      * 单一增加数据
      *

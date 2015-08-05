@@ -566,7 +566,7 @@ strong {
 }
 
 .nav-bracket > li.nav-parent > a:focus {
-    background-color: none;
+    background-color: transparent;
     color: #8F939E;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -785,7 +785,6 @@ strong {
 
 .pageheader .fa-file-text {
     padding: 6px 10px;
-    `
 }
 
 .pageheader .fa-map-marker {
@@ -844,7 +843,7 @@ strong {
 }
 
 .contentpanel {
-    padding: 20px;
+    padding: 10px;
     position: relative;
 }
 
@@ -853,7 +852,6 @@ strong {
     display: block;
     content: '';
 }
-
 form .form-group:last-child {
     margin-bottom: 0;
 }

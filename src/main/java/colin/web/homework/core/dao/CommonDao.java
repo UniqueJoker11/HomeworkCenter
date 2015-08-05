@@ -194,7 +194,8 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
         searchSql.append(this.getEntityTableNameByClazz(cl));
         if(map!=null&&!map.isEmpty()){
             //获取查询参数
-            searchSql.append(" where ").append(searchField).append(" between :").append(map.keySet()).append(" and :").append(map.get("end"));
+            Object[] paramsArray=map.keySet().toArray();
+            searchSql.append(" where ").append(searchField).append(" between :").append(paramsArray[0].toString()).append(" and :").append(paramsArray[1].toString());
         }
         if(orderstr!=null){
             searchSql.append(" order by ").append(orderstr);
