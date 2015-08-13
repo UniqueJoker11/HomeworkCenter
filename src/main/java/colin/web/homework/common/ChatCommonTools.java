@@ -9,6 +9,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
+import org.jivesoftware.smack.roster.RosterListener;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.vcardtemp.packet.VCard;
@@ -18,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -57,9 +59,9 @@ public class ChatCommonTools {
     public AbstractXMPPConnection initXMPPConnection(String username, String password) throws IOException, XMPPException, SmackException {
         if(abstractXMPPConnection==null){
             abstractXMPPConnection = new XMPPTCPConnection(this.initXMPPTCPConfigConfig());
+            abstractXMPPConnection.connect();
+            abstractXMPPConnection.login(username, password);
         }
-        abstractXMPPConnection.connect();
-        abstractXMPPConnection.login(username, password);
         return abstractXMPPConnection;
     }
 
@@ -97,30 +99,50 @@ public class ChatCommonTools {
     /**
      * 换取用户的Roster对象
      *
-     * @param username
-     * @param password
      * @return
      * @throws XMPPException
      * @throws IOException
      * @throws SmackException
      */
-    public Roster initUserRoster(String username, String password) throws XMPPException, IOException, SmackException {
-        Roster roster = Roster.getInstanceFor(this.initXMPPConnection(username, password));
+    public Roster initUserRoster() throws XMPPException, IOException, SmackException {
+        if(abstractXMPPConnection==null||!abstractXMPPConnection.isConnected()){
+            abstractXMPPConnection.connect();
+        }
+        Roster roster = Roster.getInstanceFor(abstractXMPPConnection);
+        roster.addRosterListener(new RosterListener() {
+            @Override
+            public void entriesAdded(Collection<String> collection) {
+
+            }
+
+            @Override
+            public void entriesUpdated(Collection<String> collection) {
+
+            }
+
+            @Override
+            public void entriesDeleted(Collection<String> collection) {
+
+            }
+
+            @Override
+            public void presenceChanged(Presence presence) {
+                System.out.println("Presence changed: " + presence.getFrom() + " " + presence);
+            }
+        });
         return roster;
     }
 
     /**
      * 获取用户的好友列表
      *
-     * @param username
-     * @param password
      * @return
      * @throws XMPPException
      * @throws IOException
      * @throws SmackException
      */
-    public Set<RosterEntry> getAllUserList(String username, String password) throws XMPPException, IOException, SmackException {
-        return this.initUserRoster(username, password).getEntries();
+    public Set<RosterEntry> getAllUserList() throws XMPPException, IOException, SmackException {
+        return this.initUserRoster().getEntries();
     }
 
     /**

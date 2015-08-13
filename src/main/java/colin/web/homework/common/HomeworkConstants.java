@@ -20,6 +20,9 @@ public class HomeworkConstants {
     public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
+    //模板每日心情
+    public static final String PAGE_TEMPLATE_TODAY_SCHEDULE ="schedule";
+
     /**
      * 页面拦截器名称
      */
@@ -44,6 +47,14 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
+    //模板每日心情页面
+    public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER="/user_schedule.html";
+    //获取当日的行程
+    public static final String CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE ="/fetch_current_schedule.action";
+    //获取当日的行程
+    public static final String CONTROLLER_ACTION_FETCH_TODAY_SCHEDULE ="/fetch_today_schedule.action";
+    //发布当日的行程
+    public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE ="/publish_current_schedule.action";
     //向openfire注册一个用户
     public static final String CONTROLLER_USER_CHAT_REGISTER="/register_user_chat.action";
     /**

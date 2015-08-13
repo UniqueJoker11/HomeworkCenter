@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommonDao<T> {
+public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDao {
 
     /**
      * 单一增加数据
@@ -28,7 +28,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @param t
      */
     @Override
-    public boolean addObjInfo(T t) {
+    public<T> boolean addObjInfo(T t) {
         //声明增加SQL语句
         StringBuilder insertSql = new StringBuilder("insert into ");
         StringBuilder insertSqlVal = new StringBuilder(" values(");
@@ -60,7 +60,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @param t
      */
     @Override
-    public boolean deleteObjInfo(T t) {
+    public<T> boolean deleteObjInfo(T t) {
         StringBuilder delSql = new StringBuilder("delete from ");
         delSql.append(this.getEntityTableName(t)).append(" where ");
         Map<String, Object> delFragmentMap = this.getEntityParamsGroup(t, 1);
@@ -81,7 +81,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @param t
      */
     @Override
-    public boolean updateObjInfo(T t) {
+    public<T> boolean updateObjInfo(T t) {
         StringBuilder updateSql = new StringBuilder("update ");
         updateSql.append(this.getEntityTableName(t)).append(" set ");
         Map<String, Object> updateMap = this.getEntityParamsGroup(t, 2);
@@ -98,7 +98,6 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         }
     }
 
-
     /**
      * 根据 主键 查询某个对象
      *
@@ -107,7 +106,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return
      */
     @Override
-    public T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
+    public<T> T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where id=:id");
         Map<String, Object> params = new HashMap<>();
@@ -128,7 +127,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回一个list对象集合
      */
     @Override
-    public List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
+    public<T> List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c));
         if(map!=null&&!map.isEmpty()){
@@ -152,7 +151,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @return 返回List集合
      */
     @Override
-    public List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+    public<T> List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         //获取表名
         searchSql.append(this.getEntityTableNameByClazz(cl));
@@ -177,6 +176,36 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }
 
+    /**
+     * 排序+区间查询
+     *
+     * @param cl
+     * @param map
+     * @param orderstr
+     * @param searchField
+     * @param rowMapper
+     * @param isAsc
+     * @return
+     */
+    @Override
+    public <T> List<T> getAmongObjectWithOrder(Class cl, Map<String, Object> map, String orderstr, String searchField, RowMapper<T> rowMapper, boolean isAsc) {
+        StringBuilder searchSql=new StringBuilder("select * from ");
+        //获取表名
+        searchSql.append(this.getEntityTableNameByClazz(cl));
+        if(map!=null&&!map.isEmpty()){
+            //获取查询参数
+            Object[] paramsArray=map.keySet().toArray();
+            searchSql.append(" where ").append(searchField).append(" between :").append(paramsArray[0].toString()).append(" and :").append(paramsArray[1].toString());
+        }
+        if(orderstr!=null){
+            searchSql.append(" order by ").append(orderstr);
+        }
+        if(isAsc){
+            searchSql.append(" asc");
+        }
+        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
+    }
+
 
     /**
      * 根絕類來獲取表名
@@ -195,7 +224,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @param t
      * @return
      */
-    private final String getEntityTableName(T t) {
+    private final <T> String getEntityTableName(T t) {
         Table table = t.getClass().getAnnotation(Table.class);
         return table.name();
     }
@@ -207,7 +236,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
      * @param choose 0:增加一个对象，1:删除一个对象，2：修改一个对象,3:查询
      * @return
      */
-    private final Map<String, Object> getEntityParamsGroup(T t, int choose) {
+    private final <T> Map<String, Object> getEntityParamsGroup(T t, int choose) {
         //获取实体类的Fields
         Field[] fields = t.getClass().getDeclaredFields();
         //存放结果对象
