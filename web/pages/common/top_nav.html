@@ -212,6 +212,21 @@
         <div class="tab-pane active" id="rp-alluser">
             <h5 class="sidebartitle">Online Users</h5>
             <ul class="chatuserlist">
+                <%for(rosterEntry in userEntries){%>
+                <li class="online">
+                    <div class="media">
+                        <a href="#" class="pull-left media-thumb">
+                            <img alt="" src="${ctxPath}/images/photos/userprofile.png" class="media-object">
+                        </a>
+
+                        <div class="media-body">
+                            <strong>${rosterEntry.name}</strong>
+                            <small>Los Angeles, CA</small>
+                        </div>
+                    </div>
+                    <!-- media -->
+                </li>
+                <%}%>
                 <li class="online">
                     <div class="media">
                         <a href="#" class="pull-left media-thumb">

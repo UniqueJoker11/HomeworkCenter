@@ -15,7 +15,8 @@
     <!-- 配置扫描包 -->
     <context:annotation-config/>
     <context:component-scan
-            base-package="colin.web.homework.service,colin.web.homework.core,colin.web.homework.tools"></context:component-scan>
+            base-package="colin.web.homework.aspect,colin.web.homework.service,colin.web.homework.core,colin.web.homework.tools"></context:component-scan>
+    <bean id="chatConfig" class="colin.web.homework.common.ChatCommonTools"></bean>
     <!--扫描aop文件夹-->
     <context:component-scan base-package="colin.web.homework.aspect"></context:component-scan>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -48,19 +49,18 @@
           p:jdbcTemplate-ref="parameterJdbcTemplate">
     </bean>
     <!-- 开启注解事务 只对当前配置文件有效 -->
-    <!--<bean id="txManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
-    <tx:annotation-driven transaction-manager="txManager"/>
-    <tx:advice id="txAdvice" transaction-manager="txManager">
+    <aop:aspectj-autoproxy/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <tx:advice id="taAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="del*" propagation="REQUIRED"/>
-            <tx:method name="modify*" propagation="REQUIRED"/>
-            <tx:method name="*" read-only="false"/>
+            <tx:method name="fetch*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
+            <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT"/>
+            <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/>
+            <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
         </tx:attributes>
-    </tx:advice>-->
-    <!--<import resource="applicationContext-security.xml"></import>-->
+    </tx:advice>
+
 </beans>

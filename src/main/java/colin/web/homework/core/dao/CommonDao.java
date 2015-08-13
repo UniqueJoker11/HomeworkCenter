@@ -98,6 +98,7 @@ public class CommonDao<T> extends NamedParameterJdbcDaoSupport implements ICommo
         }
     }
 
+
     /**
      * 根据 主键 查询某个对象
      *

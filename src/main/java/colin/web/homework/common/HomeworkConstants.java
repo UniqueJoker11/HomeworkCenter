@@ -44,6 +44,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
+    //向openfire注册一个用户
+    public static final String CONTROLLER_USER_CHAT_REGISTER="/register_user_chat.action";
     /**
      * 默认的分页数据
      */
