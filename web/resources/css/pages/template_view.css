@@ -1,0 +1,7 @@
+#template_view_table img{
+    width: 237px;
+    height:100px;
+}
+#template_view_table td{
+    vertical-align: middle;
+}
