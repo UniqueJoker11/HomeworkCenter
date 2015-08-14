@@ -1,6 +1,6 @@
 package colin.homework.test.tools;
 
-import colin.web.homework.tools.FileTools;
+import colin.web.homework.tools.FileToolsUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Properties;
 @ContextConfiguration("classpath:applicationContext.xml")
 public class MailToolsTest {
     @Autowired
-    private FileTools fileTools;
+    private FileToolsUtils fileTools;
 
     @Test
     public void testMail() throws IOException, MessagingException {

@@ -75,6 +75,9 @@
           <element id="library" level="project" name="Maven: org.jxmpp:jxmpp-core:0.4.2-beta1" />
           <element id="library" level="project" name="Maven: org.jxmpp:jxmpp-util-cache:0.4.2-beta1" />
           <element id="library" level="project" name="Maven: xpp3:xpp3:1.1.4c" />
+          <element id="library" level="project" name="Maven: cglib:cglib:3.1" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:4.2" />
+          <element id="library" level="project" name="Maven: org.zeroturnaround:zt-zip:1.8" />
         </element>
       </element>
     </root>

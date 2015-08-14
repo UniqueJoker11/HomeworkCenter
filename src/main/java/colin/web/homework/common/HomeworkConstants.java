@@ -38,7 +38,7 @@ public class HomeworkConstants {
     //验证用户的表单提交
     public static final String CONTROLLER_SIGNIN_FORM = "/userSignin.html";
     //验证用户的注册表单提交
-    public static final String CONTROLLER_SIGNUP_FORM = "/userSignup.html";
+    public static final String CONTROLLER_SIGNUP_FORM = "/signupUserinfo.html";
     //模板管理页面
     public static final String CONTROLLER_TEMPLATE_MANAGE = "/template_view.html";
     //模板提交的页面
@@ -57,6 +57,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE ="/publish_current_schedule.action";
     //向openfire注册一个用户
     public static final String CONTROLLER_USER_CHAT_REGISTER="/register_user_chat.action";
+    //接受向好友聊天的请求
+    public static final String CONTROLLER_USER_CHAT_SEND_MESSAGE="/user_send_message.action";
     /**
      * 默认的分页数据
      */

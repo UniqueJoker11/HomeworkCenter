@@ -15,8 +15,7 @@
     <!-- 配置扫描包 -->
     <context:annotation-config/>
     <context:component-scan
-            base-package="colin.web.homework.aspect,colin.web.homework.service,colin.web.homework.core,colin.web.homework.tools"></context:component-scan>
-    <bean id="chatConfig" class="colin.web.homework.common.ChatCommonTools"></bean>
+            base-package="colin.web.homework.aspect.**,colin.web.homework.service.**,colin.web.homework.core.**,colin.web.homework.tools.**"></context:component-scan>
     <!--扫描aop文件夹-->
     <context:component-scan base-package="colin.web.homework.aspect"></context:component-scan>
     <aop:aspectj-autoproxy proxy-target-class="true"/>

@@ -3,9 +3,8 @@ package colin.web.homework.controller.template;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
 import colin.web.homework.service.TemplateService;
-import colin.web.homework.tools.FileTools;
+import colin.web.homework.tools.FileToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,9 +61,9 @@ public class TemplateAddManagerController extends BaseController {
         //解压缩文件
         String accessUrl = "";
         if (templateResource.getOriginalFilename().endsWith(".rar")) {
-            FileTools.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            FileToolsUtils.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
         } else {
-            FileTools.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            FileToolsUtils.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
         }
         accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
         boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
@@ -89,7 +88,7 @@ public class TemplateAddManagerController extends BaseController {
         if (!storeDir.exists()) {
             storeDir.mkdirs();
         }
-        storeRoute.append(File.separator).append(FileTools.fetchImageFileName()).append(suffix);
+        storeRoute.append(File.separator).append(FileToolsUtils.fetchImageFileName()).append(suffix);
         ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!imageFileResource.exists()) {
             imageFileResource.getFile().createNewFile();
@@ -103,7 +102,7 @@ public class TemplateAddManagerController extends BaseController {
         if (!storeDir.exists()) {
             storeDir.mkdirs();
         }
-        storeRoute.append(File.separator).append(FileTools.fetchResourceFileName()).append(suffix);
+        storeRoute.append(File.separator).append(FileToolsUtils.fetchResourceFileName()).append(suffix);
         ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!imageFileResource.exists()) {
             imageFileResource.getFile().createNewFile();

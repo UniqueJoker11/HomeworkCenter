@@ -547,7 +547,7 @@ strong {
 }
 
 .nav-bracket > li > a {
-    color: #8f939e;
+    color: #87CEFA;
     padding: 7px 10px;
 }
 
@@ -566,7 +566,7 @@ strong {
 }
 
 .nav-bracket > li.nav-parent > a:focus {
-    background-color: none;
+    background-color: transparent;
     color: #8F939E;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -644,7 +644,7 @@ strong {
 }
 
 .nav-bracket .children > li > a {
-    color: #94989d;
+    color: #87CEFA;
     font-size: 13px;
     display: block;
     padding: 5px 0 5px 27px;
@@ -785,7 +785,6 @@ strong {
 
 .pageheader .fa-file-text {
     padding: 6px 10px;
-    `
 }
 
 .pageheader .fa-map-marker {
@@ -3451,6 +3450,7 @@ div.error label.error:before {
 
 .chatuserlist li {
     border-top: 1px dotted rgba(255, 255, 255, 0.05);
+    cursor: pointer;
 }
 
 .chatuserlist .media-thumb {

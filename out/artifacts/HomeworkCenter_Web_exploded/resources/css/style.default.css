@@ -547,7 +547,7 @@ strong {
 }
 
 .nav-bracket > li > a {
-    color: #8f939e;
+    color: #87CEFA;
     padding: 7px 10px;
 }
 
@@ -644,7 +644,7 @@ strong {
 }
 
 .nav-bracket .children > li > a {
-    color: #94989d;
+    color: #87CEFA;
     font-size: 13px;
     display: block;
     padding: 5px 0 5px 27px;
@@ -3451,6 +3451,7 @@ div.error label.error:before {
 
 .chatuserlist li {
     border-top: 1px dotted rgba(255, 255, 255, 0.05);
+    cursor: pointer;
 }
 
 .chatuserlist .media-thumb {

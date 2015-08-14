@@ -1,4 +1,4 @@
-package colin.web.homework.common;
+package colin.web.homework.tools;
 
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.chat.Chat;
@@ -13,6 +13,7 @@ import org.jivesoftware.smack.roster.RosterListener;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.vcardtemp.packet.VCard;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,6 +26,7 @@ import java.util.Set;
 /**
  * Created by ASUS on 2015/8/2.
  */
+@Service
 public class ChatCommonTools {
     private XMPPTCPConnectionConfiguration config = null;
     private AbstractXMPPConnection abstractXMPPConnection = null;
@@ -35,13 +37,17 @@ public class ChatCommonTools {
      * @return
      */
     public XMPPTCPConnectionConfiguration initXMPPTCPConfigConfig() {
-        if(config==null){
-            config = XMPPTCPConnectionConfiguration.builder()
-                    .setServiceName("colin").setSecurityMode(ConnectionConfiguration.SecurityMode.disabled)
-                    .setHost("127.0.0.1").setDebuggerEnabled(true)
-                    .setSendPresence(true)
-                    .setPort(5222)
-                    .build();
+        if (config == null) {
+            try {
+                config = XMPPTCPConnectionConfiguration.builder()
+                        .setServiceName(FileToolsUtils.fetchPropertiesResources("openfire-server.properties", "server")).setSecurityMode(ConnectionConfiguration.SecurityMode.disabled)
+                        .setHost(FileToolsUtils.fetchPropertiesResources("openfire-server.properties", "serverHost")).setDebuggerEnabled(true)
+                        .setSendPresence(true)
+                        .setPort(Integer.valueOf(FileToolsUtils.fetchPropertiesResources("openfire-server.properties", "serverPort")))
+                        .build();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return config;
     }
@@ -57,7 +63,7 @@ public class ChatCommonTools {
      * @throws SmackException
      */
     public AbstractXMPPConnection initXMPPConnection(String username, String password) throws IOException, XMPPException, SmackException {
-        if(abstractXMPPConnection==null){
+        if (abstractXMPPConnection == null) {
             abstractXMPPConnection = new XMPPTCPConnection(this.initXMPPTCPConfigConfig());
             abstractXMPPConnection.connect();
             abstractXMPPConnection.login(username, password);
@@ -65,12 +71,29 @@ public class ChatCommonTools {
         return abstractXMPPConnection;
     }
 
-    public void listenUserMsg(final AbstractXMPPConnection connection) throws XMPPException, IOException, SmackException {
-        ChatManager chatManager = ChatManager.getInstanceFor(connection);
+    /**
+     * 初始化用户的会话管理对象
+     *
+     * @throws XMPPException
+     * @throws IOException
+     * @throws SmackException
+     */
+    public ChatManager initChatManager() throws XMPPException, IOException, SmackException {
+        return ChatManager.getInstanceFor(abstractXMPPConnection);
+    }
+
+    /**
+     * 初始化用户的监听
+     * @throws XMPPException
+     * @throws IOException
+     * @throws SmackException
+     */
+    public void initUserChatManagerListen() throws XMPPException, IOException, SmackException {
+        ChatManager chatManager = this.initChatManager();
         chatManager.addChatListener(new ChatManagerListener() {
             @Override
             public void chatCreated(Chat chat, boolean createdLocally) {
-                if (!createdLocally){
+                if (!createdLocally) {
                     chat.addMessageListener(new ChatMessageListener() {
                         @Override
                         public void processMessage(Chat chat, Message message) {
@@ -80,7 +103,7 @@ public class ChatCommonTools {
                                 System.out.println("type is " + message.getType().toString());
 
                                 System.out.println(chat.getParticipant().split("/")[0]);
-                                Roster roster=Roster.getInstanceFor(connection);
+                                Roster roster = Roster.getInstanceFor(abstractXMPPConnection);
                                 Message newMsg = new Message();
                                 newMsg.setBody("谢谢你哦，我已经收到你的消息了");
                                 try {
@@ -97,6 +120,22 @@ public class ChatCommonTools {
     }
 
     /**
+     * 发送用户的消息
+     * @param username
+     * @param text
+     * @throws XMPPException
+     * @throws IOException
+     * @throws SmackException
+     */
+    public void sendUserMessage(String username, String text) throws XMPPException, IOException, SmackException {
+        ChatManager chatManager = this.initChatManager();
+        Chat chat = chatManager.createChat(username);
+        Message message = new Message();
+        message.setBody(text);
+        chat.sendMessage(message);
+    }
+
+    /**
      * 换取用户的Roster对象
      *
      * @return
@@ -105,7 +144,7 @@ public class ChatCommonTools {
      * @throws SmackException
      */
     public Roster initUserRoster() throws XMPPException, IOException, SmackException {
-        if(abstractXMPPConnection==null||!abstractXMPPConnection.isConnected()){
+        if (abstractXMPPConnection == null || !abstractXMPPConnection.isConnected()) {
             abstractXMPPConnection.connect();
         }
         Roster roster = Roster.getInstanceFor(abstractXMPPConnection);

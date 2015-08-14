@@ -1,6 +1,6 @@
 package colin.web.homework.controller;
 
-import colin.web.homework.common.ChatCommonTools;
+import colin.web.homework.tools.ChatCommonTools;
 import colin.web.homework.common.HomeworkConstants;
 
 import colin.web.homework.core.vo.HomeworkMenuVo;
@@ -33,19 +33,28 @@ public class DashboardController extends BaseController {
 
     @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD, method = RequestMethod.GET)
     public String showDashboardPage(HttpServletRequest request) throws XMPPException, IOException, SmackException {
-        //加载左侧导航菜单内容
-        List<HomeworkMenuVo> menuList = menuService.getMenuInfoService();
-        request.setAttribute("menuList", menuList);
-        //加载用户的聊天好友
-        HomeworkUserInfo homeworkUserInfo=super.fetchUserInfo();
-        chatCommonTools.listenUserMsg(chatCommonTools.initXMPPConnection(homeworkUserInfo.getUser_name(), homeworkUserInfo.getUser_password()));
+        //查看用户是否登录
+        System.out.println(super.userIsLogin());
+        if(!super.userIsLogin()){
+            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER + HomeworkConstants.CONTROLLER_SIGNIN;
+        }else{
+            //加载左侧导航菜单内容
+            List<HomeworkMenuVo> menuList = menuService.getMenuInfoService();
+            request.setAttribute("menuList", menuList);
+            //加载用户的聊天好友
+            HomeworkUserInfo homeworkUserInfo=super.fetchUserInfo();
+            //设定用户的信息
+            request.setAttribute("userinfo",homeworkUserInfo);
+            chatCommonTools.initXMPPConnection(homeworkUserInfo.getUser_name(), homeworkUserInfo.getUser_password());
+            chatCommonTools.initUserChatManagerListen();
         /*request.setAttribute("userEntries",chatConfig.getAllUserList(homeworkUserInfo.getUser_name(), homeworkUserInfo.getUser_password()));*/
-        Set<RosterEntry> rosterEntries=chatCommonTools.getAllUserList();
-        System.out.println("用户的列表是");
-        for(RosterEntry rosterEntry:rosterEntries){
-            System.out.println("用户名是"+rosterEntry.getName()+"---状态是"+rosterEntry.getStatus());
+            Set<RosterEntry> rosterEntries=chatCommonTools.getAllUserList();
+            System.out.println("用户的列表是");
+            for(RosterEntry rosterEntry:rosterEntries){
+                System.out.println("用户名是"+rosterEntry.getName()+"---状态是"+rosterEntry.getStatus());
+            }
+            request.setAttribute("userEntries",rosterEntries);
+            return HomeworkConstants.PAGE_DASHBOARD;
         }
-        request.setAttribute("userEntries",rosterEntries);
-        return HomeworkConstants.PAGE_DASHBOARD;
     }
 }
