@@ -24,7 +24,7 @@
 
                 <div class="signup-info">
                     <div class="logopanel">
-                        <h1><span>[</span> Homework Manage <span>]</span></h1>
+                        <h1><span>[</span> bracket <span>]</span></h1>
                     </div>
                     <!-- logopanel -->
 
@@ -79,17 +79,27 @@
 
                     <p class="mt5 mb20">Already a member? <a href="${ctxPath}/homework/signin.html"><strong>Sign
                         In</strong></a></p>
+                    <label class="control-label">Name</label>
+
+                    <div class="row mb10">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Firstname"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Lastname"/>
+                        </div>
+                    </div>
 
                     <div class="mb10">
                         <label class="control-label">Username</label>
                         <input id="username" name="username" type="text" class="form-control"
-                               placeholder="用戶名在4~20個字符之間，只能是英文"/>
+                               placeholder="用戶名在6~20個字符之間，只能是英文"/>
                     </div>
 
                     <div class="mb10">
                         <label class="control-label">Password</label>
                         <input id="password" name="password" type="password" class="form-control"
-                               placeholder="密碼最少爲6~30位之间"/>
+                               placeholder="密碼最少爲6位"/>
                     </div>
 
                     <div class="mb10">
@@ -97,15 +107,43 @@
                         <input id="confirm_password" name="confirm_password" type="password" class="form-control"
                                placeholder="請重新輸入確認密碼"/>
                     </div>
+                    <label class="control-label">Birthday</label>
+
+                    <div class="row mb10">
+                        <div class="col-sm-5">
+                            <select id="birthday" name="birthday" class="select2" data-placeholder="Month">
+                                <option value=""></option>
+                                <option value="January">一月</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" placeholder="Day"/>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" placeholder="Year"/>
+                        </div>
+                    </div>
+
                     <div class="mb10">
                         <label class="control-label">Email Address</label>
-                        <input id="email" name="email" type="text" class="form-control" placeholder="請輸入常用的郵箱"/>
+                        <input type="text" class="form-control"/>
                     </div>
 
 
                     <br/>
 
-                    <button class="btn btn-success btn-block">註&nbsp;&nbsp;冊</button>
+                    <button class="btn btn-success btn-block">Sign Up</button>
                 </form>
             </div>
             <!-- col-sm-6 -->
@@ -128,7 +166,7 @@
 </section>
 
 
-<script src="${ctxPath}/js/select2.min.js"></script>
+<script src="${ctxPath}/resources/js/select2.min.js"></script>
 
 <script>
     jQuery(document).ready(function () {

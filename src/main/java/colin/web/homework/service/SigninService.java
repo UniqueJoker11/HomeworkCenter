@@ -1,9 +1,8 @@
 package colin.web.homework.service;
 
-import colin.web.homework.core.dao.decoratedao.SignDao;
+import colin.web.homework.core.dao.decoratedao.SigninDao;
 import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.rowmapper.Homework_User_Rowmapper;
-import colin.web.homework.tools.StringToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,14 +16,14 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class SignService {
+public class SigninService {
 
     @Autowired
     private Homework_User_Entity homework_user_entity;
     @Autowired
     private Homework_User_Rowmapper homework_User_Rowmapper;
     @Autowired
-    private SignDao signDao;
+    private SigninDao signinDao;
 
     /**
      * 驗證用戶登錄,根絕用戶名和密碼查詢
@@ -34,7 +33,7 @@ public class SignService {
      */
     public Map<String, Object> valdiateUserSignin(Map<String, Object> params) {
         //組合用戶的查詢對象
-        List<Homework_User_Entity> resultList = signDao.seletcObjectByMap(Homework_User_Entity.class, params, homework_User_Rowmapper);
+        List<Homework_User_Entity> resultList = signinDao.seletcObjectByMap(Homework_User_Entity.class, params, homework_User_Rowmapper);
         Map<String, Object> userInfoMap = new HashMap<>();
         if (resultList != null && !resultList.isEmpty()) {
             userInfoMap.put("isExists", true);
@@ -54,21 +53,7 @@ public class SignService {
      * @Exception 异常对象
      */
     public Boolean validateUsernameService(Map<String, Object> params) {
-        Map<String, Object> signinParams = signDao.validateUserSignin(params);
+        Map<String, Object> signinParams = signinDao.validateUserSignin(params);
         return (Boolean) signinParams.get("isExists");
-    }
-
-    /**
-     * 提交用户的注册信息
-     *
-     * @return
-     */
-    public boolean saveUserSigninUpService(Map<String, Object> params) {
-        Homework_User_Entity user_entity = new Homework_User_Entity();
-        user_entity.setUser_id(StringToolsUtils.getCommonUUID());
-        user_entity.setUser_name(params.get("user_name").toString());
-        user_entity.setUser_password(params.get("user_password").toString());
-        user_entity.setUser_email(params.get("user_email").toString());
-        return this.signDao.addObjInfo(user_entity);
     }
 }

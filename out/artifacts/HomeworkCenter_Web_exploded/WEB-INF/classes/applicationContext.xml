@@ -15,7 +15,8 @@
     <!-- 配置扫描包 -->
     <context:annotation-config/>
     <context:component-scan
-            base-package="colin.web.homework.service,colin.web.homework.core,colin.web.homework.tools"></context:component-scan>
+            base-package="colin.web.homework.aspect,colin.web.homework.service,colin.web.homework.core,colin.web.homework.tools"></context:component-scan>
+    <bean id="chatConfig" class="colin.web.homework.common.ChatCommonTools"></bean>
     <!--扫描aop文件夹-->
     <context:component-scan base-package="colin.web.homework.aspect"></context:component-scan>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -47,21 +48,19 @@
     <bean id="jdbcDaoSupport" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport"
           p:jdbcTemplate-ref="parameterJdbcTemplate">
     </bean>
-    <!--开始配置事务-->
+    <!-- 开启注解事务 只对当前配置文件有效 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
-    <!--使用Cglib来提供代理-->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
-    <tx:advice id="txAdvicer" transaction-manager="transactionManager">
+    <aop:aspectj-autoproxy/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <tx:advice id="taAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="get*" read-only="true" propagation="REQUIRED"/>
-            <tx:method name="fetch*" read-only="true" propagation="REQUIRED"/>
-            <tx:method name="add*" rollback-for="Exception" propagation="REQUIRED"/>
-            <tx:method name="edit*" rollback-for="Exception" propagation="REQUIRED"/>
-            <tx:method name="remove*" rollback-for="Exception" propagation="REQUIRED"/>
+            <tx:method name="fetch*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
+            <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT"/>
+            <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/>
+            <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
 
-    <!--<import resource="applicationContext-security.xml"></import>-->
 </beans>

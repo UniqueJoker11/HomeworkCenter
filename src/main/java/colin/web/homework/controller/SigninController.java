@@ -3,15 +3,15 @@ package colin.web.homework.controller;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.vo.HomeworkUserInfo;
-import colin.web.homework.service.SignService;
+import colin.web.homework.service.SigninService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +20,10 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
-public class SignController extends BaseController {
+public class SigninController extends BaseController {
 
     @Autowired
-    private SignService signService;
+    private SigninService signinService;
 
     /**
      * 显示登陆页面
@@ -34,38 +34,7 @@ public class SignController extends BaseController {
     public String showSigninPage() {
         return HomeworkConstants.PAGE_SIGNIN;
     }
-    /**
-     * 显示注册页面
-     *
-     * @return
-     */
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNUP, method = RequestMethod.GET)
-    public String showSignupPage() {
-        return HomeworkConstants.PAGE_SIGNUP;
-    }
 
-    /**
-     * 用户注册请求
-     * @param username
-     * @param password
-     * @param email
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNUP_FORM, method = RequestMethod.POST)
-    public Object userSignup(@RequestParam(value = "username",required = true) String username, @RequestParam(value = "password",required = true) String password, @RequestParam(value = "email",required = true) String email,HttpServletRequest request) {
-        Map<String,Object> params=new HashMap<>();
-        params.put("user_name",username);
-        params.put("user_password",password);
-        params.put("user_email",email);
-        boolean result=signService.saveUserSigninUpService(params);
-        if(result){
-            return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER + HomeworkConstants.CONTROLLER_DASHBOARD;
-        }else{
-            return HomeworkConstants.CONTROLLER_SIGNUP;
-        }
-
-    }
     /**
      * 方法描述：验证用户的用户名是否存在
      * 注意事项：
@@ -84,7 +53,7 @@ public class SignController extends BaseController {
         } else {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("user_name", username);
-            Boolean validateResult = this.signService.validateUsernameService(params);
+            Boolean validateResult = this.signinService.validateUsernameService(params);
             if (validateResult) {
                 return true;
             } else {
@@ -105,7 +74,7 @@ public class SignController extends BaseController {
         Map<String, Object> searchParams = new HashMap<>();
         searchParams.put("user_name", username);
         searchParams.put("user_password", password);
-        Map<String, Object> searchResult = signService.valdiateUserSignin(searchParams);
+        Map<String, Object> searchResult = signinService.valdiateUserSignin(searchParams);
         if ((Boolean) searchResult.get("isExists")) {
             Homework_User_Entity homework_user_entity = (Homework_User_Entity) searchResult.get("userEntity");
             //初始化用户信息
