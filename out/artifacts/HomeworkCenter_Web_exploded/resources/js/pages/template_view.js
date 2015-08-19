@@ -30,4 +30,16 @@ $(function(){
         "sPaginationType": "full_numbers"
     });
 });
+//查看用户的的模板页面
+function showTemplate(accessurl){
+    //在一个新的窗口打开该链接的页面
+    $("#template_browser_dialog").find("iframe").attr("src",accessurl);
+    $("#template_browser_dialog").modal("show");
+}
+//编辑用户的模板
+function editTemplate(templateId){
+//初始化表单内容
+    //显示对话框
+    $("#template_edit_dialog").modal("show");
+}
 

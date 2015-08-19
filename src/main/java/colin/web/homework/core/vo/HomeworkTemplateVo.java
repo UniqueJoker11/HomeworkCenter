@@ -76,4 +76,5 @@ public class HomeworkTemplateVo {
     public void setTemplaye_browser_num(int templaye_browser_num) {
         this.templaye_browser_num = templaye_browser_num;
     }
+
 }

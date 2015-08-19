@@ -21,13 +21,17 @@
     <mvc:resources mapping="/upload/resources/**" location="/upload/resources/"></mvc:resources>
     <mvc:resources mapping="/upload/template/**" location="/upload/template/"></mvc:resources>
     <!--据请求URL路径直接转化为逻辑视图名的支持基类-->
-    <bean name="/*.html" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"></bean>
+    <bean name="upload/template/*/*.html" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" p:prefix="upload/template/" p:suffix=".html">
+    </bean>
+    <!--Beetl视图解析器-->
     <bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init"/>
+
     <bean id="viewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver" p:prefix="pages/" p:suffix=".html">
         <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="order" value="1"></property>
     </bean>
     <!--配置统一的错误处理机制,也可以自己重写这个类，通过集成HandlerExceptionResolverAdapter-->
-    <!--  <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
           <property name="exceptionMappings">
               <props>
                   <prop key="java.lang.Exception">/server_error</prop>

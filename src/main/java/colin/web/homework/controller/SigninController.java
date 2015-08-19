@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,7 @@ import java.util.Map;
  * Created by ASUS on 2015/7/11.
  */
 @Controller
-@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class SigninController extends BaseController {
 
     @Autowired
@@ -81,7 +80,7 @@ public class SigninController extends BaseController {
             HomeworkUserInfo userInfo = this.initUserInfo(homework_user_entity);
             //存放Session
             super.getSessionObj().setAttribute(HomeworkConstants.SESSION_USERINFO, userInfo);
-            return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER + HomeworkConstants.CONTROLLER_DASHBOARD;
+            return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_DASHBOARD;
         } else {
             return HomeworkConstants.PAGE_SIGNIN;
         }

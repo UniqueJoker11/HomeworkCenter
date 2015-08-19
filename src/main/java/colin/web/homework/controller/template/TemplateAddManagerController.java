@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by DELL on 2015/7/27.
  */
 @Controller
-@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class TemplateAddManagerController extends BaseController {
 
     @Autowired
@@ -56,17 +56,18 @@ public class TemplateAddManagerController extends BaseController {
         String resourcesUrl = "";
         String resourceOrignalName = templateResource.getOriginalFilename();
         File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-        resourcesUrl =HomeworkConstants.IMAGE_STORE_DIR+File.separator+ resourcesCopyFile.getName();
+        resourcesUrl =HomeworkConstants.RESOURCES_STORE_DIR+File.separator+ resourcesCopyFile.getName();
         templateResource.transferTo(resourcesCopyFile);
         //解压缩文件
         String accessUrl = "";
         if (templateResource.getOriginalFilename().endsWith(".rar")) {
-            FileToolsUtils.unRarFile(resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            FileToolsUtils.unRarFile(super.getRequestObj(),resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
         } else {
-            FileToolsUtils.unZipFiles(resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            FileToolsUtils.unZipFiles(super.getRequestObj(),resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
         }
-        accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName() + "index.html";
-        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
+        accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR +"/" + resourcesCopyFile.getName().substring(0,resourcesCopyFile.getName().lastIndexOf(".")) +"/index.html";
+        //存储模板实体对象
+        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl.replaceAll(File.separator,"/"),this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (result) {
             resultMap.put("isSuccess", true);
@@ -84,9 +85,9 @@ public class TemplateAddManagerController extends BaseController {
      */
     private File getUploadSnapshotFile(String suffix) throws IOException {
         StringBuilder storeRoute = new StringBuilder(HomeworkConstants.IMAGE_STORE_DIR);
-        File storeDir = new File(storeRoute.toString());
+        ServletContextResource storeDir = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!storeDir.exists()) {
-            storeDir.mkdirs();
+            storeDir.getFile().mkdirs();
         }
         storeRoute.append(File.separator).append(FileToolsUtils.fetchImageFileName()).append(suffix);
         ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());
@@ -98,9 +99,9 @@ public class TemplateAddManagerController extends BaseController {
 
     private File getUploadResourceFile(String suffix) throws IOException {
         StringBuilder storeRoute = new StringBuilder(HomeworkConstants.RESOURCES_STORE_DIR);
-        File storeDir = new File(storeRoute.toString());
+        ServletContextResource storeDir = new ServletContextResource(super.getServletContext(),storeRoute.toString());
         if (!storeDir.exists()) {
-            storeDir.mkdirs();
+            storeDir.getFile().mkdirs();
         }
         storeRoute.append(File.separator).append(FileToolsUtils.fetchResourceFileName()).append(suffix);
         ServletContextResource imageFileResource = new ServletContextResource(super.getServletContext(),storeRoute.toString());

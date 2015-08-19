@@ -1,6 +1,7 @@
 package colin.web.homework.core.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -8,6 +9,7 @@ import javax.persistence.Table;
  */
 @Table(name = "homework_aticle")
 public class Homework_Aticle_Entity {
+    @Id
     @Column(name ="aticle_id" ,nullable = false)
     private String aticle_id;
     @Column(name ="aticle_category" ,nullable = false)

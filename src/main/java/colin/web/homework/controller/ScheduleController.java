@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by DELL on 2015/8/4.
  */
 @Controller
-@RequestMapping(HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class ScheduleController extends BaseController {
     @Autowired
     private ScheduleService scheduleService;

@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by ASUS on 2015/8/2.
  */
 @Controller
-@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class UserChatController extends BaseController{
     @Autowired
     private ChatCommonTools chatCommonTools;

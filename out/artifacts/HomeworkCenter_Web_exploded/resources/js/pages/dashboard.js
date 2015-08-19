@@ -210,11 +210,20 @@ $(function () {
             }]);
         plot.draw();
     }
+
     jQuery("#colin-dashboard-menu").find(".children").children("li").bind("click", function (e) {
         var hrefVal = $(this).children("a").attr("href");
         $("#rightPanel").load(hrefVal);
+        resizeWindow();
         e.preventDefault();
         return false;
     });
-
+    //重新绘制页面的高度
+    function resizeWindow(){
+        //移除初始化高度
+        $(".mainpanel").removeAttr("style");
+        var leftPanelHeight=$(".leftpanel").innerHeight();
+        var rightPanelHeight=$("#rightPanel").innerHeight();
+        $(window).height(leftPanelHeight<rightPanelHeight?rightPanelHeight:leftPanelHeight);
+    }
 });

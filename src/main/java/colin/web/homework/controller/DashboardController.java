@@ -23,7 +23,7 @@ import java.util.Set;
  * Created by ASUS on 2015/7/26.
  */
 @Controller
-@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class DashboardController extends BaseController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class DashboardController extends BaseController {
         //查看用户是否登录
         System.out.println(super.userIsLogin());
         if(!super.userIsLogin()){
-            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER + HomeworkConstants.CONTROLLER_SIGNIN;
+            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_SIGNIN;
         }else{
             //加载左侧导航菜单内容
             List<HomeworkMenuVo> menuList = menuService.getMenuInfoService();

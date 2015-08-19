@@ -2,6 +2,7 @@ package colin.web.homework.service;
 
 import colin.web.homework.core.dao.decoratedao.TemplateDao;
 import colin.web.homework.core.pojo.Homework_Template_Entity;
+import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import colin.web.homework.core.vo.HomeworkTemplateVo;
 import colin.web.homework.tools.DateToolsUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,10 +41,10 @@ public class TemplateService {
      * @return
      */
     public Map<String,Object> fetchTemplateWithPage(Map<String,Object> params,int currentPage,int pageSize){
-       return templateDao.getOrderObjectsByPage (Homework_Template_Entity.class,params,"template_create_time",currentPage,pageSize,new DefaultRowmapper<HomeworkTemplateVo>(HomeworkTemplateVo.class.getName()),false);
+       return templateDao.getOrderObjectsByPage(Homework_Template_Entity.class, params, "template_create_time", currentPage, pageSize, new DefaultRowmapper<HomeworkTemplateVo>(HomeworkTemplateVo.class.getName()), false);
     }
     /**
-     * 保存模板对象
+     * 添加模板对象
      *
      * @param tamplateSnapshotUrl
      * @param templateResource
@@ -66,6 +68,27 @@ public class TemplateService {
     }
 
     /**
+     * 根据id来进行搜索模板
+     * @param template_id
+     * @return
+     */
+    public HomeworkTemplateVo searchTemplateService(String template_id){
+        Homework_Template_Entity template_entity=templateDao.selectObjectById(Homework_Template_Entity.class, template_id, new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
+        return this.transferPoToVo(template_entity);
+    }
+
+    /**
+     * 更新模板对象
+     * @param params
+     * @return
+     */
+    public boolean updateTemplateService(Map<String,Object> params){
+
+    }
+    public boolean deleteTemplateService(String template_id){
+
+    }
+    /**
      * 转换数据对象
      * @param sourceList
      * @return
@@ -85,5 +108,19 @@ public class TemplateService {
             templateVoList.add(templateVo);
         }
         return templateVoList;
+    }
+
+    /**
+     * 转换根据id查询的对象
+     * @param template_entity
+     * @return
+     */
+    private HomeworkTemplateVo transferPoToVo(Homework_Template_Entity template_entity){
+        HomeworkTemplateVo homeworkTemplateVo=new HomeworkTemplateVo();
+        homeworkTemplateVo.setTemplate_id(template_entity.getTemplate_id());
+        homeworkTemplateVo.setTemplate_describe(template_entity.getTemplate_describe());
+        homeworkTemplateVo.setTemplate_snapshot(template_entity.getTemplate_snapshot());
+        homeworkTemplateVo.setTemplate_tip(template_entity.getTemplate_tip());
+        return homeworkTemplateVo;
     }
 }

@@ -1,6 +1,4 @@
-<link href="${ctxPath}/css/jquery.datatables.css" rel="stylesheet">
-<script type="text/javascript" src="${ctxPath}/js/jquery.datatables.min.js"></script>
-<script type="text/javascript" src="${ctxPath}/js/select2.min.js"></script>
+<link rel="stylesheet" href="${ctxPath}/css/pages/template_view.css"/>
 <script type="text/javascript" src="${ctxPath}/js/pages/template_view.js"></script>
 <div class="pageheader">
     <h2><i class="fa fa-table"></i> 模板管理 <span>模板详情一览.</span></h2>
@@ -36,22 +34,31 @@
 
                     </thead>
                     <tbody>
-
                     <%for(templateVo in templateList){
                     if(templateVoLP.odd){%>
                     <tr id="template_${templateVo.template_id}" class="odd gradeX">
                         <%}else{%>
-                    <tr id="template_${templateVo.template_id}"  class="even gradeC">
-                       <%}%>
+                    <tr id="template_${templateVo.template_id}" class="even gradeC">
+                        <%}%>
                         <td class="center">${templateVo.template_name}</td>
-                        <td class="center col-xs-6 col-md-3"><a href="#" class="thumbnail"><img data-src="holder.js/100x100" alt="" src="${ctxPath}/${templateVo.template_snapshot}"/></a></td>
+                        <td class="center col-xs-6 col-md-3"><a href="#" class="thumbnail"><img
+                                data-src="holder.js/100x100" alt=""
+                                src="${ctxPath}/${templateVo.template_snapshot}"/></a></td>
 
                         <td class="center">${templateVo.templaye_browser_num}</td>
                         <td class="center">${templateVo.template_describe}</td>
                         <td class="center">${templateVo.template_tip}</td>
-                        <td class="center"> <a href="${ctxPath}/${templateVo.template_access_url}"><i class="glyphicon glyphicon-eye-open"></i></a>
-                            <a href="./template_edit.action?templateId=${templateVo.template_id}"><i class="fa fa-pencil"></i></a>
-                            <a href="./template_delete.action?templateId=${templateVo.template_id}" class="delete-row"><i class="fa fa-trash-o"></i></a></td>
+                        <td class="center">
+                            <button class="btn btn-info"
+                                    onclick="showTemplate('${ctxPath}/${templateVo.template_access_url}')"><i
+                                    class="glyphicon glyphicon-eye-open"></i></button>
+                            <button class="btn btn-primary"
+                                    onclick="editTemplate('${templateVo.template_id}')"><i
+                                    class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger"
+                                    onclick="delTemplate('${templateVo.template_id}')"><i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
                         <%}%>
                     </tbody>
                 </table>
@@ -64,4 +71,86 @@
     <!-- panel -->
 
 </div><!-- contentpanel -->
+<!--内嵌模板进行显示-->
+<div id="template_browser_dialog" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">浏览模板页面</h4>
+            </div>
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--模板内容进行编辑-->
+<div id="template_edit_dialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">模板内容编辑</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="post" action="edit_template.action" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="tamplateName" class="col-sm-2 control-label">模板名称&nbsp;*&nbsp;</label>
+
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="edit_tamplateName" name="tamplateName"
+                                   placeholder="修改模板名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_tamplateTips" class="col-sm-2 control-label">模板标签&nbsp;*&nbsp;</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="tamplateTips" id="edit_tamplateTips"
+                                   placeholder="重写模板标签">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_tamplateDescribe" class="col-sm-2 control-label">模板描述&nbsp;*&nbsp;</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edit_tamplateDescribe" name="tamplateDescribe"
+                                   placeholder="模板描述">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">模板截图 <span class="asterisk">*</span></label>
+
+                        <div class="col-sm-10">
+                            <input id="edit_templateSnapshot" name="templateSnapshot" type="file" class="file">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">模板资源 <span class="asterisk">*</span></label>
+
+                        <div class="col-sm-10">
+                            <input id="edit_templateResource" name="templateResource" type="file" class="file">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div><!-- /.modal -->
 

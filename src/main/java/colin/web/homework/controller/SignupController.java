@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Scope(value = "request")
-@RequestMapping(HomeworkConstants.CONTROLLER_MANAGER)
+@RequestMapping(HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class SignupController extends BaseController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class SignupController extends BaseController {
 			params.put("user_password",password);
 			boolean result = this.signupService.signupUserinfoService(params);
 			if (result) {
-				return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER+HomeworkConstants.CONTROLLER_SIGNIN;
+				return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER_PREFIX +HomeworkConstants.CONTROLLER_SIGNIN;
 			} else {
 				return HomeworkConstants.PAGE_SIGNUP;
 			}

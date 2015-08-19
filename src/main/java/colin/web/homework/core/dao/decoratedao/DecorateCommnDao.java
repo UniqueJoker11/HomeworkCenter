@@ -66,6 +66,18 @@ public class DecorateCommnDao implements ICommonDao {
     }
 
     /**
+     * 根据主键ID删除对象
+     *
+     * @param c
+     * @param idVal
+     * @return
+     */
+    @Override
+    public boolean deleteObjectById(Class c, String idVal) {
+        return this.commonDao.deleteObjectById(c,idVal);
+    }
+
+    /**
      * 带条件的查询.返回list集合
      *
      * @param c

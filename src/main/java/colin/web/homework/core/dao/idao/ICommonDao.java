@@ -35,6 +35,14 @@ public interface ICommonDao {
     public <T> T selectObjectById(final Class c, final String id, RowMapper<T> rowMapper);
 
     /**
+     * 根据主键ID删除对象
+     * @param c
+     * @param idVal
+     * @return
+     */
+    public boolean deleteObjectById(final Class c, final String idVal);
+
+    /**
      * 带条件的查询.返回list集合
      *
      * @param <E>
@@ -60,6 +68,7 @@ public interface ICommonDao {
 
     /**
      * 排序+区间查询
+     *
      * @param cl
      * @param map
      * @param orderstr

@@ -3,6 +3,7 @@ package colin.web.homework.core.dao;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.tools.HomeworkLogOperate;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ import java.util.Set;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDao {
+public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDao {
 
     /**
      * 单一增加数据
@@ -28,7 +29,7 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @param t
      */
     @Override
-    public<T> boolean addObjInfo(T t) {
+    public <T> boolean addObjInfo(T t) {
         //声明增加SQL语句
         StringBuilder insertSql = new StringBuilder("insert into ");
         StringBuilder insertSqlVal = new StringBuilder(" values(");
@@ -60,7 +61,7 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @param t
      */
     @Override
-    public<T> boolean deleteObjInfo(T t) {
+    public <T> boolean deleteObjInfo(T t) {
         StringBuilder delSql = new StringBuilder("delete from ");
         delSql.append(this.getEntityTableName(t)).append(" where ");
         Map<String, Object> delFragmentMap = this.getEntityParamsGroup(t, 1);
@@ -81,7 +82,7 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @param t
      */
     @Override
-    public<T> boolean updateObjInfo(T t) {
+    public <T> boolean updateObjInfo(T t) {
         StringBuilder updateSql = new StringBuilder("update ");
         updateSql.append(this.getEntityTableName(t)).append(" set ");
         Map<String, Object> updateMap = this.getEntityParamsGroup(t, 2);
@@ -106,7 +107,7 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @return
      */
     @Override
-    public<T> T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
+    public <T> T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where id=:id");
         Map<String, Object> params = new HashMap<>();
@@ -120,6 +121,33 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
     }
 
     /**
+     * 根据主键ID删除对象
+     *
+     * @param c
+     * @param idVal
+     * @return
+     */
+    @Override
+    public boolean deleteObjectById(Class c, String idVal) {
+        StringBuilder deleteSql = new StringBuilder("delete from ");
+        String keyName = this.getPrimaryKeyNameByClazz(c);
+        if (keyName.equals("")) {
+            deleteSql.append(this.getEntityTableNameByClazz(c)).append(" where ").append(keyName).append("=:").append(keyName);
+            Map<String, Object> params = new HashMap<>();
+            params.put(keyName, idVal);
+            int result = this.getNamedParameterJdbcTemplate().update(deleteSql.toString(), params);
+            if (result == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
      * 带条件的查询.返回list集合
      *
      * @param c
@@ -127,10 +155,10 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @return 返回一个list对象集合
      */
     @Override
-    public<T> List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
+    public <T> List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         searchSql.append(this.getEntityTableNameByClazz(c));
-        if(map!=null&&!map.isEmpty()){
+        if (map != null && !map.isEmpty()) {
             searchSql.append(" where ");
             //拼接查詢參數
             searchSql.append(this.fetchSearchSqlFragment(map));
@@ -151,7 +179,7 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      * @return 返回List集合
      */
     @Override
-    public<T> List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
+    public <T> List<T> getOrderObjects(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<T> rowMapper, boolean isAsc) {
         StringBuilder searchSql = new StringBuilder("select * from ");
         //获取表名
         searchSql.append(this.getEntityTableNameByClazz(cl));
@@ -189,21 +217,21 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
      */
     @Override
     public <T> List<T> getAmongObjectWithOrder(Class cl, Map<String, Object> map, String orderstr, String searchField, RowMapper<T> rowMapper, boolean isAsc) {
-        StringBuilder searchSql=new StringBuilder("select * from ");
+        StringBuilder searchSql = new StringBuilder("select * from ");
         //获取表名
         searchSql.append(this.getEntityTableNameByClazz(cl));
-        if(map!=null&&!map.isEmpty()){
+        if (map != null && !map.isEmpty()) {
             //获取查询参数
-            Object[] paramsArray=map.keySet().toArray();
+            Object[] paramsArray = map.keySet().toArray();
             searchSql.append(" where ").append(searchField).append(" between :").append(paramsArray[0].toString()).append(" and :").append(paramsArray[1].toString());
         }
-        if(orderstr!=null){
+        if (orderstr != null) {
             searchSql.append(" order by ").append(orderstr);
         }
-        if(isAsc){
+        if (isAsc) {
             searchSql.append(" asc");
         }
-        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(),map,rowMapper);
+        return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }
 
 
@@ -216,6 +244,23 @@ public class  CommonDao extends NamedParameterJdbcDaoSupport implements ICommonD
     private final String getEntityTableNameByClazz(Class clazz) {
         Table table = (Table) clazz.getAnnotation(Table.class);
         return table.name();
+    }
+
+    /**
+     * 根絕類來獲取主键名
+     *
+     * @param clazz
+     * @return
+     */
+    private final String getPrimaryKeyNameByClazz(Class clazz) {
+        Field[] fields = clazz.getDeclaredFields();
+        String keyName = "";
+        for (Field field : fields) {
+            if (field.getAnnotation(Id.class) != null) {
+                keyName = field.getAnnotation(Column.class).name();
+            }
+        }
+        return keyName;
     }
 
     /**

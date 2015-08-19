@@ -14,8 +14,10 @@ import java.util.Enumeration;
 
 import com.github.junrar.Archive;
 import com.github.junrar.rarfile.FileHeader;
+import org.springframework.web.context.support.ServletContextResource;
 import org.zeroturnaround.zip.ZipUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
@@ -100,8 +102,8 @@ public class FileToolsUtils {
      * @param zipfile File 需要解压缩的文件
      * @param descDir String 解压后的目标目录
      */
-    public static void unZipFiles(java.io.File zipfile, String descDir) {
-        File outputDir=new File(descDir);
+    public static void unZipFiles(HttpServletRequest request,java.io.File zipfile, String descDir) throws IOException {
+        File outputDir=new ServletContextResource(request.getServletContext(),descDir).getFile();
         ZipUtil.unpack(zipfile,outputDir);
     }
 
@@ -112,29 +114,29 @@ public class FileToolsUtils {
      * @param srcRarPath       原始rar路径
      * @param dstDirectoryPath 解压到的文件夹
      */
-    public static void unRarFile(String srcRarPath, String dstDirectoryPath) {
+    public static void unRarFile(HttpServletRequest request,String srcRarPath, String dstDirectoryPath) throws IOException {
         if (!srcRarPath.toLowerCase().endsWith(".rar")) {
             System.out.println("非rar文件！");
             return;
         }
-        File dstDiretory = new File(dstDirectoryPath);
+        ServletContextResource dstDiretory = new ServletContextResource(request.getServletContext(),dstDirectoryPath);
         if (!dstDiretory.exists()) {// 目标目录不存在时，创建该文件夹
-            dstDiretory.mkdirs();
+            dstDiretory.getFile().mkdirs();
         }
         Archive a = null;
         try {
-            a = new Archive(new File(srcRarPath));
+            a = new Archive(new ServletContextResource(request.getServletContext(),srcRarPath).getFile());
             if (a != null) {
                 a.getMainHeader().print(); // 打印文件信息.
                 FileHeader fh = a.nextFileHeader();
                 while (fh != null) {
                     if (fh.isDirectory()) { // 文件夹
-                        File fol = new File(dstDirectoryPath + File.separator
-                                + fh.getFileNameString());
+                        File fol = new ServletContextResource(request.getServletContext(),dstDirectoryPath + File.separator
+                                + fh.getFileNameString()).getFile();
                         fol.mkdirs();
                     } else { // 文件
-                        File out = new File(dstDirectoryPath + File.separator
-                                + fh.getFileNameString().trim());
+                        File out =new ServletContextResource(request.getServletContext(),dstDirectoryPath + File.separator
+                                + fh.getFileNameString().trim()).getFile();
                         //System.out.println(out.getAbsolutePath());
                         try {// 之所以这么写try，是因为万一这里面有了异常，不影响继续解压.
                             if (!out.exists()) {

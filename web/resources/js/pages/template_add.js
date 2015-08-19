@@ -2,6 +2,18 @@
  * Created by DELL on 2015/7/27.
  */
 $(function () {
+    //初始化上传文件
+    $("#templateSnapshot").fileinput({
+        allowedFileExtensions:['jpg', 'gif', 'png'],
+        allowedPreviewTypes:['images'],
+        maxFileSize:4096,
+        minFileCount:1,
+        maxFileCount:4
+    });
+    $("#templateResource").fileinput({ allowedFileExtensions:['rar', 'zip'],
+        maxFileSize:15360,
+        minFileCount:1,
+        maxFileCount:1});
     //验证表单提交
     $("#templateAddForm").validate({
         rules: {
@@ -44,6 +56,8 @@ $(function () {
             $("#add_template_result").html(result);
             $("#add_template_modal").modal({keyboard: false});
             $("#templateAddForm").clearForm();
+            $('#templateSnapshot').fileinput('reset');
+            $('#templateResource ').fileinput('reset');
         });
     });
 });

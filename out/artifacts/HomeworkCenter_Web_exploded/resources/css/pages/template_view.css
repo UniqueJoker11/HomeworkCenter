@@ -5,3 +5,6 @@
 #template_view_table td{
     vertical-align: middle;
 }
+#template_view_table td a{
+    margin: 0!important;
+}

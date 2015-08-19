@@ -8,13 +8,15 @@ import java.util.Calendar;
  */
 public class DateToolsUtils {
     /**
-     * 以YYYY-MM-DD hh-mm-ss的形式返回当前的具体时间
+     * 以YYYY-MM-DD HH-mm-ss的形式返回当前的具体时间
+     * HH返回的是24小时制的时间
+     * hh返回的是12小时制的时间
      *
      * @return
      */
     public static String getTodayCurrentTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         return dateFormat.format(calendar.getTime());
     }
 
