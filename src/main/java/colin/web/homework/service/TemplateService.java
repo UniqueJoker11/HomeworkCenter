@@ -27,22 +27,26 @@ public class TemplateService {
 
     /**
      * 一次性获取全部的模板对象
+     *
      * @return
      */
-    public List<HomeworkTemplateVo> initTemplateInfoService(){
-        List<Homework_Template_Entity> allTemplateList=this.templateDao.seletcObjectByMap(Homework_Template_Entity.class,null,new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
+    public List<HomeworkTemplateVo> initTemplateInfoService() {
+        List<Homework_Template_Entity> allTemplateList = this.templateDao.seletcObjectByMap(Homework_Template_Entity.class, null, new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
         return this.transferPoToVo(allTemplateList);
     }
+
     /**
      * 分页查询当前的上传模板内容，
+     *
      * @param params
      * @param currentPage
      * @param pageSize
      * @return
      */
-    public Map<String,Object> fetchTemplateWithPage(Map<String,Object> params,int currentPage,int pageSize){
-       return templateDao.getOrderObjectsByPage(Homework_Template_Entity.class, params, "template_create_time", currentPage, pageSize, new DefaultRowmapper<HomeworkTemplateVo>(HomeworkTemplateVo.class.getName()), false);
+    public Map<String, Object> fetchTemplateWithPage(Map<String, Object> params, int currentPage, int pageSize) {
+        return templateDao.getOrderObjectsByPage(Homework_Template_Entity.class, params, "template_create_time", currentPage, pageSize, new DefaultRowmapper<HomeworkTemplateVo>(HomeworkTemplateVo.class.getName()), false);
     }
+
     /**
      * 添加模板对象
      *
@@ -69,34 +73,41 @@ public class TemplateService {
 
     /**
      * 根据id来进行搜索模板
+     *
      * @param template_id
      * @return
      */
-    public HomeworkTemplateVo searchTemplateService(String template_id){
-        Homework_Template_Entity template_entity=templateDao.selectObjectById(Homework_Template_Entity.class, template_id, new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
+    public HomeworkTemplateVo searchTemplateService(String template_id) {
+        Homework_Template_Entity template_entity = templateDao.selectObjectById(Homework_Template_Entity.class, template_id, new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
         return this.transferPoToVo(template_entity);
     }
 
     /**
      * 更新模板对象
+     *
      * @param params
      * @return
      */
-    public boolean updateTemplateService(Map<String,Object> params){
-
+    public boolean updateTemplateService(Map<String, Object> params) {
+//TODO
+        return false;
     }
-    public boolean deleteTemplateService(String template_id){
 
+    public boolean deleteTemplateService(String template_id) {
+//TODO
+        return false;
     }
+
     /**
      * 转换数据对象
+     *
      * @param sourceList
      * @return
      */
-    private List<HomeworkTemplateVo> transferPoToVo(List<Homework_Template_Entity> sourceList){
-        List<HomeworkTemplateVo> templateVoList=new ArrayList<HomeworkTemplateVo>();
-        for(Homework_Template_Entity template_entity:sourceList){
-            HomeworkTemplateVo templateVo=new HomeworkTemplateVo();
+    private List<HomeworkTemplateVo> transferPoToVo(List<Homework_Template_Entity> sourceList) {
+        List<HomeworkTemplateVo> templateVoList = new ArrayList<HomeworkTemplateVo>();
+        for (Homework_Template_Entity template_entity : sourceList) {
+            HomeworkTemplateVo templateVo = new HomeworkTemplateVo();
             templateVo.setTemplate_id(template_entity.getTemplate_id());
             templateVo.setTemplate_tip(template_entity.getTemplate_tip());
             templateVo.setTemplate_snapshot(template_entity.getTemplate_snapshot().split(",")[0]);
@@ -112,11 +123,12 @@ public class TemplateService {
 
     /**
      * 转换根据id查询的对象
+     *
      * @param template_entity
      * @return
      */
-    private HomeworkTemplateVo transferPoToVo(Homework_Template_Entity template_entity){
-        HomeworkTemplateVo homeworkTemplateVo=new HomeworkTemplateVo();
+    private HomeworkTemplateVo transferPoToVo(Homework_Template_Entity template_entity) {
+        HomeworkTemplateVo homeworkTemplateVo = new HomeworkTemplateVo();
         homeworkTemplateVo.setTemplate_id(template_entity.getTemplate_id());
         homeworkTemplateVo.setTemplate_describe(template_entity.getTemplate_describe());
         homeworkTemplateVo.setTemplate_snapshot(template_entity.getTemplate_snapshot());

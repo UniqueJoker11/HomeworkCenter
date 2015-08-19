@@ -68,7 +68,8 @@ public class TemplateManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_SEARCH, method = RequestMethod.POST)
     public Object searchTemplateObj(@RequestParam(value = "template_id") String template_id) {
-
+//TODO
+        return null;
     }
 
     /**
@@ -79,11 +80,14 @@ public class TemplateManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_EDIT, method = RequestMethod.POST)
     public Object editTemplateObj(@RequestParam(value = "template_id") String template_id) {
-
+//TODO
+        return null;
     }
 
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_DELETE, method = RequestMethod.POST)
     public Object deleteTemplateObj(@RequestParam(value = "template_id") String template_id) {
+        //TODO
+        return null;
     }
 }
