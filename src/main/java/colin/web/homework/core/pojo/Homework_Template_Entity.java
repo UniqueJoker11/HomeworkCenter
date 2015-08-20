@@ -3,6 +3,7 @@ package colin.web.homework.core.pojo;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 @Component
 @Table(name = "homework_template")
 public class Homework_Template_Entity {
+    @Id
     @Column(name = "template_id")
     private String template_id;
     @Column(name = "template_name")

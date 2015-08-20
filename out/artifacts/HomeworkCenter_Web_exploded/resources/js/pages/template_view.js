@@ -1,7 +1,7 @@
 /**
  * Created by DELL on 2015/7/29.
  */
-$(function(){
+$(function () {
     $("#template_view_table").dataTable({
         language: {
             "sProcessing": "处理中...",
@@ -29,17 +29,58 @@ $(function(){
         },
         "sPaginationType": "full_numbers"
     });
+    //保存更改的信息
+    $("#edit_templateSubmitBtn").on("click", function (e) {
+        var params = new Object();
+        params.template_id = $("#template_edit_dialog").attr("data-id");
+        params.template_name = $("#edit_tamplateName").val();
+        params.template_tip = $("#edit_tamplateTips").val();
+        params.template_describe = $("#edit_tamplateDescribe").val();
+        $.post("./update_template.action", params, function (data) {
+            if (!data.isSuccess) {
+                alert(data.msg);
+            }else{
+                alert("更新数据成功！");
+            }
+            //关闭对话框
+            $("#template_edit_dialog").modal("hide");
+        });
+        //
+    });
 });
 //查看用户的的模板页面
-function showTemplate(accessurl){
+function showTemplate(accessurl) {
     //在一个新的窗口打开该链接的页面
-    $("#template_browser_dialog").find("iframe").attr("src",accessurl);
+    $("#template_browser_dialog").find("iframe").attr("src", accessurl);
     $("#template_browser_dialog").modal("show");
 }
 //编辑用户的模板
-function editTemplate(templateId){
-//初始化表单内容
-    //显示对话框
-    $("#template_edit_dialog").modal("show");
+function editTemplate(templateId) {
+    //初始化表单内容
+    var params = new Object();
+    params.template_id = templateId;
+    $.post("./template_search.action", params, function (data) {
+        $("#template_edit_dialog").attr("data-id", templateId);
+        $("#edit_tamplateName").val(data.template_name);
+        $("#edit_tamplateTips").val(data.template_tip);
+        $("#edit_tamplateDescribe").val(data.template_describe);
+        //显示对话框
+        $("#template_edit_dialog").modal("show");
+    });
+}
+//删除模板的信息
+function delTemplate(templateId) {
+    var result = window.confirm("确定要删除该模板么？");
+    if (result) {
+        var params = new Object();
+        params.template_id = templateId;
+        $.post("./delate_template.action", params, function (data) {
+            if (data.isSuccess) {
+                alert("删除成功");
+            } else {
+                alert(data.msg);
+            }
+        });
+    }
 }
 

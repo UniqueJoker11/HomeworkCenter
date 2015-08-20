@@ -89,13 +89,29 @@ public class TemplateService {
      * @return
      */
     public boolean updateTemplateService(Map<String, Object> params) {
-//TODO
-        return false;
+        Homework_Template_Entity template_entity = new Homework_Template_Entity();
+        template_entity.setTemplate_id(params.get("template_id").toString());
+        if (params.containsKey("template_tip")) {
+            template_entity.setTemplate_tip(params.get("template_tip").toString());
+        }
+        if (params.containsKey("template_name")) {
+            template_entity.setTemplate_name(params.get("template_name").toString());
+        }
+        if (params.containsKey("template_describe")) {
+            template_entity.setTemplate_describe(params.get("template_describe").toString());
+        }
+        boolean result = this.templateDao.updateObjInfo(template_entity);
+        return result;
     }
 
+    /**
+     * 根据id删除模板
+     * @param template_id
+     * @return
+     */
     public boolean deleteTemplateService(String template_id) {
-//TODO
-        return false;
+        boolean result=this.templateDao.deleteObjectById(Homework_Template_Entity.class, template_id);
+        return result;
     }
 
     /**
@@ -133,6 +149,7 @@ public class TemplateService {
         homeworkTemplateVo.setTemplate_describe(template_entity.getTemplate_describe());
         homeworkTemplateVo.setTemplate_snapshot(template_entity.getTemplate_snapshot());
         homeworkTemplateVo.setTemplate_tip(template_entity.getTemplate_tip());
+        homeworkTemplateVo.setTemplate_name(template_entity.getTemplate_name());
         return homeworkTemplateVo;
     }
 }

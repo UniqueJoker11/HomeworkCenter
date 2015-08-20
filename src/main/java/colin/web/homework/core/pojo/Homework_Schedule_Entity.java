@@ -3,6 +3,7 @@ package colin.web.homework.core.pojo;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Component
 @Table(name = "homework_schedule")
 public class Homework_Schedule_Entity implements Serializable{
+    @Id
     @Column(name = "schedule_id",nullable = false)
     private String schedule_id;
     @Column(name = "schedule_content",nullable = false)

@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,18 +85,31 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
     @Override
     public <T> boolean updateObjInfo(T t) {
         StringBuilder updateSql = new StringBuilder("update ");
-        updateSql.append(this.getEntityTableName(t)).append(" set ");
-        Map<String, Object> updateMap = this.getEntityParamsGroup(t, 2);
-        if (!updateMap.get("updateSql").toString().equals("")) {
-            updateSql.append(updateMap.get("updateSql").toString()).append(" where ").append(updateMap.get("updateSqlCondition").toString());
-            int result = this.getNamedParameterJdbcTemplate().update(updateSql.toString(), (Map<String, Object>) updateMap.get("params"));
+        updateSql.append(this.getEntityTableName(t));
+        Map<String, Object> updateFragment = null;
+        try {
+            updateFragment = this.initUpdateSqlFragment(t);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        if (updateFragment == null) {
+            logger.info("没有获取到需要更新的对象内容");
+            return false;
+        } else {
+            updateSql.append(" set ").append(
+                    updateFragment.get("updateSqlFragment").toString());
+            updateSql.append(updateFragment.get("updateWhereSqlFragemnt")
+                    .toString());
+            Map<String, Object> updateParans = (Map<String, Object>) updateFragment
+                    .get("updateParams");
+            int result = this.getNamedParameterJdbcTemplate().update(
+                    updateSql.toString(), updateParans);
             if (result == 1) {
                 return true;
             } else {
+                logger.info("更新对象失败");
                 return false;
             }
-        } else {
-            return false;
         }
     }
 
@@ -109,9 +123,11 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
     @Override
     public <T> T selectObjectById(Class c, String id, RowMapper<T> rowMapper) {
         StringBuilder searchSql = new StringBuilder("select * from ");
-        searchSql.append(this.getEntityTableNameByClazz(c)).append(" where id=:id");
+        searchSql.append(this.getEntityTableNameByClazz(c)).append(" where ");
+        String idName = this.getPrimaryKeyNameByClazz(c);
+        searchSql.append(idName).append("=:").append(idName);
         Map<String, Object> params = new HashMap<>();
-        params.put("id", id);
+        params.put(idName, id);
         try {
             return this.getNamedParameterJdbcTemplate().queryForObject(searchSql.toString(), params, rowMapper);
         } catch (Exception e) {
@@ -332,29 +348,6 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
                 resultMap.put("delSql", delSql.toString());
                 resultMap.put("params", params);
                 break;
-            //修改一个对象,根据主键更新
-            case 2:
-                StringBuilder updateSql = new StringBuilder(""), updateSqlCondition = new StringBuilder();
-                for (Field field : fields) {
-                    try {
-                        if (field.get(t) != null) {
-                            String columnName = field.getAnnotation(Column.class).name();
-                            if (field.getAnnotation(Id.class) != null) {
-                                updateSqlCondition.append(columnName).append("=:").append(columnName);
-                            } else {
-                                updateSql.append(columnName).append("=:").append(columnName).append(",");
-                            }
-                            params.put(columnName, field.get(t));
-                        }
-                    } catch (IllegalAccessException e) {
-                        HomeworkLogOperate.getCurrentLogger(CommonDao.class).error("拼接修改语句时出错！");
-                        e.printStackTrace();
-                    }
-                }
-                resultMap.put("updateSql", updateSql.toString());
-                resultMap.put("updateSqlCondition", updateSqlCondition.toString());
-                resultMap.put("params", params);
-                break;
             //根据条件查询一个对像，精确查询，非like查询
             case 3:
                 StringBuilder querySql = new StringBuilder("");
@@ -395,5 +388,59 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
             searchFragment.append(key).append("=:").append(key).append(" and ");
         }
         return searchFragment.substring(0, searchFragment.lastIndexOf(" and "));
+    }
+
+    /**
+     * 方法描述： 返回更新语句的片段 注意事项：
+     *
+     * @param t
+     * @return
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @Exception 异常对象
+     */
+    private <T> Map<String, Object> initUpdateSqlFragment(T t)
+            throws IllegalArgumentException, IllegalAccessException {
+        Field[] fields = t.getClass().getDeclaredFields();
+        StringBuilder updateSqlFragment = new StringBuilder("");
+        StringBuilder updateWhereSqlFragemnt = new StringBuilder(" where ");
+        Map<String, Object> params = new HashMap<String, Object>();
+        for (Field field : fields) {
+            if (!Modifier.isFinal(field.getModifiers())
+                    && !Modifier.isStatic(field.getModifiers())) {
+                field.setAccessible(true);
+                if (field.get(t) != null
+                        && field.getAnnotation(Id.class) == null) {
+                    Column commonColumn = field.getAnnotation(Column.class);
+                    String columnName = "";
+                    if (commonColumn == null) {
+                        columnName = field.getName();
+                    } else {
+                        columnName = commonColumn.name();
+                    }
+                    params.put(columnName, field.get(t));
+                    updateSqlFragment.append(columnName).append("=:")
+                            .append(columnName).append(",");
+                } else if (field.get(t) != null
+                        && field.getAnnotation(Id.class) != null) {
+                    String idName = field.getAnnotation(Column.class).name();
+                    updateWhereSqlFragemnt.append(idName).append("=:")
+                            .append(idName);
+                    params.put(idName, field.get(t).toString());
+                }
+            }
+
+        }
+        if (updateSqlFragment.equals("")) {
+            return null;
+        } else {
+            Map<String, Object> updateFragmentMap = new HashMap<String, Object>();
+            updateFragmentMap.put("updateSqlFragment", updateSqlFragment
+                    .toString().substring(0, updateSqlFragment.length() - 1));
+            updateFragmentMap.put("updateParams", params);
+            updateFragmentMap.put("updateWhereSqlFragemnt",
+                    updateWhereSqlFragemnt.toString());
+            return updateFragmentMap;
+        }
     }
 }

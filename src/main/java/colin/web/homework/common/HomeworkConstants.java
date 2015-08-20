@@ -20,10 +20,18 @@ public class HomeworkConstants {
     public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
-    //模板每日心情
+    //个人日历记事本
     public static final String PAGE_TEMPLATE_TODAY_SCHEDULE = "schedule";
+    //文章一览页面
+    public static final String PAGE_ATICLE_BROWSER_VIEW = "aticle_browser";
+    //文章添加页面
+    public static final String PAGE_ATICLE_ADD_VIEW = "aticle_add";
+    //用户的信息管理页面
+    public static final String PAGE_PERSON_MANAGE_VIEW="person_manage";
     //前台模板首页
     public static final String PAGE_TEMPLATE_DASHBOARD = "template/dashboard";
+
+
 
     /**
      * 页面拦截器名称
@@ -48,12 +56,22 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_MANAGE = "/template_view.html";
     //模板提交的页面
     public static final String CONTROLLER_TEMPLATE_ADD = "/template_add.html";
-    //模板编辑页面
-    public static final String CONTROLLER_TEMPLATE_EDIT = "/template_edit.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
-    //模板每日心情页面
+    //记事本页面
     public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";
+    //文章一览页面
+    public static final String CONTROLLER_ATICLE_BROWSER_PAGE = "/aticle_browser.html";
+    //文章增加页面
+    public static final String CONTROLLER_ATICLE_ADD_PAGE = "/aticle_add.html";
+    //文章内容编辑
+    public static final String CONTROLLER_ATICLE_EDIT_ACTION = "/aticle.edit.action";
+    //文章内容删除
+    public static final String CONTROLLER_ATICLE_DELETE_ACTION = "/aticle_delete.action";
+    //文章内容增加
+    public static final String CONTROLLER_ATICLE_ADD_ACTION = "/aticle_add.action";
+    //文章内容搜索
+    public static final String CONTROLLER_ATICLE_SEARCH_ACTION = "/aticle_search.action";
     //ajax请求分页返回模板的内容
     public static final String CONTROLLER_TEMPLATE_PAGE_LIST = "/fetch_template.action";
     //ajax根据id返回模板的内容信息
@@ -68,6 +86,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ACTION_FETCH_TODAY_SCHEDULE = "/fetch_today_schedule.action";
     //发布当日的行程
     public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE = "/publish_current_schedule.action";
+    //访问用户的管理页面
+    public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_manage.html";
     //向openfire注册一个用户
     public static final String CONTROLLER_USER_CHAT_REGISTER = "/register_user_chat.action";
     //接受向好友聊天的请求
