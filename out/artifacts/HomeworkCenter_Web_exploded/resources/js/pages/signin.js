@@ -2,7 +2,6 @@
  * Created by ASUS on 2015/7/11.
  */
 jQuery(document).ready(function () {
-    var accessUrl="/HomeworkCenter/homework/";
     $("#homework_signin").validate({
         debug : false,// //调试模式取消submit的默认提交功能
         submitHandler : function(form) { // 表单提交句柄,为一回调函数，带一个参数：form
@@ -16,7 +15,7 @@ jQuery(document).ready(function () {
                 required : true,
                 rangelength : [ 4, 20 ],
                 remote : {
-                    url : accessUrl+"usernamevalidate.action",
+                    url :"./usernamevalidate.action",
                     type : 'post',
                     dataType : "json",
                     data : {

@@ -10,10 +10,7 @@ import colin.web.homework.tools.StringToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by DELL on 2015/7/28.
@@ -33,6 +30,25 @@ public class TemplateService {
     public List<HomeworkTemplateVo> initTemplateInfoService() {
         List<Homework_Template_Entity> allTemplateList = this.templateDao.seletcObjectByMap(Homework_Template_Entity.class, null, new DefaultRowmapper<Homework_Template_Entity>(Homework_Template_Entity.class.getName()));
         return this.transferPoToVo(allTemplateList);
+    }
+
+    /**
+     * 返回所有的模板标签
+     *
+     * @return
+     */
+    public Set<String> fetchAllTemplateTips() {
+        return this.templateDao.fetchAllTemplateTips();
+    }
+
+    /**
+     * 返回最新发布的8条模板数据
+     *
+     * @return
+     */
+    public List<HomeworkTemplateVo> fetchRecentlyTemplateList() {
+        List<Homework_Template_Entity> template_entityList = this.templateDao.fetchRecentlyTemplateObj();
+        return this.transferPoToVo(template_entityList);
     }
 
     /**
@@ -106,11 +122,12 @@ public class TemplateService {
 
     /**
      * 根据id删除模板
+     *
      * @param template_id
      * @return
      */
     public boolean deleteTemplateService(String template_id) {
-        boolean result=this.templateDao.deleteObjectById(Homework_Template_Entity.class, template_id);
+        boolean result = this.templateDao.deleteObjectById(Homework_Template_Entity.class, template_id);
         return result;
     }
 

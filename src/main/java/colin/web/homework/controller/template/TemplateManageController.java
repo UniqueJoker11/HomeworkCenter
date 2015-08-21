@@ -45,13 +45,14 @@ public class TemplateManageController extends BaseController {
         return HomeworkConstants.PAGE_TEMPLATE_MANAGE;
     }
 
+
     /**
      * ajax获取模板分页信息
      *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_PAGE_LIST, method = RequestMethod.GET)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_PAGE_LIST, method = RequestMethod.POST)
     public Object showTemplateInfoByPage(HttpServletRequest request) {
         //初始化模板列表内容
         int currentPage = 0;
@@ -64,6 +65,32 @@ public class TemplateManageController extends BaseController {
         }
         Map<String, Object> templateMap = templateService.fetchTemplateWithPage(null, currentPage, pageSize);
         return templateMap;
+    }
+
+    /**
+     * 返回所有的标签
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_TIPS,method =RequestMethod.POST)
+    public Object fetchAllTemplateTips(){
+       return this.templateService.fetchAllTemplateTips();
+    }
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE,method = RequestMethod.POST)
+    public Object fetchRecentlyTemplate(){
+        return this.templateService.fetchRecentlyTemplateList();
+    }
+    /**
+     * 返回所有的模板数据
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCHALL, method = RequestMethod.POST)
+    public Object fetchAllTemplateObj() {
+        List<HomeworkTemplateVo> menuList = this.templateService.initTemplateInfoService();
+        return menuList;
     }
 
     /**

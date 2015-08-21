@@ -21,8 +21,9 @@
     <mvc:resources mapping="/upload/resources/**" location="/upload/resources/"></mvc:resources>
     <mvc:resources mapping="/upload/template/**" location="/upload/template/"></mvc:resources>
     <!--据请求URL路径直接转化为逻辑视图名的支持基类-->
-    <bean name="upload/template/*/*.html" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" p:prefix="upload/template/" p:suffix=".html">
-    </bean>
+    <bean name="upload/template/*/*.html" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" p:prefix="upload/template/" p:suffix=".html"></bean>
+    <!--umeditor图片上传jsp访问-->
+    <bean name="umeditor/*.jsp" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" p:prefix="umeditor/" p:suffix=".jsp"></bean>
     <!--Beetl视图解析器-->
     <bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init"/>
 

@@ -3,8 +3,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <%include("./common/resources.html"){}%>
-    <link rel="stylesheet" href="${ctxPath}/css/pages/template_dashboard.css">
-    <title>我的作品</title>
+    <link rel="stylesheet" href="${ctxPath}/css/pages/template/dashboard.css">
+    <script type="text/javascript" src="${ctxPath}/js/pages/template/dashboard.js"></script>
+    <title>CoCo小屋</title>
 </head>
 <body>
 <!--头部导航条-->
@@ -48,44 +49,14 @@
                     <div class="panel panel-default">
                         <h4 class="panel-heading"><i class="glyphicon glyphicon-th-list"></i>&nbsp;作品列表</h4>
 
-                        <div id="coco-production-list" class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="thumbnail">
-                                        <img src="..." alt="...">
+                        <div class="panel-body">
+                            <div id="coco-production-list" data-page="1">
 
-                                        <div class="caption">
-                                            <h3>Thumbnail label</h3>
-
-                                            <p>...</p>
-
-                                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                                               class="btn btn-default"
-                                                                                                               role="button">Button</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-center">
                                     <nav>
-                                        <ul class="pagination">
-                                            <li>
-                                                <a href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li>
-                                                <a href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
+                                        <ul id="template_pagination"  class=”pagination”>
                                         </ul>
                                     </nav>
                                 </div>
@@ -100,7 +71,7 @@
                             <div class="panel panel-default">
                                 <h4 class="panel-heading"><i class="glyphicon glyphicon-paperclip"></i>&nbsp;我的标签</h4>
 
-                                <div class="panel-body">
+                                <div id="coco-tips-panel" class="panel-body">
                                     <span class="label label-default">Default</span>
                                     <span class="label label-primary">Primary</span>
                                     <span class="label label-success">Success</span>
@@ -115,32 +86,18 @@
                                 <h4 class="panel-heading"><i class="glyphicon glyphicon-th"></i>&nbsp;最新发布</h4>
 
                                 <div class="panel-body">
-                                    <ul class="list-group">
+                                    <ul id="coco-recently-template-list">
                                         <li class="list-group-item">Cras justo odio</li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <h4 class="panel-heading"><i class="glyphicon glyphicon-comment"></i>&nbsp;最新评论</h4>
+                                <h4 class="panel-heading"><i class="glyphicon glyphicon-book"></i>&nbsp;收藏好文</h4>
 
                                 <div class="panel-body">
-                                    <div class="media">
-                                        <div class="media-left media-middle">
-                                            <a href="#">
-                                                <img class="media-object" src="..." alt="...">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Middle aligned media</h4>
-                                            ...
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

@@ -27,6 +27,14 @@ public class AticleManageController extends BaseController {
     }
 
     /**
+     * 转载文章页面
+     * @return
+     */
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_REPRINT_PAGE,method = RequestMethod.GET)
+    public String showReprintAticlePage(){
+        return HomeworkConstants.PAGE_REPRINT_ATICLE_VIEW;
+    }
+    /**
      * 显示文章的添加页面
      *
      * @return

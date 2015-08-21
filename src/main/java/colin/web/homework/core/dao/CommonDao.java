@@ -203,13 +203,6 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
         if (map != null && !map.isEmpty()) {
             searchSql.append(" where ").append(this.fetchSearchSqlFragment(map));
         }
-        //假如需要分页
-        if (beginpos != null && beginpos >= 1) {
-            if (count == null || count < 1) {
-                count = HomeworkConstants.PAGE_SIZE;
-            }
-            searchSql.append(" limit ").append((beginpos - 1) * count).append(" ").append(count);
-        }
         //假如需要排序
         if (!orderstr.equals("")) {
             searchSql.append(" order by ").append(orderstr);
@@ -217,6 +210,14 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
                 searchSql.append(" asc");
             }
         }
+        //假如需要分页
+        if (beginpos != null && beginpos >= 1) {
+            if (count == null || count < 1) {
+                count = HomeworkConstants.PAGE_SIZE;
+            }
+            searchSql.append(" limit ").append((beginpos - 1) * count).append(",").append(count);
+        }
+
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }
 

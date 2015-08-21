@@ -20,12 +20,15 @@ public class HomeworkConstants {
     public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
+
     //个人日历记事本
     public static final String PAGE_TEMPLATE_TODAY_SCHEDULE = "schedule";
     //文章一览页面
     public static final String PAGE_ATICLE_BROWSER_VIEW = "aticle_browser";
     //文章添加页面
     public static final String PAGE_ATICLE_ADD_VIEW = "aticle_add";
+    //转载文章页面
+    public static final String PAGE_REPRINT_ATICLE_VIEW="reprint_aticle";
     //用户的信息管理页面
     public static final String PAGE_PERSON_MANAGE_VIEW="person_manage";
     //前台模板首页
@@ -58,20 +61,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_ADD = "/template_add.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
-    //记事本页面
-    public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";
-    //文章一览页面
-    public static final String CONTROLLER_ATICLE_BROWSER_PAGE = "/aticle_browser.html";
-    //文章增加页面
-    public static final String CONTROLLER_ATICLE_ADD_PAGE = "/aticle_add.html";
-    //文章内容编辑
-    public static final String CONTROLLER_ATICLE_EDIT_ACTION = "/aticle.edit.action";
-    //文章内容删除
-    public static final String CONTROLLER_ATICLE_DELETE_ACTION = "/aticle_delete.action";
-    //文章内容增加
-    public static final String CONTROLLER_ATICLE_ADD_ACTION = "/aticle_add.action";
-    //文章内容搜索
-    public static final String CONTROLLER_ATICLE_SEARCH_ACTION = "/aticle_search.action";
+    //返回所有的模板管理对象
+    public static final String CONTROLLER_TEMPLATE_FETCHALL="fetchall_template.action";
     //ajax请求分页返回模板的内容
     public static final String CONTROLLER_TEMPLATE_PAGE_LIST = "/fetch_template.action";
     //ajax根据id返回模板的内容信息
@@ -80,6 +71,31 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_UPDATE = "/update_template.action";
     //ajax删除模板的内容
     public static final String CONTROLLER_TEMPLATE_DELETE = "/delate_template.action";
+    //获取模板所有的标签，不重复
+    public static final String CONTROLLER_TEMPLATE_FETCH_TIPS="/fetch_all_tips.action";
+    //获取最近的模板
+    public static final String CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE="/fetch_recent_template.action";
+
+    //记事本页面
+    public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";
+
+
+    //文章一览页面
+    public static final String CONTROLLER_ATICLE_BROWSER_PAGE = "/aticle_browser.html";
+    //文章增加页面
+    public static final String CONTROLLER_ATICLE_ADD_PAGE = "/aticle_add.html";
+    //转载文章页面
+    public static final String CONTROLLER_ATICLE_REPRINT_PAGE = "/aticle_reprint.html";
+    //文章内容编辑
+    public static final String CONTROLLER_ATICLE_EDIT_ACTION = "/aticle.edit.action";
+    //文章内容删除
+    public static final String CONTROLLER_ATICLE_DELETE_ACTION = "/aticle_delete.action";
+    //文章内容增加
+    public static final String CONTROLLER_ATICLE_ADD_ACTION = "/aticle_add.action";
+    //文章内容搜索
+    public static final String CONTROLLER_ATICLE_SEARCH_ACTION = "/aticle_search.action";
+
+
     //获取当日的行程
     public static final String CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE = "/fetch_current_schedule.action";
     //获取当日的行程
@@ -88,10 +104,6 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE = "/publish_current_schedule.action";
     //访问用户的管理页面
     public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_manage.html";
-    //向openfire注册一个用户
-    public static final String CONTROLLER_USER_CHAT_REGISTER = "/register_user_chat.action";
-    //接受向好友聊天的请求
-    public static final String CONTROLLER_USER_CHAT_SEND_MESSAGE = "/user_send_message.action";
     //
     /**
      * 模板的前台页面访问

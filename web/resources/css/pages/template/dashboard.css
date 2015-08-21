@@ -1,0 +1,35 @@
+#coco-production-list{
+    padding:0;
+}
+#coco-production-list img{
+    width: 100%;
+    height:350px;
+}
+#coco-tips-panel span{
+    display:inline-block;
+    margin: 3px;
+}
+.coco-interaction-component label{
+    margin-right: 10px;
+}
+#coco-recently-template-list{
+    padding-left: 0;
+}
+#coco-recently-template-list li{
+    margin: 5px 0;
+    padding: 5px 0;
+    border-bottom: 1px dotted #878787;
+    list-style: none;
+}
+.label-default2{
+background-color: #0390fd;
+}
+.label-info2{
+background-color: #119380;
+}
+.label-success2{
+    background-color: #78CF8A;
+}
+.label-warning2{
+    background-color: #efe24b;
+}
