@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-08-21 09:09:22
+Date: 2015-08-21 17:53:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,16 +57,20 @@ CREATE TABLE `homework_menu` (
 -- ----------------------------
 -- Records of homework_menu
 -- ----------------------------
-INSERT INTO `homework_menu` VALUES ('0de179bc-bfc4-4450-a62f-457a6b8a0677', '日程安排', 'd29228b8-2d5f-4951-b928-5a2e7aff4642', '/user_schedule.html', 'admin', '2015-07-26 12:16:27', 'fa fa-dropbox', '11');
+INSERT INTO `homework_menu` VALUES ('0de179bc-bfc4-4450-a62f-457a6b8a0677', '日程安排', 'd29228b8-2d5f-4951-b928-5a2e7aff4642', '/user_schedule.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list-alt', '11');
 INSERT INTO `homework_menu` VALUES ('15f3785b-e45f-4f7e-96e8-72aa091b8172', '权限配置', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_authority', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-eye-open', '63');
+INSERT INTO `homework_menu` VALUES ('405c5cca-b1e1-4283-b486-f7d53475cbea', '个人资料', 'd29228b8-2d5f-4951-b928-5a2e7aff4642', '/person_manage.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-user', '12');
 INSERT INTO `homework_menu` VALUES ('45868e8a-e453-4e3d-979e-3415f859a04d', '网络图片', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-picture', '5');
+INSERT INTO `homework_menu` VALUES ('4c4d11ca-455b-4bd8-9ab9-630fe52ffeda', '文章一览', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_browser.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-list', '31');
 INSERT INTO `homework_menu` VALUES ('54c729c3-9c73-4e32-872a-d645c7c31cf9', '音乐一览', 'e9992506-e269-4219-9116-9b81d9ca6544', '/music_view.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list', '41');
+INSERT INTO `homework_menu` VALUES ('675bf996-85e5-4c90-9956-cc089008559a', '新增文章', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_add.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-plus-sign', '32');
 INSERT INTO `homework_menu` VALUES ('932f7fd0-7c9c-4f3c-ad84-65a806e68fb0', '增加模版', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4', '/template_add.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-plus', '22');
 INSERT INTO `homework_menu` VALUES ('a00abd9c-410f-4310-8262-7f50c209bfa0', '用户管理', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_user.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-user', '62');
 INSERT INTO `homework_menu` VALUES ('a4c78339-cf93-4642-be1b-57b5dafb2ab6', '系统管理', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-cog', '6');
-INSERT INTO `homework_menu` VALUES ('c2bd7195-32f7-47b0-96fc-827c8e0e0226', '网络文章', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-book', '3');
+INSERT INTO `homework_menu` VALUES ('c2bd7195-32f7-47b0-96fc-827c8e0e0226', '我的文章', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-book', '3');
 INSERT INTO `homework_menu` VALUES ('d29228b8-2d5f-4951-b928-5a2e7aff4642', '个人中心', 'root', '#', 'admin', '2015-07-26 12:16:27', 'fa fa-reddit-square', '1');
 INSERT INTO `homework_menu` VALUES ('e9992506-e269-4219-9116-9b81d9ca6544', '网络音乐', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-headphones', '4');
+INSERT INTO `homework_menu` VALUES ('ea159abc-86c9-4d1f-8fa0-baca94a70cab', '转载文章', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_reprint.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-share-alt', '33');
 INSERT INTO `homework_menu` VALUES ('f55d2ac6-03a3-4e65-b47c-0a4b72cbcf55', '模板一览', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4', '/template_view.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list', '21');
 INSERT INTO `homework_menu` VALUES ('f95e66ee-05d8-4685-9971-bb93a3d94ce4', '网页模板', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-th', '2');
 INSERT INTO `homework_menu` VALUES ('fef50057-94b8-4e7e-b5be-077556943260', '菜单管理', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_menu.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list-alt', '61');
@@ -146,10 +150,16 @@ INSERT INTO `homework_template` VALUES ('08623cf1-43ba-4bb0-9a84-618263f0facf', 
 INSERT INTO `homework_template` VALUES ('6ed7a924-9c68-47bc-98b7-36f04ff5e015', 'fewagaer', 'upload\\images\\201507280430523872.jpg,upload\\images\\201507280430521407.jpg,', '0', 'h6ys4', 'j67jd', 'upload\\resources\\2015072804305239910.rar', 'adminjoker', '2015-07-28 04:30:52', 'upload\\template\\2015072804305239910.rarindex.html');
 INSERT INTO `homework_template` VALUES ('777f1e8b-d450-4673-b939-89dbba867ebb', '测试模板2', 'upload\\images\\201508190409332426.jpg,', '0', '测试模板描述2', 'html5,2', 'upload\\resources\\2015081904093321489.zip', 'colin', '2015-08-19 16:09:33', 'upload\\template/2015081904093321489/index.html');
 INSERT INTO `homework_template` VALUES ('7a035c11-4446-4357-83db-127822d1e3de', '测试模板', 'upload\\images\\201508190402337685.jpg,', '0', '测试模板描述', 'html5', 'upload\\resources\\2015081904023396126.zip', 'colin', '2015-08-19 04:02:34', 'upload\\template\\2015081904023396126\\index.html');
-INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc162', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', null, '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-3d89-93af-a9c0b11cc162', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b2349-93af-a9c0b11cc162', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0241cc162', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc146', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc162', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc165', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc32534', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
+INSERT INTO `homework_template` VALUES ('868a32bb-c9c4-4b89-93af-a9c0b11cc4562', 'cesdf', 'upload\\images\\20150728031212641.jpg,upload\\images\\201507280312127527.jpg,', '0', 'gaergser', 'gwe4', 'upload\\resources\\2015072803121273715.rar', '', '2015-07-28 03:12:12', 'upload\\template\\2015072803121273715.rarindex.html');
 INSERT INTO `homework_template` VALUES ('8c69047a-9c2e-4ae8-b4b4-38757f1f806b', 'bhrjhdt', 'upload\\images\\20150728041405633.jpg,upload\\images\\201507280414053815.jpg,', '0', 'gsergts', 'hrths', 'upload\\resources\\201507280414056953.rar', 'adminjoker', '2015-07-28 04:14:05', 'upload\\template\\201507280414056953.rarindex.html');
 INSERT INTO `homework_template` VALUES ('ae988cb1-ccc0-40ef-91ff-5ee152ce6702', '测试模板2', 'upload\\images\\201508190319445990.jpg,', '0', '测试内容描述', 'html5,模板', 'upload\\resources\\2015081903194451871.rar', 'colin', '2015-08-19 03:19:45', 'upload\\template\\2015081903194451871\\index.html');
-INSERT INTO `homework_template` VALUES ('c5b9127f-beb1-4573-9528-bab955b784d5', '测试模板', 'upload\\images\\201508191143592502.jpg,', '0', '描述内容', 'html5', 'upload\\images\\2015081911435966985.rar', 'colin', '2015-08-19 11:43:59', 'upload\\template\\2015081911435966985.rarindex.html');
 
 -- ----------------------------
 -- Table structure for homework_user
