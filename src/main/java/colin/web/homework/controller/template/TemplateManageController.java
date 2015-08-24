@@ -8,6 +8,7 @@ import colin.web.homework.tools.FileToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +17,12 @@ import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.FileSystems;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,7 +184,7 @@ public class TemplateManageController extends BaseController {
         String resourcesUrl = "";
         String resourceOrignalName = templateResource.getOriginalFilename();
         File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-        resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + File.separator + resourcesCopyFile.getName();
+        resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR +"/"+ resourcesCopyFile.getName();
         templateResource.transferTo(resourcesCopyFile);
         //解压缩文件
         String accessUrl = "";
@@ -190,7 +195,7 @@ public class TemplateManageController extends BaseController {
         }
         accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + "/" + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
         //存储模板实体对象
-        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl.replaceAll(File.separator, "/"), this.fetchUserInfo().getUser_name());
+        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (result) {
             resultMap.put("isSuccess", true);
@@ -234,5 +239,17 @@ public class TemplateManageController extends BaseController {
         return imageFileResource.getFile();
     }
 
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_DOWNLOAD,method = RequestMethod.GET)
+    public void downloadTemplateResource(@RequestParam(value = "sourceId") String sourceId, HttpServletResponse response) throws IOException {
+        //加载模板资源
+        ServletContextResource contextResource=new ServletContextResource(super.getServletContext(),sourceId);
+        if(!contextResource.exists()){
+            String content="资源未找到，原因或许为未存在。";
+            response.getWriter().print(content);
+        }else{
+           response.getOutputStream().write(FileCopyUtils.copyToByteArray(contextResource.getFile()));
+        }
+    }
 
 }

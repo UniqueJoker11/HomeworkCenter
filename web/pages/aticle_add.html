@@ -21,7 +21,7 @@
                         <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
                     </div>
-                    <h4 class="panel-title">Basic Wizard</h4>
+                    <h4 class="panel-title">发布文章</h4>
 
                     <p>This basic wizard have no form validation and allows you to skip to another step by clicking on
                         the tab.</p>
@@ -32,82 +32,302 @@
                     <div id="basicWizard" class="basic-wizard">
 
                         <ul class="nav nav-pills nav-justified">
-                            <li><a href="#tab1" data-toggle="tab">文章标题</a></li>
-                            <li><a href="#tab2" data-toggle="tab">文章内容</a></li>
+                            <li><a href="#tab1" data-toggle="tab"><i class="glyphicon glyphicon-edit"></i>&nbsp;发布文章</a>
+                            </li>
+                            <li><a href="#tab2" data-toggle="tab"><i class="fa fa-eye"></i>&nbsp;文章预览</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane" id="tab1">
                                 <div class="form">
                                     <div class="form-group">
-                                        <label class="col-sm-4"><em class="coco-form-required">*</em>&nbsp;文章标题</label>
+                                        <label class="col-sm-1 col-sm-offset-1">文章标题</label>
 
-                                        <div class="col-sm-8">
-
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name="aticleTitle" id="aticleTitle">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-4">Lastname</label>
+                                        <label class="col-sm-1 col-sm-offset-1">文章摘要</label>
 
-                                        <div class="col-sm-8">
-                                            <input type="text" name="lastname" class="form-control"/>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" id="aticleDigest" name="aticleDigest"
+                                                      rows="6"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-4">Gender</label>
+                                        <label class="col-sm-1 col-sm-offset-1">文章内容</label>
 
-                                        <div class="col-sm-8">
-                                            <div class="rdio rdio-primary">
-                                                <input type="radio" checked="checked" id="male" value="m" name="radio">
-                                                <label for="male">Male</label>
+                                        <div class="col-sm-9">
+                                            <!-- 加载编辑器的容器 -->
+                                            <script id="aticleContentContainer" type="text/plain"
+                                                    style="height:260px;"></script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 col-sm-offset-1">文章分类</label>
+
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="aticleCategory" name="aticleCategory"
+                                                    multiple data-placeholder="选择文章分类">
+                                                <option value=""></option>
+                                                <option value="0">java开发技术</option>
+                                                <option value="0">css前端技术</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 col-sm-offset-1">文章封面</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="uploader" class="form-control">
+                                                <!--用来存放文件信息-->
+                                                <div id="thelist" class="uploader-list"></div>
+                                                <div>
+                                                    <div id="picker" class="btn">选择文件</div>
+                                                </div>
                                             </div>
-                                            <div class="rdio rdio-primary">
-                                                <input type="radio" value="f" id="female" name="radio">
-                                                <label for="female">Female</label>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 col-sm-offset-1">文章标签</label>
+
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name="aticleTips" id="aticleTips"
+                                                   placeholder="多个标签用,隔开">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <button type="submit" class="btn btn-success col-sm-4 col-sm-offset-2"><i
+                                                    class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;发表文章
+                                            </button>
+                                            <button type="reset" class="btn btn-danger col-md-4 col-sm-offset-1"><i
+                                                    class="glyphicon glyphicon-minus"></i>&nbsp;&nbsp;取消
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2">
-                                <form class="form">
-                                    <div class="form-group">
-                                        <label class="col-sm-4">文章内容</label>
+                                <div class="col-sm-9">
 
-                                        <div class="col-sm-5">
-                                            <input type="text" name="product_id" class="form-control"/>
+                                    <div class="panel panel-default panel-blog">
+                                        <div class="panel-body">
+                                            <h3 class="blogsingle-title">Getting Started With Film Photography</h3>
+
+                                            <ul class="blog-meta">
+                                                <li>By: <a href="">TmPxls</a></li>
+                                                <li>Jan 02, 2014</li>
+                                                <li><a href="">2 Comments</a></li>
+                                            </ul>
+
+                                            <br>
+
+                                            <div class="blog-img"><img src="images/photos/blog1.jpg"
+                                                                       class="img-responsive" alt=""></div>
+                                            <div class="mb20"></div>
+
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                                mollit anim id est laborum.</p>
+
+                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+                                                illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                                                explicabo.</p>
+
+                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                                                fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
+                                                sequi nesciunt.</p>
+
+                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+                                                consectetur, adipisci velit, sed quia non numquam eius modi tempora
+                                                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim
+                                                ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+                                                laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
+                                                eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+                                                molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
+                                                nulla pariatur</p>
+
                                         </div>
+                                        <!-- panel-body -->
                                     </div>
+                                    <!-- panel -->
 
-                                    <div class="form-group">
-                                        <label class="col-sm-4">Product Name</label>
+                                    <div class="authorpanel">
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object thumbnail" src="images/photos/userprofile.png"
+                                                     alt="">
+                                            </a>
 
-                                        <div class="col-sm-8">
-                                            <input type="text" name="product_name" class="form-control"/>
+                                            <div class="media-body event-body">
+                                                <h4 class="subtitle">About The Author</h4>
+
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
+                                            </div>
                                         </div>
+                                        <!-- media -->
                                     </div>
+                                    <!-- authorpanel -->
 
-                                    <div class="form-group">
-                                        <label class="col-sm-4">Category</label>
+                                    <div class="mb30"></div>
+                                    <h5 class="subtitle">5 Comments</h5>
 
-                                        <div class="col-sm-4">
-                                            <select class="select2" data-placeholder="Choose One">
-                                                <option value=""></option>
-                                                <option value="">3D Animation</option>
-                                                <option value="">Web Design</option>
-                                                <option value="">Software Engineering</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
+                                    <div class="mb30"></div>
+
+                                    <ul class="media-list comment-list">
+
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object thumbnail" src="images/photos/user1.png"
+                                                     alt="">
+                                            </a>
+
+                                            <div class="media-body">
+                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                <h4>Nusja Nawancali</h4>
+                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                                                <div class="media">
+                                                    <a class="pull-left" href="#">
+                                                        <img class="media-object thumbnail"
+                                                             src="images/photos/userprofile.png" alt="">
+                                                    </a>
+
+                                                    <div class="media-body">
+                                                        <a href=""
+                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                        <h4>Eileen Sideways</h4>
+                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                                            do eiusmod tempor incididunt ut labore et dolore magna
+                                                            aliqua.</p>
+
+                                                        <div class="media">
+                                                            <a class="pull-left" href="#">
+                                                                <img class="media-object thumbnail"
+                                                                     src="images/photos/user3.png" alt="">
+                                                            </a>
+
+                                                            <div class="media-body">
+                                                                <a href=""
+                                                                   class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                                <h4>Zaham Sindilmaca</h4>
+                                                                <small class="text-muted">January 10, 2014 at 7:30am
+                                                                </small>
+                                                                <p>Ut enim ad minim veniam, quis nostrud exercitation
+                                                                    ullamco laboris nisi ut aliquip ex ea commodo
+                                                                    consequat.</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- media -->
+
+                                                    </div>
+                                                    <!-- media-body -->
+                                                </div>
+                                                <!-- media -->
+
+                                                <div class="media">
+                                                    <a class="pull-left" href="#">
+                                                        <img class="media-object thumbnail"
+                                                             src="images/photos/user2.png" alt="">
+                                                    </a>
+
+                                                    <div class="media-body">
+                                                        <a href=""
+                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                        <h4>Ray Sin</h4>
+                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                                            laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- media -->
+
+                                            </div>
+                                            <!-- media-body -->
+
+                                        </li>
+                                        <!-- media -->
+
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object thumbnail" src="images/photos/user1.png"
+                                                     alt="">
+                                            </a>
+
+                                            <div class="media-body">
+                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                <h4>Nusja Nawancali</h4>
+                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
+                                            </div>
+                                        </li>
+                                        <!-- media -->
+
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object thumbnail" src="images/photos/user4.png"
+                                                     alt="">
+                                            </a>
+
+                                            <div class="media-body">
+                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                <h4>Weno Carasbong</h4>
+                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
+
+                                                <div class="media">
+                                                    <a class="pull-left" href="#">
+                                                        <img class="media-object thumbnail"
+                                                             src="images/photos/user3.png" alt="">
+                                                    </a>
+
+                                                    <div class="media-body">
+                                                        <a href=""
+                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
+                                                        <h4>Zaham Sindilmaca</h4>
+                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
+                                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                                            laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- media -->
+
+                                            </div>
+                                        </li>
+                                        <!-- media -->
+
+                                    </ul>
+                                    <!-- comment-list -->
+                                    =
+
+                                </div>
                             </div>
                         </div>
                         <!-- tab-content -->
                         <ul class="pager wizard">
-                            <li class="previous"><a href="javascript:void(0)">上一个</a></li>
-                            <li class="next"><a href="javascript:void(0)">下一个</a></li>
+                            <li class="previous"><a href="javascript:void(0)">返回</a></li>
+                            <li class="next"><a href="javascript:void(0)">查看预览</a></li>
                         </ul>
 
                     </div>

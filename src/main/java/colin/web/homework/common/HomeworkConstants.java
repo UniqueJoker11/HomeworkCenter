@@ -29,8 +29,15 @@ public class HomeworkConstants {
     public static final String PAGE_ATICLE_ADD_VIEW = "aticle_add";
     //转载文章页面
     public static final String PAGE_REPRINT_ATICLE_VIEW="reprint_aticle";
+
     //用户的信息管理页面
     public static final String PAGE_PERSON_MANAGE_VIEW="person_manage";
+
+
+    //菜单管理首页
+    public static final String PAGE_MENU_MANAGE_VIEW="system_menu";
+
+
     //前台模板首页
     public static final String PAGE_TEMPLATE_DASHBOARD = "template/dashboard";
 
@@ -75,6 +82,9 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_FETCH_TIPS="/fetch_all_tips.action";
     //获取最近的模板
     public static final String CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE="/fetch_recent_template.action";
+    //下载模板内容
+    public static final String CONTROLLER_TEMPLATE_DOWNLOAD="/template_download.action";
+
 
     //记事本页面
     public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";
@@ -102,9 +112,25 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ACTION_FETCH_TODAY_SCHEDULE = "/fetch_today_schedule.action";
     //发布当日的行程
     public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE = "/publish_current_schedule.action";
+
     //访问用户的管理页面
     public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_manage.html";
-    //
+
+    //菜单管理页面
+    public static final String CONTROLLER_MEMU_MANAGE_PAGE="/system_menu.html";
+    //加载系统的根菜单
+    public static final String CONTROLLER_FETCH_MENU_ROOT="/fetch_menu_root.action";
+    //加载系统的子节点菜单
+    public static final String CONTROLLER_FETCH_MENU_NODE="/fetch_menu_node.action";
+    //更新系统的菜单内容
+    public static final String CONTROLLER_UPDATE_MENU_INFO="/update_menu_info.action";
+    //新增系统的菜单内容
+    public static final String CONTROLLER_ADD_MENU_INFO="/add_menu_info.action";
+    //删除系统的菜单内容
+    public static final String CONTROLLER_DEL_MENU_INFO="/del_menu_info.action";
+
+    //同意上传图片
+    public static final String CONTROLLER_COMMON_UPLOAD_IMAGE="/upload_image.action";
     /**
      * 模板的前台页面访问
      */
@@ -116,9 +142,9 @@ public class HomeworkConstants {
     /**
      * 默认的资源上传路径
      */
-    public static final String RESOURCES_STORE_DIR = "upload" + File.separator + "resources";
-    public static final String IMAGE_STORE_DIR = "upload" + File.separator + "images";
-    public static final String RESOURCES_COMPRESS_DIR = "upload" + File.separator + "template";
+    public static final String RESOURCES_STORE_DIR = "upload/resources";
+    public static final String IMAGE_STORE_DIR = "upload/images";
+    public static final String RESOURCES_COMPRESS_DIR = "upload/template";
 
     /**
      * 用户存放信息
