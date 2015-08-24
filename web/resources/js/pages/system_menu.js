@@ -29,35 +29,41 @@ $(function () {
  * 开始编辑信息
  * @param menuId
  */
+var menuGId="";
 function editMenuInfo(menuId, isNode) {
-    //移除所有的模板内容
-    $("#colin_edit_menu_template").remove("");
-    var menuObj = $("#colin_menu_" + menuId);
-    var editTemplate =
-        "<li id='colin_edit_menu_template'>" +
-        "<div class=\"panel-body\">" +
-        "<div class=\"form\">" +
-        "<div class=\"input-group mb15\">" +
-        "<span class=\"input-group-addon\">图标</span>" +
-        "<input type=\"text\" placeholder=\"修改图标\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").children("i").attr("class") + "'>" +
+    if(menuGId==menuId){
+        $("#colin_edit_menu_template").toggle();
+    }else{
+        menuGId=menuId;
+        //移除所有的模板内容
+        $("#colin_edit_menu_template").remove("");
+        var menuObj = $("#colin_menu_" + menuId);
+        var editTemplate =
+            "<li id='colin_edit_menu_template'>" +
+            "<div class=\"panel-body\">" +
+            "<div class=\"form\">" +
+            "<div class=\"input-group mb15\">" +
+            "<span class=\"input-group-addon\">图标</span>" +
+            "<input type=\"text\" placeholder=\"修改图标\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").children("i").attr("class") + "'>" +
+            "</div>" +
+            "<div class=\"input-group mb15\">" +
+            "<span class=\"input-group-addon\">名称</span>" +
+            "<input type=\"text\" placeholder=\"修改名称\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").text() + "'>" +
+            "</div>";
+        if (isNode) {
+            editTemplate += "<div class=\"input-group mb15\">" +
+            "<span class=\"input-group-addon\">链接</span>" +
+            "<input type=\"text\" placeholder=\"访问链接\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children(".colin-node-menu-url").find("mark").html() + "'>" +
+            "</div>";
+        }
+        editTemplate += "<div class=\"panel-footer\">" +
+        "<button type=\"submit\" class='btn btn-primary col-sm-3 col-sm-offset-2' onclick='confirmEditMenuInfo(" + menuId + ")'>修改</button><button type='reset'class='btn btn-danger col-sm-3 col-sm-offset-1' onclick='confirmResetEditMenuInfo()'>取消</button>" +
         "</div>" +
-        "<div class=\"input-group mb15\">" +
-        "<span class=\"input-group-addon\">名称</span>" +
-        "<input type=\"text\" placeholder=\"修改名称\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").text() + "'>" +
-        "</div>";
-    if (isNode) {
-        editTemplate += "<div class=\"input-group mb15\">" +
-        "<span class=\"input-group-addon\">链接</span>" +
-        "<input type=\"text\" placeholder=\"访问链接\" id=\"menuIcon\" class=\"form-control\" value='" + menuObj.children(".colin-node-menu-url").find("mark").html() + "'>" +
-        "</div>";
+        "</li>";
+        //操作dom
+        menuObj.after(editTemplate);
+        $("#colin_edit_menu_template").slideDown();
     }
-    editTemplate += "<div class=\"panel-footer\">" +
-    "<button type=\"submit\" class='btn btn-primary col-sm-3 col-sm-offset-2' onclick='confirmEditMenuInfo(" + menuId + ")'>修改</button><button type='reset'class='btn btn-danger col-sm-3 col-sm-offset-1' onclick='confirmResetEditMenuInfo()'>取消</button>" +
-    "</div>" +
-    "</li>";
-    //操作dom
-    menuObj.after(editTemplate);
-    $("#colin_edit_menu_template").slideDown("slow");
 }
 /**
  * 加载子节点
@@ -82,6 +88,22 @@ function loadNodeMenuInfo(menuId) {
             $("#colin-node-menu-list").html("<li>当前没有子菜单哦！</li>")
         }
     });
+}
+//根据id删除菜单
+function removeMenuInfo(menuId){
+    var result=Widnow.confirm("确认要删除该菜单吗？");
+    if(result){
+        var params=new Object();
+        params.menuId=menuId;
+        $.post("./del_menu_info.action",params,function(data){
+            if(data.isSuccess){
+                alert("删除菜单成功！");
+                $("colin_menu_"+menuId).remove();
+            }else{
+                alert("删除菜单失败！");
+            }
+        });
+    }
 }
 /**
  * 确认修改菜单信息

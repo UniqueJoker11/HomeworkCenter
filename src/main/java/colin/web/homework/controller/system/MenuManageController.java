@@ -19,6 +19,7 @@ public class MenuManageController extends BaseController {
 
     @Autowired
     private MenuService menuService;
+
     /**
      * 显示菜单管理主页面
      *
@@ -33,21 +34,31 @@ public class MenuManageController extends BaseController {
      * 加载根菜单的内容
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_FETCH_MENU_ROOT,method = RequestMethod.POST)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_FETCH_MENU_ROOT, method = RequestMethod.POST)
     public Object fetchSystemRootMenuList() {
         return this.menuService.getMenuNodeInfo("root");
     }
 
     /**
      * 加载子节点的内容
+     *
      * @param menuParId
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_FETCH_MENU_NODE,method = RequestMethod.POST)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_FETCH_MENU_NODE, method = RequestMethod.POST)
     public Object fetchSystemNodeMenuList(@RequestParam(value = "menuParId") String menuParId) {
         return this.menuService.getMenuNodeInfo(menuParId);
     }
 
-
+    /**
+     * 根绝id删除节点
+     * @param menuId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_DEL_MENU_INFO, method = RequestMethod.POST)
+    public Object deleteSystemMenuInfo(@RequestParam(value = "menuId") String menuId) {
+        return this.menuService.deleteMenuInfo(menuId);
+    }
 }
