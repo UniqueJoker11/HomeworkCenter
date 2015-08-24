@@ -69,7 +69,7 @@ public class HomeworkConstants {
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
     //返回所有的模板管理对象
-    public static final String CONTROLLER_TEMPLATE_FETCHALL="fetchall_template.action";
+    public static final String CONTROLLER_TEMPLATE_FETCHALL="/fetchall_template.action";
     //ajax请求分页返回模板的内容
     public static final String CONTROLLER_TEMPLATE_PAGE_LIST = "/fetch_template.action";
     //ajax根据id返回模板的内容信息
@@ -124,8 +124,10 @@ public class HomeworkConstants {
     public static final String CONTROLLER_FETCH_MENU_NODE="/fetch_menu_node.action";
     //更新系统的菜单内容
     public static final String CONTROLLER_UPDATE_MENU_INFO="/update_menu_info.action";
-    //新增系统的菜单内容
-    public static final String CONTROLLER_ADD_MENU_INFO="/add_menu_info.action";
+    //新增系统的根菜单内容
+    public static final String CONTROLLER_ADD_ROOT_MENU_INFO="/add_root_menu_info.action";
+    //新增系统的节点菜单内容
+    public static final String CONTROLLER_ADD_NODE_MENU_INFO="/add_node_menu_info.action";
     //删除系统的菜单内容
     public static final String CONTROLLER_DEL_MENU_INFO="/del_menu_info.action";
 

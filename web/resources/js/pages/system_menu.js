@@ -23,18 +23,27 @@ $(function () {
             }
         });
     }
+
+    //绑定添加根节点菜单添加的事件
+    $("#colin-root-menu-modal-submitbtn").bind("click", function () {
+        $("#colin-root-menu-modal-form").ajaxForm();
+    });
+    //绑定添加子节点菜单添加的事件
+    $("#colin-node-menu-modal-submitbtn").bind("click", function () {
+        $("#colin-node-menu-modal-form").ajaxForm();
+    });
 });
 
 /**
  * 开始编辑信息
  * @param menuId
  */
-var menuGId="";
+var menuGId = "";
 function editMenuInfo(menuId, isNode) {
-    if(menuGId==menuId){
+    if (menuGId == menuId) {
         $("#colin_edit_menu_template").toggle();
-    }else{
-        menuGId=menuId;
+    } else {
+        menuGId = menuId;
         //移除所有的模板内容
         $("#colin_edit_menu_template").remove("");
         var menuObj = $("#colin_menu_" + menuId);
@@ -90,16 +99,16 @@ function loadNodeMenuInfo(menuId) {
     });
 }
 //根据id删除菜单
-function removeMenuInfo(menuId){
-    var result=Widnow.confirm("确认要删除该菜单吗？");
-    if(result){
-        var params=new Object();
-        params.menuId=menuId;
-        $.post("./del_menu_info.action",params,function(data){
-            if(data.isSuccess){
+function removeMenuInfo(menuId) {
+    var result = Widnow.confirm("确认要删除该菜单吗？");
+    if (result) {
+        var params = new Object();
+        params.menuId = menuId;
+        $.post("./del_menu_info.action", params, function (data) {
+            if (data.isSuccess) {
                 alert("删除菜单成功！");
-                $("colin_menu_"+menuId).remove();
-            }else{
+                $("colin_menu_" + menuId).remove();
+            } else {
                 alert("删除菜单失败！");
             }
         });
@@ -116,4 +125,18 @@ function confirmEditMenuInfo(menuId) {
  */
 function confirmResetEditMenuInfo() {
 
+}
+/**
+ * 添加根目录菜单
+ */
+function addRootMenuInfo() {
+    $("#colin-node-menu-modal").modal("hide");
+    $("#colin-root-menu-modal").modal("show");
+}
+/**
+ * 添加节点目录菜单
+ */
+function addNodeMenuInfo() {
+    $("#colin-node-menu-modal").modal("show");
+    $("#colin-root-menu-modal").modal("hide");
 }

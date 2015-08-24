@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by DELL on 2015/8/24.
  */
@@ -60,5 +63,39 @@ public class MenuManageController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_DEL_MENU_INFO, method = RequestMethod.POST)
     public Object deleteSystemMenuInfo(@RequestParam(value = "menuId") String menuId) {
         return this.menuService.deleteMenuInfo(menuId);
+    }
+
+    /**
+     * 添加菜单根目录
+     * @param menuName
+     * @param menuIcon
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_ROOT_MENU_INFO,method = RequestMethod.POST)
+    public Object addSystemRootMenuInfo(@RequestParam(value = "menuName")String menuName,@RequestParam(value = "menuIcon")String menuIcon){
+        Map<String,Object> paramsMap=new HashMap<String,Object>();
+        paramsMap.put("menuName",menuName);
+        paramsMap.put("menuIcon",menuIcon);
+        return this.menuService.saveMenuInfo(paramsMap);
+    }
+
+    /**
+     * 添加菜单子节点
+     * @param menuName
+     * @param menuIcon
+     * @param menuUrl
+     * @param parentId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_NODE_MENU_INFO,method = RequestMethod.POST)
+    public Object addSystemNodeMenuInfo(@RequestParam(value = "menuName")String menuName,@RequestParam(value = "menuIcon")String menuIcon,@RequestParam(value = "menuUrl")String menuUrl,@RequestParam(value = "parentId")String parentId){
+        Map<String,Object> paramsMap=new HashMap<String,Object>();
+        paramsMap.put("menuName",menuName);
+        paramsMap.put("menuIcon",menuIcon);
+        paramsMap.put("menuUrl",menuUrl);
+        paramsMap.put("parentId",parentId);
+        return this.menuService.saveMenuInfo(paramsMap);
     }
 }
