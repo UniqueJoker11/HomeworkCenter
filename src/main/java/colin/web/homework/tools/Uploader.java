@@ -12,6 +12,10 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 
 
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import sun.misc.BASE64Decoder;
 import javax.servlet.http.HttpServletRequest;
 /**
@@ -32,11 +36,11 @@ public class Uploader {
 	// 文件大小
 	private long size = 0;
 
-	private HttpServletRequest request = null;
+	private MultipartHttpServletRequest request = null;
 	private String title = "";
 
 	// 保存路径
-	private String savePath = "upload";
+	private String savePath = "";
 	// 文件允许格式
 	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf",".txt", ".swf", ".wmv", ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 	// 文件大小限制，单位KB
@@ -44,7 +48,7 @@ public class Uploader {
 	
 	private HashMap<String, String> errorInfo = new HashMap<String, String>();
 
-	public Uploader(HttpServletRequest request) {
+	public Uploader(MultipartHttpServletRequest request) {
 		this.request = request;
 		HashMap<String, String> tmp = this.errorInfo;
 		tmp.put("SUCCESS", "SUCCESS"); //默认成功
@@ -65,18 +69,19 @@ public class Uploader {
 			this.state = this.errorInfo.get("NOFILE");
 			return;
 		}
-		DiskFileItemFactory dff = new DiskFileItemFactory();
 		String savePath = this.getFolder(this.savePath);
-		dff.setRepository(new File(savePath));
+        File dirPath=new File(savePath);
+        ServletContextResource contextResource=new ServletContextResource(this.request.getServletContext(),savePath);
+        if(!contextResource.exists()){
+            contextResource.getFile().mkdirs();
+        }
 		try {
-			ServletFileUpload sfu = new ServletFileUpload(dff);
-			sfu.setSizeMax(this.maxSize * 1024);
-			sfu.setHeaderEncoding("utf-8");
-			FileItemIterator fii = sfu.getItemIterator(this.request);
-			while (fii.hasNext()) {
-				FileItemStream fis = fii.next();
-				if (!fis.isFormField()) {
-					this.originalName = fis.getName().substring(fis.getName().lastIndexOf(System.getProperty("file.separator")) + 1);
+           Iterator<String> fileNames=this.request.getFileNames();
+            while (fileNames.hasNext()) {
+                String fileName=fileNames.next();
+                MultipartFile multipartFile=this.request.getFile(fileName);
+				if (!multipartFile.isEmpty()) {
+					this.originalName = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(System.getProperty("file.separator")) + 1);
 					if (!this.checkFileType(this.originalName)) {
 						this.state = this.errorInfo.get("TYPE");
 						continue;
@@ -84,39 +89,23 @@ public class Uploader {
 					this.fileName = this.getName(this.originalName);
 					this.type = this.getFileExt(this.fileName);
 					this.url = savePath + "/" + this.fileName;
-					BufferedInputStream in = new BufferedInputStream(fis.openStream());
-					File file = new File(this.getPhysicalPath(this.url));
-					FileOutputStream out = new FileOutputStream( file );
-					BufferedOutputStream output = new BufferedOutputStream(out);
-					Streams.copy(in, output, true);
+					BufferedInputStream in = new BufferedInputStream(multipartFile.getInputStream());
+                    ServletContextResource storeFileResource = new ServletContextResource(request.getServletContext(),this.url);
+                    if(!storeFileResource.exists()){
+                        storeFileResource.getFile().createNewFile();
+                    }
+                    //存储文件
+                    FileCopyUtils.copy(multipartFile.getInputStream(),new FileOutputStream(storeFileResource.getFile()));
 					this.state=this.errorInfo.get("SUCCESS");
-					this.size = file.length();
+					this.size = multipartFile.getSize();
 					//UE中只会处理单张上传，完成后即退出
 					break;
 				} else {
-					String fname = fis.getFieldName();
-					//只处理title，其余表单请自行处理
-					if(!fname.equals("pictitle")){
-						continue;
-					}
-                    BufferedInputStream in = new BufferedInputStream(fis.openStream());
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuffer result = new StringBuffer();  
-                    while (reader.ready()) {  
-                        result.append((char)reader.read());  
-                    }
-                    this.title = new String(result.toString().getBytes(),"utf-8");
-                    reader.close();  
-                    
+                    System.out.println("没有接收到上传的文件内容");
 				}
 			}
-		} catch (SizeLimitExceededException e) {
-			this.state = this.errorInfo.get("SIZE");
-		} catch (InvalidContentTypeException e) {
-			this.state = this.errorInfo.get("ENTYPE");
-		} catch (FileUploadException e) {
-			this.state = this.errorInfo.get("REQUEST");
 		} catch (Exception e) {
+            e.printStackTrace();
 			this.state = this.errorInfo.get("UNKNOWN");
 		}
 	}
