@@ -76,12 +76,14 @@ public class MenuService {
         homework_menu_entity.setMenu_order(Integer.parseInt(menuParams.get("menuOrder").toString()));
         if (menuParams.containsKey("menuUrl")) {
             homework_menu_entity.setMenu_url(menuParams.get("menuUrl").toString());
+            homework_menu_entity.setMenu_parent_id(menuParams.get("parentId").toString());
         } else {
             homework_menu_entity.setMenu_url("#");
+            homework_menu_entity.setMenu_parent_id("root");
         }
         homework_menu_entity.setMenu_create_user(menuParams.get("createUser").toString());
         homework_menu_entity.setMenu_create_time(DateToolsUtils.getTodayCurrentTime());
-        homework_menu_entity.setMenu_parent_id(menuParams.get("parentId").toString());
+
         return this.menuDao.addObjInfo(homework_menu_entity);
     }
 
