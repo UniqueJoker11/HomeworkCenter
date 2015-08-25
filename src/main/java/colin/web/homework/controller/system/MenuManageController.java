@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class MenuManageController extends BaseController {
 
     /**
      * 根绝id删除节点
+     *
      * @param menuId
      * @return
      */
@@ -67,21 +69,25 @@ public class MenuManageController extends BaseController {
 
     /**
      * 添加菜单根目录
+     *
      * @param menuName
      * @param menuIcon
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_ROOT_MENU_INFO,method = RequestMethod.POST)
-    public Object addSystemRootMenuInfo(@RequestParam(value = "menuName")String menuName,@RequestParam(value = "menuIcon")String menuIcon){
-        Map<String,Object> paramsMap=new HashMap<String,Object>();
-        paramsMap.put("menuName",menuName);
-        paramsMap.put("menuIcon",menuIcon);
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_ROOT_MENU_INFO, method = RequestMethod.POST)
+    public Object addSystemRootMenuInfo(@RequestParam(value = "menuName") String menuName, @RequestParam(value = "menuIcon") String menuIcon, @RequestParam(value = "menuOrder") String menuOrder) {
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        paramsMap.put("menuName", menuName);
+        paramsMap.put("menuIcon", menuIcon);
+        paramsMap.put("menuOrder", menuOrder);
+        paramsMap.put("createUser", super.fetchUserInfo().getUser_name());
         return this.menuService.saveMenuInfo(paramsMap);
     }
 
     /**
      * 添加菜单子节点
+     *
      * @param menuName
      * @param menuIcon
      * @param menuUrl
@@ -89,13 +95,21 @@ public class MenuManageController extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_NODE_MENU_INFO,method = RequestMethod.POST)
-    public Object addSystemNodeMenuInfo(@RequestParam(value = "menuName")String menuName,@RequestParam(value = "menuIcon")String menuIcon,@RequestParam(value = "menuUrl")String menuUrl,@RequestParam(value = "parentId")String parentId){
-        Map<String,Object> paramsMap=new HashMap<String,Object>();
-        paramsMap.put("menuName",menuName);
-        paramsMap.put("menuIcon",menuIcon);
-        paramsMap.put("menuUrl",menuUrl);
-        paramsMap.put("parentId",parentId);
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ADD_NODE_MENU_INFO, method = RequestMethod.POST)
+    public Object addSystemNodeMenuInfo(@RequestParam(value = "menuName") String menuName, @RequestParam(value = "menuIcon") String menuIcon, @RequestParam(value = "menuUrl") String menuUrl, @RequestParam(value = "parentId") String parentId, @RequestParam(value = "menuOrder") String menuOrder) {
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        paramsMap.put("menuName", menuName);
+        paramsMap.put("menuIcon", menuIcon);
+        paramsMap.put("menuUrl", menuUrl);
+        paramsMap.put("parentId", parentId);
+        paramsMap.put("menuOrder", menuOrder);
+        paramsMap.put("createUser", super.fetchUserInfo().getUser_name());
         return this.menuService.saveMenuInfo(paramsMap);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_UPDATE_MENU_INFO, method = RequestMethod.POST)
+    public Object updateSystemMenuInfo(HttpServletRequest request) {
+        return this.menuService.updateMenuInfo(super.formatRequestParamsMap(request));
     }
 }

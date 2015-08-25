@@ -91,6 +91,6 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.8" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:3.1" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:4.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.53" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.61" level="application_server_libraries" />
   </component>
 </module>

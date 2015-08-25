@@ -32,8 +32,7 @@
 
             this.path = this.documentURL;
             this.stack = [];
-
-            this.push( this.documentURL );
+            this.push( this.documentURL);
 
         }
 
@@ -122,7 +121,7 @@
 
         currentPath = currentPath[ currentPath.length -1 ].src;
 
-        return new PathStack().push( currentPath ) + "";
+        return new PathStack().push( currentPath ) + "../js/umeditor/";
 
 
     })();
