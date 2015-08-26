@@ -73,7 +73,6 @@ public class SigninController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN_FORM, method = RequestMethod.POST)
     public String userSignin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
-        System.out.println("我被调用了");
         Map<String, Object> searchParams = new HashMap<>();
         searchParams.put("user_name", username);
         searchParams.put("user_password", password);
@@ -86,7 +85,6 @@ public class SigninController extends BaseController {
             super.getSessionObj().setAttribute(HomeworkConstants.SESSION_USERINFO, userInfo);
             Subject user = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(userInfo.getUser_name(),userInfo.getUser_password());
-            System.out.println("登录信息"+token.getUsername());
             token.setRememberMe(true);
             return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_DASHBOARD;
         } else {
