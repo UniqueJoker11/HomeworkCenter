@@ -4,6 +4,7 @@ import colin.web.homework.common.HomeworkConstants;
 
 import colin.web.homework.core.vo.HomeworkMenuVo;
 import colin.web.homework.core.vo.HomeworkUserInfo;
+import colin.web.homework.service.DashboardService;
 import colin.web.homework.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,22 +24,38 @@ import java.util.Set;
 public class DashboardController extends BaseController {
 
     @Autowired
-    private MenuService menuService;//加载菜单服务
+    private DashboardService dashboardService;//加载菜单服务
 
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD, method = RequestMethod.GET)
-    public String showDashboardPage(HttpServletRequest request){
+    /**
+     * 显示404错误页面
+     * @return
+     */
+    @RequestMapping(value = "/notfound.html",method = RequestMethod.GET)
+    public String showNotFoundPage(){
+        return "notfound";
+    }
+
+    /**
+     * 显示未授权页面
+     * @return
+     */
+    @RequestMapping(value = "/unauthorized.html",method = RequestMethod.GET)
+    public String showUnauthorizedPage(){
+        return "unauthorized";
+    }
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD)
+    public String showDashboardPage(HttpServletRequest request) {
         //查看用户是否登录
-        System.out.println(super.userIsLogin());
-        if(!super.userIsLogin()){
-            return "redirect:"+HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_SIGNIN;
-        }else{
+        if (!super.userIsLogin()) {
+            return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_SIGNIN;
+        } else {
+            //加载用户的信息
+            HomeworkUserInfo homeworkUserInfo = super.fetchUserInfo();
             //加载左侧导航菜单内容
-            List<HomeworkMenuVo> menuList = menuService.getMenuInfoService();
+            List<HomeworkMenuVo> menuList = dashboardService.getUserMenuInfo(homeworkUserInfo.getUser_id());
+            //设定用户的信息和菜单信息
             request.setAttribute("menuList", menuList);
-            //加载用户的聊天好友
-            HomeworkUserInfo homeworkUserInfo=super.fetchUserInfo();
-            //设定用户的信息
-            request.setAttribute("userinfo",homeworkUserInfo);
+            request.setAttribute("userinfo", homeworkUserInfo);
             return HomeworkConstants.PAGE_DASHBOARD;
         }
     }

@@ -19,8 +19,6 @@ import java.util.Map;
 public class SigninService {
 
     @Autowired
-    private Homework_User_Entity homework_user_entity;
-    @Autowired
     private Homework_User_Rowmapper homework_User_Rowmapper;
     @Autowired
     private SigninDao signinDao;

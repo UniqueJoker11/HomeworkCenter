@@ -1,5 +1,5 @@
 <div class="pageheader">
-    <h2><i class="fa fa-calendar"></i> 我的文章 <span>转载文章</span></h2>
+    <h2><i class="glyphicon glyphicon-share"></i> 我的文章 <span>转载文章</span></h2>
 
     <div class="breadcrumb-wrapper">
         <span class="label">当前位置:</span>
@@ -10,4 +10,24 @@
         </ol>
     </div>
 </div>
-<div class="contentpanel"></div>
+<div class="contentpanel">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="page-header">
+                <div class="input-group mb15">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input type="text" class="form-control" placeholder="请输入URL查询网页内容">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-success" onclick="startSearch()">搜索</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.baidu.com"></iframe>
+            </div>
+        </div>
+    </div>
+
+</div>

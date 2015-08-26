@@ -19,10 +19,19 @@ public class Homework_User_Entity {
     private String user_name;
     @Column(name = "user_password")
     private String user_password;
-    @Column(name = "user_role")
-    private String user_role;
+    @Column(name = "user_head")
+    private String user_head;
     @Column(name = "user_callname")
     private String user_callname;
+    @Column(name = "user_email")
+    private String user_email;
+    @Column(name = "user_phone")
+    private String user_phone;
+    @Column(name = "user_createtime")
+    private String user_createtime;
+    @Column(name = "user_logintime")
+    private String user_logintime;
+
 
     public String getUser_id() {
         return user_id;
@@ -48,19 +57,51 @@ public class Homework_User_Entity {
         this.user_password = user_password;
     }
 
-    public String getUser_role() {
-        return user_role;
-    }
-
-    public void setUser_role(String user_role) {
-        this.user_role = user_role;
-    }
-
     public String getUser_callname() {
         return user_callname;
     }
 
     public void setUser_callname(String user_callname) {
         this.user_callname = user_callname;
+    }
+
+    public String getUser_head() {
+        return user_head;
+    }
+
+    public void setUser_head(String user_head) {
+        this.user_head = user_head;
+    }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
+    public String getUser_phone() {
+        return user_phone;
+    }
+
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public String getUser_createtime() {
+        return user_createtime;
+    }
+
+    public void setUser_createtime(String user_createtime) {
+        this.user_createtime = user_createtime;
+    }
+
+    public String getUser_logintime() {
+        return user_logintime;
+    }
+
+    public void setUser_logintime(String user_logintime) {
+        this.user_logintime = user_logintime;
     }
 }

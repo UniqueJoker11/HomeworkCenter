@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="${ctxPath}/css/pages/aticle_add.css">
+<!--引入umeditor-->
+<script type="text/javascript" src="${ctxPath}/js/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" src="${ctxPath}/js/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/js/umeditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" src="${ctxPath}/js/pages/aticle_add.js"></script>
 <div class="pageheader">
     <h2><i class="fa fa-calendar"></i> 我的文章 <span>新增文章</span></h2>
@@ -22,9 +26,7 @@
                         <a href="" class="minimize">&minus;</a>
                     </div>
                     <h4 class="panel-title">发布文章</h4>
-
-                    <p>This basic wizard have no form validation and allows you to skip to another step by clicking on
-                        the tab.</p>
+                    <p>我们终此一生，就是要摆脱他人的期待，找到真正的自己。</p>
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
@@ -36,10 +38,9 @@
                             </li>
                             <li><a href="#tab2" data-toggle="tab"><i class="fa fa-eye"></i>&nbsp;文章预览</a></li>
                         </ul>
-
                         <div class="tab-content">
                             <div class="tab-pane" id="tab1">
-                                <div class="form">
+                                <form class="form" id="colin-add-aticle-form" action="./aticle_add.action" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-sm-1 col-sm-offset-1">文章标题</label>
 
@@ -62,7 +63,7 @@
 
                                         <div class="col-sm-9">
                                             <!-- 加载编辑器的容器 -->
-                                            <script id="aticleContentContainer" type="text/plain"
+                                            <script id="aticleContentContainer" name="aticleContent" type="text/plain"
                                                     style="height:260px;"></script>
                                         </div>
                                     </div>
@@ -78,19 +79,21 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-sm-1 col-sm-offset-1">文章封面</label>
 
                                         <div class="col-sm-9">
                                             <div id="uploader" class="form-control">
-                                                <!--用来存放文件信息-->
+                                                &lt;!&ndash;用来存放文件信息&ndash;&gt;
                                                 <div id="thelist" class="uploader-list"></div>
                                                 <div>
+                                                    <div id="slider-success" class="slider-success mb20"></div>
                                                     <div id="picker" class="btn">选择文件</div>
+                                                    <div id="uploader" class="btn btn-danger">开始上传</div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <label class="col-sm-1 col-sm-offset-1">文章标签</label>
 
@@ -101,7 +104,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <button type="submit" class="btn btn-success col-sm-4 col-sm-offset-2"><i
+                                            <button id="colin-aticle-add-submitbtn" type="submit" class="btn btn-success col-sm-4 col-sm-offset-2"><i
                                                     class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;发表文章
                                             </button>
                                             <button type="reset" class="btn btn-danger col-md-4 col-sm-offset-1"><i
@@ -109,225 +112,40 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="tab-pane" id="tab2">
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
 
                                     <div class="panel panel-default panel-blog">
                                         <div class="panel-body">
-                                            <h3 class="blogsingle-title">Getting Started With Film Photography</h3>
+                                            <h3 class="blogsingle-title" id="colin-aticle-preview-title"></h3>
 
                                             <ul class="blog-meta">
-                                                <li>By: <a href="">TmPxls</a></li>
-                                                <li>Jan 02, 2014</li>
-                                                <li><a href="">2 Comments</a></li>
+                                                <li id="colin-aticle-preview-date"></li>
+                                                <li id="colin-aticle-preview-tags"></li>
                                             </ul>
 
-                                            <br>
+                                            <hr/>
+                                            <blockquote>
+                                                <p id="colin-aticle-preview-digest"></p>
+                                            </blockquote>
+                                            <hr/>
+                                            <div class="mb20"  id="colin-aticle-preview-content">
 
-                                            <div class="blog-img"><img src="images/photos/blog1.jpg"
-                                                                       class="img-responsive" alt=""></div>
-                                            <div class="mb20"></div>
-
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                                mollit anim id est laborum.</p>
-
-                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                                                illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                                explicabo.</p>
-
-                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                                                fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
-                                                sequi nesciunt.</p>
-
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                                consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                                                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim
-                                                ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                                                laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
-                                                eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                                                molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
-                                                nulla pariatur</p>
+                                            </div>
 
                                         </div>
                                         <!-- panel-body -->
                                     </div>
                                     <!-- panel -->
-
-                                    <div class="authorpanel">
-                                        <div class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object thumbnail" src="images/photos/userprofile.png"
-                                                     alt="">
-                                            </a>
-
-                                            <div class="media-body event-body">
-                                                <h4 class="subtitle">About The Author</h4>
-
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                        </div>
-                                        <!-- media -->
-                                    </div>
-                                    <!-- authorpanel -->
-
-                                    <div class="mb30"></div>
-                                    <h5 class="subtitle">5 Comments</h5>
-
-                                    <div class="mb30"></div>
-
-                                    <ul class="media-list comment-list">
-
-                                        <li class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object thumbnail" src="images/photos/user1.png"
-                                                     alt="">
-                                            </a>
-
-                                            <div class="media-body">
-                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                <h4>Nusja Nawancali</h4>
-                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-                                                <div class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <img class="media-object thumbnail"
-                                                             src="images/photos/userprofile.png" alt="">
-                                                    </a>
-
-                                                    <div class="media-body">
-                                                        <a href=""
-                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                        <h4>Eileen Sideways</h4>
-                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                                            do eiusmod tempor incididunt ut labore et dolore magna
-                                                            aliqua.</p>
-
-                                                        <div class="media">
-                                                            <a class="pull-left" href="#">
-                                                                <img class="media-object thumbnail"
-                                                                     src="images/photos/user3.png" alt="">
-                                                            </a>
-
-                                                            <div class="media-body">
-                                                                <a href=""
-                                                                   class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                                <h4>Zaham Sindilmaca</h4>
-                                                                <small class="text-muted">January 10, 2014 at 7:30am
-                                                                </small>
-                                                                <p>Ut enim ad minim veniam, quis nostrud exercitation
-                                                                    ullamco laboris nisi ut aliquip ex ea commodo
-                                                                    consequat.</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- media -->
-
-                                                    </div>
-                                                    <!-- media-body -->
-                                                </div>
-                                                <!-- media -->
-
-                                                <div class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <img class="media-object thumbnail"
-                                                             src="images/photos/user2.png" alt="">
-                                                    </a>
-
-                                                    <div class="media-body">
-                                                        <a href=""
-                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                        <h4>Ray Sin</h4>
-                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- media -->
-
-                                            </div>
-                                            <!-- media-body -->
-
-                                        </li>
-                                        <!-- media -->
-
-                                        <li class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object thumbnail" src="images/photos/user1.png"
-                                                     alt="">
-                                            </a>
-
-                                            <div class="media-body">
-                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                <h4>Nusja Nawancali</h4>
-                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                        </li>
-                                        <!-- media -->
-
-                                        <li class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object thumbnail" src="images/photos/user4.png"
-                                                     alt="">
-                                            </a>
-
-                                            <div class="media-body">
-                                                <a href="" class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                <h4>Weno Carasbong</h4>
-                                                <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat.</p>
-
-                                                <div class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <img class="media-object thumbnail"
-                                                             src="images/photos/user3.png" alt="">
-                                                    </a>
-
-                                                    <div class="media-body">
-                                                        <a href=""
-                                                           class="btn btn-primary btn-xs pull-right reply">Reply</a>
-                                                        <h4>Zaham Sindilmaca</h4>
-                                                        <small class="text-muted">January 10, 2014 at 7:30am</small>
-                                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- media -->
-
-                                            </div>
-                                        </li>
-                                        <!-- media -->
-
-                                    </ul>
-                                    <!-- comment-list -->
-                                    =
-
                                 </div>
                             </div>
                         </div>
                         <!-- tab-content -->
                         <ul class="pager wizard">
                             <li class="previous"><a href="javascript:void(0)">返回</a></li>
-                            <li class="next"><a href="javascript:void(0)">查看预览</a></li>
+                            <li class="next" id="colin-aticle-preview-btn"><a href="javascript:void(0)">查看预览</a></li>
                         </ul>
 
                     </div>

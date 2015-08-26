@@ -30,7 +30,11 @@ public class Homework_User_Rowmapper implements RowMapper<Homework_User_Entity> 
         entity.setUser_password(rs.getString("user_password"));
         entity.setUser_name(rs.getString("user_name"));
         entity.setUser_callname(rs.getString("user_callname"));
-        entity.setUser_role(rs.getString("user_role"));
+        entity.setUser_createtime(rs.getString("user_createtime"));
+        entity.setUser_email(rs.getString("user_email"));
+        entity.setUser_head(rs.getString("user_head"));
+        entity.setUser_logintime(rs.getString("user_logintime"));
+        entity.setUser_phone(rs.getString("user_phone"));
         return entity;
     }
 }

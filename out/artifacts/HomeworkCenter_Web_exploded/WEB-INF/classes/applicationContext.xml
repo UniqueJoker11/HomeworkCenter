@@ -4,13 +4,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:util="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        default-autowire="byName" default-lazy-init="true">
     <!-- 配置扫描包 -->
     <context:annotation-config/>
@@ -61,5 +61,42 @@
             <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
+    <bean id="securityManager"
+          class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroDbRealm"/>
+    </bean>
 
+    <!-- 項目自定义的Realm -->
+    <bean id="shiroDbRealm" class="colin.web.homework.service.realm.ShiroDbRealm"></bean>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter"
+          class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/homework/signin.html"/>
+        <property name="successUrl" value="/homework/dashboard.html"/>
+        <property name="unauthorizedUrl" value="/homework/unauthorized.html"/>
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="homeworkLoginFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /homework/signin.html = anon
+                /homework/notfound.html = anon
+                /homework/dashboard.html*=authc
+            </value>
+        </property>
+    </bean>
+    <bean id="lifecycleBeanPostProcessor"
+          class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+<!--    <bean id="shiroCacheManager"
+          class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>-->
+
+    <bean id="homeworkLoginFilter"
+          class="colin.web.homework.filter.HomeworkLoginFilter"/>
 </beans>

@@ -38,15 +38,10 @@
                                 <a class="panel-group" href="javascript:;" onclick="addNodeMenuInfo()"><i class="glyphicon glyphicon-plus"></i></a>
                             </div>
                             <!-- panel-btns -->
-                            <h2 id="colin-node-menu-title" class="panel-title">日程安排菜单目录</h2>
+                            <h2 id="colin-node-menu-title" class="panel-title" data-parentId="">日程安排菜单目录</h2>
                         </div>
                         <div class="panel-body">
                             <ul id="colin-node-menu-list">
-                                <li>
-                                    <small class="pull-right"><a href="" class="panel-edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="panel-remove"><i class="glyphicon glyphicon-remove-circle"></i></a></small>
-                                    <h4 class="sender"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;日程安排</h4>
-                                    <div class="colin-node-menu-url"><small>页面访问目录：<mark>/access_schedule.html</mark></small></div>
-                                </li>
 
                             </ul>
                         </div>
@@ -74,6 +69,7 @@
                         <label for="root_menuIcon" class="control-label">菜单图标:</label>
                         <input type="text" class="form-control" id="root_menuIcon" name="menuIcon"/>
                     </div>
+                    <input type="hidden" name="menuOrder" id="root_menuOrder">
                 </form>
             </div>
             <div class="modal-footer">
@@ -83,7 +79,7 @@
         </div>
     </div>
 </div>
-<!--根节点菜单对话框-->
+<!--子节点菜单对话框-->
 <div class="modal fade" id="colin-node-menu-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -105,10 +101,12 @@
                         <label for="node_menuUrl" class="control-label">菜单页面:</label>
                         <input type="text" class="form-control" id="node_menuUrl" name="menuUrl"/>
                     </div>
+                    <input type="hidden" name="parentId" id="node_parentId">
+                    <input type="hidden" name="menuOrder" id="node_menuOrder">
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="colin-node-menu-modal-submitbtn">确定</button>
+                <button type="submit" class="btn btn-primary" id="colin-node-menu-modal-submitbtn">确定</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
             </div>
         </div>

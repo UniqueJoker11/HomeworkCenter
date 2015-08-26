@@ -147,7 +147,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
     public boolean deleteObjectById(Class c, String idVal) {
         StringBuilder deleteSql = new StringBuilder("delete from ");
         String keyName = this.getPrimaryKeyNameByClazz(c);
-        if (keyName.equals("")) {
+        if (!keyName.equals("")) {
             deleteSql.append(this.getEntityTableNameByClazz(c)).append(" where ").append(keyName).append("=:").append(keyName);
             Map<String, Object> params = new HashMap<>();
             params.put(keyName, idVal);

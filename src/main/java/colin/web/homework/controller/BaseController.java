@@ -9,6 +9,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by ASUS on 2015/7/11.
@@ -38,11 +41,13 @@ public class BaseController {
 
     /**
      * 获取ServletContext
+     *
      * @return
      */
-    protected ServletContext getServletContext(){
-        return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getServletContext();
+    protected ServletContext getServletContext() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getServletContext();
     }
+
     /**
      * 获取HttpSession
      *
@@ -67,5 +72,15 @@ public class BaseController {
      */
     protected boolean userIsLogin() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession().getAttribute(HomeworkConstants.SESSION_USERINFO) == null ? false : true;
+    }
+
+    public Map<String, Object> formatRequestParamsMap(HttpServletRequest request) {
+        Map<String, String[]> paramsMap = request.getParameterMap();
+        Set<String> keySet = paramsMap.keySet();
+        Map<String, Object> resultMap = new HashMap<>();
+        for (String key : keySet) {
+            resultMap.put(key, request.getParameter(key));
+        }
+        return resultMap;
     }
 }

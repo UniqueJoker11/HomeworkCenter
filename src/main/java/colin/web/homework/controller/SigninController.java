@@ -4,6 +4,9 @@ import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.vo.HomeworkUserInfo;
 import colin.web.homework.service.SigninService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,6 +83,9 @@ public class SigninController extends BaseController {
             HomeworkUserInfo userInfo = this.initUserInfo(homework_user_entity);
             //存放Session
             super.getSessionObj().setAttribute(HomeworkConstants.SESSION_USERINFO, userInfo);
+            Subject user = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(userInfo.getUser_name(),userInfo.getUser_password());
+            token.setRememberMe(true);
             return "redirect:" + HomeworkConstants.CONTROLLER_MANAGER_PREFIX + HomeworkConstants.CONTROLLER_DASHBOARD;
         } else {
             return HomeworkConstants.PAGE_SIGNIN;
