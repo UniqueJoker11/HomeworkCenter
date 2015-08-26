@@ -22,7 +22,7 @@ public class MenuService {
     private MenuDao menuDao;
 
     /**
-     * 获取主页的左侧导航栏内容
+     * 加载所有的菜单内容
      *
      * @return
      */
@@ -37,6 +37,9 @@ public class MenuService {
 
     }
 
+    public List<HomeworkMenuVo> getUserMenuInfo(List<String> roleIds){
+        return this.reformatMenuList(menuDao.getUserMenuInfoByRoleId(roleIds));
+    }
     /**
      * 获取跟菜单目录
      *
@@ -173,7 +176,7 @@ public class MenuService {
      * @param menu_entityList
      * @return
      */
-    private List<HomeworkMenuVo> transferMenuList(List<Homework_Menu_Entity> menu_entityList){
+    public List<HomeworkMenuVo> transferMenuList(List<Homework_Menu_Entity> menu_entityList){
         List<HomeworkMenuVo> homeworkMenuVos=new ArrayList<>();
         for(Homework_Menu_Entity menu_entity:menu_entityList){
             homeworkMenuVos.add(transferMenu(menu_entity));

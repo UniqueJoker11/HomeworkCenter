@@ -36,6 +36,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.61" level="application_server_libraries" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:4.1.6.RELEASE" level="project" />
@@ -91,6 +92,10 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.8" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:3.1" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:4.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.61" level="application_server_libraries" />
+    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-cas:1.2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.jasig.cas.client:cas-client-core:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.2.4" level="project" />
   </component>
 </module>

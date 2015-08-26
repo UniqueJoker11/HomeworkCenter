@@ -13,11 +13,15 @@ import javax.persistence.Table;
 @Table(name = "homework_role")
 public class Homework_Role_Entity {
     @Id
-    @Column(name="role_id")
+    @Column(name = "role_id")
     private String role_id;
-    @Column(name="role_name")
+    @Column(name = "parent_role_id")
+    private String parent_role_id;
+    @Column(name = "createdate")
+    private String createdate;
+    @Column(name = "role_name")
     private String role_name;
-    @Column(name="role_description")
+    @Column(name = "role_description")
     private String role_description;
 
     public String getRole_id() {
@@ -42,5 +46,21 @@ public class Homework_Role_Entity {
 
     public void setRole_description(String role_description) {
         this.role_description = role_description;
+    }
+
+    public String getParent_role_id() {
+        return parent_role_id;
+    }
+
+    public void setParent_role_id(String parent_role_id) {
+        this.parent_role_id = parent_role_id;
+    }
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
     }
 }

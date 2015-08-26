@@ -54,10 +54,44 @@
             <param-value>utf-8</param-value>
         </init-param>
     </filter>
+    <!-- Shiro security filter -->
+    <!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <!-- Make sure any request you want accessible to Shiro is filtered. /* catches all -->
+    <!-- requests. Usually this filter mapping is defined first (before all others) to       -->
+    <!-- ensure that Shiro works in subsequent filters in the filter chain: -->
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- end of filters -->
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- Error page definition -->
+    <!--
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/static_pages/error_pages/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/static_pages/error_pages/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/static_pages/error_pages/404.jsp</location>
+    </error-page>
+    -->
+    <!-- end of Error page definition -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

@@ -27,9 +27,9 @@
             </ul>
         </div>
 
-        <h5 class="sidebartitle">Navigation</h5>
+        <h5 class="sidebartitle">菜单导航</h5>
         <ul id="colin-dashboard-menu" class="nav nav-pills nav-stacked nav-bracket">
-            <li class="active"><a href="./dashboard.html"><i class="fa fa-home"></i> <span>系统首页</span></a></li>
+            <li><a href="./dashboard.html"><i class="fa fa-home"></i> <span>系统首页</span></a></li>
             <%for(menu in menuList){%>
             <%if(isEmpty(menu.childMenuList)){%>
             <li><a href=".${menu.menu_url}"><i class="${menu.menu_icon}"></i> <span>${menu.menu_name}</span></a></li>
