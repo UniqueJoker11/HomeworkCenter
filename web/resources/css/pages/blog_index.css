@@ -3,7 +3,7 @@ body {
 }
 
 .blog-header {
-    background: #CCCCCC url("../images/banner.jpg") repeat-x center center;
+    background: #CCCCCC url("../../images/banner.jpg") repeat-x center center;
     height: 230px;
     line-height: 230px;
 }
