@@ -1,0 +1,63 @@
+body {
+    background: #EBEBEB;
+}
+
+.blog-header {
+    background: #CCCCCC url("../img/banner.jpg") repeat-x center center;
+    height: 230px;
+    line-height: 230px;
+}
+
+.blog-header a {
+
+}
+
+.blog-header img {
+    width: 90px;
+    height: 90px;
+}
+
+/**导航菜单**/
+.blog-navbar {
+    min-height: 58px;
+    border: 2px solid #CCCCCC;
+    background: #ffffff;
+}
+
+.blog-navbar .menu {
+    width: 60%;
+    margin: 0 auto;
+    min-height: 58px;
+    line-height: 58px;
+}
+
+.blog-navbar .menu li {
+    width: 110px;
+    text-align: center;
+    display: inline-block;
+    list-style: none;
+    font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+.blog-navbar .menu li a{
+    font-size: 1.1em;
+    color: #545454;
+    text-decoration: none;
+}
+.blog-navbar .menu li a:hover{
+    color:#292929;
+}
+.blog-navbar .menu .active{
+    border-bottom:2px solid #EEB422;
+}
+.blog-main-modal{
+    padding: 20px 0;
+}
+hr{
+    height: 3px;
+    border-color: #cccccc;
+}
+.blog-main-modal .panel-title{
+    margin: 10px 0;
+    font-weight: 500;
+    color: #545454;
+}
