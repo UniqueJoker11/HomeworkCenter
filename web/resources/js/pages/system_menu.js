@@ -66,39 +66,51 @@ $(function () {
 var menuGId = "";
 function editMenuInfo(menuId, isNode) {
     if (menuGId == menuId) {
-        $("#colin_edit_menu_template").toggle();
+        if ($("#colin_edit_menu_template").length != 0) {
+            $("#colin_edit_menu_template").toggle();
+        } else {
+            initTemplate(menuId, isNode)
+        }
     } else {
         menuGId = menuId;
         //移除所有的模板内容
-        $("#colin_edit_menu_template").remove("");
-        var menuObj = $("#colin_menu_" + menuId);
-        var editTemplate =
-            "<li id='colin_edit_menu_template'>" +
-            "<div class=\"panel-body\">" +
-            "<form id=\"colin_edit_menu_form\" class=\"form\" method=\"post\" action='./update_menu_info.action'>" +
-            "<input type=\"hidden\" name=\"menuId\" value=\"" + menuId + "\"/>" +
-            "<div class=\"input-group mb15\">" +
-            "<span class=\"input-group-addon\">图标</span>" +
-            "<input type=\"text\" placeholder=\"修改图标\" name=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").children("i").attr("class") + "'>" +
-            "</div>" +
-            "<div class=\"input-group mb15\">" +
-            "<span class=\"input-group-addon\">名称</span>" +
-            "<input type=\"text\" placeholder=\"修改名称\" name=\"menuName\" class=\"form-control\" value='" + $.trim(menuObj.children("h4").text()) + "'>" +
-            "</div>";
-        if (isNode) {
-            editTemplate += "<div class=\"input-group mb15\">" +
-            "<span class=\"input-group-addon\">链接</span>" +
-            "<input type=\"text\" placeholder=\"访问链接\" name=\"menuUrl\" class=\"form-control\" value='" + menuObj.children(".colin-node-menu-url").find("mark").html() + "'>" +
-            "</div></form>";
+        if ($("#colin_edit_menu_template").length != 0) {
+            $("#colin_edit_menu_template").remove();
         }
-        editTemplate += "<div class=\"panel-footer\">" +
-        "<button type=\"submit\" class='btn btn-primary col-sm-3 col-sm-offset-2' onclick='confirmEditMenuInfo()'>修改</button><button type='reset'class='btn btn-danger col-sm-3 col-sm-offset-1' onclick='confirmResetEditMenuInfo()'>取消</button>" +
-        "</div>" +
-        "</li>";
-        //操作dom
-        menuObj.after(editTemplate);
-        $("#colin_edit_menu_template").slideDown();
+        initTemplate(menuId, isNode);
     }
+
+
+}
+function initTemplate(menuId, isNode) {
+    var menuObj = $("#colin_menu_" + menuId);
+    var editTemplate =
+        "<li id='colin_edit_menu_template'>" +
+        "<div class=\"panel-body\">" +
+        "<form id=\"colin_edit_menu_form\" class=\"form\">" +
+        "<input type=\"hidden\" name=\"menuId\" value=\"" + menuId + "\"/>" +
+        "<div class=\"input-group mb15\">" +
+        "<span class=\"input-group-addon\">图标</span>" +
+        "<input type=\"text\" placeholder=\"修改图标\" name=\"menuIcon\" class=\"form-control\" value='" + menuObj.children("h4").children("i").attr("class") + "'>" +
+        "</div>" +
+        "<div class=\"input-group mb15\">" +
+        "<span class=\"input-group-addon\">名称</span>" +
+        "<input type=\"text\" placeholder=\"修改名称\" name=\"menuName\" class=\"form-control\" value='" + $.trim(menuObj.children("h4").text()) + "'>" +
+        "</div>";
+    if (isNode) {
+        editTemplate += "<div class=\"input-group mb15\">" +
+        "<span class=\"input-group-addon\">链接</span>" +
+        "<input type=\"text\" placeholder=\"访问链接\" name=\"menuUrl\" class=\"form-control\" value='" + menuObj.children(".colin-node-menu-url").find("mark").html() + "'>" +
+        "</div></form>";
+    }
+    editTemplate += "<div class=\"panel-footer\">" +
+    "<button type=\"button\" class='btn btn-primary col-sm-3 col-sm-offset-2' onclick='confirmEditMenuInfo()'>修改</button><button type='reset'class='btn btn-danger col-sm-3 col-sm-offset-1' onclick='confirmResetEditMenuInfo()'>取消</button>" +
+    "</div>" +
+    "</li>";
+
+    //操作dom
+    menuObj.after(editTemplate);
+    $("#colin_edit_menu_template").slideDown();
 }
 /**
  * 加载子节点
@@ -134,12 +146,12 @@ function removeMenuInfo(menuId) {
         $.post("./del_menu_info.action", params, function (data) {
             if (data) {
                 alert("删除菜单成功！");
-                if($("#colin_menu_" + menuId).parent("ul").attr("id")=="colin-root-menu-list"){
+                if ($("#colin_menu_" + menuId).parent("ul").attr("id") == "colin-root-menu-list") {
                     $("#colin-root-menu-list").children("li").eq(0).children("h4").trigger("click");
                 }
-                if($("#colin_menu_" + menuId).siblings("li").length==0){
+                if ($("#colin_menu_" + menuId).siblings("li").length == 0) {
                     $("#colin_menu_" + menuId).html("<li>当前没有菜单啦！</li>");
-                }else{
+                } else {
                     $("#colin_menu_" + menuId).remove();
                 }
             } else {
@@ -152,30 +164,31 @@ function removeMenuInfo(menuId) {
  * 确认修改菜单信息
  */
 function confirmEditMenuInfo() {
-    $("#colin_edit_menu_form").ajaxForm({
-        success: function (data) {
-            if (data) {
-                //隐藏编辑框
-                var menuTemplateObj = $("#colin_edit_menu_template");
-                menuTemplateObj.slideUp();
-                //刷新内容
-                var prevObj = menuTemplateObj.prev("li");
-                var prevMenuObj = prevObj.children("h4");
-                if (menuTemplateObj.find("input[name='menuIcon']").val() != "") {
-                    prevMenuObj.children("i").attr("class", menuTemplateObj.find("input[name='menuIcon']").val());
-                }
-                if (menuTemplateObj.find("input[name='menuName']").val() != "") {
-                    prevMenuObj.children("strong").html(menuTemplateObj.find("input[name='menuName']").val());
-                }
-                if (menuTemplateObj.find("input[name='menuUrl']").length > 0 && menuTemplateObj.find("input[name='menuUrl']").val() != "") {
-                    prevObj.children(".colin-node-menu-url").children("small").html("页面访问目录：<mark>" + menuTemplateObj.find("input[name='menuUrl']").val() + "</mark>");
-                }
-                alert("更新菜单内容成功！");
-            } else {
-                alert("更新菜单内容失败！");
+    var params = new Object();
+    params = $("#colin_edit_menu_form").serialize();
+    $.post("./update_menu_info.action", params, function (data) {
+        if (data) {
+            //隐藏编辑框
+            var menuTemplateObj = $("#colin_edit_menu_template");
+            menuTemplateObj.slideUp();
+            //刷新内容
+            var prevObj = menuTemplateObj.prev("li");
+            var prevMenuObj = prevObj.children("h4");
+            if (menuTemplateObj.find("input[name='menuIcon']").val() != "") {
+                prevMenuObj.children("i").attr("class", menuTemplateObj.find("input[name='menuIcon']").val());
             }
+            if (menuTemplateObj.find("input[name='menuName']").val() != "") {
+                prevMenuObj.children("strong").html(menuTemplateObj.find("input[name='menuName']").val());
+            }
+            if (menuTemplateObj.find("input[name='menuUrl']").length > 0 && menuTemplateObj.find("input[name='menuUrl']").val() != "") {
+                prevObj.children(".colin-node-menu-url").children("small").html("页面访问目录：<mark>" + menuTemplateObj.find("input[name='menuUrl']").val() + "</mark>");
+            }
+            alert("更新菜单内容成功！");
+        } else {
+            alert("更新菜单内容失败！");
         }
     });
+    event.preventDefault();
     return false;
 }
 /**

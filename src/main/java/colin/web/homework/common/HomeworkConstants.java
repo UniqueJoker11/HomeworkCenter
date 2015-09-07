@@ -31,7 +31,7 @@ public class HomeworkConstants {
     public static final String PAGE_REPRINT_ATICLE_VIEW="reprint_aticle";
 
     //用户的信息管理页面
-    public static final String PAGE_PERSON_MANAGE_VIEW="person_manage";
+    public static final String PAGE_PERSON_MANAGE_VIEW="person_data";
 
 
     //菜单管理首页
@@ -114,7 +114,7 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE = "/publish_current_schedule.action";
 
     //访问用户的管理页面
-    public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_manage.html";
+    public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_data.html";
 
     //菜单管理页面
     public static final String CONTROLLER_MEMU_MANAGE_PAGE="/system_menu.html";

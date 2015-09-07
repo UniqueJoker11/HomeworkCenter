@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="panel-body">
+    <form id="colin_edit_menu_form" class="form" method="post" action="./update_menu_info.action">
+        <input type="hidden"
+               name="menuId"
+               value="e9992506-e269-4219-9116-9b81d9ca6544">
+
+        <div class="input-group mb15"><span class="input-group-addon">图标</span>
+            <input type="text" placeholder="修改图标"
+                   name="menuIcon"
+                   class="form-control"
+                   value="glyphicon glyphicon-headphones">
+        </div>
+        <div class="input-group mb15"><span class="input-group-addon">名称</span>
+            <input type="text" placeholder="修改名称"
+                   name="menuName"
+                   class="form-control" value="音乐搜集">
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary col-sm-3 col-sm-offset-2" onclick="confirmEditMenuInfo()">修改
+            </button>
+            <button type="reset" class="btn btn-danger col-sm-3 col-sm-offset-1" onclick="confirmResetEditMenuInfo()">
+                取消
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div class="panel-body">
+    <form id="colin_edit_menu_form" class="form" method="post" action="./">
+        <input type="hidden" name="menuId" value="54c729c3-9c73-4e32-872a-d645c7c31cf9">
+
+        <div class="input-group mb15"><span class="input-group-addon">图标</span>
+            <input type="text" placeholder="修改图标"
+                   name="menuIcon"
+                   class="form-control"
+                   value="glyphicon glyphicon-list">
+        </div>
+        <div class="input-group mb15"><span class="input-group-addon">名称</span>
+            <input type="text" placeholder="修改名称"
+                   name="menuName"
+                   class="form-control" value="音乐一览">
+        </div>
+        <div class="input-group mb15"><span class="input-group-addon">链接</span>
+            <input type="text" placeholder="访问链接"
+                   name="menuUrl"
+                   class="form-control"
+                   value="/music_view.html"></div>
+    </form>
+    <div class="panel-footer">
+        <button type="submit" class="btn btn-primary col-sm-3 col-sm-offset-2" onclick="confirmEditMenuInfo()">修改
+        </button>
+        <button type="reset" class="btn btn-danger col-sm-3 col-sm-offset-1" onclick="confirmResetEditMenuInfo()">取消
+        </button>
+    </div>
+</div>
+</body>
+</html>
