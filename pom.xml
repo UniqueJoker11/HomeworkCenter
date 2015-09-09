@@ -10,6 +10,7 @@
     <!-- Version of jars -->
     <properties>
         <shiro.version>1.2.4</shiro.version>
+        <webcollector.version>2.09</webcollector.version>
     </properties>
     <dependencies>
         <dependency>
@@ -199,5 +200,11 @@
             <version>${shiro.version}</version>
         </dependency>
         <!-- end of Shiro security -->
+        <!--WebCollector-->
+        <dependency>
+            <groupId>cn.edu.hfut.dmic.webcollector</groupId>
+            <artifactId>WebCollector</artifactId>
+            <version>${webcollector.version}</version>
+        </dependency>
     </dependencies>
 </project>

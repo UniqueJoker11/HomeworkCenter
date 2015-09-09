@@ -1,10 +1,10 @@
 package colin.web.homework.core.pojo;
 
+import colin.web.homework.annotation.Column;
+import colin.web.homework.annotation.Id;
+import colin.web.homework.annotation.Table;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Created by DELL on 2015/7/27.
