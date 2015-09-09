@@ -28,21 +28,24 @@ public class DashboardController extends BaseController {
 
     /**
      * 显示404错误页面
+     *
      * @return
      */
-    @RequestMapping(value = "/notfound.html",method = RequestMethod.GET)
-    public String showNotFoundPage(){
+    @RequestMapping(value = "/notfound.html", method = RequestMethod.GET)
+    public String showNotFoundPage() {
         return "notfound";
     }
 
     /**
      * 显示未授权页面
+     *
      * @return
      */
-    @RequestMapping(value = "/unauthorized.html",method = RequestMethod.GET)
-    public String showUnauthorizedPage(){
+    @RequestMapping(value = "/unauthorized.html", method = RequestMethod.GET)
+    public String showUnauthorizedPage() {
         return "unauthorized";
     }
+
     @RequestMapping(value = HomeworkConstants.CONTROLLER_DASHBOARD)
     public String showDashboardPage(HttpServletRequest request) {
         //查看用户是否登录
