@@ -1,5 +1,4 @@
 .webuploader-container {
-    width: 100%;
 	position: relative;
 }
 .webuploader-element-invisible {
@@ -8,7 +7,6 @@
     clip: rect(1px,1px,1px,1px);
 }
 .webuploader-pick {
-    width:100%;
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
