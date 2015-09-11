@@ -90,11 +90,6 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.8" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:3.1" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-cas:1.2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.jasig.cas.client:cas-client-core:3.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.2.4" level="project" />
     <orderEntry type="library" name="Maven: cn.edu.hfut.dmic.webcollector:WebCollector:2.09" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.7.3" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.juniversalchardet:juniversalchardet:1.0.3" level="project" />

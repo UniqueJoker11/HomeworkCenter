@@ -179,7 +179,7 @@
             <version>3.1</version>
         </dependency>
         <!-- Shiro security -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>${shiro.version}</version>
@@ -198,7 +198,7 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- end of Shiro security -->
         <!--WebCollector-->
         <dependency>

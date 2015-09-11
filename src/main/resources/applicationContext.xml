@@ -61,42 +61,4 @@
             <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
-    <bean id="securityManager"
-          class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="shiroDbRealm"/>
-    </bean>
-
-    <!-- 項目自定义的Realm -->
-    <bean id="shiroDbRealm" class="colin.web.homework.service.realm.ShiroDbRealm"></bean>
-
-    <!-- Shiro Filter -->
-    <bean id="shiroFilter"
-          class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/homework/signin.html"/>
-        <property name="successUrl" value="/homework/dashboard.html"/>
-        <property name="unauthorizedUrl" value="/homework/unauthorized.html"/>
-        <property name="filters">
-            <util:map>
-                <entry key="authc" value-ref="homeworkLoginFilter"/>
-            </util:map>
-        </property>
-        <property name="filterChainDefinitions">
-            <value>
-                /homework/signin.html = anon
-                /homework/notfound.html = anon
-                /homework/dashboard.html*=authc
-            </value>
-        </property>
-    </bean>
-    <bean id="lifecycleBeanPostProcessor"
-          class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-<!--    <bean id="shiroCacheManager"
-          class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManager" ref="cacheManager"/>
-    </bean>-->
-
-    <bean id="homeworkLoginFilter"
-          class="colin.web.homework.filter.HomeworkLoginFilter"/>
 </beans>
