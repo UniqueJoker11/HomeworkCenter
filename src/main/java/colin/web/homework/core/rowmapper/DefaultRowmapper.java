@@ -1,8 +1,8 @@
 package colin.web.homework.core.rowmapper;
 
+import colin.web.homework.annotation.Column;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.persistence.Column;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigInteger;

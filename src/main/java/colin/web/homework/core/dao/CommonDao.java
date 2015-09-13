@@ -1,16 +1,15 @@
 package colin.web.homework.core.dao;
 
+import colin.web.homework.annotation.Column;
+import colin.web.homework.annotation.Id;
+import colin.web.homework.annotation.Table;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.tools.HomeworkLogOperate;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;

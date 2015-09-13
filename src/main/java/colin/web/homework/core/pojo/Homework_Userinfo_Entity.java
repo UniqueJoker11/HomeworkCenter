@@ -1,9 +1,11 @@
 package colin.web.homework.core.pojo;
 
+import colin.web.homework.annotation.Column;
+import colin.web.homework.annotation.Id;
+import colin.web.homework.annotation.Table;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+
 
 /**
  * Created by ASUS on 2015/7/12.
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 @Component
 @Table(name = "homework_user_info")
 public class Homework_Userinfo_Entity {
+    @Id
     @Column(name = "user_info_id")
     private String user_info_id;
     @Column(name = "user_info_firstname")
