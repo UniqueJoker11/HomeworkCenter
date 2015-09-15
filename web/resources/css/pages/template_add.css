@@ -1,0 +1,52 @@
+.colin-upload-snapshot{
+text-align: center;
+    height:200px;
+}
+#templateSnapshotArea{
+    height: 100%;
+    boirder:1px dashed #CCCCCC;
+}
+#templateSnapshotArea p{
+    font-size: 1.2em;
+    margin: 10px 0 0;
+}
+#templateSnapshotArea #templateSnapshot{
+    padding:56.5px 0 0;
+}
+.colin-upload-snapshot_append{
+    height: 300px;
+}
+#templateSnapshotUploadThum{
+    height: 240px;
+    border: 1px solid #CCCCCC;
+}
+#templateSnapshotUploadThum img{
+    height: 200px;
+}
+#templateSnapshotUploadThum .thumbnail{
+    margin: 5px 0 2px;
+}
+#templateSnapshotUploadThum i{
+    position: absolute;
+    left: 87%;
+    top: 6px;
+    font-size: 1.8em;
+}
+#templateSnapshotUploadForm{
+    height: 40px;
+    position: relative;
+    top: -10px;
+}
+#templateSnapshotUploadForm .col-sm-9{
+    padding: 15px 0 0 5px;
+}
+#templateSnapshotUploadForm .col-sm-3{
+    text-align: right;
+    padding: 3px 0 0;
+}
+#templateSnapshotUploadForm .col-sm-4 button{
+    margin: 0 5px;
+}
+#templateResource {
+    text-align: center;
+}

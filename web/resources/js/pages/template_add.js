@@ -3,17 +3,29 @@
  */
 $(function () {
     //初始化上传文件
-    $("#templateSnapshot").fileinput({
-        allowedFileExtensions:['jpg', 'gif', 'png'],
-        allowedPreviewTypes:['images'],
-        maxFileSize:4096,
-        minFileCount:1,
-        maxFileCount:4
+    /*  $("#templateSnapshot").fileinput({
+     allowedFileExtensions:['jpg', 'gif', 'png'],
+     allowedPreviewTypes:['images'],
+     maxFileSize:4096,
+     minFileCount:1,
+     maxFileCount:4
+     });
+     $("#templateResource").fileinput({ allowedFileExtensions:['rar', 'zip'],
+     maxFileSize:15360,
+     minFileCount:1,
+     maxFileCount:1});*/
+    var snapTemplateImage = WebUploader.create({
+        swf: "../js/webuploader/Uploader.swf",
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#templateSnapshot'
     });
-    $("#templateResource").fileinput({ allowedFileExtensions:['rar', 'zip'],
-        maxFileSize:15360,
-        minFileCount:1,
-        maxFileCount:1});
+    var templateZipResource = WebUploader.create({
+        swf: "../js/webuploader/Uploader.swf",
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#templateResource'
+    });
     //验证表单提交
     $("#templateAddForm").validate({
         rules: {
@@ -47,11 +59,11 @@ $(function () {
     });
     $("#submitTemplateBtn").click(function () {
         $("#templateAddForm").ajaxForm(function (data) {
-            var result="";
-            if(data.isSuccess){
-                result="新增模板成功！";
-            }else{
-                result="新增模板失败！";
+            var result = "";
+            if (data.isSuccess) {
+                result = "新增模板成功！";
+            } else {
+                result = "新增模板失败！";
             }
             $("#add_template_result").html(result);
             $("#add_template_modal").modal({keyboard: false});
