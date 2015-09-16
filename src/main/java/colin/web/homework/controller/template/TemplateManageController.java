@@ -26,6 +26,7 @@ import java.nio.file.FileSystems;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 模板管理一览
@@ -74,18 +75,21 @@ public class TemplateManageController extends BaseController {
 
     /**
      * 返回所有的标签
+     *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_TIPS,method =RequestMethod.POST)
-    public Object fetchAllTemplateTips(){
-       return this.templateService.fetchAllTemplateTips();
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_TIPS, method = RequestMethod.POST)
+    public Object fetchAllTemplateTips() {
+        return this.templateService.fetchAllTemplateTips();
     }
+
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE,method = RequestMethod.POST)
-    public Object fetchRecentlyTemplate(){
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE, method = RequestMethod.POST)
+    public Object fetchRecentlyTemplate() {
         return this.templateService.fetchRecentlyTemplateList();
     }
+
     /**
      * 返回所有的模板数据
      *
@@ -171,35 +175,80 @@ public class TemplateManageController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_ADD_FORM, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object uploadTemplateSnapshot(@RequestParam(value = "templateSnapshot", required = true) MultipartFile[] templateSnapshot, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "templateResource", required = true) MultipartFile templateResource) throws IOException {
-        //处理上传图片的类
-        StringBuilder snapshotUrl = new StringBuilder("");
-        for (MultipartFile snapshotFile : templateSnapshot) {
-            String orginalFilename = snapshotFile.getOriginalFilename();
-            File snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
-            snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR + File.separator + snapshotCopyFile.getName()).append(",");
-            snapshotFile.transferTo(snapshotCopyFile);
-        }
-        //处理上传的压缩包
-        String resourcesUrl = "";
-        String resourceOrignalName = templateResource.getOriginalFilename();
-        File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-        resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR +"/"+ resourcesCopyFile.getName();
-        templateResource.transferTo(resourcesCopyFile);
-        //解压缩文件
-        String accessUrl = "";
-        if (templateResource.getOriginalFilename().endsWith(".rar")) {
-            FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
-        } else {
-            FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
-        }
-        accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + "/" + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
+    public Object uploadTemplateSnapshot(@RequestParam(value = "uploadImg", required = true) String uploadImg,@RequestParam(value = "uploadZipLocation")String uploadZipLocation, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "uploadZip", required = true) String uploadZip) throws IOException {
         //存储模板实体对象
-        boolean result = templateService.addTemplateService(snapshotUrl.toString(), resourcesUrl, tamplateName, tamplateTips, tamplateDescribe, accessUrl, this.fetchUserInfo().getUser_name());
+        boolean result = templateService.addTemplateService(uploadImg, uploadZipLocation, tamplateName, tamplateTips, tamplateDescribe, uploadZip, this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (result) {
             resultMap.put("isSuccess", true);
         } else {
+            resultMap.put("isSuccess", false);
+        }
+        return resultMap;
+    }
+
+    /**
+     * 上传模板截图
+     *
+     * @param templateSnapshotPics
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_UPLOAD_SNAPSHOT_PICTURE, method = RequestMethod.POST)
+    public Map<String, Object> uploadTemplateSnapshot(@RequestParam(value = "templateSnapshotPics") MultipartFile[] templateSnapshotPics) {
+        //处理上传图片的类
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        try {
+            StringBuilder snapshotUrl = new StringBuilder("");
+            for (MultipartFile snapshotFile : templateSnapshotPics) {
+                String orginalFilename = snapshotFile.getOriginalFilename();
+                File snapshotCopyFile = null;
+
+                snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
+
+                snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR + File.separator + snapshotCopyFile.getName()).append(",");
+                snapshotFile.transferTo(snapshotCopyFile);
+            }
+            resultMap.put("isSuccess", true);
+            resultMap.put("uploadImg", snapshotUrl.toString().substring(0, snapshotUrl.lastIndexOf(",")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            resultMap.put("isSuccess", false);
+        }
+        return resultMap;
+    }
+
+    /**
+     * 处理上传的模板资源
+     *
+     * @param templateZipFiles
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE, method = RequestMethod.POST)
+    public Map<String, Object> uploadTemplateZips(@RequestParam(value = "templateZipFiles") MultipartFile templateZipFiles) {
+        StringBuilder snapshotUrl = new StringBuilder("");
+        //处理上传的压缩包
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        try {
+            String resourcesUrl = "";
+            String resourceOrignalName = templateZipFiles.getOriginalFilename();
+            File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
+            resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + "/" + resourcesCopyFile.getName();
+            templateZipFiles.transferTo(resourcesCopyFile);
+            //解压缩文件
+            String accessUrl = "";
+            if (templateZipFiles.getOriginalFilename().endsWith(".rar")) {
+                FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            } else {
+                FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            }
+            accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + "/" + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
+            resultMap.put("isSuccess", true);
+            resultMap.put("uploadZip",accessUrl);
+            resultMap.put("uploadZipLocation",resourcesUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
             resultMap.put("isSuccess", false);
         }
         return resultMap;
@@ -240,15 +289,15 @@ public class TemplateManageController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_DOWNLOAD,method = RequestMethod.GET)
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_DOWNLOAD, method = RequestMethod.GET)
     public void downloadTemplateResource(@RequestParam(value = "sourceId") String sourceId, HttpServletResponse response) throws IOException {
         //加载模板资源
-        ServletContextResource contextResource=new ServletContextResource(super.getServletContext(),sourceId);
-        if(!contextResource.exists()){
-            String content="资源未找到，原因或许为未存在。";
+        ServletContextResource contextResource = new ServletContextResource(super.getServletContext(), sourceId);
+        if (!contextResource.exists()) {
+            String content = "资源未找到，原因或许为未存在。";
             response.getWriter().print(content);
-        }else{
-           response.getOutputStream().write(FileCopyUtils.copyToByteArray(contextResource.getFile()));
+        } else {
+            response.getOutputStream().write(FileCopyUtils.copyToByteArray(contextResource.getFile()));
         }
     }
 

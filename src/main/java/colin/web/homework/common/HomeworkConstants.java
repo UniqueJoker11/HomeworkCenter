@@ -68,6 +68,10 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_ADD = "/template_add.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
+    //模板上传模板截图
+    public static final String CONTROLLER_TEMPLATE_UPLOAD_SNAPSHOT_PICTURE="uploadSnapshotPic.action";
+    //
+    public static final String CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE="uploadTemplateZip.action";
     //返回所有的模板管理对象
     public static final String CONTROLLER_TEMPLATE_FETCHALL="/fetchall_template.action";
     //ajax请求分页返回模板的内容
