@@ -148,9 +148,9 @@ public class HomeworkConstants {
     /**
      * 默认的资源上传路径
      */
-    public static final String RESOURCES_STORE_DIR = "upload/resources";
-    public static final String IMAGE_STORE_DIR = "upload/images";
-    public static final String RESOURCES_COMPRESS_DIR = "upload/template";
+    public static final String RESOURCES_STORE_DIR = "upload/resources/";
+    public static final String IMAGE_STORE_DIR = "upload/images/";
+    public static final String RESOURCES_COMPRESS_DIR = "upload/template/";
 
     /**
      * 用户存放信息

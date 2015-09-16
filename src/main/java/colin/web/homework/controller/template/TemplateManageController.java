@@ -206,7 +206,7 @@ public class TemplateManageController extends BaseController {
 
                 snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
 
-                snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR + File.separator + snapshotCopyFile.getName()).append(",");
+                snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR+ snapshotCopyFile.getName()).append(",");
                 snapshotFile.transferTo(snapshotCopyFile);
             }
             resultMap.put("isSuccess", true);
@@ -221,29 +221,29 @@ public class TemplateManageController extends BaseController {
     /**
      * 处理上传的模板资源
      *
-     * @param templateZipFiles
+     * @param templateZipFile
      * @return
      */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE, method = RequestMethod.POST)
-    public Map<String, Object> uploadTemplateZips(@RequestParam(value = "templateZipFiles") MultipartFile templateZipFiles) {
+    public Map<String, Object> uploadTemplateZips(@RequestParam(value = "templateZipFile") MultipartFile templateZipFile) {
         StringBuilder snapshotUrl = new StringBuilder("");
         //处理上传的压缩包
         Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
             String resourcesUrl = "";
-            String resourceOrignalName = templateZipFiles.getOriginalFilename();
+            String resourceOrignalName = templateZipFile.getOriginalFilename();
             File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
-            resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + "/" + resourcesCopyFile.getName();
-            templateZipFiles.transferTo(resourcesCopyFile);
+            resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + resourcesCopyFile.getName();
+            templateZipFile.transferTo(resourcesCopyFile);
             //解压缩文件
             String accessUrl = "";
-            if (templateZipFiles.getOriginalFilename().endsWith(".rar")) {
-                FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+            if (templateZipFile.getOriginalFilename().endsWith(".rar")) {
+                FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
             } else {
-                FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + File.separator + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+                FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
             }
-            accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + "/" + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
+            accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
             resultMap.put("isSuccess", true);
             resultMap.put("uploadZip",accessUrl);
             resultMap.put("uploadZipLocation",resourcesUrl);
