@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Scope(value = "request")
 @RequestMapping(value = HomeworkConstants.CONTROLLER_MANAGER_PREFIX)
 public class PersonManageController {
-
     @RequestMapping(value = HomeworkConstants.CONTROLLER_PERSON_MANAGE_PAGE,method = RequestMethod.GET)
     public String showPersonManagePage(){
         return HomeworkConstants.PAGE_PERSON_MANAGE_VIEW;
