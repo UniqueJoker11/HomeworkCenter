@@ -1,10 +1,10 @@
 .colin-upload-snapshot{
-text-align: center;
     height:200px;
 }
 #templateSnapshotArea{
     height: 100%;
-    boirder:1px dashed #CCCCCC;
+    padding: 56.5px 0 0;
+    border: 1px dotted #CCCCCC!important;
 }
 #templateSnapshotArea p{
     font-size: 1.2em;
@@ -32,6 +32,18 @@ text-align: center;
     top: 6px;
     font-size: 1.8em;
 }
+#templateResourceUploadSuccess{
+    height:220px;
+    border: 1px solid #CCCCCC;
+}
+#templateResourceUploadSuccess a{
+    margin:2px 0;
+    height: 210px;
+}
+#templateResourceUploadSuccess img{
+    height:100%;
+    width: 100%;
+ }
 #templateSnapshotUploadForm{
     height: 40px;
     position: relative;
@@ -47,6 +59,24 @@ text-align: center;
 #templateSnapshotUploadForm .col-sm-4 button{
     margin: 0 5px;
 }
-#templateResource {
-    text-align: center;
+#templateResourceUpload{
+    height: 50px;
+}
+#templateResourceUpload ul{
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+}
+#templateResourceUpload .col-sm-2{
+    padding: 0;
+}
+#resumeAddSnapshotBtn{
+    float: left;
+    font-size: 14px;
+    margin: 0 10px 0 27px ;
+}
+#startUploadSnapshotBtn{
+    float: left;
+    height: 39px;
+    font-size: 14px;
 }

@@ -68,6 +68,10 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_ADD = "/template_add.html";
     //模板提交表单的请求
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
+    //模板上传模板截图
+    public static final String CONTROLLER_TEMPLATE_UPLOAD_SNAPSHOT_PICTURE="uploadSnapshotPic.action";
+    //
+    public static final String CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE="uploadTemplateZip.action";
     //返回所有的模板管理对象
     public static final String CONTROLLER_TEMPLATE_FETCHALL="/fetchall_template.action";
     //ajax请求分页返回模板的内容
@@ -144,9 +148,9 @@ public class HomeworkConstants {
     /**
      * 默认的资源上传路径
      */
-    public static final String RESOURCES_STORE_DIR = "upload/resources";
-    public static final String IMAGE_STORE_DIR = "upload/images";
-    public static final String RESOURCES_COMPRESS_DIR = "upload/template";
+    public static final String RESOURCES_STORE_DIR = "upload/resources/";
+    public static final String IMAGE_STORE_DIR = "upload/images/";
+    public static final String RESOURCES_COMPRESS_DIR = "upload/template/";
 
     /**
      * 用户存放信息

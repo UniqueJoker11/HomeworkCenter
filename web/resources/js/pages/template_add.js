@@ -1,30 +1,125 @@
 /**
  * Created by DELL on 2015/7/27.
  */
+var templateSnapshotUploader = null;
 $(function () {
     //初始化上传文件
-    /*  $("#templateSnapshot").fileinput({
-     allowedFileExtensions:['jpg', 'gif', 'png'],
-     allowedPreviewTypes:['images'],
-     maxFileSize:4096,
-     minFileCount:1,
-     maxFileCount:4
-     });
-     $("#templateResource").fileinput({ allowedFileExtensions:['rar', 'zip'],
-     maxFileSize:15360,
-     minFileCount:1,
-     maxFileCount:1});*/
-    var snapTemplateImage = WebUploader.create({
-        swf: "../js/webuploader/Uploader.swf",
-        // 选择文件的按钮。可选。
+    templateSnapshotUploader = WebUploader.create({
+        // swf文件路径
+        swf: '../js/webuploader/Uploader.swf',
+        dnd:"#templateSnapshotArea",
+        server: "./uploadSnapshotPic.action",
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        pick: '#templateSnapshot'
+        pick: {
+            id: '#templateSnapshotBtn',
+            multiple: true
+        },
+        fileSingleSizeLimit: 1000 * 1024,
+        fileNumLimit: 4,
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        method: 'post',
+        fileVal: 'templateSnapshotPics',
+        auto: false,
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
     });
-    var templateZipResource = WebUploader.create({
-        swf: "../js/webuploader/Uploader.swf",
-        // 选择文件的按钮。可选。
+    //监听模板上传事件
+    listenTemplateSnapshotUploader();
+    function listenTemplateSnapshotUploader() {
+        var imageUrl="";//上传成功的文件url
+
+        //当图片文件被加入队列以后触发。
+        templateSnapshotUploader.on("fileQueued", function (file) {
+            $("#uploadTemplateResourcePrepare").hide();
+            var snapshotReadyObj = $("#uploadTemplateResourceReady");
+            var snapshotThumObjs = snapshotReadyObj.find("#templateSnapshotUploadThum");
+            makethum(file, snapshotThumObjs, templateSnapshotUploader);
+            templateSnapshotUploader.addButton({id:"#resumeAddSnapshotBtn",innerHTML:"继续添加"});
+            snapshotReadyObj.removeClass("hidden").show();
+        });
+        //图片上传过程中事件
+        templateSnapshotUploader.on("uploadProgress", function (file, percentage) {
+            $("#templateSnapshotUploadForm").find(".progress-bar").attr("aria-valuenow",percentage*100).html(percentage*100+"%").css("width",percentage*100+"%");
+        });
+        //文件上传出错时触发，停止后续的上传
+        templateSnapshotUploader.on("uploadError", function (file, reason) {
+            alert("文件"+file.name+"上传出错了出错原因是"+reason+"，我们将尝试重新上传该文件");
+            templateSnapshotUploader.retry(file);
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        templateSnapshotUploader.on("uploadStart", function (file) {
+          if(templateSnapshotUploader.getStats().uploadFailNum!=0){
+              templateSnapshotUploader.cancelFile(file);
+          }
+        });
+        //当文件上传结束时触发
+        templateSnapshotUploader.on("uploadSuccess", function (file,response) {
+            if(response.isSuccess){
+                imageUrl+=response.uploadImg+",";
+                var currentSnapshotTemplateResource=$("#templateSnapshotUploadThum").children("#"+file.id).find("img");
+                //当前上传成功的文件模板
+                var snapshtoSuccessFragment="<div class=\"col-xs-6 col-sm-3\">"
+                +"<a href=\"javascript:;\" class=\"thumbnail\">"
+                +"<img src=\""+currentSnapshotTemplateResource.attr("src")+"\" title=\""+currentSnapshotTemplateResource.attr("title")+"\">"
+                +"</a>"
+                +"</div>";
+                $("#templateResourceUploadSuccess").append(snapshtoSuccessFragment);
+            }else{
+                alert("服务器存储上传文件出现错误");
+            }
+        });
+        //不管成功或者失败，文件上传完成时触发。
+        templateSnapshotUploader.on("uploadFinished", function (file) {
+            $("#uploadTemplateResourcePrepare").attr("data-imageUrl",imageUrl);
+            $("#uploadTemplateResourceReady").hide();
+            $("#templateResourceUploadSuccess").removeClass("hidden");
+        });
+    }
+
+    function makethum(file, domObj, uploaderObj) {
+        uploaderObj.makeThumb(file, function (error, ret) {
+            if (error) {
+                domObj.append('预览错误');
+            } else {
+                var snapshotTemplateFragment = " <div id=\""+file.id+"\" class=\"col-xs-6 col-sm-3\">"
+                    + "<a href=\"javascript:;\" class=\"thumbnail\">"
+                    + "<i class=\"glyphicon glyphicon-remove-circle\" onclick=\"removeUploadFile('" + file.id + "')\"></i>"
+                    + "<img src=\"" + ret + "\" title=\"" + file.name + "\">"
+                    + "</a><strong>"
+                    + "文件名：" + file.name + ""
+                    + "</strong></div>";
+                domObj.append(snapshotTemplateFragment);
+            }
+        });
+    }
+    //开始上传资源
+   $("#startUploadSnapshotBtn").bind("click",function(){
+       templateSnapshotUploader.upload();
+   });
+    //初始化资源上传
+    //初始化上传文件
+    var templateZipUploader = WebUploader.create({
+        // swf文件路径
+        swf: '../js/webuploader/Uploader.swf',
+        server: "./uploadTemplateZip.action",
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        pick: '#templateResource'
+        pick: '#templateZipResource',
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Zip',
+            extensions: 'zip,rar',
+            mimeTypes: 'application/*'
+        },
+        method: 'post',
+        fileVal: 'templateZipFiles',
+        auto: false,
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
     });
     //验证表单提交
     $("#templateAddForm").validate({
@@ -73,3 +168,8 @@ $(function () {
         });
     });
 });
+//移除上传的图片资源
+function removeUploadFile(fileId) {
+    templateSnapshotUploader.removeFile(fileId);
+    $( event.target).parent("a").parent("div").remove();
+}
