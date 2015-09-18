@@ -34,7 +34,10 @@
 }
 #templateResourceUploadSuccess{
     height:220px;
-    border: 1px solid #CCCCCC;
+}
+#templateResourceUploadSuccess .form-control{
+    height: 100%;
+    padding: 2px 0;
 }
 #templateResourceUploadSuccess a{
     margin:2px 0;
@@ -79,4 +82,7 @@
     float: left;
     height: 39px;
     font-size: 14px;
+}
+#templateResourceUploadCompleted{
+    height:25px;
 }

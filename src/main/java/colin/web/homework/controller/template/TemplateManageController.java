@@ -232,7 +232,7 @@ public class TemplateManageController extends BaseController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
             String resourcesUrl = "";
-            String resourceOrignalName = templateZipFile.getOriginalFilename();
+            String resourceOrignalName = new String(templateZipFile.getOriginalFilename().getBytes(),"UTF-8");
             File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
             resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + resourcesCopyFile.getName();
             templateZipFile.transferTo(resourcesCopyFile);
