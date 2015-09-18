@@ -27,6 +27,7 @@ public class HomeworkConstants {
     public static final String PAGE_ATICLE_BROWSER_VIEW = "aticle_browser";
     //文章添加页面
     public static final String PAGE_ATICLE_ADD_VIEW = "aticle_add";
+
     //转载文章页面
     public static final String PAGE_REPRINT_ATICLE_VIEW="reprint_aticle";
 
@@ -36,6 +37,8 @@ public class HomeworkConstants {
 
     //菜单管理首页
     public static final String PAGE_MENU_MANAGE_VIEW="system_menu";
+    //用户管理界面
+    public static final String PAGE_USER_MANAGE_VIEW="system_user";
 
 
     //前台模板首页
@@ -134,6 +137,11 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ADD_NODE_MENU_INFO="/add_node_menu_info.action";
     //删除系统的菜单内容
     public static final String CONTROLLER_DEL_MENU_INFO="/del_menu_info.action";
+
+    //用户管理界面
+    public static final String CONTROLLER_USER_MANAGE_PAGE="/system_user.html";
+    //加载管理用户的信息
+    public static final String CONTROLLER_USER_MANAGE_INFO="/fetch_system_user.action";
 
     //同意上传图片
     public static final String CONTROLLER_COMMON_UPLOAD_IMAGE="/upload_image.action";
