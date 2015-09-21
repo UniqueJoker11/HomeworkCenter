@@ -40,11 +40,12 @@ public class UserAuthorityInteceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //判断用户是否登录，未登录强制登陆
-        if(request.getRequestURL().indexOf("signin")!=-1||request.getRequestURL().indexOf("signup")!=-1){
+        String requestUrl=request.getRequestURL().toString();
+        if(requestUrl.indexOf("signin")!=-1||requestUrl.indexOf("signup")!=-1||requestUrl.indexOf("userSignin")!=-1||requestUrl.indexOf("signupUserinfo")!=-1){
             return true;
         }else{
             if(request.getSession().getAttribute("userInfo")==null){
-                request.getRequestDispatcher("index.jsp").forward(request,response);
+                request.getRequestDispatcher("/index.jsp").forward(request,response);
                 return false;
             }else {
                 return true;

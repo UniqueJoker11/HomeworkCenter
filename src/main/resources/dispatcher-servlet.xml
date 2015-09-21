@@ -36,7 +36,7 @@
     </bean>
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/homework/*" />
+            <mvc:mapping path="/homework/*.html" />
             <bean class="colin.web.homework.interceptor.UserAuthorityInteceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
