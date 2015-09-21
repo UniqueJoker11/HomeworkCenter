@@ -69,13 +69,10 @@ $(function () {
                     + "</a>"
                     + "</div>";
                 $("#templateResourceUploadSuccess").find(".form-control").append(snapshtoSuccessFragment);
+                $("#uploadImg").val(response.uploadImg);
             } else {
                 alert("服务器存储上传文件出现错误");
             }
-        });
-        //不管成功或者失败，文件上传完成时触发。
-        templateSnapshotUploader.on("uploadFinished", function (file) {
-            $("#uploadTemplateResourcePrepare").attr("data-imageUrl", imageUrl);
             $("#uploadTemplateResourceReady").hide();
             $("#templateResourceUploadSuccess").removeClass("hidden");
         });
@@ -111,7 +108,7 @@ $(function () {
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
         pick: '#templateZipResource',
         fileNumLimit: 1,
-        // 只允许选择图片文件。
+        // 只允许选择压缩文件。
         accept: {
             title: 'Zip',
             extensions: 'zip',
@@ -148,6 +145,8 @@ $(function () {
                 $("#uploadZipResourceReady").hide();
                 var $uploadZipResourceCompleted = $("#uploadZipResourceCompleted");
                 $uploadZipResourceCompleted.find(".col-sm-8").html("文件" + file.name + "上传成功！")
+                $("#uploadZipLocation").val(response.uploadZipLocation);
+                $("#uploadZip").val(response.uploadZip);
                 $uploadZipResourceCompleted.removeClass("hidden").show();
             } else {
                 alert("上传压缩文件失败！");
@@ -198,8 +197,10 @@ $(function () {
             $("#add_template_result").html(result);
             $("#add_template_modal").modal({keyboard: false});
             $("#templateAddForm").clearForm();
-            $('#templateSnapshot').fileinput('reset');
-            $('#templateResource ').fileinput('reset');
+            $("#templateResourceUploadSuccess").hide();
+            $("#uploadTemplateResourcePrepare").show();
+            $("#uploadZipResourceCompleted").hide();
+            $("#uploadZipResourcePrepare").show();
         });
     });
 });

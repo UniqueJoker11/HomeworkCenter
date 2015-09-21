@@ -21,6 +21,7 @@ public class UserService {
 
     /**
      * 返回当前所有的用户的信息
+     *
      * @return
      */
     public List<Homework_User_Entity> getAllUserInfo() {
@@ -29,14 +30,26 @@ public class UserService {
 
     /**
      * 根绝用户名和密码验证用户的信息
+     *
      * @param username
      * @param password
      * @return
      */
-    public Map<String,Object> validateUserInfoByNamePwd(String username,String password){
-        Map<String,Object> params=new HashMap<>();
-        params.put("user_name",username);
-        params.put("user_password",password);
-       return userDao.validateUserInfoByNamePwd(params);
+    public Map<String, Object> validateUserInfoByNamePwd(String username, String password) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_name", username);
+        params.put("user_password", password);
+        return userDao.validateUserInfoByNamePwd(params);
+    }
+
+    /**
+     * 根绝用户的ID来查询用户的角色，返回其角色和权限信息
+     *
+     * @param user_id
+     * @return
+     */
+    public List<Homework_User_Entity> fetchUserInfoListByUserRole(String user_id) {
+       // userDao.
+        return null;
     }
 }
