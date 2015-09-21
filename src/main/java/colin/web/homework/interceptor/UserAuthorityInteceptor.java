@@ -26,9 +26,32 @@ public class UserAuthorityInteceptor implements HandlerInterceptor{
      * that this interceptor has already dealt with the response itself.
      * @throws Exception in case of errors
      */
+    /**
+     * 在业务处理器处理请求之前被调用
+     * 如果返回false
+     *     从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
+     * 如果返回true
+     *    执行下一个拦截器,直到所有的拦截器都执行完毕
+     *    再执行被拦截的Controller
+     *    然后进入拦截器链,
+     *    从最后一个拦截器往回执行所有的postHandle()
+     *    接着再从最后一个拦截器往回执行所有的afterCompletion()
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return false;
+        //判断用户是否登录，未登录强制登陆
+        String requestUrl=request.getRequestURL().toString();
+        if(requestUrl.indexOf("signin")!=-1||requestUrl.indexOf("signup")!=-1||requestUrl.indexOf("userSignin")!=-1||requestUrl.indexOf("signupUserinfo")!=-1){
+            return true;
+        }else{
+            if(request.getSession().getAttribute("userInfo")==null){
+                request.getRequestDispatcher("/index.jsp").forward(request,response);
+                return false;
+            }else {
+                return true;
+            }
+
+        }
     }
 
     /**

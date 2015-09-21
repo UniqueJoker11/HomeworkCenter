@@ -122,6 +122,8 @@ public class HomeworkConstants {
 
     //访问用户的管理页面
     public static final String CONTROLLER_PERSON_MANAGE_PAGE="/person_data.html";
+    //返回用户管理的人员的角色信息
+    public static final String CONTROLLER_ACTION_FETCH_MANAGE_USER_ROLE="/fetch_user_role.action";
 
     //菜单管理页面
     public static final String CONTROLLER_MEMU_MANAGE_PAGE="/system_menu.html";

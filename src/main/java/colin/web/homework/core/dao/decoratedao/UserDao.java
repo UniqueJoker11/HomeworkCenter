@@ -1,12 +1,14 @@
 package colin.web.homework.core.dao.decoratedao;
 
 import colin.web.homework.core.pojo.Homework_User_Entity;
+import colin.web.homework.core.pojo.Homework_User_Role_Entity;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,4 +40,9 @@ public class UserDao extends DecorateCommnDao {
        return result;
     }
 
+    public List<Homework_User_Role_Entity> fetchUserRoleInfo(){
+        String searchUserRoleSql="select user_id from homework_user_role where role_id in(select role_id from homework_user_role where user_id=:user_id)";
+       // List<String> role_id
+        return null;
+    }
 }
