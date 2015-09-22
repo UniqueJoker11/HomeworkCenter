@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="${ctxPath}/css/pages/system_user.css">
-<script type="text/javascript" src="${ctxPath}/js/pages/system_user.js"></script>
+<!--分页组件-->
+<script type="text/javascript" src="${ctxPath}/js/bootstrap-paginator.min.js"></script>
+
 <div class="pageheader">
     <h2><i class="fa fa-calendar"></i> 系统管理 <span>用户管理</span></h2>
 
@@ -18,20 +20,75 @@
             <div class="panel panel-dark panel-alt widget-todo">
                 <div class="panel-heading">
                     <div class="panel-btns">
-                        <a href="javascript:;" id="changeUserInfoBtn" class="tooltips" data-toggle="tooltip" title="修改用户信息" data-original-title="Settings"><i class="glyphicon glyphicon-cog"></i></a>
-                        <a href="javascript:;" id="addUserInfoBtn" class="tooltips" data-toggle="tooltip" title="增加用户信息" data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
-                    </div><!-- panel-btns -->
+                        <a href="javascript:;" onclick="addUserInfo()" id="addUserInfoBtn" class="tooltips"
+                           data-toggle="tooltip" title="增加用户信息"
+                           data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
+                    </div>
+                    <!-- panel-btns -->
                     <h3 class="panel-title">管理用户信息一览</h3>
                 </div>
                 <div class="panel-body nopadding">
-                    <table id="userInfoTable" class="table table-bordered">
-                        <thead><tr><th>用户名</th><th>用户头像</th><th>用户别称</th><th>用户邮箱</th><th>用户创建时间</th><th>最近一次登陆时间</th><th>角色管理</th><th>用户操作</th></tr></thead>
-                        <tbody>
+                    <div id="userInfoModal">
+                        <div class="item">
+                            <div class="colin-return-part">
+                                <h3>用户管理列表</h3>
+                            </div>
+                            <table id="userInfoTable" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>用户别称</th>
+                                    <th>用户邮箱</th>
+                                    <th>用户手机</th>
+                                    <th>用户创建时间</th>
+                                    <th>最近一次登陆时间</th>
+                                    <th>角色管理</th>
+                                    <th>用户操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%for(user in userList){%>
+                                <tr>
+                                    <td>${user.user_name}</td>
+                                    <td>${user.user_callname}</td>
+                                    <td>${user.user_email}</td>
+                                    <td>${user.user_phone}</td>
+                                    <td>${user.user_createtime}</td>
+                                    <td>${user.user_logintime}</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="configUserRole('${user.user_id}')">配置角色</button></td>
+                                    <td>
+                                            <button class="btn btn-primary" onclick="editUserInfo('${user.user_id}')">修改</button>
+                                            <button class="btn btn-danger" onclick="deleteUserInfo('${user.user_id}')">删除</button>
+                                    </td>
+                                </tr>
+                                <%}%>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                                <ul id="userInfoTablePagenation"></ul>
+                            </div>
+                        </div>
+                        <div clss="item">
+                            <div class="colin-return-part">
+                                <a href="javascript:;" onclick="returnLastMenu('0')"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;返回用户列表</a>
+                            </div>
 
-                        </tbody>
-                    </table>
-                </div><!-- panel-body -->
+                            <table class="table table-bordered">
+                                <thead>
+                                <th><input type="checkbox"/></th>
+                                <th>角色名称</th>
+                                <th>角色权限</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- panel-body -->
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="${ctxPath}/js/pages/system_user.js"></script>

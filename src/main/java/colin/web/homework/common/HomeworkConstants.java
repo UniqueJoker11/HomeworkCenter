@@ -143,7 +143,7 @@ public class HomeworkConstants {
     //用户管理界面
     public static final String CONTROLLER_USER_MANAGE_PAGE="/system_user.html";
     //加载管理用户的信息
-    public static final String CONTROLLER_USER_MANAGE_INFO="/fetch_system_user.action";
+    public static final String CONTROLLER_USER_MANAGE_INFO="/fetch_system_user_roleinfo.action";
 
     //同意上传图片
     public static final String CONTROLLER_COMMON_UPLOAD_IMAGE="/upload_image.action";

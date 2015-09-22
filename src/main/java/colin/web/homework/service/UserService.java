@@ -3,6 +3,8 @@ package colin.web.homework.service;
 import colin.web.homework.core.dao.decoratedao.UserDao;
 import colin.web.homework.core.pojo.Homework_User_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
+import colin.web.homework.core.vo.HomeworkUserInfo;
+import colin.web.homework.core.vo.HomeworkUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,13 +45,23 @@ public class UserService {
     }
 
     /**
-     * 根绝用户的ID来查询用户的角色，返回其角色和权限信息
+     * 根绝用户的ID来查询用户的信息
      *
      * @param user_id
      * @return
      */
-    public List<Homework_User_Entity> fetchUserInfoListByUserRole(String user_id) {
-       // userDao.
-        return null;
+    public List<HomeworkUserInfo> fetchUserInfoListByUserRole(String user_id) {
+        List<HomeworkUserInfo> userInfoList = userDao.fetchUserRoleInfo(initParams(user_id));
+        return userInfoList;
+    }
+
+    public List<HomeworkUserRole> fetchUserRoleDetail(String user_id) {
+        return userDao.fetchUserRoleList(initParams(user_id));
+    }
+
+    private Map<String, Object> initParams(String user_id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id", user_id);
+        return params;
     }
 }

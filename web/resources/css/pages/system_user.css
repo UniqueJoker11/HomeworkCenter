@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#userInfoTable{
+    min-height: 408px;
+}
+#userInfoTable td{
+    vertical-align: middle;
+}
+.colin-return-part{
+    padding: 10px;
+}
+.colin-return-part a{
+    font-size: 1.3em;
+    color: #3071a9;
+}
+.colin-return-part a:hover{
+ text-decoration: none;
+ }
+.colin-return-part a span{
+    position: relative;
+    top: 2px;
+}
