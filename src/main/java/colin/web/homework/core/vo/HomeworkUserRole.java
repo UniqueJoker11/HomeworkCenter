@@ -6,10 +6,20 @@ import java.util.List;
  * Created by DELL on 2015/9/21.
  * 用户角色Vo
  */
-public class HomeworUserRole {
+public class HomeworkUserRole {
     private String role_name;
     private String role_description;
+    private boolean isOwned;
     private List<HomeworkUserAuthority> authorityList;
+    private List<HomeworkMenuVo> menuList;
+
+    public List<HomeworkMenuVo> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<HomeworkMenuVo> menuList) {
+        this.menuList = menuList;
+    }
 
     public String getRole_name() {
         return role_name;
@@ -33,5 +43,13 @@ public class HomeworUserRole {
 
     public void setAuthorityList(List<HomeworkUserAuthority> authorityList) {
         this.authorityList = authorityList;
+    }
+
+    public boolean isOwned() {
+        return isOwned;
+    }
+
+    public void setOwned(boolean isOwned) {
+        this.isOwned = isOwned;
     }
 }
