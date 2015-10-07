@@ -31,6 +31,7 @@ public class AticleManageController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_BROWSER_PAGE, method = RequestMethod.GET)
     public String showAticleBrowserPage() {
+        super.getRequestObj().setAttribute("aticleList",aticleService.findAllAticleInfo());
         return HomeworkConstants.PAGE_ATICLE_BROWSER_VIEW;
     }
 
@@ -80,8 +81,7 @@ public class AticleManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_DELETE_ACTION, method = RequestMethod.POST)
     public boolean delAticleObj(@RequestParam(value = "aticleId") String aticleId) {
-        //TODO
-        return true;
+        return this.aticleService.deleteAticleInfo(aticleId);
     }
 
     /**
@@ -105,5 +105,11 @@ public class AticleManageController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SEARCH_ACTION, method = RequestMethod.POST)
     public Object searchAticleObjWithPage() {
         return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SEARCH_ALL_ACTION,method = RequestMethod.POST)
+    public Object searchAticleObjWithoutPage(){
+        return aticleService.findAllAticleInfo();
     }
 }

@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <%include("./common/header.html"){}%>
     <link rel="stylesheet" href="${ctxPath}/css/pages/blog_index.css"/>
-    <title></title>
+    <title>叨叨叨</title>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -41,23 +41,13 @@
     </div>
 
 </nav>
-<div class="container blog-main-modal">
-    <div class="col-sm-8">
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">
-                <h1>h1. Bootstrap heading</h1>
-                <small>作者：匿名&nbsp;|&nbsp;发布时间：2015-08-12</small>
-            </div>
-            <div class="panel-body">
-                {{ghost_foot}} 助手函数将不再输出 jQuery 链接了。 从 Ghost 第一个版本开始， {{ghost_foot}} 助手函数默认都会输出一个 jQuery
-                文件链接，并且这个文件还是本地存储的。最开始 Ghost 团队觉得这是一件对所有主题开发者有意义
-            </div>
-            <div class="panel-footer"><i class="glyphicon glyphicon-tag"></i>&nbsp;</div>
-        </div>
+<div class="container-fluid blog-main-modal" data-index="0">
+    <div id="blogInfoList" class="col-sm-offset-1 col-sm-10">
+
     </div>
-    <div class="col-sm-4">
+ <!--   <div class="col-sm-3">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading blog-list-head">
                 <h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;访问排行</h3>
             </div>
             <div class="panel-body">
@@ -68,7 +58,8 @@
                 </ol>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
+<script type="text/javascript" src="${ctxPath}/js/pages/blog_index.js"></script>
 </body>
 </html>

@@ -17,76 +17,46 @@ $(function () {
         }
 
     }
+    /**
+     * $ajax.select2({
+      ajax: {
+        url: "https://api.github.com/search/repositories",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      escapeMarkup: function (markup) { return markup; },
+      minimumInputLength: 1,
+      templateResult: formatRepo,
+      templateSelection: formatRepoSelection
+    });**/
 
     //初始化下拉菜单
     $("#aticleCategory").select2({
+        language: "zh-CN",
         width: '100%'
     });
 
-    //初始化上传图片插件
-    /* initUploadComponent();
-     function initUploadComponent() {
-     var uploader = WebUploader.create({
-     auto:false,
-     // swf文件路径
-     swf: '../webuploader/Uploader.swf',
-
-     // 文件接收服务端。
-     server: './upload_image.action',
-
-     // 选择文件的按钮。可选。
-     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-     pick: '#picker',
-
-     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-     resize: false,
-     // 只允许选择图片文件。
-     accept: {
-     title: 'Images',
-     extensions: 'gif,jpg,jpeg,bmp,png',
-     mimeTypes: 'image*/
-    /*'
-     }
-     });
-     // 当有文件被添加进队列的时候
-     uploader.on('fileQueued', function (file) {
-     $("#thelist").append('<div id="' + file.id + '" class="item">' +
-     '<h4 class="info">' + file.name + '</h4>' +
-     '<p class="state">等待上传...</p>' +
-     '</div>');
-     });
-     // 文件上传过程中创建进度条实时显示。
-     uploader.on( 'uploadProgress', function( file, percentage ) {
-     var $li = $( '#'+file.id ),
-     $percent = $li.find('.progress .progress-bar');
-
-     // 避免重复创建
-     if ( !$percent.length ) {
-     $percent = $('<div class="progress progress-striped active">' +
-     '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-     '</div>' +
-     '</div>').appendTo( $li ).find('.progress-bar');
-     }
-
-     $li.find('p.state').text('上传中');
-
-     $percent.css( 'width', percentage * 100 + '%' );
-     });
-     uploader.on( 'uploadSuccess', function( file ) {
-     $( '#'+file.id ).find('p.state').text('已上传');
-     });
-
-     uploader.on( 'uploadError', function( file ) {
-     $( '#'+file.id ).find('p.state').text('上传出错');
-     });
-
-     uploader.on( 'uploadComplete', function( file ) {
-     $( '#'+file.id ).find('.progress').fadeOut();
-     });
-     $("#uploader").on("click",function(e){
-     uploader.upload();
-     });
-     }*/
 
     //初始化流程表单插件
     $('#basicWizard').bootstrapWizard({
@@ -150,13 +120,19 @@ $(function () {
                     $("#colin-aticle-preview-tags").html(tagContent);
                     $("#colin-aticle-preview-digest").html($("#aticleDigest").val());
                     $("#colin-aticle-preview-content").html(ueditor.getAllHtml());
-
+                    clearFormContent();
                 }else{
                     alert("保存文章失败！");
                 }
             }
         });
     });
+    function clearFormContent(){
+       var $formObj= $("#colin-add-aticle-form");
+        $formObj.find("input").val("");
+        $formObj.find("textarea").val("");
+        ueditor.reset();
+    }
 });
 
 
