@@ -111,7 +111,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ATICLE_ADD_ACTION = "/aticle_add.action";
     //文章内容搜索
     public static final String CONTROLLER_ATICLE_SEARCH_ACTION = "/aticle_search.action";
-
+    //加载全部的内容
+    public static final String CONTROLLER_ATICLE_SEARCH_ALL_ACTION="/aticle_fetch_all.action";
 
     //获取当日的行程
     public static final String CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE = "/fetch_current_schedule.action";

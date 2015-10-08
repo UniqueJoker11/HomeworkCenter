@@ -61,3 +61,20 @@ hr{
     font-weight: 500;
     color: #545454;
 }
+.blog-list-loading{
+    font-size: 6.6em;
+}
+#blogInfoList .panel-body{
+    height:260px;
+    padding: 15px;
+    overflow-y: hidden;
+}
+#blogInfoList .panel-body:after{
+    content: "...";
+}
+.blog-info-digest{
+    border-left: 3px solid #CCCCCC;
+}
+.blog-list-head{
+    padding: 5px 0 5px 15px;
+}

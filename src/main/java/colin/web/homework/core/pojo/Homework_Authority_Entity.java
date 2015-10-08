@@ -1,11 +1,16 @@
 package colin.web.homework.core.pojo;
 
+import colin.web.homework.annotation.Id;
+import colin.web.homework.annotation.Table;
+
 import java.io.Serializable;
 
 /**
  * Created by ASUS on 2015/8/29.
  */
+@Table(name = "homework_authority")
 public class Homework_Authority_Entity implements Serializable{
+    @Id
     private String authority_id;
     private String parent_authority_id;
     private String authority_name;
