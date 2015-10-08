@@ -48,10 +48,31 @@ $(function () {
 //配置用户角色
 function configUserRole(userId){
     $("#userInfoModal").children("div").hide().eq("1").slideDown();
+    var $userRoleInfo=$("#userRoleInfo"),roleInfoTemplate="";
+    $userRoleInfo.children("tbody").html("");
     //开始加载当前用户的角色和权限
     var params=new Object();
-    params.user_id="";
-    $.post("/fetch_system_user_roleinfo.action",params,function(data){});
+    params.userId=userId;
+    $.post("./fetch_system_user_roleinfo.action",params,function(data){
+        $.each(data,function(i,ele){
+            roleInfoTemplate+="<tr>";
+            if(ele.owned){
+                roleInfoTemplate+="<td><input  type='checkbox' checked=\"checked\"></td>";
+            }else{
+                roleInfoTemplate+="<td><input type='checkbox'></td>";
+            }
+            roleInfoTemplate+="<td>"+ele.role_name+"</td>";
+            roleInfoTemplate+="<td>";
+            //加载权限
+            $.each(ele.authorityList,function(j,authObj){
+                roleInfoTemplate+="<span class=\"label label-info\">"+authObj.authority_name+"</span>&nbsp;"
+            });
+            roleInfoTemplate+="</td></tr>";
+        });
+        $userRoleInfo.children("tbody").html(roleInfoTemplate);
+        var saveBtnTemplate="<div class='text-center'><button type=\"button\" disabled=\"disabled\" id=\"roleConfigBtn\" class='btn btn-default btn-lg'>保存修改</button></div>";
+        $userRoleInfo.after(saveBtnTemplate);
+    });
 }
 //增加用户信息
 function addUserInfo(){

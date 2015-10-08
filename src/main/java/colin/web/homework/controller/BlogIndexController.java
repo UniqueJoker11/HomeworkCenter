@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("blog")
 public class BlogIndexController {
-    private final static int initIndex = 0;
+    private final static int initIndex = 1;
     private final static int pageSize = 6;
 
     @Autowired
@@ -39,7 +39,7 @@ public class BlogIndexController {
     @ResponseBody
     @RequestMapping(value = "find_blog_info_list.action", method = RequestMethod.POST)
     public Object findAllBlogInfoListByPage(@RequestParam int pageIndex) {
-        if (pageIndex < 0) {
+        if (pageIndex <=0) {
             pageIndex = initIndex;
         }
         return aticleService.findAllAticleInfoByPage(pageIndex, pageSize);
