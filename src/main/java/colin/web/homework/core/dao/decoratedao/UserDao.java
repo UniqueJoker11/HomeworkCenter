@@ -76,6 +76,7 @@ public class UserDao extends DecorateCommnDao {
         List<HomeworkUserRole> userRoleList = new ArrayList<>();
         for (Homework_Role_Entity role_entity : allRoleList) {
             HomeworkUserRole userRole = new HomeworkUserRole();
+            userRole.setRole_id(role_entity.getRole_id());
             userRole.setRole_name(role_entity.getRole_name());
             Map<String,Object> userRoleDetail=this.fetchUserRoleAuthority(role_entity.getRole_id());
             userRole.setAuthorityList((List<HomeworkUserAuthority>) userRoleDetail.get("authorityList"));
@@ -313,7 +314,6 @@ public class UserDao extends DecorateCommnDao {
         final Set<HomeworkMenuVo> menuVoList = new HashSet<>();
         for (String menuId : menuIds) {
             for(String menuArray:menuId.split(",")){
-                System.out.println(menuArray);
                 menuDetailParams.put("menu_id", menuArray);
                 super.getJdbcTemplate().query(searchUserMenuDetail, menuDetailParams, new RowCallbackHandler() {
                     @Override
