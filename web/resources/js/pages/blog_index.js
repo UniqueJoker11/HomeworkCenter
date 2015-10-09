@@ -62,7 +62,7 @@ $(function () {
             "</div>" +
             "<div class=\"panel-body\"><blockquote class=\"blog-info-digest\">" +
             "<p>" + blog.aticle_digest + "</p>" +
-            "</blockquote>" + blog.aticle_content +
+            "</blockquote>" + blog.aticle_content+
             "</div>" +
             "<div class=\"panel-footer\">标签:&nbsp;";
             var keywords = blog.key_words.split("，");

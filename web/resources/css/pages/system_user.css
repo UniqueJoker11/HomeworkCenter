@@ -1,27 +1,34 @@
 @charset "UTF-8";
-#userInfoTable{
+#userInfoTable {
     min-height: 408px;
 }
-#userInfoTable td{
+
+#userInfoTable td {
     vertical-align: middle;
 }
-.colin-return-part{
+
+.colin-return-part {
     padding: 10px;
 }
-.colin-return-part a{
-    font-size: 1.3em;
-    color: #333333;
+
+.colin-return-part a {
+    color: #4D4D4D;
 }
-.colin-return-part a:hover{
- text-decoration: none;
- }
-.colin-return-part a span{
+
+.colin-return-part a:hover {
+    text-decoration: none;
+    color: #00b7ee;
+}
+
+.colin-return-part a span {
     position: relative;
     top: 2px;
 }
-#userInfoModal td,#userInfoModal th{
+
+#userInfoModal td, #userInfoModal th {
     text-align: center;
 }
-#roleConfigBtn{
+
+#roleConfigBtn {
     margin-bottom: 10px;
 }

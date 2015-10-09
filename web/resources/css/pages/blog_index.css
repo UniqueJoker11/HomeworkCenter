@@ -69,9 +69,6 @@ hr{
     padding: 15px;
     overflow-y: hidden;
 }
-#blogInfoList .panel-body:after{
-    content: "...";
-}
 .blog-info-digest{
     border-left: 3px solid #CCCCCC;
 }

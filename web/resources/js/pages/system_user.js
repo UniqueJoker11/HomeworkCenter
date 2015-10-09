@@ -57,20 +57,26 @@ function configUserRole(userId){
         $.each(data,function(i,ele){
             roleInfoTemplate+="<tr>";
             if(ele.owned){
-                roleInfoTemplate+="<td><input  type='checkbox' checked=\"checked\"></td>";
+                roleInfoTemplate+="<td class='col-sm-1'><input  type='checkbox' checked=\"checked\"></td>";
             }else{
-                roleInfoTemplate+="<td><input type='checkbox'></td>";
+                roleInfoTemplate+="<td class='col-sm-1'><input type='checkbox'></td>";
             }
-            roleInfoTemplate+="<td>"+ele.role_name+"</td>";
-            roleInfoTemplate+="<td>";
+            roleInfoTemplate+="<td class='col-sm-3'>"+ele.role_name+"</td>";
+            roleInfoTemplate+="<td class='col-sm-4'><p>";
             //加载权限
             $.each(ele.authorityList,function(j,authObj){
                 roleInfoTemplate+="<span class=\"label label-info\">"+authObj.authority_name+"</span>&nbsp;"
             });
-            roleInfoTemplate+="</td></tr>";
+            roleInfoTemplate+="</p></td><td class='col-sm-4'><p>";
+            //加载菜单
+            $.each(ele.menuList,function(i,menuObj){
+                roleInfoTemplate+="<span class=\"label label-success\">"+menuObj.menu_name+"</span>&nbsp;"
+            })
+            roleInfoTemplate+="</p></td></tr>";
         });
         $userRoleInfo.children("tbody").html(roleInfoTemplate);
         var saveBtnTemplate="<div class='text-center'><button type=\"button\" disabled=\"disabled\" id=\"roleConfigBtn\" class='btn btn-default btn-lg'>保存修改</button></div>";
+        $userRoleInfo.siblings(".text-center").remove();
         $userRoleInfo.after(saveBtnTemplate);
     });
 }
