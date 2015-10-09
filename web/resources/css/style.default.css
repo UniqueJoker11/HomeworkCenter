@@ -621,9 +621,8 @@ strong {
 
 .nav-bracket li .fa,
 .nav-bracket li .glyphicon {
-    font-size: 16px;
-    vertical-align: middle;
-    margin-right: 10px;
+    font-size: 15px;
+    margin-right: 5px;
     width: 16px;
     text-align: center;
 }
@@ -660,7 +659,7 @@ strong {
     color: #1caf9a;
 }
 
-.nav-bracket .children > li .fa {
+.nav-bracket .children > li .fa, .nav-bracket .children > li .glyphicon {
     font-size: 12px;
     opacity: 0.5;
     margin-right: 5px;

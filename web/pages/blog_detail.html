@@ -1,10 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="zh_CN">
     <meta charset="UTF-8">
-    <title>叨叨叨-博文详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%include("./common/header.html"){}%>
+    <link rel="stylesheet" href="${ctxPath}/css/pages/blog_detail.css"/>
+
+    <title>黑暗骑士</title>
 </head>
 <body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<header class="blog-header">
+    <div class="container text-center">
+        <a href="javascript:;"><img src="${ctxPath}/images/title.jpeg" alt="头像" class="img-circle"/></a>
+    </div>
+</header>
+<nav class="blog-navbar" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <ul class="menu text-center">
+            <li role="presentation" class="active"><a href="./blog_index.html">首页</a></li>
+            <li role="presentation"><a href="#">雅趣小文</a></li>
+            <li role="presentation"><a href="#">开心一刻</a></li>
+            <li role="presentation"><a href="#">照片墙</a></li>
+            <li role="presentation"><a href="#">关于我</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid blog-detail">
+    <div class="row">
+        <!--文章详情-->
+        <div class="col-sm-9">
+            <%if(!isEmpty(aticle)){%>
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h3>${aticle.aticle_name}</h3>
+                    <small>作者：${aticle.aticle_author}&nbsp;|&nbsp;发布时间：${aticle.aticle_createtime}&nbsp;|&nbsp;文章类型：${aticle.aticle_category}</small>
+                </div>
+                <div class="panel-body">
+                    ${aticle.aticle_content}
+                </div>
+                <div class="panel-footer">
+                    <%if(!isEmpty(prevAticle)){%>
+                    <div class="pull-left">
+                        <a href="./blog_detail.html?aticleId=${prevAticle.aticle_id}"><span class="fa  fa-angle-double-left"></span> &nbsp;上一篇：${prevAticle.aticle_name}</a>
+                    </div>
+                    <%}%>
+                    <%if(!isEmpty(nextAticle)){%>
+                    <div class="pull-right">
+                        <a href="./blog_detail.html?aticleId=${nextAticle.aticle_id}">下一篇：${nextAticle.aticle_name}&nbsp;<span class="fa  fa-angle-double-right"></span></a>
+                    </div>
+                    <%}%>
+                </div>
+                <%}%>
+            </div>
+        </div>
+        <!--相似推荐-->
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h4>相关阅读推荐</h4>
+                </div>
+                <div class="panel-body">
+                    <ol class="blog-recommond-list">
+                        <%if(!isEmpty(recommondAticles)){%>
+                        <%for(aticle in recommondAticles){%>
+                        <li>
+                            <%if(strutil.length(aticle.aticle_name)>15){%>
+                            ${aticleLP.index}、<a href="./blog_detail.html?aticleId=${aticle.aticle_id}" target="_self">${strutil.subStringTo(aticle.aticle_name,0,15)}...</a>
+                            <%}else{%>
+                            ${aticleLP.index}、<a href="./blog_detail.html?aticleId=${aticle.aticle_id}" target="_self">${aticle.aticle_name}</a>
+                            <%}%>
 
+                        </li>
+                        <%}%>
+                        <%}else{%>
+                        <p class="bg-info">暂无相关推荐</p>
+                        <%}%>
+                    </ol>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h4>文章评论</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="..." alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Media heading</h4>
+                                ...
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="${ctxPath}/js/pages/blog_detail.js"></script>
 </body>
 </html>

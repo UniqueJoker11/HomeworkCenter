@@ -44,7 +44,6 @@ public class UserManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_MANAGE_INFO, method = RequestMethod.POST)
     public Object getManageUserInfo(@RequestParam(value = "userId")String userId) {
-
         return userService.fetchUserRoleDetail(userId);
     }
 

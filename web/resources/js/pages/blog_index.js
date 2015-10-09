@@ -62,15 +62,14 @@ $(function () {
             "</div>" +
             "<div class=\"panel-body\"><blockquote class=\"blog-info-digest\">" +
             "<p>" + blog.aticle_digest + "</p>" +
-            "</blockquote>" + blog.aticle_content +
+            "</blockquote>" + blog.aticle_content+
             "</div>" +
             "<div class=\"panel-footer\">标签:&nbsp;";
             var keywords = blog.key_words.split("，");
             for (var tip in keywords) {
                 blogTemplateContent += "&nbsp;<span class=\"label label-default\">" + keywords[tip] + "</span>&nbsp;"
             }
-
-            blogTemplateContent += "<a class=\"pull-right\" href='./findBlogDetail.html?aticleId='" + blog.aticle_id + " >阅读全文</a></div></div>";
+            blogTemplateContent += "<a class=\"pull-right\" target=\"_blank\" href='./blog_detail.html?aticleId=" + blog.aticle_id + "'>阅读全文</a></div></div>";
         });
         $("#blogInfoList").html(blogTemplateContent);
 

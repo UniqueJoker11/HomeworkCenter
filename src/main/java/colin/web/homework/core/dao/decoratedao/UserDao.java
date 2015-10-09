@@ -79,7 +79,9 @@ public class UserDao extends DecorateCommnDao {
             userRole.setRole_name(role_entity.getRole_name());
             Map<String,Object> userRoleDetail=this.fetchUserRoleAuthority(role_entity.getRole_id());
             userRole.setAuthorityList((List<HomeworkUserAuthority>) userRoleDetail.get("authorityList"));
-            userRole.setMenuList((List<HomeworkMenuVo>) userRoleDetail.get("menuList"));
+            List<HomeworkMenuVo> menuVoList=new ArrayList<>();
+            menuVoList.addAll((Set<HomeworkMenuVo>)userRoleDetail.get("menuList"));
+            userRole.setMenuList(menuVoList);
             if(allRoleIdList.contains(role_entity.getRole_id())){
                 userRole.setOwned(true);
             }else{
@@ -202,7 +204,7 @@ public class UserDao extends DecorateCommnDao {
         //查询权限的详细信息
         List<HomeworkUserAuthority> userAuthorityList = this.fetchUserAuthorityDetail(authorityAllSet);
         //查询当前权限对应的菜单
-        List<HomeworkMenuVo> menuVoList =this.fetchUserMenuDetail(roleId);
+        Set<HomeworkMenuVo> menuVoList =this.fetchUserMenuDetail(roleId);
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("authorityList",userAuthorityList);
         resultMap.put("menuList",menuVoList);
@@ -283,7 +285,7 @@ public class UserDao extends DecorateCommnDao {
      * @param roleId
      * @return
      */
-    private List<HomeworkMenuVo> fetchUserMenuDetail(String roleId) {
+    private Set<HomeworkMenuVo> fetchUserMenuDetail(String roleId) {
         String searchUserMenuIds = "select menu_id from homework_role_menu where role_id=:role_id";
         Map<String, Object> menuParams = new HashMap<>();
         final Set<String> menuIdSet = new HashSet<>();
@@ -308,17 +310,20 @@ public class UserDao extends DecorateCommnDao {
         }
         String searchUserMenuDetail = "select menu_name from homework_menu where menu_id=:menu_id";
         Map<String, Object> menuDetailParams = new HashMap<>();
-        final List<HomeworkMenuVo> menuVoList = new ArrayList<>();
+        final Set<HomeworkMenuVo> menuVoList = new HashSet<>();
         for (String menuId : menuIds) {
-            menuDetailParams.put("menu_id", menuId);
-            super.getJdbcTemplate().query(searchUserMenuDetail, menuDetailParams, new RowCallbackHandler() {
-                @Override
-                public void processRow(ResultSet resultSet) throws SQLException {
-                    HomeworkMenuVo menuVo = new HomeworkMenuVo();
-                    menuVo.setMenu_name(resultSet.getString(1));
-                    menuVoList.add(menuVo);
-                }
-            });
+            for(String menuArray:menuId.split(",")){
+                System.out.println(menuArray);
+                menuDetailParams.put("menu_id", menuArray);
+                super.getJdbcTemplate().query(searchUserMenuDetail, menuDetailParams, new RowCallbackHandler() {
+                    @Override
+                    public void processRow(ResultSet resultSet) throws SQLException {
+                        HomeworkMenuVo menuVo = new HomeworkMenuVo();
+                        menuVo.setMenu_name(resultSet.getString(1));
+                        menuVoList.add(menuVo);
+                    }
+                });
+            }
         }
         return menuVoList;
     }
