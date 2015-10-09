@@ -5,7 +5,7 @@ import colin.web.homework.annotation.Id;
 import colin.web.homework.annotation.Table;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.dao.idao.ICommonDao;
-import colin.web.homework.tools.HomeworkLogOperate;
+import colin.web.homework.tools.LogOperateUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -341,7 +341,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
                             params.put(columnName, field.get(t));
                         }
                     } catch (IllegalAccessException e) {
-                        HomeworkLogOperate.getCurrentLogger(CommonDao.class).error("拼接删除语句时出错！");
+                        LogOperateUtils.getCurrentLogger(CommonDao.class).error("拼接删除语句时出错！");
                         e.printStackTrace();
                     }
                 }
@@ -360,7 +360,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
                             params.put(columnName, field.get(t));
                         }
                     } catch (IllegalAccessException e) {
-                        HomeworkLogOperate.getCurrentLogger(CommonDao.class).error("拼接查詢语句时出错！");
+                        LogOperateUtils.getCurrentLogger(CommonDao.class).error("拼接查詢语句时出错！");
                         e.printStackTrace();
                     }
                 }

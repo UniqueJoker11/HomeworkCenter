@@ -1,0 +1,82 @@
+body {
+    background: #EBEBEB;
+}
+
+.blog-header {
+    background: #CCCCCC url("../../images/banner.jpg") repeat-x center center;
+    height: 230px;
+    line-height: 230px;
+}
+
+.blog-header a {
+
+}
+
+.blog-header img {
+    width: 90px;
+    height: 90px;
+}
+
+/**导航菜单**/
+.blog-navbar {
+    min-height: 58px;
+    border: 2px solid #CCCCCC;
+    background: #ffffff;
+}
+
+.blog-navbar .menu {
+    width: 60%;
+    margin: 0 auto;
+    min-height: 58px;
+    line-height: 58px;
+}
+
+.blog-navbar .menu li {
+    width: 110px;
+    text-align: center;
+    display: inline-block;
+    list-style: none;
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+.blog-navbar .menu li a {
+    font-size: 1.1em;
+    color: #545454;
+    text-decoration: none;
+}
+
+.blog-navbar .menu li a:hover {
+    color: #292929;
+}
+
+.blog-navbar .menu .active {
+    border-bottom: 2px solid #EEB422;
+}
+
+/*页面主题*/
+.blog-detail {
+    margin-top: 10px;
+}
+
+.blog-recommond-list {
+    padding:0;
+}
+
+.blog-recommond-list li {
+    list-style: decimal;
+    margin: 10px 0 10px 10px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 5px;
+    overflow: hidden;
+    border-left: 3px solid #CDCD00;
+}
+
+.blog-recommond-list a {
+    padding-left: 10px;
+
+}
+
+.blog-recommond-list a:hover {
+    text-decoration: none;
+}

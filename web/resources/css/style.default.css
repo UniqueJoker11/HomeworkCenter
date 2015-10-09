@@ -659,7 +659,7 @@ strong {
     color: #1caf9a;
 }
 
-.nav-bracket .children > li .fa .nav-bracket .children > li .glyphicon {
+.nav-bracket .children > li .fa, .nav-bracket .children > li .glyphicon {
     font-size: 12px;
     opacity: 0.5;
     margin-right: 5px;

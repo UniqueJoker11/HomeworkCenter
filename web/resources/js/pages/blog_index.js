@@ -69,8 +69,7 @@ $(function () {
             for (var tip in keywords) {
                 blogTemplateContent += "&nbsp;<span class=\"label label-default\">" + keywords[tip] + "</span>&nbsp;"
             }
-
-            blogTemplateContent += "<a class=\"pull-right\" href='./findBlogDetail.html?aticleId='" + blog.aticle_id + " >阅读全文</a></div></div>";
+            blogTemplateContent += "<a class=\"pull-right\" target=\"_blank\" href='./blog_detail.html?aticleId=" + blog.aticle_id + "'>阅读全文</a></div></div>";
         });
         $("#blogInfoList").html(blogTemplateContent);
 

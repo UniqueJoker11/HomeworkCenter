@@ -25,14 +25,11 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
      * ResultSet. This method should not call {@code next()} on the ResultSet;
      * it is only supposed to map values of the current row.
      *
-     * @param rs
-     *            the ResultSet to map (pre-initialized for the current row)
-     * @param rowNum
-     *            the number of the current row
+     * @param rs     the ResultSet to map (pre-initialized for the current row)
+     * @param rowNum the number of the current row
      * @return the result object for the current row
-     * @throws java.sql.SQLException
-     *             if a SQLException is encountered getting column values (that
-     *             is, there's no need to catch SQLException)
+     * @throws java.sql.SQLException if a SQLException is encountered getting column values (that
+     *                               is, there's no need to catch SQLException)
      */
     @Override
     public T mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -51,7 +48,7 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
         for (Field field : fields) {
             field.setAccessible(true);// 对于似有属性予以访问
             //过滤掉static final等字段
-            if(!Modifier.isFinal(field.getModifiers())&&!Modifier.isStatic(field.getModifiers())){
+            if (!Modifier.isFinal(field.getModifiers()) && !Modifier.isStatic(field.getModifiers())) {
                 String columnName = "";
                 if (field.getAnnotation(Column.class) != null) {
                     columnName = field.getAnnotation(Column.class).name();
@@ -60,18 +57,20 @@ public class DefaultRowmapper<T> implements RowMapper<T> {
                 }
                 // 获取列的名称
                 try {
-                    if(field.getType().toString().equals("class java.math.BigInteger")){
-                        if(rs.getObject(columnName)!=null){
+                    if (field.getType().toString().equals("class java.math.BigInteger")) {
+                        if (rs.getObject(columnName) != null) {
                             field.set(t, BigInteger.valueOf(Double.valueOf(rs.getObject(columnName).toString()).longValue()));
                         }
-                    }else{
-                        Object columnObj=null;
-                        try{
-                            columnObj=rs.getObject(columnName);
-                        }catch(SQLException e){
-                            columnObj=null;
+                    } else if (field.getType().equals(int.class)) {
+                        field.set(t, rs.getInt(columnName));
+                    } else {
+                        Object columnObj = null;
+                        try {
+                            columnObj = rs.getObject(columnName);
+                        } catch (SQLException e) {
+                            columnObj = null;
                         }
-                        if(columnObj!=null){
+                        if (columnObj != null) {
                             field.set(t, rs.getObject(columnName));
                         }
                     }
