@@ -10,7 +10,7 @@
 }
 .colin-return-part a{
     font-size: 1.3em;
-    color: #17a08c;
+    color: #333333;
 }
 .colin-return-part a:hover{
  text-decoration: none;
@@ -18,4 +18,10 @@
 .colin-return-part a span{
     position: relative;
     top: 2px;
+}
+#userInfoModal td,#userInfoModal th{
+    text-align: center;
+}
+#roleConfigBtn{
+    margin-bottom: 10px;
 }

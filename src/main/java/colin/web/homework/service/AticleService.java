@@ -72,7 +72,7 @@ public class AticleService {
      * @return
      */
     public Map<String, Object> findAllAticleInfoByPage(int pageIndex,int pageSize){
-        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class,null,"aticle_createtime",pageIndex*pageSize,pageSize,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()),true);
+        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class,null,"aticle_createtime",pageIndex,pageSize,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()),true);
     }
 
     /**

@@ -257,7 +257,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
      * @param clazz
      * @return
      */
-    private final String getEntityTableNameByClazz(Class clazz) {
+    public final String getEntityTableNameByClazz(Class clazz) {
         Table table = (Table) clazz.getAnnotation(Table.class);
         return table.name();
     }

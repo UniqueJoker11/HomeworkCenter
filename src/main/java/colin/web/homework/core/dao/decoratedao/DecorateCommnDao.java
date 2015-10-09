@@ -1,13 +1,18 @@
 package colin.web.homework.core.dao.decoratedao;
 
+import colin.web.homework.annotation.Table;
 import colin.web.homework.core.dao.CommonDao;
 import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.lang.annotation.Annotation;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,16 +137,25 @@ public class DecorateCommnDao implements ICommonDao {
      * @param <G>
      * @return
      */
-    public <G> Map<String, Object> getOrderObjectsByPage(Class cl, Map<String, Object> map, String orderstr, Integer beginpos, Integer count, RowMapper<G> rowMapper, boolean isAsc) {
+    public <G> Map<String, Object> getOrderObjectsByPage(Class cl, Map<String, Object> map, String orderstr, Integer beginpos,final Integer count, RowMapper<G> rowMapper, boolean isAsc) {
         //查询当前页的数据
         List<G> resultList = this.commonDao.getOrderObjects(cl, map, orderstr, beginpos, count, rowMapper, isAsc);
+
+        final Map<String, Object> resultMap = new HashMap<>();
         //查询总数据
-        List<G> allData = this.commonDao.seletcObjectByMap(cl, map, rowMapper);
-        Map<String, Object> resultMap = new HashMap<>();
-        //设置数据总量
-        resultMap.put("totalCount", allData.size());
-        //设置总页数
-        resultMap.put("totalPage", allData.size() % count > 0 ? allData.size() / count + 1 : allData.size() / count);
+        String tableName=this.commonDao.getEntityTableNameByClazz(cl);
+        String  countSql="select count(*) from "+tableName;
+        this.commonDao.getNamedParameterJdbcTemplate().query(countSql, new RowCallbackHandler() {
+            @Override
+            public void processRow(ResultSet rs) throws SQLException {
+                int totalSize=rs.getInt(1);
+                //设置数据总量
+                resultMap.put("totalCount", totalSize);
+                //设置总页数
+                resultMap.put("totalPage", totalSize % count > 0 ? totalSize / count + 1 : totalSize / count);
+            }
+        });
+
         //设置当前页
         resultMap.put("currentPage", beginpos);
         //设置当前页的数据
