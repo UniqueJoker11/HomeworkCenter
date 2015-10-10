@@ -28,7 +28,16 @@
 #userInfoModal td, #userInfoModal th {
     text-align: center;
 }
-
+#userInfoModal td span{
+    display: inline-block;
+    margin:10px 5px;
+}
 #roleConfigBtn {
     margin-bottom: 10px;
+}
+table{
+    table-layout:fixed;
+}
+table td{
+    word-wrap:break-word;
 }

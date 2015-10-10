@@ -7,11 +7,20 @@ import java.util.List;
  * 用户角色Vo
  */
 public class HomeworkUserRole {
+    private String role_id;
     private String role_name;
     private String role_description;
     private boolean isOwned;
     private List<HomeworkUserAuthority> authorityList;
     private List<HomeworkMenuVo> menuList;
+
+    public String getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
+    }
 
     public List<HomeworkMenuVo> getMenuList() {
         return menuList;

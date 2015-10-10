@@ -57,27 +57,34 @@ function configUserRole(userId){
         $.each(data,function(i,ele){
             roleInfoTemplate+="<tr>";
             if(ele.owned){
-                roleInfoTemplate+="<td class='col-sm-1'><input  type='checkbox' checked=\"checked\"></td>";
+                roleInfoTemplate+="<td class='col-sm-1'><input data-roleId=\""+ele.role_id+"\"  type='checkbox' checked=\"checked\"></td>";
             }else{
-                roleInfoTemplate+="<td class='col-sm-1'><input type='checkbox'></td>";
+                roleInfoTemplate+="<td class='col-sm-1'><input  data-roleId=\""+ele.role_id+"\" type='checkbox'></td>";
             }
             roleInfoTemplate+="<td class='col-sm-3'>"+ele.role_name+"</td>";
-            roleInfoTemplate+="<td class='col-sm-4'><p>";
+            roleInfoTemplate+="<td class='col-sm-4'>";
             //加载权限
             $.each(ele.authorityList,function(j,authObj){
                 roleInfoTemplate+="<span class=\"label label-info\">"+authObj.authority_name+"</span>&nbsp;"
             });
-            roleInfoTemplate+="</p></td><td class='col-sm-4'><p>";
+            roleInfoTemplate+="</td><td class='col-sm-4'><div class='col-sm-12'>";
             //加载菜单
             $.each(ele.menuList,function(i,menuObj){
                 roleInfoTemplate+="<span class=\"label label-success\">"+menuObj.menu_name+"</span>&nbsp;"
             })
-            roleInfoTemplate+="</p></td></tr>";
+            roleInfoTemplate+="</div></td></tr>";
         });
         $userRoleInfo.children("tbody").html(roleInfoTemplate);
-        var saveBtnTemplate="<div class='text-center'><button type=\"button\" disabled=\"disabled\" id=\"roleConfigBtn\" class='btn btn-default btn-lg'>保存修改</button></div>";
+        var saveBtnTemplate="<div class='text-center'><button type=\"button\" id='roleConfigBtn' onclick=\"saveUserRoleConfig('"+userId+"')\" class='btn btn-default btn-lg'>保存修改</button></div>";
         $userRoleInfo.siblings(".text-center").remove();
         $userRoleInfo.after(saveBtnTemplate);
+    });
+}
+//保存用户的角色配置信息
+function saveUserRoleConfig(userId){
+    //遍历当前被选中的角色，然后更新用户的角色选择
+    $.each($("#userRoleInfo").find(":checked"),function(i,e){
+        console.log($(e).attr("data-roleId"));
     });
 }
 //增加用户信息
