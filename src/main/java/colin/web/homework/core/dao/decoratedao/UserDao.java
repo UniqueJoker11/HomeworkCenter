@@ -8,6 +8,7 @@ import colin.web.homework.core.vo.HomeworkMenuVo;
 import colin.web.homework.core.vo.HomeworkUserAuthority;
 import colin.web.homework.core.vo.HomeworkUserInfo;
 import colin.web.homework.core.vo.HomeworkUserRole;
+import colin.web.homework.tools.StringToolsUtils;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
@@ -59,7 +60,20 @@ public class UserDao extends DecorateCommnDao {
         //返回所有的管理用户的信息
         return this.fetchManageUserInfoList(userIdList);
     }
-
+    public boolean updateUserRoleConfig(String userId, String[] rolesIds){
+        //先删除之前的所有权限，然后重新生成新的权限
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("userId",userId);
+        String delUserRole="delete from homework_user_role where user_id=:userId";
+        this.getJdbcTemplate().update(delUserRole,params);
+        String insertUserRole="insert into homework_user_role(user_role_id,user_id,role_id) values(:userRoleId,:userId,:roleId)";
+        for(String roleId : rolesIds){
+            params.put("userRoleId", StringToolsUtils.getCommonUUID());
+            params.put("roleId",roleId);
+            this.getJdbcTemplate().update(insertUserRole,params);
+        }
+        return true;
+    }
     /**
      * 获取用户的角色和权限信息
      *

@@ -59,6 +59,15 @@ public class UserService {
         return userDao.fetchUserRoleList(initParams(user_id));
     }
 
+    /**
+     * 更新用户的角色配置
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    public boolean updateUserRoleConfig(String userId,String[] roleIds){
+       return this.userDao.updateUserRoleConfig(userId, roleIds);
+    }
     private Map<String, Object> initParams(String user_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("user_id", user_id);
