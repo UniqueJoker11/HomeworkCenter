@@ -24,6 +24,7 @@ public class UserManageController extends BaseController {
 
     @Autowired
     private UserService userService;
+
     /**
      * 显示用户管理页面
      *
@@ -31,20 +32,44 @@ public class UserManageController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_MANAGE_PAGE, method = RequestMethod.GET)
     public String showUserManagePage() {
-        List<HomeworkUserInfo> userInfoList=userService.fetchUserInfoListByUserRole(super.fetchUserInfo().getUser_id());
-        super.getRequestObj().setAttribute("userList",userInfoList);
+        List<HomeworkUserInfo> userInfoList = userService.fetchUserInfoListByUserRole(super.fetchUserInfo().getUser_id());
+        super.getRequestObj().setAttribute("userList", userInfoList);
         return HomeworkConstants.PAGE_USER_MANAGE_VIEW;
     }
 
     /**
      * 获取要用户当前的权限ID
+     *
      * @param userId
      * @return
      */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_MANAGE_INFO, method = RequestMethod.POST)
-    public Object getManageUserInfo(@RequestParam(value = "userId")String userId) {
+    public Object getManageUserInfo(@RequestParam(value = "userId") String userId) {
         return userService.fetchUserRoleDetail(userId);
     }
 
+    /**
+     * 更改用户的权限
+     *
+     * @param roleIds
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_ROLE_CONFIG_ACTION, method = RequestMethod.POST)
+    public Object updateUserRoleConfig(@RequestParam String userId, @RequestParam String roleIds) {
+        return this.userService.updateUserRoleConfig(userId, roleIds.split(","));
+    }
+
+    /**
+     * 删除用户的信息
+     *
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_DEL_ACTION, method = RequestMethod.POST)
+    public Object delUserInfo(@RequestParam String userId) {
+        return null;
+    }
 }

@@ -83,8 +83,16 @@ function configUserRole(userId){
 //保存用户的角色配置信息
 function saveUserRoleConfig(userId){
     //遍历当前被选中的角色，然后更新用户的角色选择
+    var roleIds="";
     $.each($("#userRoleInfo").find(":checked"),function(i,e){
-        console.log($(e).attr("data-roleId"));
+        roleIds+=$(e).attr("data-roleId")+",";
+    });
+    $.post("./update_system_user_role.action",{"userId":userId,"roleIds":roleIds},function(data){
+        if(data){
+            alert("更新用户角色成功");
+        }else{
+            alert("更新用户角色失败");
+        }
     });
 }
 //增加用户信息
