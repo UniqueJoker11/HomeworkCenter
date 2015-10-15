@@ -101,10 +101,24 @@ function addUserInfo(){
 }
 //修改用户信息
 function editUserInfo(userId){
-
+    $("#userinfoEditDialog").attr("data-Id",userId);
+    $("#userinfoEditDialog").modal("show");
 }
 //删除用户信息
 function deleteUserInfo(userId){
+   if(window.confirm("你确定要删除该用户信息吗？")){
+       var params=new Object();
+       params.userId=userId;
+       $.post("./del_system_user.action",params,function(data){
+           if(data){
+               alert("删除成功！");
+           }else{
+               alert("删除失败！");
+           }
+       });
+   }
+}
+function submitEditUserinfo(){
 
 }
 //返回上一级菜单
