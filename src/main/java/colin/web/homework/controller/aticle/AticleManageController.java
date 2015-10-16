@@ -3,14 +3,17 @@ package colin.web.homework.controller.aticle;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
 import colin.web.homework.service.AticleService;
+import colin.web.homework.validationbean.AticleValidationBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,9 +94,19 @@ public class AticleManageController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_EDIT_ACTION, method = RequestMethod.POST)
-    public boolean editAticleObj() {
-        //TODO
-        return true;
+    public Object editAticleObj(@Valid AticleValidationBean aticleValidationBean,BindingResult result) {
+        Map<String,Object> resultMap=new HashMap<>();
+        if(result.hasErrors()){
+            resultMap.put("isSucces",false);
+            Map<String, Object> errorMap = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            resultMap.put("errors", errorMap);
+        }else{
+            resultMap.put("isSuccess",true);
+        }
+        return resultMap;
     }
 
     /**

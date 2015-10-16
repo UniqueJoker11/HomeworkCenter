@@ -44,7 +44,7 @@
                              <td>${aticleVo.aticle_createtime}</td>
                              <td>${aticleVo.aticle_category}</td>
                              <td>${aticleVo.aticle_read_num}</td>
-                             <td><button class="btn btn-success">查看</button>&nbsp;<button class="btn btn-info">编辑</button>&nbsp;<button class="btn btn-danger">删除</button></td>
+                             <td><button class="btn btn-success" onclick="checkAticleInfo('${aticleVo.aticle_id}')">查看</button>&nbsp;<button class="btn btn-info" onclick="editAticleInfo('${aticleVo.aticle_id}')">编辑</button>&nbsp;<button class="btn btn-danger" onclick="delAticleInfo('${aticleVo.aticle_id}')">删除</button></td>
                          </tr>
                          <%}%>
                         </tbody>

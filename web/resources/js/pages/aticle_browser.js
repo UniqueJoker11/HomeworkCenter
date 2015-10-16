@@ -1,9 +1,10 @@
 /**
  * Created by ASUS on 2015/9/30.
  */
+var aticleDatagrid;
 $(function(){
     //初始化文章列表
-    $("#aticleListTable").dataTable({
+    aticleDatagrid=$("#aticleListTable").dataTable({
         "bPaginate": true, //翻页功能
         "bLengthChange": true, //改变每页显示数据数量
         "bFilter": true, //过滤功能
@@ -27,12 +28,27 @@ $(function(){
         });
 
 });
+//查看文章
+function checkAticleInfo(aticleId){
+
+}
 //开始编辑文章
-function editAticleInfo(aticleTag){
+function editAticleInfo(aticleId){
 
 
 }
 //删除文章
-function delAticleInfo(aticleTag){
-
+function delAticleInfo(aticleId){
+    if(window.confirm("确定要删除该篇文章吗？")){
+        var params=new Object();
+        params.aticleId=aticleId;
+        $.post("./aticle_delete.action",params,function(data){
+            if(data){
+                aticleDatagrid.
+                alert("删除文章成功");
+            }else{
+                alert("删除文章失败");
+            }
+        });
+    }
 }
