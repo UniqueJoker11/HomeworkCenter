@@ -142,7 +142,6 @@ $(function () {
         //上传资源完毕
         templateZipUploader.on("uploadSuccess", function (file, response) {
             if (response.isSuccess) {
-                $("#uploadZipResourceReady").hide();
                 var $uploadZipResourceCompleted = $("#uploadZipResourceCompleted");
                 $uploadZipResourceCompleted.find(".col-sm-8").html("文件" + file.name + "上传成功！")
                 $("#uploadZipLocation").val(response.uploadZipLocation);
@@ -152,6 +151,7 @@ $(function () {
                 alert("上传压缩文件失败！");
                 $("#uploadZipResourcePrepare").show();
             }
+            $("#uploadZipResourceReady").hide();
         });
     }
 

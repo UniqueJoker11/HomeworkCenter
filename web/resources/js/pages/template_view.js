@@ -1,33 +1,35 @@
 /**
  * Created by DELL on 2015/7/29.
  */
+var templateDatagrid=null;
+var options={language: {
+    "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索:",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+        "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+    },
+    "oAria": {
+        "sSortAscending": ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+    }
+}};
 $(function () {
-    $("#template_view_table").dataTable({
-        language: {
-            "sProcessing": "处理中...",
-            "sLengthMenu": "显示 _MENU_ 项结果",
-            "sZeroRecords": "没有匹配结果",
-            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索:",
-            "sUrl": "",
-            "sEmptyTable": "表中数据为空",
-            "sLoadingRecords": "载入中...",
-            "sInfoThousands": ",",
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "上页",
-                "sNext": "下页",
-                "sLast": "末页"
-            },
-            "oAria": {
-                "sSortAscending": ": 以升序排列此列",
-                "sSortDescending": ": 以降序排列此列"
-            }
-        },
-        "sPaginationType": "full_numbers"
+    templateDatagrid=$("#template_view_table").dataTable({
+        "sPaginationType": "full_numbers",
+        "language":options.language
     });
     //保存更改的信息
     $("#edit_templateSubmitBtn").on("click", function (e) {
@@ -77,6 +79,12 @@ function delTemplate(templateId) {
         $.post("./delate_template.action", params, function (data) {
             if (data.isSuccess) {
                 alert("删除成功");
+                var templateObj=$("#template_"+templateId).fadeIn();
+                templateDatagrid.dataTable({
+                    "sPaginationType": "full_numbers",
+                    "language":options.language
+                });
+                templateObj.remove();
             } else {
                 alert(data.msg);
             }

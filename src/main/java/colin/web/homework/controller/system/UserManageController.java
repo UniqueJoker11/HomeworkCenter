@@ -70,6 +70,6 @@ public class UserManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_USER_DEL_ACTION, method = RequestMethod.POST)
     public Object delUserInfo(@RequestParam String userId) {
-        return null;
+        return this.userService.deleteUserinfoById(userId);
     }
 }

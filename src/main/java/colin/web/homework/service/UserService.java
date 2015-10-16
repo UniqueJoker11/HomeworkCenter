@@ -68,6 +68,16 @@ public class UserService {
     public boolean updateUserRoleConfig(String userId,String[] roleIds){
        return this.userDao.updateUserRoleConfig(userId, roleIds);
     }
+
+    /**
+     * 根据用户显示
+     * @param userId
+     * @return
+     */
+    public boolean deleteUserinfoById(String userId){
+        return this.userDao.deleteObjectById(Homework_User_Entity.class,userId);
+    }
+
     private Map<String, Object> initParams(String user_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("user_id", user_id);
