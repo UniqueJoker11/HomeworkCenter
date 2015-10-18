@@ -7,7 +7,7 @@ import colin.web.homework.annotation.Table;
  * Created by ASUS on 2015/10/2.
  */
 @Table(name = "homework_aticle_comment")
-public class Homework_Aticle_Comment {
+public class Homework_Aticle_Comment_Entity {
     @Id
     private String aticle_comment_id;
     private String aticle_id;
