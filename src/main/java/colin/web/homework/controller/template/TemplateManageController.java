@@ -241,6 +241,7 @@ public class TemplateManageController extends BaseController {
             if (templateZipFile.getOriginalFilename().endsWith(".rar")) {
                 FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
             } else {
+                System.out.println(HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html");
                 FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
             }
             accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
