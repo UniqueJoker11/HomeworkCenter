@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
+import org.zeroturnaround.zip.ZipUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -175,7 +176,7 @@ public class TemplateManageController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_ADD_FORM, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object uploadTemplateSnapshot(@RequestParam(value = "uploadImg", required = true) String uploadImg,@RequestParam(value = "uploadZipLocation")String uploadZipLocation, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "uploadZip", required = true) String uploadZip) throws IOException {
+    public Object uploadTemplateSnapshot(@RequestParam(value = "uploadImg", required = true) String uploadImg, @RequestParam(value = "uploadZipLocation") String uploadZipLocation, @RequestParam(value = "tamplateName", required = true) String tamplateName, @RequestParam(value = "tamplateTips", required = true) String tamplateTips, @RequestParam(value = "tamplateDescribe", required = true) String tamplateDescribe, @RequestParam(value = "uploadZip", required = true) String uploadZip) throws IOException {
         //存储模板实体对象
         boolean result = templateService.addTemplateService(uploadImg, uploadZipLocation, tamplateName, tamplateTips, tamplateDescribe, uploadZip, this.fetchUserInfo().getUser_name());
         Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -206,7 +207,7 @@ public class TemplateManageController extends BaseController {
 
                 snapshotCopyFile = getUploadSnapshotFile(orginalFilename.substring(orginalFilename.lastIndexOf("."), orginalFilename.length()));
 
-                snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR+ snapshotCopyFile.getName()).append(",");
+                snapshotUrl.append(HomeworkConstants.IMAGE_STORE_DIR + snapshotCopyFile.getName()).append(",");
                 snapshotFile.transferTo(snapshotCopyFile);
             }
             resultMap.put("isSuccess", true);
@@ -232,22 +233,26 @@ public class TemplateManageController extends BaseController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
             String resourcesUrl = "";
-            String resourceOrignalName = new String(templateZipFile.getOriginalFilename().getBytes(),"UTF-8");
+            String resourceOrignalName = new String(templateZipFile.getOriginalFilename().getBytes(), "UTF-8");
             File resourcesCopyFile = getUploadResourceFile(resourceOrignalName.substring(resourceOrignalName.lastIndexOf("."), resourceOrignalName.length()));
             resourcesUrl = HomeworkConstants.RESOURCES_STORE_DIR + resourcesCopyFile.getName();
             templateZipFile.transferTo(resourcesCopyFile);
             //解压缩文件
             String accessUrl = "";
-            if (templateZipFile.getOriginalFilename().endsWith(".rar")) {
-                FileToolsUtils.unRarFile(super.getRequestObj(), resourcesUrl, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
-            } else {
-                System.out.println(HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html");
+            //探查上传的压缩包里是否有index.html文件
+            boolean isExistsIndex=ZipUtil.containsEntry(resourcesCopyFile,"index.html");
+            if(isExistsIndex){
                 FileToolsUtils.unZipFiles(super.getRequestObj(), resourcesCopyFile, HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")));
+                accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
+                resultMap.put("isSuccess", true);
+                resultMap.put("uploadZip", accessUrl);
+                resultMap.put("uploadZipLocation", resourcesUrl);
+            }else{
+                FileToolsUtils.delete(resourcesCopyFile.getAbsolutePath());//删除无效文件
+                resultMap.put("isSuccess", false);
+                resultMap.put("msg","并非有效的模板文件");
             }
-            accessUrl = HomeworkConstants.RESOURCES_COMPRESS_DIR + resourcesCopyFile.getName().substring(0, resourcesCopyFile.getName().lastIndexOf(".")) + "/index.html";
-            resultMap.put("isSuccess", true);
-            resultMap.put("uploadZip",accessUrl);
-            resultMap.put("uploadZipLocation",resourcesUrl);
+
         } catch (IOException e) {
             e.printStackTrace();
             resultMap.put("isSuccess", false);

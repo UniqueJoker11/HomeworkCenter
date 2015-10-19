@@ -70,12 +70,12 @@ public class UserService {
     }
 
     /**
-     * 根据用户显示
+     * 根据用户id删除其信息及其角色
      * @param userId
      * @return
      */
     public boolean deleteUserinfoById(String userId){
-        return this.userDao.deleteObjectById(Homework_User_Entity.class,userId);
+        return this.userDao.delUserInfoById(userId);
     }
 
     private Map<String, Object> initParams(String user_id) {

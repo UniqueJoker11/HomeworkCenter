@@ -16,10 +16,10 @@ public class RepositoryTest extends BaseSpringTest{
     private CommentDao commentDao;
     @Test
     public void testJPARepository(){
-        Iterator<Homework_Aticle_Comment_Entity> comment_entities=commentDao.findAll().iterator();
+       /* Iterator<Homework_Aticle_Comment_Entity> comment_entities=commentDao.findAll().iterator();
         while(comment_entities.hasNext()){
             Homework_Aticle_Comment_Entity entity=comment_entities.next();
             System.out.println(entity.getComment_id());
-        }
+        }*/
     }
 }
