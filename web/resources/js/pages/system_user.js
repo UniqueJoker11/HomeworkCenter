@@ -1,10 +1,10 @@
 /**
  * Created by ASUS on 2015/9/17.
  */
-var userInfoSlider=null;
+var userInfoGrid=null;
+var pageSize = 4;
+var currentPage = 1;
 $(function () {
-    var pageSize = 4;
-    var currentPage = 1;
     var userInfoListObj = $("#userInfoTable").children("tbody");
     var userInfoListObjLength = userInfoListObj.find("tr").length;
     $("#userInfoModal").children("div:gt(0)").hide();
@@ -14,7 +14,6 @@ $(function () {
         userInfoListObj.children("tr").show();
         userInfoListObj.children("tr:lt(" + ((currentPage - 1) * pageSize) + ")").hide();
         userInfoListObj.children("tr:gt(" + (currentPage * pageSize - 1) + ")").hide();
-
     }
     var options = {
         bootstrapMajorVersion: 3,
@@ -42,7 +41,7 @@ $(function () {
         }
     }
     //用户列表分页模块
-    $('#userInfoTablePagenation').bootstrapPaginator(options);
+    userInfoGrid=$('#userInfoTablePagenation').bootstrapPaginator(options);
 });
 
 //配置用户角色
@@ -112,6 +111,13 @@ function deleteUserInfo(userId){
        $.post("./del_system_user.action",params,function(data){
            if(data){
                alert("删除成功！");
+               //移除当前的元素
+               $("#user_"+userId).remove();
+               //刷新当前的列表
+               var userInfoListObj = $("#userInfoTable").children("tbody");
+               userInfoListObj.children("tr").show();
+               userInfoListObj.children("tr:lt(" + ((currentPage - 1) * pageSize) + ")").hide();
+               userInfoListObj.children("tr:gt(" + (currentPage * pageSize - 1) + ")").hide();
            }else{
                alert("删除失败！");
            }

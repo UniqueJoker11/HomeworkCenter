@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by DELL on 2015/8/19.
  */
@@ -22,7 +24,7 @@ public class TemplateDashboardController extends BaseController {
      * @return
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TAMPLATE_DASHBOARD, method = RequestMethod.GET)
-    public String showDashboardPage() {
+    public String showDashboardPage(HttpServletRequest request) {
         return HomeworkConstants.PAGE_TEMPLATE_DASHBOARD;
     }
 

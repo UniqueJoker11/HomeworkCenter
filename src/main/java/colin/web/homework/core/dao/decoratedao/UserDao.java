@@ -24,6 +24,39 @@ public class UserDao extends DecorateCommnDao {
 
 
     /**
+     * 初始化添加用户的角色信息
+     * @param userId
+     * @param roleIds
+     */
+    public void addUserInfo(String userId,String... roleIds){
+        //添加用户的访客角色
+        String addUserRole="insert into homework_user_role('user_role_id','user_id','role_id') values(:userRoleId,userId,roleId)";
+        Map<String,Object> params=new HashMap<>();
+        params.put("userRoleId", StringToolsUtils.getCommonUUID());
+        params.put("userId",userId);
+        for(String roleId:roleIds){
+            params.put("roleId",roleId);
+            this.getJdbcTemplate().update(addUserRole,params);
+        }
+    }
+
+    /**
+     * 删除用户信息及其配置的角色
+     * @param userId
+     * @return
+     */
+    public boolean delUserInfoById(String userId){
+        //删除用户对应的所有角色
+        String delUserRole="delete from homework_user_role where user_id=:userId";
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("userId",userId);
+        if(this.getJdbcTemplate().update(delUserRole,params)>0){
+            return this.deleteObjectById(Homework_User_Entity.class,userId);
+        }else{
+            return false;
+        }
+    }
+    /**
      * 根据用户名和密码验证用户的登录信息是否存在
      *
      * @param params

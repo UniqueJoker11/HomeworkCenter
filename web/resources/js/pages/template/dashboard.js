@@ -73,11 +73,11 @@ $(function () {
            if(data!=null&&data.length>0){
                var templateContent = "";
                for (var i = 0; i < data.length; i++) {
-                   templateContent += "<li><a href=\"../"+data[i].template_resource_url+"\">"+i+"、" + data[i].template_name + "</a></li>";
+                   templateContent += "<li><a href=\"../"+data[i].template_resource_url+"\">"+(i+1)+"、" + data[i].template_name + "</a></li>";
                }
                $("#coco-recently-template-list").html(templateContent);
            }else{
-               $("#coco-recently-template-list").html("<li>目前还没有文章哦</li>")
+               $("#coco-recently-template-list").html("<li>目前还没有作品哦</li>")
            }
         });
     }

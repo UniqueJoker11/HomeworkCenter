@@ -92,6 +92,9 @@ public class HomeworkConstants {
     //下载模板内容
     public static final String CONTROLLER_TEMPLATE_DOWNLOAD="/template_download.action";
 
+    //服务总览
+    public static final String CONTROLLER_SERVICE_OVERVIEW_SHOW="/service_overview.html";
+
 
     //记事本页面
     public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";

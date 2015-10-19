@@ -45,7 +45,7 @@
                                 </thead>
                                 <tbody>
                                 <%for(user in userList){%>
-                                <tr>
+                                <tr id="user_${user.user_id}">
                                     <td>${user.user_name}</td>
                                     <td>${user.user_callname}</td>
                                     <td>${user.user_email}</td>
