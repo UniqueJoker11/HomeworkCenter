@@ -1,11 +1,10 @@
 package colin.web.homework.aspect.controller;
 
-import colin.web.homework.tools.IpConvertUtils;
+import colin.web.homework.tools.DateToolsUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,15 +18,33 @@ import java.util.Map;
 @Service
 @Aspect
 public class SystemAccessCountAspect {
-    private Map<String,Object> accessMap=new HashMap<String,Object>();
-    @Pointcut(value = "within(*colin.web.homework.controller.dashboard.TemplateDashboardController)")
-    public void accessPointcut(){
+    private Map<String,Integer> sysAccessMap =new HashMap<String,Integer>();
+
+    @Pointcut(value = "execution(*userSignin *(..))")
+    public void sysAccessPointcut(){
 
     }
-    @Before(value = "accessPointcut()")
+    @Pointcut(value = "execution(*showTemplateManagePage *(..))")
+    public void templateAccessPointcut(){
+
+    }
+    @Pointcut(value = "execution(*showBlogIndex *(..))")
+    public void aticleAccessPointcut(){
+
+    }
+    /**
+     * 统计修通的的访问
+     * @param joinPoint
+     */
+    @Before(value = "sysAccessPointcut()")
     public void countUserAccess(JoinPoint joinPoint){
         HttpServletRequest request= (HttpServletRequest) joinPoint.getArgs()[0];
-        System.out.println("远程访问地址是");
-        System.out.println(request.getRemoteAddr()+"----"+request.getRemoteUser()+"---"+ IpConvertUtils.stringToBigInt(request.getRemoteAddr()));
+        String currentAccessKey=(request.getRemoteAddr() + DateToolsUtils.getTodayDate());
+        if(sysAccessMap.containsKey(currentAccessKey)){
+           sysAccessMap.put(currentAccessKey, sysAccessMap.get(currentAccessKey)+1);
+        }else{
+            sysAccessMap.put(currentAccessKey, 1);
+        }
     }
+
 }
