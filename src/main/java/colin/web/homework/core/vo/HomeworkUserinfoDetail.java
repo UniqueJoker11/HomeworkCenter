@@ -9,6 +9,7 @@ public class HomeworkUserinfoDetail {
     private String user_callname;
     private String user_email;
     private String user_phone;
+    private String user_head;
     private String user_info_firstname;
     private String user_info_lastname;
     private String user_info_province;
@@ -148,5 +149,13 @@ public class HomeworkUserinfoDetail {
 
     public void setUser_info_college(String user_info_college) {
         this.user_info_college = user_info_college;
+    }
+
+    public String getUser_head() {
+        return user_head;
+    }
+
+    public void setUser_head(String user_head) {
+        this.user_head = user_head;
     }
 }
