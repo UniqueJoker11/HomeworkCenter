@@ -35,14 +35,16 @@
                         <label for="basedata-username" class="col-sm-2 control-label">用户名</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="basedata-username" placeholder="不能为空">
+                            <input type="text" class="form-control" id="basedata-username" placeholder="不能为空"
+                                   value="${userInfo.user_callname}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="basedata-truename" class="col-sm-2 control-label">真实姓名</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="basedata-truename" placeholder="不能为空">
+                            <input type="text" class="form-control" id="basedata-truename" placeholder="不能为空"
+                                   value="${userInfo.user_name}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,8 +52,13 @@
 
                         <div class="col-sm-7">
                             <select id="basedata-gendar" class="form-control">
-                                <option value="男">男</option>
+                                <% if(userInfo.user_info_gendar=="男"){%>
+                                <option value="男" selected="selected">男</option>
                                 <option value="女">女</option>
+                                <%}else{%>
+                                <option value="男">男</option>
+                                <option value="女" selected="selected">女</option>
+                                <%}%>
                             </select>
                         </div>
                     </div>
@@ -59,32 +66,60 @@
                         <label for="basedata-birthday" class="col-sm-2 control-label">生日</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="basedata-birthday" placeholder="不能为空">
+                            <input type="text" class="form-control" id="basedata-birthday" placeholder="不能为空" value="${userInfo.user_info_birthday}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="basedata-address-province" class="col-sm-2 control-label">出生地</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="basedata-address-province" id="basedata-address-province" placeholder="不能为空">
+                            <select class="col-sm-4 form-control-static">
+                                <option value="${userInfo.user_info_province}">${userInfo.user_info_province}</option>
+                            </select>
+                            <select class="col-sm-4 form-control-static">
+                                <option value="${userInfo.user_info_city}">${userInfo.user_info_city}</option>
+                            </select>
+                            <select class="col-sm-4 form-control-static">
+                                <option value="${userInfo.user_info_area}">${userInfo.user_info_area}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="basedata-liveaddress-province" class="col-sm-2 control-label">居住地</label>
 
                         <div class="col-sm-7">
-                           <input type="text" class="form-control" name="basedata-liveaddress-province" id="basedata-liveaddress-province" placeholder="不能为哦那个"/>
+                            <input type="text" class="form-control" name="basedata-liveaddress-province"
+                                   id="basedata-liveaddress-province" placeholder="不能为哦那个" value="${userInfo.user_info_address}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="basedata-blood" class="col-sm-2 control-label">血型</label>
 
                         <div class="col-sm-7">
-                            <select id="basedata-blood" class="form-control">
-                                <option value="A">A型</option>
+                            <select id="basedata-blood" class="form-control" data-value="${userInfo.user_info_blood}">
+                                <%if(userInfo.user_info_blood=="A"){%>
+                                <option value="A" selected="selected">A型</option>
                                 <option value="B">B型</option>
                                 <option value="AB">AB型</option>
                                 <option value="O">O型</option>
+                                <%}else if(userInfo.user_info_blood=="B"){%>
+                                <option value="A">A型</option>
+                                <option value="B" selected="selected">B型</option>
+                                <option value="AB">AB型</option>
+                                <option value="O">O型</option>
+                                <%}else if(userInfo.user_info_blood=="AB"){%>
+                                <option value="A">A型</option>
+                                <option value="B">B型</option>
+                                <option value="AB" selected="selected">AB型</option>
+                                <option value="O">O型</option>
+                                <%}else if(userInfo.user_info_blood=="O"){%>
+                                <option value="A">A型</option>
+                                <option value="B">B型</option>
+                                <option value="AB">AB型</option>
+                                <option value="O" selected="selected">O型</option>
+                                <%}%>
+
+
                             </select>
                         </div>
                     </div>
@@ -99,28 +134,24 @@
             <div role="tabpanel" class="tab-pane" id="contactdata">
                 <form id="contactdata-form" class="form-horizontal" action="./" method="post">
                     <div class="form-group">
-                        <label for="contactdata-phone" class="col-sm-2 control-label">固定电话</label>
+                        <label for="contactdata-phone" class="col-sm-2 control-label">邮箱</label>
 
                         <div class="col-sm-7">
-                            <input type="tel" class="form-control" id="contactdata-phone" placeholder="不能为空">
+                            <input type="tel" class="form-control" id="contactdata-phone" placeholder="不能为空" value="${userInfo.user_email}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="contactdata-mobile" class="col-sm-2 control-label">手机</label>
+
                         <div class="col-sm-7">
-                            <input type="tel" class="form-control" id="contactdata-mobile" placeholder="不能为空">
+                            <input type="tel" class="form-control" id="contactdata-mobile" placeholder="不能为空" value="${userInfo.user_phone}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="contactdata-qq" class="col-sm-2 control-label">QQ</label>
+
                         <div class="col-sm-7">
-                            <input type="tel" class="form-control" id="contactdata-qq" placeholder="不能为空">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contactdata-ali" class="col-sm-2 control-label">阿里旺旺</label>
-                        <div class="col-sm-7">
-                            <input type="tel" class="form-control" id="contactdata-ali" placeholder="">
+                            <input type="tel" class="form-control" id="contactdata-qq" placeholder="不能为空" value="${userInfo.user_info_qq}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -133,6 +164,7 @@
             <div role="tabpanel" class="tab-pane" id="educationdata">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">我的大学</label>
+
                     <div class="col-sm-7">
                         <select name="" id="" class="form-control">
                             <option value="0">清华大学</option>
@@ -143,8 +175,9 @@
             <div role="tabpanel" class="tab-pane" id="persondata">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">我的头像</label>
+
                     <div class="col-sm-7">
-                        <img class="img-thumbnail coco-form-title" src=""/>
+                        <img class="img-thumbnail coco-form-title" src="../upload/images/${userInfo.}"/>
                     </div>
                 </div>
             </div>

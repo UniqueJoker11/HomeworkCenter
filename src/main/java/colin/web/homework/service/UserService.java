@@ -66,14 +66,15 @@ public class UserService {
      * @return
      */
     public HomeworkUserinfoDetail findUserinfoDetail(String user_id){
-        Homework_User_Entity user_entity=userDao.selectObjectById(Homework_User_Entity.class,user_id,new DefaultRowmapper<Homework_User_Entity>(Homework_User_Entity.class.getName()));
+        Homework_User_Entity user_entity=userDao.selectObjectById(Homework_User_Entity.class, user_id, new DefaultRowmapper<Homework_User_Entity>(Homework_User_Entity.class.getName()));
         final HomeworkUserinfoDetail userinfoDetail=new HomeworkUserinfoDetail();
         userinfoDetail.setUser_callname(user_entity.getUser_callname());
         userinfoDetail.setUser_email(user_entity.getUser_email());
         userinfoDetail.setUser_id(user_entity.getUser_id());
         userinfoDetail.setUser_name(user_entity.getUser_name());
         userinfoDetail.setUser_phone(user_entity.getUser_phone());
-        String searchUserDetailSql="select user_info_firstname,user_info_lastname,user_info_province,user_info_city,user_info_area,user_info_birthday,user_info_address,user_info_gendar,user_info_blood,user_info_qq,user_info_college where user_id=:userId";
+        userinfoDetail.setUser_head(user_entity.getUser_head());
+        String searchUserDetailSql="select user_info_firstname,user_info_lastname,user_info_province,user_info_city,user_info_area,user_info_birthday,user_info_address,user_info_gendar,user_info_blood,user_info_qq,user_info_college  from homework_user_info where user_id=:user_id";
         this.userDao.getJdbcTemplate().query(searchUserDetailSql, this.initParams(user_id), new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {

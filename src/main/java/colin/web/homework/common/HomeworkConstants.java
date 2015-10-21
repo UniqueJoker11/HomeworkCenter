@@ -34,11 +34,19 @@ public class HomeworkConstants {
     //用户的信息管理页面
     public static final String PAGE_PERSON_MANAGE_VIEW="person_data";
 
+    //收藏图片页面
+    public static final String PAGE_COLLECT_PICTURE_VIEW="collect_picture";
+    //服务一览页面
+    public static final String PAGE_SERVICE_OVERVIEW_VIEW="service_overview";
 
     //菜单管理首页
     public static final String PAGE_MENU_MANAGE_VIEW="system_menu";
     //用户管理界面
     public static final String PAGE_USER_MANAGE_VIEW="system_user";
+
+    //用户角色管理页面
+    public static final String PAGE_USER_ROLE_MANAGE_VIEW="system_user_role";
+
 
 
     //前台模板首页
@@ -73,7 +81,7 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
     //模板上传模板截图
     public static final String CONTROLLER_TEMPLATE_UPLOAD_SNAPSHOT_PICTURE="uploadSnapshotPic.action";
-    //
+    //上传压缩文件
     public static final String CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE="uploadTemplateZip.action";
     //返回所有的模板管理对象
     public static final String CONTROLLER_TEMPLATE_FETCHALL="/fetchall_template.action";
@@ -91,6 +99,9 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_FETCH_RECENTLY_TEMPLATE="/fetch_recent_template.action";
     //下载模板内容
     public static final String CONTROLLER_TEMPLATE_DOWNLOAD="/template_download.action";
+
+    //收藏图片
+    public static final String CONTROLLER_COLLECT_PICTURE="/collect_picture.html";
 
     //服务总览
     public static final String CONTROLLER_SERVICE_OVERVIEW_SHOW="/service_overview.html";
@@ -154,6 +165,9 @@ public class HomeworkConstants {
     public static final String CONTROLLER_USER_DEL_ACTION="del_system_user.action";
     //更新用户的基本信息
     public static final String CONTROLLER_USER_UPDATE_ACTION="update_system_user_info.action";
+
+    //用户角色管理页面
+    public static final String CONTROLLER_SYSTEM_USER_ROLE_MANAGE_PAGE="/system_user_role.html";
 
     //同意上传图片
     public static final String CONTROLLER_COMMON_UPLOAD_IMAGE="/upload_image.action";
