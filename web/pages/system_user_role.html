@@ -1,10 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<link rel="stylesheet" href="${ctxPath}/css/plugin/ztree/ztree.css"/>
+<link rel="stylesheet" href="${ctxPath}/css/pages/system_user_role.css"/>
+<script type="text/javascript" src="${ctxPath}/js/plugin/ztree/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="${ctxPath}/js/pages/system_user_role.js"></script>
 
-</body>
-</html>
+<div class="pageheader">
+    <h2><i class="fa fa-calendar"></i> 系统管理 <span>角色管理</span></h2>
+
+    <div class="breadcrumb-wrapper">
+        <span class="label">当前位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="index.html">HomeCenter</a></li>
+            <li><a href="calendar.html">系统管理</a></li>
+            <li class="active">角色管理</li>
+        </ol>
+    </div>
+</div>
+<div class="contentpanel">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="colinRoleDatagrid" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="col-sm-2">角色名称</th>
+                    <th class="col-sm-2">角色描述</th>
+                    <th class="col-sm-2">角色菜单</th>
+                    <th class="col-sm-2">角色权限</th>
+                    <th class="col-sm-4">角色操作</th>
+                </tr>
+                </thead>
+                <%for(role in rolesList){%>
+                <tr id="role_${role.role_id}">
+                    <td>${role.role_name}</td>
+                    <td>${role.role_description}</td>
+                    <td>
+                        <button class="btn btn-default" onclick="configMenu('${role.role_id}')">配置菜单</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info" onclick="configAuthority('${role.role_id}')">配置权限</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editRole('${role.role_id}')">修改角色</button>&nbsp;<button class="btn btn-danger" onclick="delRole('${role.role_id}')">删除角色</button>
+                    </td>
+                </tr>
+                <%}%>
+
+            </table>
+        </div>
+    </div>
+</div>
+<!--配置菜单对话框-->
+<div id="colinConfigRoleMenuDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">配置角色菜单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="colin-modal-header">
+                    角色名称：<span></span>
+                </div>
+                <ul id="colinRoleMenuList" class="ztree">
+
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="updateRoleMenuConfig()">保存</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--配置权限对话框-->
+<div id="colinConfigRoleAuthorityDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">配置角色菜单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="colin-modal-header">
+                    角色名称：<span></span>
+                </div>
+                <ul id="colinRoleAuthorityList" class="ztree">
+
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="updateRoleMenuConfig()">保存</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--配置菜单对话框-->
+<div id="colinUpdateRoleDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">配置角色菜单</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="updateRoleMenuConfig()">保存</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

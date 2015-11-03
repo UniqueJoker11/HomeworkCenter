@@ -16,54 +16,7 @@ $(function () {
     var uploads = [[0, 2], [1, 9], [2, 5], [3, 13], [4, 6], [5, 13], [6, 8]];
     var downloads = [[0, 0], [1, 6.5], [2, 4], [3, 10], [4, 2], [5, 10], [6, 4]];
 
-    var plot = jQuery.plot(jQuery("#basicflot"),
-        [{
-            data: uploads,
-            label: "Uploads",
-            color: "#1CAF9A"
-        },
-            {
-                data: downloads,
-                label: "Downloads",
-                color: "#428BCA"
-            }
-        ],
-        {
-            series: {
-                lines: {
-                    show: false
-                },
-                splines: {
-                    show: true,
-                    tension: 0.5,
-                    lineWidth: 1,
-                    fill: 0.45
-                },
-                shadowSize: 0
-            },
-            points: {
-                show: true
-            },
-            legend: {
-                position: 'nw'
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-                borderColor: '#ddd',
-                borderWidth: 1,
-                labelMargin: 10,
-                backgroundColor: '#fff'
-            },
-            yaxis: {
-                min: 0,
-                max: 15,
-                color: '#eee'
-            },
-            xaxis: {
-                color: '#eee'
-            }
-        });
+
 
     var previousPoint = null;
     jQuery("#basicflot").bind("plothover", function (event, pos, item) {
@@ -95,44 +48,6 @@ $(function () {
         }
     });
 
-    // Donut Chart
-    var m1 = new Morris.Donut({
-        element: 'donut-chart2',
-        data: [
-            {label: "Chrome", value: 30},
-            {label: "Firefox", value: 20},
-            {label: "Opera", value: 20},
-            {label: "Safari", value: 20},
-            {label: "Internet Explorer", value: 10}
-        ],
-        colors: ['#D9534F', '#1CAF9A', '#428BCA', '#5BC0DE', '#428BCA']
-    });
-
-
-    var m2 = new Morris.Line({
-        // ID of the element in which to draw the chart.
-        element: 'line-chart',
-        // Chart data records -- each entry in this array corresponds to a point on
-        // the chart.
-        data: [
-            {y: '2006', a: 50, b: 0},
-            {y: '2007', a: 60, b: 25},
-            {y: '2008', a: 45, b: 30},
-            {y: '2009', a: 40, b: 20},
-            {y: '2010', a: 50, b: 35},
-            {y: '2011', a: 60, b: 50},
-            {y: '2012', a: 65, b: 55}
-        ],
-        xkey: 'y',
-        ykeys: ['a', 'b'],
-        labels: ['Series A', 'Series B'],
-        gridTextColor: 'rgba(255,255,255,0.5)',
-        lineColors: ['#fff', '#fdd2a4'],
-        lineWidth: '2px',
-        hideHover: 'always',
-        smooth: false,
-        grid: false
-    });
 
     // Trigger Resize in Morris Chart
     var delay = (function () {
@@ -143,12 +58,6 @@ $(function () {
         };
     })();
 
-    jQuery(window).resize(function () {
-        delay(function () {
-            m1.redraw();
-            m2.redraw();
-        }, 200);
-    }).trigger('resize');
 
     jQuery('#sparkline').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
         type: 'bar',
@@ -162,14 +71,6 @@ $(function () {
         height: '30px',
         barColor: '#999'
     });
-
-    // Chosen Select
-    jQuery("select").chosen({
-        'min-width': '100px',
-        'white-space': 'nowrap',
-        disable_search_threshold: 10
-    });
-
 
     // Do not use the code below. It's for demo purposes only
     var c = jQuery.cookie('change-skin');

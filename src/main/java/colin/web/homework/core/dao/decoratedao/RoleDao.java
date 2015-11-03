@@ -30,4 +30,24 @@ public class RoleDao extends DecorateCommnDao {
         return roleList;
     }
 
+    /**
+     * 根绝角色id删除对应的菜单配置
+     * @param params
+     */
+    public void delSystemRoleMenu(Map<String,Object> params){
+        String delSql="delete from homework_role_menu where role_id=:roleId";
+        this.getJdbcTemplate().update(delSql,params);
+    }
+
+    /**
+     * 根绝角色的id插入菜单
+     * @param roleMenuParams
+     */
+    public void insertSystemRoleMenu(List<Map<String,Object>> roleMenuParams){
+        String insertSql="insert into homework_role_menu('role_menu_id','role_id','menu_id') values(:roleMenuId,:roleId,:menuId)";
+        for(Map<String,Object> params:roleMenuParams){
+            this.getJdbcTemplate().update(insertSql,params);
+        }
+    }
+
 }
