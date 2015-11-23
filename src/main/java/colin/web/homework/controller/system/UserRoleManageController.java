@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -60,13 +61,32 @@ public class UserRoleManageController extends BaseController {
     public Object listSystemRoleMenuList(@RequestParam String roleId) {
         return menuService.fetchMenuTreeinfo(roleId);
     }
+
+    /**
+     * 更新配置角色的对应的菜单
+     * @param roleId
+     * @param menuIds
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_UPDATE_SYSTEM_ROLE_MENU_ACTION,method = RequestMethod.POST)
-    public Object updateSystemRoleMenuConfig(@RequestParam String roleId,@RequestParam List<String> menuIds){
+    public Object updateSystemRoleMenuConfig(@RequestParam String roleId,@RequestParam("menuIds[]") List<String> menuIds){
         //先删除原来的配置
         this.roleService.delSystemRoleMenu(roleId);
         //重新配置菜单
-        this.roleService.insertSystemRoleMenu(roleId,menuIds);
+        this.roleService.insertSystemRoleMenu(roleId, menuIds);
+        return true;
+    }
+
+    /**
+     * 删除用户的角色
+     * @param roleId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_DELETE_SYSTEM_ROLE_MENU_ACTION,method = RequestMethod.POST)
+    public Object delSystemRole(String roleId){
+        this.roleService.delSystemRoleMenu(roleId);
         return true;
     }
 }

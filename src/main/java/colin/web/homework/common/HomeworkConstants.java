@@ -175,7 +175,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_SYSTEM_ROLE_MENU_ACTION="/fetch_system_role_menu.action";
     //更新角色对应的菜单
     public static final String CONTROLLER_UPDATE_SYSTEM_ROLE_MENU_ACTION="/update_system_role_menu.action";
-
+    //删除用户的角色
+    public static final String CONTROLLER_DELETE_SYSTEM_ROLE_MENU_ACTION="/delete_system_role_menu.action";
 
 
 

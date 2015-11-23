@@ -44,7 +44,7 @@ public class RoleDao extends DecorateCommnDao {
      * @param roleMenuParams
      */
     public void insertSystemRoleMenu(List<Map<String,Object>> roleMenuParams){
-        String insertSql="insert into homework_role_menu('role_menu_id','role_id','menu_id') values(:roleMenuId,:roleId,:menuId)";
+        String insertSql="insert into homework_role_menu(role_menu_id,role_id,menu_id) values(:roleMenuId,:roleId,:menuId)";
         for(Map<String,Object> params:roleMenuParams){
             this.getJdbcTemplate().update(insertSql,params);
         }

@@ -39,6 +39,7 @@ function configMenu(roleId) {
 };
 var t = $("#colinRoleMenuList");
 function initMenuTree(data) {
+    $.fn.zTree.destroy("colinRoleMenuList");
     var selectTreeNodes = new Array();
     var setting = {
         treeId: "colinRoleMenuList",
@@ -74,7 +75,7 @@ function initMenuTree(data) {
         }
     };
 
-    t = $.fn.zTree.init(t, setting, data);
+    t = $.fn.zTree.init($("#colinRoleMenuList"), setting, data);
 
 }
 /**
@@ -88,13 +89,16 @@ function updateRoleMenuConfig() {
          */
         var nodes = t.getCheckedNodes(true);
         var params=new Object();
+        params.roleId=$("#colinConfigRoleMenuDialog").attr("data-roleId");
+        params.menuIds=new Array();
         $.each(nodes, function (i, e) {
-           params.menuId.push(e.id);
+           params.menuIds.push(e.id);
         });
-        params.roleId=("#colinConfigRoleMenuDialog").attr("data-roleId");
         $.post("./update_system_role_menu.action",params,function(data){
             if(data){
                 alert("更新成功！");
+                t.refresh();
+                $("#colinConfigRoleMenuDialog").modal("hide");
             }else{
                 alert("更新角色对应的菜单失败！");
             }
