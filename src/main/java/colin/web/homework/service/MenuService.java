@@ -4,6 +4,7 @@ import colin.web.homework.core.dao.decoratedao.MenuDao;
 import colin.web.homework.core.pojo.Homework_Menu_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import colin.web.homework.core.vo.HomeworkMenuVo;
+import colin.web.homework.core.vo.MenuTreeNodeVo;
 import colin.web.homework.tools.DateToolsUtils;
 import colin.web.homework.tools.StringToolsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,54 @@ public class MenuService {
         //开始整理菜单
         List<HomeworkMenuVo> resultList = this.reformatMenuList(menuList);
         return resultList;
-
     }
 
-    public List<HomeworkMenuVo> getUserMenuInfo(List<String> roleIds){
+    /**
+     * 根绝角色id获取菜单信息
+     *
+     * @param roleIds
+     * @return
+     */
+    public List<HomeworkMenuVo> getUserMenuInfo(List<String> roleIds) {
         return this.reformatMenuList(menuDao.getUserMenuInfoByRoleId(roleIds));
     }
+
+    /**
+     * 获取系统所有的节点，用户拥有的菜单会被选中
+     *
+     * @param roleId
+     * @return
+     */
+    public List<MenuTreeNodeVo> fetchMenuTreeinfo(String roleId) {
+        //获取用户所拥有的角色菜单
+        List<Homework_Menu_Entity> userRoleMenuList = this.menuDao.getUserMenuInfoByRoleId(Arrays.asList(new String[]{roleId}));
+
+        //获取系统所有的菜单
+        List<Homework_Menu_Entity> systemMenuList = this.menuDao.getOrderObjects(Homework_Menu_Entity.class, null, "menu_order", null, null, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName()), false);
+
+        //遍历出所有的顶级节点
+        List<MenuTreeNodeVo> syetemMenuList = new ArrayList<>();//存储顶级节点
+        for (Homework_Menu_Entity menu_entity : systemMenuList) {
+            MenuTreeNodeVo treeNodeVo = new MenuTreeNodeVo();
+            treeNodeVo.setName(menu_entity.getMenu_name());
+            treeNodeVo.setId(menu_entity.getMenu_id());
+            treeNodeVo.setpId(menu_entity.getMenu_parent_id());
+            for (Homework_Menu_Entity user_menu_entity : userRoleMenuList) {
+                if (user_menu_entity.getMenu_id().equals(menu_entity.getMenu_id())) {
+                    treeNodeVo.setChecked(true);
+                }
+            }
+            if (menu_entity.getMenu_parent_id().equals("root")) {
+                treeNodeVo.setParent(true);
+                treeNodeVo.setOpen(true);
+            }
+            syetemMenuList.add(treeNodeVo);
+        }
+        return syetemMenuList;
+
+    }
+
+
     /**
      * 获取跟菜单目录
      *
@@ -118,12 +161,14 @@ public class MenuService {
 
     /**
      * 根绝Id删除菜单对象
+     *
      * @param menuId
      * @return
      */
-    public boolean deleteMenuInfo(String menuId){
-       return this.menuDao.deleteObjectById(Homework_Menu_Entity.class,menuId);
+    public boolean deleteMenuInfo(String menuId) {
+        return this.menuDao.deleteObjectById(Homework_Menu_Entity.class, menuId);
     }
+
     /**
      * 重新构造返回结果
      *
@@ -173,12 +218,13 @@ public class MenuService {
 
     /**
      * 转换menuList
+     *
      * @param menu_entityList
      * @return
      */
-    public List<HomeworkMenuVo> transferMenuList(List<Homework_Menu_Entity> menu_entityList){
-        List<HomeworkMenuVo> homeworkMenuVos=new ArrayList<>();
-        for(Homework_Menu_Entity menu_entity:menu_entityList){
+    public List<HomeworkMenuVo> transferMenuList(List<Homework_Menu_Entity> menu_entityList) {
+        List<HomeworkMenuVo> homeworkMenuVos = new ArrayList<>();
+        for (Homework_Menu_Entity menu_entity : menu_entityList) {
             homeworkMenuVos.add(transferMenu(menu_entity));
         }
         return homeworkMenuVos;

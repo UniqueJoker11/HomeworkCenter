@@ -46,7 +46,8 @@ public class HomeworkConstants {
 
     //用户角色管理页面
     public static final String PAGE_USER_ROLE_MANAGE_VIEW="system_user_role";
-
+    //用户权限管理页面
+    public static final String PAGE_USER_AUTHORITY_MANAGE_VIEW="system_user_authority";
 
 
     //前台模板首页
@@ -168,8 +169,21 @@ public class HomeworkConstants {
 
     //用户角色管理页面
     public static final String CONTROLLER_SYSTEM_USER_ROLE_MANAGE_PAGE="/system_user_role.html";
+    //获取系统所有角色
+    public static final String CONTROLLER_SYSTEM_USER_ROLE_LIST_ACTION="/list_system_roles.action";
+    //获取对应角色的菜单
+    public static final String CONTROLLER_SYSTEM_ROLE_MENU_ACTION="/fetch_system_role_menu.action";
+    //更新角色对应的菜单
+    public static final String CONTROLLER_UPDATE_SYSTEM_ROLE_MENU_ACTION="/update_system_role_menu.action";
+    //删除用户的角色
+    public static final String CONTROLLER_DELETE_SYSTEM_ROLE_MENU_ACTION="/delete_system_role_menu.action";
 
-    //同意上传图片
+
+
+
+    //用户权限管理页面
+    public static final String CONTROLLER_SYSTEM_USER_AUTHORITY_PAGE="/system_authority.html";
+    //上传图片
     public static final String CONTROLLER_COMMON_UPLOAD_IMAGE="/upload_image.action";
     /**
      * 模板的前台页面访问
