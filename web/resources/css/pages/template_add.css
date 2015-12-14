@@ -50,7 +50,7 @@
 #templateSnapshotUploadForm{
     height: 40px;
     position: relative;
-    top: -10px;
+    top: -5px;
 }
 #templateSnapshotUploadForm .col-sm-9{
     padding: 15px 0 0 5px;
@@ -78,10 +78,11 @@
     font-size: 14px;
     margin: 0 10px 0 27px ;
 }
-#startUploadSnapshotBtn{
+#startUploadSnapshotBtn,#resetUploadSnapshotBtn{
     float: left;
     height: 39px;
-    font-size: 14px;
+    margin-right:5px;
+    font-size: 1.4rem;
 }
 #templateResourceUploadCompleted{
     height:25px;

@@ -33,9 +33,9 @@ public class HttpToolsUtils {
                 System.out.println("Header:" + key + ":" + httpHeaders.get(key));
             }
             //获取返回内容
-            Map<String, Object> params = new HashMap<>();
+            Map<String, Object> params = new HashMap<String, Object>();
             params.put("username", "colin");
-            Map<String, Object> headers = new HashMap<>();
+            Map<String, Object> headers = new HashMap<String, Object>();
             headers.put("Content-Type", "application/json;charset=UTF-8");
             headers.put("Date", "Wed, 26 Aug 2015 02:25:28 GMT");
             headers.put("Server", "Apache-Coyote/1.1");

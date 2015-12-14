@@ -20,8 +20,8 @@ public class MenuDao extends DecorateCommnDao {
      */
     public List<Homework_Menu_Entity> getUserMenuInfoByRoleId(List<String> roleIds) {
         String searchMenuSql = "select menu_id from homework_role_menu where role_id=:role_id";
-        Map<String, Object> searchParams = new HashMap<>();
-        Set<String> menuIds = new HashSet<>();
+        Map<String, Object> searchParams = new HashMap<String,Object>();
+        Set<String> menuIds = new HashSet<String>();
         for (String roleId : roleIds) {
             searchParams.put("role_id", roleId);
             //开始查询
@@ -30,7 +30,7 @@ public class MenuDao extends DecorateCommnDao {
             menuIds.addAll(menuList);
         }
         //根绝menuId返回所有的Menu对象
-        List<Homework_Menu_Entity> menu_entityList = new ArrayList<>();
+        List<Homework_Menu_Entity> menu_entityList = new ArrayList<Homework_Menu_Entity>();
         for (String menuId : menuIds) {
             menu_entityList.add(this.selectObjectById(Homework_Menu_Entity.class, menuId, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName())));
         }

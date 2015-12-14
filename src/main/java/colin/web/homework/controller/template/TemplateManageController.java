@@ -124,7 +124,7 @@ public class TemplateManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_UPDATE, method = RequestMethod.POST)
     public Object editTemplateObj(@RequestParam(value = "template_id") String template_id) {
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("template_id", template_id);
         HttpServletRequest request = super.getRequestObj();
         if (request.getParameter("template_tip") != null) {
@@ -137,7 +137,7 @@ public class TemplateManageController extends BaseController {
             params.put("template_describe", request.getParameter("template_describe").toString());
         }
         boolean result = this.templateService.updateTemplateService(params);
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("isSuccess", result);
         if (!result) {
             resultMap.put("msg", "模板信息更新失败！模板信息不正确");
@@ -155,7 +155,7 @@ public class TemplateManageController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_DELETE, method = RequestMethod.POST)
     public Object deleteTemplateObj(@RequestParam(value = "template_id") String template_id) {
         boolean result = this.templateService.deleteTemplateService(template_id);
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<String,Object>();
         resultMap.put("isSuccess", result);
         if (!result) {
             resultMap.put("msg", "删除模板失败，模板信息有误");

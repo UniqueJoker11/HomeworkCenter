@@ -3,13 +3,13 @@
 <head lang="en">
     <meta charset="UTF-8">
     <%include("./common/resources.html"){}%>
+    <script type="text/javascript" src="${ctxPath}/js/masonry.pkgd.js"></script>
     <link rel="stylesheet" href="${ctxPath}/css/pages/template/dashboard.css">
     <script type="text/javascript" src="${ctxPath}/js/pages/template/dashboard.js"></script>
     <title>CoCo小屋</title>
 </head>
 <body>
 <!--头部导航条-->
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="row">
@@ -45,12 +45,11 @@
     <div class="row">
         <div class="col-md-10  col-md-offset-1">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="panel panel-default">
-                        <h4 class="panel-heading"><span class="glyphicon glyphicon-leaf"></span>&nbsp;模板作品</h4>
-
-                        <div class="panel-body">
-                            <div id="coco-production-list" data-page="1">
+                        <h4 class="panel-heading">我的模板作品</h4>
+                        <div id="coco-template-panel-list" class="panel-body">
+                            <div class="row" id="coco-production-list" data-page="1">
 
                             </div>
                             <div class="row">
@@ -61,31 +60,8 @@
                                     </nav>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <h4 class="panel-heading"><span class="glyphicon glyphicon-tags"></span>&nbsp;模板标签</h4>
-                                <div id="coco-tips-panel" class="panel-body">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <h4 class="panel-heading"><i class="glyphicon glyphicon-th"></i>&nbsp;最新发布</h4>
-
-                                <div class="panel-body">
-                                    <ul id="coco-recently-template-list">
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

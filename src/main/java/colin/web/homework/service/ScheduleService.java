@@ -68,7 +68,7 @@ public class ScheduleService {
      * @return
      */
     private List<HomeworkScheduleVo> transferScheduleEntity(List<Homework_Schedule_Entity> scheduleEntityList) {
-        List<HomeworkScheduleVo> scheduleVoList = new ArrayList<>();
+        List<HomeworkScheduleVo> scheduleVoList = new ArrayList<HomeworkScheduleVo>();
         for (Homework_Schedule_Entity schedule_entity : scheduleEntityList) {
             HomeworkScheduleVo scheduleVo = new HomeworkScheduleVo();
             scheduleVo.setId(schedule_entity.getSchedule_id());

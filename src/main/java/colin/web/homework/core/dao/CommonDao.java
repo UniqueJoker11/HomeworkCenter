@@ -125,7 +125,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
         searchSql.append(this.getEntityTableNameByClazz(c)).append(" where ");
         String idName = this.getPrimaryKeyNameByClazz(c);
         searchSql.append(idName).append("=:").append(idName);
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put(idName, id);
         try {
             return this.getNamedParameterJdbcTemplate().queryForObject(searchSql.toString(), params, rowMapper);
@@ -148,7 +148,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
         String keyName = this.getPrimaryKeyNameByClazz(c);
         if (!keyName.equals("")) {
             deleteSql.append(this.getEntityTableNameByClazz(c)).append(" where ").append(keyName).append("=:").append(keyName);
-            Map<String, Object> params = new HashMap<>();
+            Map<String, Object> params = new HashMap<String, Object>();
             params.put(keyName, idVal);
             int result = this.getNamedParameterJdbcTemplate().update(deleteSql.toString(), params);
             if (result == 1) {
@@ -301,7 +301,7 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
         //获取实体类的Fields
         Field[] fields = t.getClass().getDeclaredFields();
         //存放结果对象
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         //参数
         Map<String, Object> params = new HashMap<String, Object>();
         //根据条件返回相应的Sql和变量

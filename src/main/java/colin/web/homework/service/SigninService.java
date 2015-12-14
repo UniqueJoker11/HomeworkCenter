@@ -32,7 +32,7 @@ public class SigninService {
     public Map<String, Object> valdiateUserSignin(Map<String, Object> params) {
         //組合用戶的查詢對象
         List<Homework_User_Entity> resultList = signinDao.seletcObjectByMap(Homework_User_Entity.class, params, homework_User_Rowmapper);
-        Map<String, Object> userInfoMap = new HashMap<>();
+        Map<String, Object> userInfoMap = new HashMap<String,Object>();
         if (resultList != null && !resultList.isEmpty()) {
             userInfoMap.put("isExists", true);
             userInfoMap.put("userEntity", resultList.get(0));

@@ -43,7 +43,7 @@ public class UserService {
      * @return
      */
     public Map<String, Object> validateUserInfoByNamePwd(String username, String password) {
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("user_name", username);
         params.put("user_password", password);
         return userDao.validateUserInfoByNamePwd(params);
@@ -120,7 +120,7 @@ public class UserService {
     }
 
     private Map<String, Object> initParams(String user_id) {
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String,Object>();
         params.put("user_id", user_id);
         return params;
     }

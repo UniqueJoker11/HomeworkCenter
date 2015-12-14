@@ -61,7 +61,7 @@ public class MenuService {
         List<Homework_Menu_Entity> systemMenuList = this.menuDao.getOrderObjects(Homework_Menu_Entity.class, null, "menu_order", null, null, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName()), false);
 
         //遍历出所有的顶级节点
-        List<MenuTreeNodeVo> syetemMenuList = new ArrayList<>();//存储顶级节点
+        List<MenuTreeNodeVo> syetemMenuList = new ArrayList<MenuTreeNodeVo>();//存储顶级节点
         for (Homework_Menu_Entity menu_entity : systemMenuList) {
             MenuTreeNodeVo treeNodeVo = new MenuTreeNodeVo();
             treeNodeVo.setName(menu_entity.getMenu_name());
@@ -176,7 +176,7 @@ public class MenuService {
      * @return
      */
     private List<HomeworkMenuVo> reformatMenuList(List<Homework_Menu_Entity> menuList) {
-        List<HomeworkMenuVo> rootList = new ArrayList<>(), subList = new ArrayList<>();
+        List<HomeworkMenuVo> rootList = new ArrayList<HomeworkMenuVo>(), subList = new ArrayList<HomeworkMenuVo>();
         for (Homework_Menu_Entity menu_entity : menuList) {
             if (menu_entity.getMenu_parent_id().equals("root")) {
                 rootList.add(this.transferMenu(menu_entity));
@@ -189,7 +189,7 @@ public class MenuService {
 
     private List<HomeworkMenuVo> rebulidMenuList(List<HomeworkMenuVo> rootList, List<HomeworkMenuVo> subList) {
         for (HomeworkMenuVo homeworkMenuVo : rootList) {
-            List<HomeworkMenuVo> childMenuList = new ArrayList<>();
+            List<HomeworkMenuVo> childMenuList = new ArrayList<HomeworkMenuVo>();
             for (HomeworkMenuVo childMenu : subList) {
                 if (homeworkMenuVo.getMenu_id().equals(childMenu.getMenu_parent_id())) {
                     childMenuList.add(childMenu);
@@ -223,7 +223,7 @@ public class MenuService {
      * @return
      */
     public List<HomeworkMenuVo> transferMenuList(List<Homework_Menu_Entity> menu_entityList) {
-        List<HomeworkMenuVo> homeworkMenuVos = new ArrayList<>();
+        List<HomeworkMenuVo> homeworkMenuVos = new ArrayList<HomeworkMenuVo>();
         for (Homework_Menu_Entity menu_entity : menu_entityList) {
             homeworkMenuVos.add(transferMenu(menu_entity));
         }

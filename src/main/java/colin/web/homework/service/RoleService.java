@@ -37,7 +37,7 @@ public class RoleService {
      */
     public List<Homework_Role_Entity> getUserRoleInfo(String userId) {
         List<String> roleList = roleDao.getUserRoleInfo(userId);
-        List<Homework_Role_Entity> role_entityList = new ArrayList<>();
+        List<Homework_Role_Entity> role_entityList = new ArrayList<Homework_Role_Entity>();
         for (String roleId : roleList) {
             role_entityList.add(roleDao.selectObjectById(Homework_Role_Entity.class, roleId, new DefaultRowmapper<Homework_Role_Entity>(Homework_Role_Entity.class.getName())));
         }
@@ -59,7 +59,7 @@ public class RoleService {
      */
     public void delSystemRoleMenu(String roleId){
         //删除原来角色配置的菜单
-        Map<String,Object> params=new HashMap<>();
+        Map<String,Object> params=new HashMap<String, Object>();
         params.put("roleId",roleId);
         this.roleDao.delSystemRoleMenu(params);
     }
@@ -71,9 +71,9 @@ public class RoleService {
      * @return
      */
     public void insertSystemRoleMenu(String roleId,List<String> menuIds){
-        List<Map<String,Object>> params=new ArrayList<>();
+        List<Map<String,Object>> params=new ArrayList<Map<String,Object>>();
         for(String menuId:menuIds){
-            Map<String,Object> menuParams=new HashMap<>();
+            Map<String,Object> menuParams=new HashMap<String,Object>();
             menuParams.put("roleMenuId", StringToolsUtils.getCommonUUID());
             menuParams.put("roleId",roleId);
             menuParams.put("menuId",menuId);

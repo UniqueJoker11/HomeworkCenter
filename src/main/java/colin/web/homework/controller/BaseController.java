@@ -77,7 +77,7 @@ public class BaseController {
     public Map<String, Object> formatRequestParamsMap(HttpServletRequest request) {
         Map<String, String[]> paramsMap = request.getParameterMap();
         Set<String> keySet = paramsMap.keySet();
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<String,Object>();
         for (String key : keySet) {
             resultMap.put(key, request.getParameter(key));
         }

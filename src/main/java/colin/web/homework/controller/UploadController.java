@@ -26,7 +26,7 @@ public class UploadController extends BaseController{
         Uploader uploader=new Uploader(request);
         ServletContextResource resource= new ServletContextResource(super.getServletContext(),HomeworkConstants.IMAGE_STORE_DIR);
         uploader.setSavePath(resource.getPath());
-        Map<String,Object> resultMap=new HashMap<>();
+        Map<String,Object> resultMap=new HashMap<String,Object>();
         String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
         uploader.setAllowFiles(fileType);
         uploader.setMaxSize(10000); //单位KB

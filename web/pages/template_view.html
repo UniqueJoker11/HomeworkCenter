@@ -25,12 +25,12 @@
                 <table class="table mb30 table-striped" id="template_view_table">
                     <thead>
                     <tr>
-                        <th>模板名称</th>
-                        <th>模板缩略图</th>
-                        <th>模板浏览次数</th>
-                        <th>模板描述</th>
-                        <th>模板标签</th>
-                        <th>模板操作</th>
+                        <th class="col-md-2">模板名称</th>
+                        <th class="col-md-2">模板缩略图</th>
+                        <th class="col-md-1">浏览</th>
+                        <th class="col-md-3">模板描述</th>
+                        <th class="col-md-1">模板标签</th>
+                        <th class="col-md-3">模板操作</th>
                     </tr>
 
                     </thead>
@@ -41,15 +41,15 @@
                         <%}else{%>
                     <tr id="template_${templateVo.template_id}" class="even gradeC">
                         <%}%>
-                        <td class="center">${templateVo.template_name}</td>
-                        <td class="center col-xs-6 col-md-3"><a href="#" class="thumbnail"><img
+                        <td class="center col-md-2">${templateVo.template_name}</td>
+                        <td class="center col-md-2"><a href="#" class="thumbnail"><img
                                 data-src="holder.js/100x100" alt=""
                                 src="${ctxPath}/${templateVo.template_snapshot}"/></a></td>
 
-                        <td class="center">${templateVo.templaye_browser_num}</td>
-                        <td class="center">${templateVo.template_describe}</td>
-                        <td class="center">${templateVo.template_tip}</td>
-                        <td class="center">
+                        <td class="center col-md-1">${templateVo.templaye_browser_num}</td>
+                        <td class="center col-md-3">${templateVo.template_describe}</td>
+                        <td class="center col-md-1">${templateVo.template_tip}</td>
+                        <td class="center col-md-3">
                             <button class="btn btn-info"
                                     onclick="showTemplate('${ctxPath}/${templateVo.template_access_url}')"><i
                                     class="glyphicon glyphicon-eye-open"></i></button>
