@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh_CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%include("./common/header.html"){}%>
+    <title>文章详情预览</title>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="container-fluid blog-detail">
+    <div class="row">
+        <!--文章详情-->
+        <div class="col-sm-10 col-md-offset-1">
+            <div class="page-header">
+                <h1>
+
+                    <small></small>
+                </h1>
+            </div>
+            <%if(!isEmpty(aticle)){%>
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h3>${aticle.aticle_name}</h3>
+                    <small>作者：${aticle.aticle_author}&nbsp;|&nbsp;发布时间：${aticle.aticle_createtime}&nbsp;|&nbsp;文章类型：${aticle.aticle_category}</small>
+                </div>
+                <div class="panel-body">
+                    ${aticle.aticle_content}
+                </div>
+                <div class="panel-footer">
+                    <%if(!isEmpty(prevAticle)){%>
+                    <div class="pull-left">
+                        <a href="./blog_detail.html?aticleId=${prevAticle.aticle_id}"><span
+                                class="fa  fa-angle-double-left"></span> &nbsp;上一篇：${prevAticle.aticle_name}</a>
+                    </div>
+                    <%}%>
+                    <%if(!isEmpty(nextAticle)){%>
+                    <div class="pull-right">
+                        <a href="./blog_detail.html?aticleId=${nextAticle.aticle_id}">下一篇：${nextAticle.aticle_name}&nbsp;<span
+                                class="fa  fa-angle-double-right"></span></a>
+                    </div>
+                    <%}%>
+                </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

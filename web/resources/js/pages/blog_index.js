@@ -57,7 +57,7 @@ $(function () {
         $.each(blogList, function (i, blog) {
             blogTemplateContent += "<div class=\"panel panel-default\">" +
             "<div class=\"panel-heading text-center\">" +
-            "<h3>" + blog.aticle_name + "</h3>" +
+            "<a target=\"_blank\" href=\"./blog_detail.html?aticleId=" + blog.aticle_id + "\"><h3>" + blog.aticle_name + "</h3></a>" +
             "<small>作者：" + blog.aticle_author + "&nbsp;|&nbsp;发布时间：" + blog.aticle_createtime + "&nbsp;|&nbsp;文章类型：" + blog.aticle_category + "</small>" +
             "</div>" +
             "<div class=\"panel-body\"><blockquote class=\"blog-info-digest\">" +

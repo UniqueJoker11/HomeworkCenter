@@ -2,6 +2,8 @@ package colin.web.homework.controller.aticle;
 
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
+import colin.web.homework.core.pojo.Homework_Aticle_Entity;
+import colin.web.homework.core.vo.HomeworkAticleVo;
 import colin.web.homework.service.AticleService;
 import colin.web.homework.validationbean.AticleValidationBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +30,7 @@ public class AticleManageController extends BaseController {
 
     @Autowired
     private AticleService aticleService;
+
     /**
      * 显示文章的管理界面
      *
@@ -34,7 +38,7 @@ public class AticleManageController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_BROWSER_PAGE, method = RequestMethod.GET)
     public String showAticleBrowserPage() {
-        super.getRequestObj().setAttribute("aticleList",aticleService.findAllAticleInfo());
+        super.getRequestObj().setAttribute("aticleList", aticleService.findAllAticleInfo());
         return HomeworkConstants.PAGE_ATICLE_BROWSER_VIEW;
     }
 
@@ -59,6 +63,14 @@ public class AticleManageController extends BaseController {
     }
 
     /**
+     * 显示文章分类页面
+     * @return
+     */
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_CATEGORY_SHOW_PAGE,method = RequestMethod.GET)
+    public String showAticleCategory(){
+        return HomeworkConstants.PAGE_ATICLE_CATEGORY_VIEW;
+    }
+    /**
      * 添加文章对象
      *
      * @return
@@ -66,13 +78,13 @@ public class AticleManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_ADD_ACTION, method = RequestMethod.POST)
     public boolean addAticleObj(@RequestParam(value = "aticleTitle") String aticleTitle, @RequestParam(value = "aticleDigest") String aticleDigest, @RequestParam(value = "aticleCategory") String aticleCategory, @RequestParam(value = "aticleTips") String aticleTips, @RequestParam(value = "aticleContent") String aticleContent) {
-        Map<String,Object> aticleMap=new HashMap<>();
-        aticleMap.put("aticleTitle",aticleTitle);
-        aticleMap.put("aticleDigest",aticleDigest);
-        aticleMap.put("aticleCategory",aticleCategory);
-        aticleMap.put("aticleTips",aticleTips);
-        aticleMap.put("aticleContent",aticleContent);
-        aticleMap.put("aticleUser",super.fetchUserInfo().getUser_name());
+        Map<String, Object> aticleMap = new HashMap<>();
+        aticleMap.put("aticleTitle", aticleTitle);
+        aticleMap.put("aticleDigest", aticleDigest);
+        aticleMap.put("aticleCategory", aticleCategory);
+        aticleMap.put("aticleTips", aticleTips);
+        aticleMap.put("aticleContent", aticleContent);
+        aticleMap.put("aticleUser", super.fetchUserInfo().getUser_name());
         return this.aticleService.addAticleInfo(aticleMap);
     }
 
@@ -94,17 +106,17 @@ public class AticleManageController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_EDIT_ACTION, method = RequestMethod.POST)
-    public Object editAticleObj(@Valid AticleValidationBean aticleValidationBean,BindingResult result) {
-        Map<String,Object> resultMap=new HashMap<>();
-        if(result.hasErrors()){
-            resultMap.put("isSucces",false);
+    public Object editAticleObj(@Valid AticleValidationBean aticleValidationBean, BindingResult result) {
+        Map<String, Object> resultMap = new HashMap<>();
+        if (result.hasErrors()) {
+            resultMap.put("isSucces", false);
             Map<String, Object> errorMap = new HashMap<>();
             for (FieldError error : result.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
             resultMap.put("errors", errorMap);
-        }else{
-            resultMap.put("isSuccess",true);
+        } else {
+            resultMap.put("isSuccess", true);
         }
         return resultMap;
     }
@@ -120,9 +132,33 @@ public class AticleManageController extends BaseController {
         return null;
     }
 
+    /**
+     * 无分页显示文章列表内容
+     *
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SEARCH_ALL_ACTION,method = RequestMethod.POST)
-    public Object searchAticleObjWithoutPage(){
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SEARCH_ALL_ACTION, method = RequestMethod.POST)
+    public Object searchAticleObjWithoutPage() {
         return aticleService.findAllAticleInfo();
+    }
+
+    /**
+     * 管理端显示文章详情页面
+     *
+     * @param aticleId
+     * @return
+     */
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SHOW_DETAIL_PAGE, method = RequestMethod.GET)
+    public String showAticleDetailPreview(@RequestParam String aticleId) {
+        //根据id加载文章详情
+        Homework_Aticle_Entity aticleEntity = aticleService.findAticleDetailInfo(aticleId);
+        super.getRequestObj().setAttribute("aticle", aticleEntity);
+        //获取该篇文章的上一篇和下一篇
+        HomeworkAticleVo prevAticle=this.aticleService.findUponAticlesInfo(aticleEntity.getAticle_createtime(),0);
+        HomeworkAticleVo nextAticle=this.aticleService.findUponAticlesInfo(aticleEntity.getAticle_createtime(),1);
+        super.getRequestObj().setAttribute("prevAticle",prevAticle);
+        super.getRequestObj().setAttribute("nextAticle",nextAticle);
+        return HomeworkConstants.PAGE_ATICLE_DETAIL_PREVIEW_VIEW;
     }
 }

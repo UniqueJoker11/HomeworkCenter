@@ -51,6 +51,7 @@
  *  18. MEDIA QUERIES
  *  
  */
+
 /********** 1. FILE IMPORTS **********/
 /*************************************/
 @import url('bootstrap.min.css');
@@ -121,7 +122,15 @@ strong {
 
 /********** 3. HEADER PANEL **********/
 /*************************************/
-
+/***自定义表头***/
+.subtitle-header{
+    font-size: 18px;
+    font-weight: bold;
+    color: #FAFAFA;
+    text-align: center;
+    border-bottom: 1px solid #EDEDED;
+    padding-bottom: 15px;
+}
 .headerbar {
     border-left: 1px solid #eee;
     background: #fff;
@@ -838,7 +847,7 @@ strong {
 }
 
 .contentpanel {
-    padding: 20px;
+    padding:0;
     position: relative;
 }
 
