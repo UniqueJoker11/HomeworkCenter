@@ -66,7 +66,7 @@ public class AticleManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_ADD_ACTION, method = RequestMethod.POST)
     public boolean addAticleObj(@RequestParam(value = "aticleTitle") String aticleTitle, @RequestParam(value = "aticleDigest") String aticleDigest, @RequestParam(value = "aticleCategory") String aticleCategory, @RequestParam(value = "aticleTips") String aticleTips, @RequestParam(value = "aticleContent") String aticleContent) {
-        Map<String,Object> aticleMap=new HashMap<>();
+        Map<String,Object> aticleMap=new HashMap<String,Object>();
         aticleMap.put("aticleTitle",aticleTitle);
         aticleMap.put("aticleDigest",aticleDigest);
         aticleMap.put("aticleCategory",aticleCategory);
@@ -95,10 +95,10 @@ public class AticleManageController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_EDIT_ACTION, method = RequestMethod.POST)
     public Object editAticleObj(@Valid AticleValidationBean aticleValidationBean,BindingResult result) {
-        Map<String,Object> resultMap=new HashMap<>();
+        Map<String,Object> resultMap=new HashMap<String,Object>();
         if(result.hasErrors()){
             resultMap.put("isSucces",false);
-            Map<String, Object> errorMap = new HashMap<>();
+            Map<String, Object> errorMap = new HashMap<String,Object>();
             for (FieldError error : result.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }

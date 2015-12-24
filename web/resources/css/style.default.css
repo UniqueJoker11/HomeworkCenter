@@ -126,8 +126,9 @@ strong {
 .subtitle-header{
     font-size: 18px;
     font-weight: bold;
+    padding-left: 13px;
     color: #FAFAFA;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #EDEDED;
     padding-bottom: 15px;
 }
