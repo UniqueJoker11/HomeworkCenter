@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,7 +35,7 @@ public class UserRoleManageController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_SYSTEM_USER_ROLE_MANAGE_PAGE, method = RequestMethod.GET)
     public String showUserroleManagePage(HttpServletRequest request) {
-        request.setAttribute("rolesList", roleService.listSystemRoleinfoService());
+        request.setAttribute("rolesList", roleService.listSystemRoleInfoService());
         return HomeworkConstants.PAGE_USER_ROLE_MANAGE_VIEW;
     }
 
@@ -47,8 +46,8 @@ public class UserRoleManageController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_SYSTEM_USER_ROLE_LIST_ACTION, method = RequestMethod.POST)
-    public Object listSystemRoleinfo() {
-        return roleService.listSystemRoleinfoService();
+    public Object listSystemRoleInfo() {
+        return roleService.listSystemRoleInfoService();
     }
 
     /**

@@ -1,5 +1,6 @@
 package colin.web.homework.core.dao.decoratedao;
 
+import colin.web.homework.core.pojo.Homework_Aticle_Entity;
 import colin.web.homework.core.pojo.Homework_Menu_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import org.springframework.stereotype.Repository;
@@ -19,40 +20,23 @@ public class MenuDao extends DecorateCommnDao {
      * @return
      */
     public List<Homework_Menu_Entity> getUserMenuInfoByRoleId(List<String> roleIds) {
-        String searchMenuSql = "select menu_id from homework_role_menu where role_id=:role_id";
-        Map<String, Object> searchParams = new HashMap<String,Object>();
-        Set<String> menuIds = new HashSet<String>();
-        for (String roleId : roleIds) {
-            searchParams.put("role_id", roleId);
-            //开始查询
-            List<String> menuList = this.getJdbcTemplate().queryForList(searchMenuSql, searchParams, String.class);
-            //去重复
-            menuIds.addAll(menuList);
+        StringBuilder roleIdTemplate=new StringBuilder("");
+        Map<String,Object> params=new HashMap<String, Object>();
+        for(int i=0;i<roleIds.size();i++){
+            params.put("roleId"+i,roleIds.get(i));
+            roleIdTemplate.append(":roleId"+i).append(",");
         }
-        //根绝menuId返回所有的Menu对象
-        List<Homework_Menu_Entity> menu_entityList = new ArrayList<Homework_Menu_Entity>();
-        for (String menuId : menuIds) {
-            menu_entityList.add(this.selectObjectById(Homework_Menu_Entity.class, menuId, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName())));
-        }
-        Collections.sort(menu_entityList,new MenuComparator());
-        return menu_entityList;
+        String searchMenuSql = "select * from homework_menu where menu_id in ( select menu_id from homework_role_menu where role_id in("+ roleIdTemplate.substring(0,roleIdTemplate.length()-1)+")) ORDER BY menu_parent_id";
+        return super.getJdbcTemplate().query(searchMenuSql,params,new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName()));
     }
-    public class MenuComparator implements Comparator<Homework_Menu_Entity>{
 
-        /**
-         * @param o1 the first object to be compared.
-         * @param o2 the second object to be compared.
-         * @return a negative integer, zero, or a positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
-         * @throws NullPointerException if an argument is null and this
-         *                              comparator does not permit null arguments
-         * @throws ClassCastException   if the arguments' types prevent them from
-         *                              being compared by this comparator.
-         */
-        @Override
-        public int compare(Homework_Menu_Entity o1, Homework_Menu_Entity o2) {
-            return o1.getMenu_order()>o2.getMenu_order()?1:-1;
-        }
+    /**
+     * 根据用户的id获取用户的所拥有的的菜单
+     * @param params
+     * @return
+     */
+    public List<Homework_Menu_Entity> fetchUserMenuEntityByUserId(Map<String,Object> params){
+        String searchSql="select * from homework_menu WHERE menu_id in (select DISTINCT(menu_id) from homework_role_menu where role_id in (select role_id from homework_user_role where user_id=:userId));";
+        return super.getJdbcTemplate().query(searchSql, params, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName()));
     }
 }

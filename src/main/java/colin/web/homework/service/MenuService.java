@@ -48,6 +48,20 @@ public class MenuService {
     }
 
     /**
+     * 格式化menuList
+     * @param params
+     * @return
+     */
+    public List<HomeworkMenuVo> getUserMenuInfoList(Map<String,Object> params){
+        List<Homework_Menu_Entity> menu_entityList=menuDao.fetchUserMenuEntityByUserId(params);
+        if (menu_entityList==null||menu_entityList.isEmpty()){
+            return null;
+        }else{
+            return this.reformatMenuList(menu_entityList);
+        }
+
+    }
+    /**
      * 获取系统所有的节点，用户拥有的菜单会被选中
      *
      * @param roleId

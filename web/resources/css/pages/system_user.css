@@ -38,3 +38,6 @@
 table td{
     word-wrap:break-word;
 }
+#userInfoModal .item{
+    padding:10px 5px;
+}

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-10-19 17:10:04
+Date: 2015-12-24 15:18:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -144,17 +144,21 @@ CREATE TABLE `homework_menu` (
 -- ----------------------------
 INSERT INTO `homework_menu` VALUES ('0de179bc-bfc4-4450-a62f-457a6b8a0677', '日程安排', 'd29228b8-2d5f-4951-b928-5a2e7aff4642', '/user_schedule.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list-alt', '10001');
 INSERT INTO `homework_menu` VALUES ('15f3785b-e45f-4f7e-96e8-72aa091b8172', '权限配置', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_authority', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-eye-open', '60003');
+INSERT INTO `homework_menu` VALUES ('3b40298f-99b9-4747-b384-7931f1daac6f', '角色管理', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_user_role.html', 'colin', '2015-10-20 09:19:09', 'glyphicon glyphicon-indent-left', '40000');
 INSERT INTO `homework_menu` VALUES ('405c5cca-b1e1-4283-b486-f7d53475cbea', '个人资料', 'd29228b8-2d5f-4951-b928-5a2e7aff4642', '/person_data.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-user', '0');
-INSERT INTO `homework_menu` VALUES ('45868e8a-e453-4e3d-979e-3415f859a04d', '网络图片', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-picture', '50000');
 INSERT INTO `homework_menu` VALUES ('4c4d11ca-455b-4bd8-9ab9-630fe52ffeda', '文章一览', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_browser.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-th-list', '0');
-INSERT INTO `homework_menu` VALUES ('54c729c3-9c73-4e32-872a-d645c7c31cf9', '音乐一览', 'e9992506-e269-4219-9116-9b81d9ca6544', '/music_view.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list', '40001');
+INSERT INTO `homework_menu` VALUES ('54c729c3-9c73-4e32-872a-d645c7c31cf9', '服务一览', 'e9992506-e269-4219-9116-9b81d9ca6544', '/service_overview.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list', '0');
 INSERT INTO `homework_menu` VALUES ('675bf996-85e5-4c90-9956-cc089008559a', '新增文章', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_add.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-plus', '0');
 INSERT INTO `homework_menu` VALUES ('932f7fd0-7c9c-4f3c-ad84-65a806e68fb0', '增加模版', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4', '/template_add.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-plus', '20002');
 INSERT INTO `homework_menu` VALUES ('a00abd9c-410f-4310-8262-7f50c209bfa0', '用户管理', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6', '/system_user.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-user', '60002');
-INSERT INTO `homework_menu` VALUES ('a4c78339-cf93-4642-be1b-57b5dafb2ab6', '系统管理', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-cog', '60000');
+INSERT INTO `homework_menu` VALUES ('a4c78339-cf93-4642-be1b-57b5dafb2ab6', '系统管理', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-cog', '50000');
+INSERT INTO `homework_menu` VALUES ('b366f899-7589-441e-95bb-73ee359dce03', '文章分类', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/picture_view.html', 'colin', '2015-12-24 10:22:03', 'glyphicon glyphicon-th', '40000');
 INSERT INTO `homework_menu` VALUES ('c2bd7195-32f7-47b0-96fc-827c8e0e0226', '我的文章', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-book', '30000');
+INSERT INTO `homework_menu` VALUES ('c7d3ca5a-c083-4391-9500-58ea27dfd882', '图片上传', 'd9061287-cc0d-4a0d-9819-5e94a6fd184a', '/picture_view.html', 'colin', '2015-12-24 10:19:41', 'glyphicon glyphicon-upload', '0');
+INSERT INTO `homework_menu` VALUES ('cc036377-924f-4bfe-85e1-c82f4aef46d2', '图片一览', 'd9061287-cc0d-4a0d-9819-5e94a6fd184a', '/picture_view.html', 'colin', '2015-12-24 10:17:19', 'fa fa-file-picture-o', '20000');
 INSERT INTO `homework_menu` VALUES ('d29228b8-2d5f-4951-b928-5a2e7aff4642', '个人中心', 'root', '#', 'admin', '2015-07-26 12:16:27', 'fa fa-reddit-square', '10000');
-INSERT INTO `homework_menu` VALUES ('e9992506-e269-4219-9116-9b81d9ca6544', '网络音乐', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-headphones', '40000');
+INSERT INTO `homework_menu` VALUES ('d9061287-cc0d-4a0d-9819-5e94a6fd184a', '我的图片', 'root', '#', 'colin', '2015-12-24 10:12:59', 'glyphicon glyphicon-picture', '60000');
+INSERT INTO `homework_menu` VALUES ('e9992506-e269-4219-9116-9b81d9ca6544', '系统服务', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-cloud', '40000');
 INSERT INTO `homework_menu` VALUES ('ea159abc-86c9-4d1f-8fa0-baca94a70cab', '转载文章', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226', '/aticle_reprint.html', 'admin', '2015-08-21 12:16:27', 'glyphicon glyphicon-share', '0');
 INSERT INTO `homework_menu` VALUES ('f55d2ac6-03a3-4e65-b47c-0a4b72cbcf55', '模板一览', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4', '/template_view.html', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-list', '20001');
 INSERT INTO `homework_menu` VALUES ('f95e66ee-05d8-4685-9971-bb93a3d94ce4', '网页模板', 'root', '#', 'admin', '2015-07-26 12:16:27', 'glyphicon glyphicon-th', '20000');
@@ -222,26 +226,30 @@ CREATE TABLE `homework_role_menu` (
 -- ----------------------------
 -- Records of homework_role_menu
 -- ----------------------------
-INSERT INTO `homework_role_menu` VALUES ('14c15187-4784-429d-9b5f-d3328ceca780', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '0de179bc-bfc4-4450-a62f-457a6b8a0677');
-INSERT INTO `homework_role_menu` VALUES ('1b2a21a2-3e9d-4912-8439-6073a39fffe2', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'f55d2ac6-03a3-4e65-b47c-0a4b72cbcf55');
-INSERT INTO `homework_role_menu` VALUES ('34010ad7-5a8d-4c76-8e1c-aec3117802f2', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '15f3785b-e45f-4f7e-96e8-72aa091b8172');
-INSERT INTO `homework_role_menu` VALUES ('4115cd02-0ba1-4d50-a10f-f18a532695d0', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '405c5cca-b1e1-4283-b486-f7d53475cbea');
-INSERT INTO `homework_role_menu` VALUES ('4c827a43-ed67-4321-9aa5-2ccc158e67ba', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '45868e8a-e453-4e3d-979e-3415f859a04d');
+INSERT INTO `homework_role_menu` VALUES ('03e5bb95-6d7b-44f2-9709-88e1cc548f24', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226');
+INSERT INTO `homework_role_menu` VALUES ('051505ab-fb9a-4b95-b39d-988bc927db72', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '405c5cca-b1e1-4283-b486-f7d53475cbea');
+INSERT INTO `homework_role_menu` VALUES ('1d5580a6-746d-46e7-ae16-47c9898ff8f4', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'fef50057-94b8-4e7e-b5be-077556943260');
+INSERT INTO `homework_role_menu` VALUES ('251c4694-ddcc-41cd-ba57-fc8b23381b28', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '0de179bc-bfc4-4450-a62f-457a6b8a0677');
+INSERT INTO `homework_role_menu` VALUES ('286aebba-3344-4d0c-9792-3dac4e1e4ddd', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '15f3785b-e45f-4f7e-96e8-72aa091b8172');
+INSERT INTO `homework_role_menu` VALUES ('288b04eb-0078-4819-abbb-1bc98aa18a83', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'cc036377-924f-4bfe-85e1-c82f4aef46d2');
+INSERT INTO `homework_role_menu` VALUES ('2d969bb9-7ab5-4941-a203-aaa5059a1073', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'c7d3ca5a-c083-4391-9500-58ea27dfd882');
 INSERT INTO `homework_role_menu` VALUES ('4cb667c3-6e1f-4e09-a629-96db8c7b1ef3', 'd36b7df1-dac0-4ff9-9c2b-a101411f8472', '54c729c3-9c73-4e32-872a-d645c7c31cf9');
-INSERT INTO `homework_role_menu` VALUES ('52a63a3a-dd74-42e7-8cfa-1c2efc14965e', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'e9992506-e269-4219-9116-9b81d9ca6544');
-INSERT INTO `homework_role_menu` VALUES ('60a704d6-dba9-4bd3-a10a-645165f5fe86', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '4c4d11ca-455b-4bd8-9ab9-630fe52ffeda');
-INSERT INTO `homework_role_menu` VALUES ('76b792a8-a57d-43d6-b8a5-541a6fcebba4', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '54c729c3-9c73-4e32-872a-d645c7c31cf9');
-INSERT INTO `homework_role_menu` VALUES ('7dd51027-14fa-4d3c-b60c-f335783af4c5', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'fef50057-94b8-4e7e-b5be-077556943260');
+INSERT INTO `homework_role_menu` VALUES ('6847fe16-06a6-4ad5-bc17-4e0ca874d354', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'ea159abc-86c9-4d1f-8fa0-baca94a70cab');
+INSERT INTO `homework_role_menu` VALUES ('74258096-ec7a-4bff-b57e-6b8231acc9f4', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6');
 INSERT INTO `homework_role_menu` VALUES ('7ef6ec13-244b-4626-a3fc-5ab1add6c03f', 'd36b7df1-dac0-4ff9-9c2b-a101411f8472', '932f7fd0-7c9c-4f3c-ad84-65a806e68fb0');
-INSERT INTO `homework_role_menu` VALUES ('95066375-abb0-4dd3-9d05-cf13aee2358b', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '675bf996-85e5-4c90-9956-cc089008559a');
-INSERT INTO `homework_role_menu` VALUES ('a6a580d0-9d25-4cc6-a810-2d51bc57556f', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '932f7fd0-7c9c-4f3c-ad84-65a806e68fb0');
-INSERT INTO `homework_role_menu` VALUES ('a7b7578a-889d-4c71-b0ee-9f52ba3caf50', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'a00abd9c-410f-4310-8262-7f50c209bfa0');
-INSERT INTO `homework_role_menu` VALUES ('a7bf6c22-4566-43a4-a2ab-222739855df5', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4');
-INSERT INTO `homework_role_menu` VALUES ('b343e34f-fe07-4161-be58-8bb768a3393f', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'ea159abc-86c9-4d1f-8fa0-baca94a70cab');
-INSERT INTO `homework_role_menu` VALUES ('bc60761a-7626-47ed-805c-e806de7c30b3', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'a4c78339-cf93-4642-be1b-57b5dafb2ab6');
-INSERT INTO `homework_role_menu` VALUES ('cdf7cead-660f-43f2-bccf-4d34d6e8cfcc', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'c2bd7195-32f7-47b0-96fc-827c8e0e0226');
+INSERT INTO `homework_role_menu` VALUES ('81505ab7-86b5-41ef-952e-63d730546294', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'd9061287-cc0d-4a0d-9819-5e94a6fd184a');
+INSERT INTO `homework_role_menu` VALUES ('a4975715-855a-4e66-8bcc-6e9ffa30f755', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'a00abd9c-410f-4310-8262-7f50c209bfa0');
+INSERT INTO `homework_role_menu` VALUES ('a794a8a8-b6fb-4d4d-8156-16873bfaed4d', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '54c729c3-9c73-4e32-872a-d645c7c31cf9');
+INSERT INTO `homework_role_menu` VALUES ('aa30fa9c-cc4f-4a1d-93ed-6a68b9858b44', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '932f7fd0-7c9c-4f3c-ad84-65a806e68fb0');
+INSERT INTO `homework_role_menu` VALUES ('bd90845c-473c-4bfd-a40c-8167e1f95e05', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '675bf996-85e5-4c90-9956-cc089008559a');
+INSERT INTO `homework_role_menu` VALUES ('c6b950dc-7d07-4b36-b541-9c90d5c6f881', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'f95e66ee-05d8-4685-9971-bb93a3d94ce4');
 INSERT INTO `homework_role_menu` VALUES ('d1870d5b-dadc-4767-ac5c-413867df4319', 'd36b7df1-dac0-4ff9-9c2b-a101411f8472', 'a00abd9c-410f-4310-8262-7f50c209bfa0');
-INSERT INTO `homework_role_menu` VALUES ('d8e9dfbc-6f7c-4337-a261-fba65a0efad5', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'd29228b8-2d5f-4951-b928-5a2e7aff4642');
+INSERT INTO `homework_role_menu` VALUES ('d8394af3-dfb5-4856-8205-aa6079b4dfb0', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'd29228b8-2d5f-4951-b928-5a2e7aff4642');
+INSERT INTO `homework_role_menu` VALUES ('d87304c0-a09b-4cd8-b64e-86090dcd72d2', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '4c4d11ca-455b-4bd8-9ab9-630fe52ffeda');
+INSERT INTO `homework_role_menu` VALUES ('e07a0517-b87f-4f7c-b1e9-d413d2ed52e1', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', '3b40298f-99b9-4747-b384-7931f1daac6f');
+INSERT INTO `homework_role_menu` VALUES ('efe0f58b-246e-4a52-96d3-4d1a101c11f8', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'e9992506-e269-4219-9116-9b81d9ca6544');
+INSERT INTO `homework_role_menu` VALUES ('f0c1b8f5-07c5-481b-bc7b-3689d96a363c', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'f55d2ac6-03a3-4e65-b47c-0a4b72cbcf55');
+INSERT INTO `homework_role_menu` VALUES ('f914745e-bc27-4b72-ac6b-3459dfabb298', 'c7675d06-ed46-429e-ae2f-aa882fc29bae', 'b366f899-7589-441e-95bb-73ee359dce03');
 
 -- ----------------------------
 -- Table structure for homework_schedule
@@ -285,8 +293,15 @@ CREATE TABLE `homework_template` (
 -- ----------------------------
 -- Records of homework_template
 -- ----------------------------
-INSERT INTO `homework_template` VALUES ('4b487fc5-894c-4ea7-8017-e3cb2af5d19c', '测试模板', 'upload/images/201510190215263722.jpg', '0', '测试', '模板，html', 'upload/resources/2015101902153515852.zip', 'colin', '2015-10-19 14:15:40', 'upload/template/2015101902153515852/index.html');
-INSERT INTO `homework_template` VALUES ('82f70c39-da2f-4b6c-8441-c8c20696a491', '测试模板2', 'upload/images/201510190218274867.jpg', '0', '测试模板', '测试2', 'upload/resources/2015101902183361192.zip', 'colin', '2015-10-19 14:18:34', 'upload/template/2015101902183361192/index.html');
+INSERT INTO `homework_template` VALUES ('2a784307-9de9-4a9d-92d1-8756293098b1', '测试模板', 'upload/images/201512141134325934.jpg', '0', '模模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模模测试模测试', 'html5,css3', 'upload/resources/2015121411344268425.zip', 'colin', '2015-12-14 11:34:48', 'upload/template/2015121411344268425/index.html');
+INSERT INTO `homework_template` VALUES ('3a3da697-1e27-4ae5-8ffb-ec3a275b4987', '测试6', 'upload/images/201512140344212751.jpg', '0', '服务而非未经肥肉较强情况度搜前往激动为我确定囧囧的抢我的空气为对奇偶奇就大佛我未经覅偶耳机', 'html5', 'upload/resources/2015121403442890568.zip', 'colin', '2015-12-14 15:44:29', 'upload/template/2015121403442890568/index.html');
+INSERT INTO `homework_template` VALUES ('4b487fc5-894c-4ea7-8017-e3cb2af5d19c', '测试模板', 'upload/images/201510190215263722.jpg', '0', '测试测试', '模板，html', 'upload/resources/2015101902153515852.zip', 'colin', '2015-10-19 14:15:40', 'upload/template/2015101902153515852/index.html');
+INSERT INTO `homework_template` VALUES ('513191eb-1aeb-4097-9eaf-d8d15c91044e', '测试模板24', 'upload/images/201512140346424331.jpg', '0', '模板缪奥数', 'html5', 'upload/resources/201512140346486582.zip', 'colin', '2015-12-14 15:46:49', 'upload/template/201512140346486582/index.html');
+INSERT INTO `homework_template` VALUES ('6cf81c87-5383-43f7-966c-78c359d86e03', '测试模板', 'upload/images/201512141013385972.jpg', '0', '测试模板内容模板内容描述，测试模板内容描述，测试模板内容描述，测试模板内容描述，测试模板内容描述，测试', 'html5,css3', 'upload/resources/2015121410133394353.zip', 'colin', '2015-12-14 10:13:40', 'upload/template/2015121410133394353/index.html');
+INSERT INTO `homework_template` VALUES ('78723ef3-283f-4316-8378-4b384fc838fc', '测试5', 'upload/images/201512140343202992.jpg', '0', '的范围为二级分叫工人我该金额提高急哦如同看【跑得快服务服务而贫困富婆尔康of额外', 'html5，css3', 'upload/resources/2015121403432580044.zip', 'colin', '2015-12-14 15:43:26', 'upload/template/2015121403432580044/index.html');
+INSERT INTO `homework_template` VALUES ('82f70c39-da2f-4b6c-8441-c8c20696a491', '测试模板2', 'upload/images/201510190218274867.jpg', '0', '测测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板测试模板试模板', '测试2', 'upload/resources/2015101902183361192.zip', 'colin', '2015-10-19 14:18:34', 'upload/template/2015101902183361192/index.html');
+INSERT INTO `homework_template` VALUES ('895acba9-ec75-4a20-8b9e-34c4e5213cce', '测试模板', 'upload/images/201512140340429998.jpg', '0', '模板描述', 'html5,css3', 'upload/resources/2015121403404863420.zip', 'colin', '2015-12-14 15:40:49', 'upload/template/2015121403404863420/index.html');
+INSERT INTO `homework_template` VALUES ('cdbbb689-55c7-436e-a995-df6ef2e3a704', '测试模板', 'upload/images/201512141154514105.jpg', '0', 'fwefwe4模板内容描述，测试模板内容描述，测试模板内容描述，测试模板内容描述，测试', 'html5,css', 'upload/resources/2015121411545867733.zip', 'colin', '2015-12-14 11:54:59', 'upload/template/2015121411545867733/index.html');
 
 -- ----------------------------
 -- Table structure for homework_user
@@ -311,39 +326,10 @@ CREATE TABLE `homework_user` (
 -- ----------------------------
 INSERT INTO `homework_user` VALUES ('02447b02-c243-44f9-bcd6-d66440b5efe6', 'student', null, null, '123456', 'Student', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
 INSERT INTO `homework_user` VALUES ('196169b4-d40f-407b-abaf-0477ae8b947b', 'joker', null, null, '111111', 'VIP用户', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user` VALUES ('247357ca-4759-4143-b3c4-d47a261ba0c7', 'colin', null, null, 'admin123', 'Administrator', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
+INSERT INTO `homework_user` VALUES ('247357ca-4759-4143-b3c4-d47a261ba0c7', 'colin', 'default_title.jpeg', null, 'admin123', 'Administrator', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
 INSERT INTO `homework_user` VALUES ('4ac0ea80-b1b0-417d-afb5-ed6bdce8dbc1', 'user3', null, null, '111111', '钻石用户', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
 INSERT INTO `homework_user` VALUES ('5dbfe4ef-785a-40bd-97e9-7f631c7c3f25', 'user4', null, null, '1111111', '访客2', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
 INSERT INTO `homework_user` VALUES ('e5c6e23d-28fe-4e75-a12d-d53951732d59', 'teacher', null, null, '123456', 'Teacher', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-
--- ----------------------------
--- Table structure for homework_user_copy
--- ----------------------------
-DROP TABLE IF EXISTS `homework_user_copy`;
-CREATE TABLE `homework_user_copy` (
-  `user_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `user_name` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户登录名',
-  `user_head` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户头像',
-  `user_password_salt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_callname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户账号',
-  `user_email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户邮件',
-  `user_phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户电话',
-  `user_createtime` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户登录次数',
-  `user_logintime` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of homework_user_copy
--- ----------------------------
-INSERT INTO `homework_user_copy` VALUES ('02447b02-c243-44f9-bcd6-d66440b5efe6', 'student', null, null, '123456', 'Student', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('196169b4-d40f-407b-abaf-0477ae8b947b', 'joker', null, null, '111111', 'VIP用户', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('247357ca-4759-4143-b3c4-d47a261ba0c7', 'colin', null, null, 'admin123', 'Administrator', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('49abec95-ba26-4628-b89d-df1322bd91a8', 'user1', null, null, '111111', '访客', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('4ac0ea80-b1b0-417d-afb5-ed6bdce8dbc1', 'user3', null, null, '111111', '钻石用户', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('5dbfe4ef-785a-40bd-97e9-7f631c7c3f25', 'user4', null, null, '1111111', '访客2', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
-INSERT INTO `homework_user_copy` VALUES ('e5c6e23d-28fe-4e75-a12d-d53951732d59', 'teacher', null, null, '123456', 'Teacher', '92934@qq.com', '11223432443', '2015-08-07 11:23:23', '2015-08-07 11:23:23');
 
 -- ----------------------------
 -- Table structure for homework_user_info
@@ -358,13 +344,18 @@ CREATE TABLE `homework_user_info` (
   `user_info_area` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户所在区',
   `user_info_birthday` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户生日',
   `user_info_address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户地址',
-  `user_id` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户id',
+  `user_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户id',
+  `user_info_gendar` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_info_blood` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_info_qq` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_info_college` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_info_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of homework_user_info
 -- ----------------------------
+INSERT INTO `homework_user_info` VALUES ('196169b4-d40f-407b-abaf-0477ae8b934d', 'colin', 'smith', '山东省', '青岛市', '李沧区', '1987-09-12 21:12:23', '黑龙江东路', '247357ca-4759-4143-b3c4-d47a261ba0c7', '男', 'AB', '987654565', '家里蹲大学');
 
 -- ----------------------------
 -- Table structure for homework_user_role
@@ -383,9 +374,14 @@ CREATE TABLE `homework_user_role` (
 INSERT INTO `homework_user_role` VALUES ('12edbeaf-6b1a-4e6b-9a25-87cac364b97d', '02447b02-c243-44f9-bcd6-d66440b5efe6', '1e310db0-6331-4457-8868-ca6a6b21ae83');
 INSERT INTO `homework_user_role` VALUES ('2434c653-dc88-4fad-9710-b4d2d1dd1f73', '247357ca-4759-4143-b3c4-d47a261ba0c7', 'c7675d06-ed46-429e-ae2f-aa882fc29bae');
 INSERT INTO `homework_user_role` VALUES ('2434c653-dc88-4fad-9710-b4d2d1dd1f7b', '02447b02-c243-44f9-bcd6-d66440b5efe6', '1c39fb09-e4f4-4b2f-876a-ee30bb470066');
+INSERT INTO `homework_user_role` VALUES ('2ef6e199-89c6-480f-9949-bbdb644918ae', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', '1e310db0-6331-4457-8868-ca6a6b21ae83');
+INSERT INTO `homework_user_role` VALUES ('4a55ead4-413b-4ec0-a198-ca44e5c7f87d', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', '9a2a486b-26b8-456c-91c2-b35824a65e88');
+INSERT INTO `homework_user_role` VALUES ('6e9bedb8-3f5d-417f-bd1d-e7bdb180880a', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', '1c39fb09-e4f4-4b2f-876a-ee30bb470066');
 INSERT INTO `homework_user_role` VALUES ('810e8203-97df-484c-9aea-53f548ba1887', '02447b02-c243-44f9-bcd6-d66440b5efe6', '9f83dc60-b9bd-438a-907f-02ce376ee356');
-INSERT INTO `homework_user_role` VALUES ('8458c135-a670-482c-b907-652485f8a2a1', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', 'd36b7df1-dac0-4ff9-9c2b-a101411f8472');
+INSERT INTO `homework_user_role` VALUES ('bbf6be75-9b37-4235-b96d-bccd4805a575', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', '9f83dc60-b9bd-438a-907f-02ce376ee356');
 INSERT INTO `homework_user_role` VALUES ('c7d3e108-689e-4779-8c88-b234c90fda7c', '02447b02-c243-44f9-bcd6-d66440b5efe6', '374abc7b-324b-4958-88e0-2a62ffb32691');
+INSERT INTO `homework_user_role` VALUES ('c8b3dede-6ab2-44c6-8268-5bb5bab79453', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', 'd36b7df1-dac0-4ff9-9c2b-a101411f8472');
+INSERT INTO `homework_user_role` VALUES ('ceff1629-e6c7-4b43-bc29-eaafc83e358d', 'e5c6e23d-28fe-4e75-a12d-d53951732d59', '374abc7b-324b-4958-88e0-2a62ffb32691');
 INSERT INTO `homework_user_role` VALUES ('ff7856f7-edef-46cd-b455-ce8577871e2d', '49abec95-ba26-4628-b89d-df1322bd91a8', '374abc7b-324b-4958-88e0-2a62ffb32691');
 INSERT INTO `homework_user_role` VALUES ('ff7856f7-edef-46cd-b455-ce8577871e2e', '4ac0ea80-b1b0-417d-afb5-ed6bdce8dbc1', '374abc7b-324b-4958-88e0-2a62ffb32691');
 INSERT INTO `homework_user_role` VALUES ('ff7856f7-edef-46cd-b455-ce8577871e4r', '5dbfe4ef-785a-40bd-97e9-7f631c7c3f25', '374abc7b-324b-4958-88e0-2a62ffb32691');
