@@ -25,7 +25,7 @@ public class RoleService {
      * 返回所有的系统角色
      * @return
      */
-    public List<Homework_Role_Entity> listSystemRoleinfoService(){
+    public List<Homework_Role_Entity> listSystemRoleInfoService(){
         return roleDao.seletcObjectByMap(Homework_Role_Entity.class,null,new DefaultRowmapper<Homework_Role_Entity>(Homework_Role_Entity.class.getName()));
     }
 

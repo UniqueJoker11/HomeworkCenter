@@ -5,48 +5,12 @@ var userInfoGrid=null;
 var pageSize = 4;
 var currentPage = 1;
 $(function () {
-    var userInfoListObj = $("#userInfoTable").children("tbody");
-    var userInfoListObjLength = userInfoListObj.find("tr").length;
-    $("#userInfoModal").children("div:gt(0)").hide();
-    //初始化用户数据列表项
-    initUserInfoList();
-    function initUserInfoList() {
-        userInfoListObj.children("tr").show();
-        userInfoListObj.children("tr:lt(" + ((currentPage - 1) * pageSize) + ")").hide();
-        userInfoListObj.children("tr:gt(" + (currentPage * pageSize - 1) + ")").hide();
-    }
-    var options = {
-        bootstrapMajorVersion: 3,
-        currentPage: currentPage,
-        totalPages: userInfoListObjLength % pageSize > 0 ? (userInfoListObjLength / pageSize) + 1 : userInfoListObjLength / pageSize,
-        size: "normal",
-        alignment: "center",
-        itemTexts: function (type, page, current) {
-            switch (type) {
-                case "first":
-                    return "第一页";
-                case "prev":
-                    return "<";
-                case "next":
-                    return ">";
-                case "last":
-                    return "最后页";
-                case "page":
-                    return page;
-            }
-        },
-        onPageClicked: function (e, originalEvent, type, page) {
-            currentPage = page;
-            initUserInfoList();
-        }
-    }
-    //用户列表分页模块
-    userInfoGrid=$('#userInfoTablePagenation').bootstrapPaginator(options);
+    var userDatagrid = $("#userInfoTable").dataTable(options);
 });
 
 //配置用户角色
 function configUserRole(userId){
-    $("#userInfoModal").children("div").hide().eq("1").slideDown();
+    $("#userInfoModal").children("div:eq(0)").hide().siblings("div").removeClass("hidden").slideDown();
     var $userRoleInfo=$("#userRoleInfo"),roleInfoTemplate="";
     $userRoleInfo.children("tbody").html("");
     //开始加载当前用户的角色和权限
@@ -131,9 +95,10 @@ function submitEditUserinfo(){
 function returnLastMenu(num){
     switch (num){
         case "0":
-            $("#userInfoModal").children("div").hide().eq("0").slideDown();
+            $("#userInfoModal").children("div:eq(0)").hide().next("div").slideDown();
             break;
         case "1":
+            $("#userInfoModal").children("div:eq(1)").hide().prev("div").slideDown();
             break;
     }
 }

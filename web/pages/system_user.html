@@ -1,7 +1,4 @@
 <link rel="stylesheet" href="${ctxPath}/css/pages/system_user.css">
-<!--分页组件-->
-<script type="text/javascript" src="${ctxPath}/js/bootstrap-paginator.min.js"></script>
-
 <div class="pageheader">
     <h2><i class="fa fa-calendar"></i> 系统管理 <span>用户管理</span></h2>
 
@@ -33,14 +30,14 @@
                             <table id="userInfoTable" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>用户名</th>
-                                    <th>用户别称</th>
-                                    <th>用户邮箱</th>
-                                    <th>用户手机</th>
-                                    <th>用户创建时间</th>
-                                    <th>最近一次登陆时间</th>
-                                    <th>角色管理</th>
-                                    <th>用户操作</th>
+                                    <th class="col-md-1">用户名</th>
+                                    <th class="col-md-1">用户别称</th>
+                                    <th class="col-md-1">用户邮箱</th>
+                                    <th class="col-md-1">用户手机</th>
+                                    <th class="col-md-1">创建时间</th>
+                                    <th class="col-md-2">上次登陆时间</th>
+                                    <th class="col-md-1">角色管理</th>
+                                    <th class="col-md-2">用户操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -53,22 +50,26 @@
                                     <td>${user.user_createtime}</td>
                                     <td>${user.user_logintime}</td>
                                     <td>
-                                        <button class="btn btn-success" onclick="configUserRole('${user.user_id}')">配置角色</button></td>
+                                        <button class="btn btn-success" onclick="configUserRole('${user.user_id}')">
+                                            配置角色
+                                        </button>
+                                    </td>
                                     <td>
-                                            <button class="btn btn-primary" onclick="editUserInfo('${user.user_id}')">修改</button>
-                                            <button class="btn btn-danger" onclick="deleteUserInfo('${user.user_id}')">删除</button>
+                                        <button class="btn btn-primary" onclick="editUserInfo('${user.user_id}')">修改
+                                        </button>
+                                        <button class="btn btn-danger" onclick="deleteUserInfo('${user.user_id}')">删除
+                                        </button>
                                     </td>
                                 </tr>
                                 <%}%>
                                 </tbody>
                             </table>
-                            <div class="text-center">
-                                <ul id="userInfoTablePagenation"></ul>
-                            </div>
                         </div>
-                        <div clss="item">
+                        <div class="item hidden">
                             <div class="colin-return-part">
-                                <a href="javascript:;" onclick="returnLastMenu('0')"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;返回用户列表</a>
+                                <a href="javascript:;" onclick="returnLastMenu('1')"><span
+                                        class="glyphicon glyphicon-arrow-left"
+                                        aria-hidden="true"></span>&nbsp;返回用户列表</a>
                             </div>
 
                             <table id="userRoleInfo" class="table table-bordered">
@@ -94,31 +95,36 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">修改用户信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
+
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="" placeholder="不能为空">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户别称</label>
+
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="username" name="username" placeholder="不能为空！">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户邮箱</label>
+
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="useremail" name="useremail" placeholder="不能为空！">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户手机</label>
+
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="userphone" name="userphone" placeholder="不能为空！">
                         </div>
@@ -128,14 +134,17 @@
             <div class="modal-footer">
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-3">
-                        <button type="button" onclick="submitEditUserinfo()" class="btn btn-info col-sm-12">提交修改</button>
+                        <button type="button" onclick="submitEditUserinfo()" class="btn btn-info col-sm-12">提交修改
+                        </button>
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">
                         <button type="button" class="btn btn-danger col-sm-12" data-dismiss="modal">取消</button>
                     </div>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script type="text/javascript" src="${ctxPath}/js/pages/system_user.js"></script>
