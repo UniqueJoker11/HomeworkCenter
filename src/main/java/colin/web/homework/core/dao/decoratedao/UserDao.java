@@ -31,7 +31,7 @@ public class UserDao extends DecorateCommnDao {
     public void addUserInfo(String userId,String... roleIds){
         //添加用户的访客角色
         String addUserRole="insert into homework_user_role('user_role_id','user_id','role_id') values(:userRoleId,userId,roleId)";
-        Map<String,Object> params=new HashMap<>();
+        Map<String,Object> params=new HashMap<String,Object>();
         params.put("userRoleId", StringToolsUtils.getCommonUUID());
         params.put("userId",userId);
         for(String roleId:roleIds){
@@ -64,7 +64,7 @@ public class UserDao extends DecorateCommnDao {
      */
     public Map<String, Object> validateUserInfoByNamePwd(Map<String, Object> params) {
         String searchSql = "select user_id,user_callname from homework_user where (user_name,user_password)=(:user_name,:user_password)";
-        final Map<String, Object> result = new HashMap<>();
+        final Map<String, Object> result = new HashMap<String, Object>();
         this.getJdbcTemplate().query(searchSql, params, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
@@ -120,14 +120,14 @@ public class UserDao extends DecorateCommnDao {
         Set<String> allRoleIdList = this.fetchUserRoleIds(roleIdList);
         //查询所有的角色
         List<Homework_Role_Entity> allRoleList = this.seletcObjectByMap(Homework_Role_Entity.class, null, new DefaultRowmapper<Homework_Role_Entity>(Homework_Role_Entity.class.getName()));
-        List<HomeworkUserRole> userRoleList = new ArrayList<>();
+        List<HomeworkUserRole> userRoleList = new ArrayList<HomeworkUserRole>();
         for (Homework_Role_Entity role_entity : allRoleList) {
             HomeworkUserRole userRole = new HomeworkUserRole();
             userRole.setRole_id(role_entity.getRole_id());
             userRole.setRole_name(role_entity.getRole_name());
             Map<String,Object> userRoleDetail=this.fetchUserRoleAuthority(role_entity.getRole_id());
             userRole.setAuthorityList((List<HomeworkUserAuthority>) userRoleDetail.get("authorityList"));
-            List<HomeworkMenuVo> menuVoList=new ArrayList<>();
+            List<HomeworkMenuVo> menuVoList=new ArrayList<HomeworkMenuVo>();
             menuVoList.addAll((Set<HomeworkMenuVo>)userRoleDetail.get("menuList"));
             userRole.setMenuList(menuVoList);
             if(allRoleIdList.contains(role_entity.getRole_id())){
@@ -193,8 +193,8 @@ public class UserDao extends DecorateCommnDao {
     private Set<String> fetchRoleUserIds(Set<String> roleIdsList) {
         //在user_role表里查询所有的userIdList
         String searchUserRoleInfo = "select user_id from homework_user_role where role_id=:role_id";
-        Map<String, Object> searchUserRoleParams = new HashMap<>();
-        final Set<String> userIdList = new HashSet<>();
+        Map<String, Object> searchUserRoleParams = new HashMap<String, Object>();
+        final Set<String> userIdList = new HashSet<String>();
         for (String roleId : roleIdsList) {
             searchUserRoleParams.put("role_id", roleId);
             super.getJdbcTemplate().query(searchUserRoleInfo, searchUserRoleParams, new RowCallbackHandler() {
@@ -217,7 +217,7 @@ public class UserDao extends DecorateCommnDao {
         //查询满足条件的用户信息
         String searchUserInfo = "select user_id,user_name,user_callname,user_email,user_phone,user_createtime,user_logintime from homework_user where user_id=:user_id";
         Map<String, Object> userParams = new HashMap<String, Object>();
-        final List<HomeworkUserInfo> userInfoList = new ArrayList<>();
+        final List<HomeworkUserInfo> userInfoList = new ArrayList<HomeworkUserInfo>();
         for (String userId : userIdList) {
             userParams.put("user_id", userId);
             super.getJdbcTemplate().query(searchUserInfo, userParams, new RowCallbackHandler() {
@@ -253,7 +253,7 @@ public class UserDao extends DecorateCommnDao {
         List<HomeworkUserAuthority> userAuthorityList = this.fetchUserAuthorityDetail(authorityAllSet);
         //查询当前权限对应的菜单
         Set<HomeworkMenuVo> menuVoList =this.fetchUserMenuDetail(roleId);
-        Map<String,Object> resultMap=new HashMap<>();
+        Map<String,Object> resultMap=new HashMap<String,Object>();
         resultMap.put("authorityList",userAuthorityList);
         resultMap.put("menuList",menuVoList);
         return resultMap;
@@ -266,10 +266,10 @@ public class UserDao extends DecorateCommnDao {
      * @return
      */
     private Set<String> fetchUserAuthorityIds(String roleId) {
-        Map<String, Object> roleParams = new HashMap<>();
+        Map<String, Object> roleParams = new HashMap<String,Object>();
         roleParams.put("role_id", roleId);
         String searchRoleAuthority = "select authority_id from homework_role_authority where role_id=:role_id";
-        final Set<String> authoritySet = new HashSet<>();
+        final Set<String> authoritySet = new HashSet<String>();
         super.getJdbcTemplate().query(searchRoleAuthority, roleParams, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
@@ -287,8 +287,8 @@ public class UserDao extends DecorateCommnDao {
      */
     private Set<String> fetchAllUserAuthorityIds(Set<String> authoritySet) {
         String searchUserAuthority = "select getAuthorityList(:authority_id)";
-        Map<String, Object> authorityParams = new HashMap<>();
-        final Set<String> authorityAllSet = new HashSet<>();
+        Map<String, Object> authorityParams = new HashMap<String,Object>();
+        final Set<String> authorityAllSet = new HashSet<String>();
         for (String authorityId : authoritySet) {
             authorityParams.put("authority_id", authorityId);
             super.getJdbcTemplate().query(searchUserAuthority, authorityParams, new RowCallbackHandler() {
@@ -310,8 +310,8 @@ public class UserDao extends DecorateCommnDao {
      */
     private List<HomeworkUserAuthority> fetchUserAuthorityDetail(Set<String> authorityAllSet) {
         String searchUserAuthorityDetail = "select authority_name,authoruty_description from homework_authority where authority_id=:authority_id";
-        Map<String, Object> authorityDetailParams = new HashMap<>();
-        final List<HomeworkUserAuthority> authorityList = new ArrayList<>();
+        Map<String, Object> authorityDetailParams = new HashMap<String,Object>();
+        final List<HomeworkUserAuthority> authorityList = new ArrayList<HomeworkUserAuthority>();
         for (String authorityId : authorityAllSet) {
             authorityDetailParams.put("authority_id", authorityId);
             super.getJdbcTemplate().query(searchUserAuthorityDetail, authorityDetailParams, new RowCallbackHandler() {
@@ -335,8 +335,8 @@ public class UserDao extends DecorateCommnDao {
      */
     private Set<HomeworkMenuVo> fetchUserMenuDetail(String roleId) {
         String searchUserMenuIds = "select menu_id from homework_role_menu where role_id=:role_id";
-        Map<String, Object> menuParams = new HashMap<>();
-        final Set<String> menuIdSet = new HashSet<>();
+        Map<String, Object> menuParams = new HashMap<String,Object>();
+        final Set<String> menuIdSet = new HashSet<String>();
         menuParams.put("role_id", roleId);
         super.getJdbcTemplate().query(searchUserMenuIds, menuParams, new RowCallbackHandler() {
             @Override
@@ -345,8 +345,8 @@ public class UserDao extends DecorateCommnDao {
             }
         });
         String searchUserRoleMenuIds = "select getMenuList(:menuId)";
-        Map<String, Object> menuRoleParams = new HashMap<>();
-        final Set<String> menuIds = new HashSet<>();
+        Map<String, Object> menuRoleParams = new HashMap<String,Object>();
+        final Set<String> menuIds = new HashSet<String>();
         for (String menuId : menuIdSet) {
             menuRoleParams.put("menuId", menuId);
             super.getJdbcTemplate().query(searchUserRoleMenuIds, menuRoleParams, new RowCallbackHandler() {
@@ -357,8 +357,8 @@ public class UserDao extends DecorateCommnDao {
             });
         }
         String searchUserMenuDetail = "select menu_name from homework_menu where menu_id=:menu_id";
-        Map<String, Object> menuDetailParams = new HashMap<>();
-        final Set<HomeworkMenuVo> menuVoList = new HashSet<>();
+        Map<String, Object> menuDetailParams = new HashMap<String,Object>();
+        final Set<HomeworkMenuVo> menuVoList = new HashSet<HomeworkMenuVo>();
         for (String menuId : menuIds) {
             for(String menuArray:menuId.split(",")){
                 menuDetailParams.put("menu_id", menuArray);

@@ -146,7 +146,7 @@ public class DecorateCommnDao implements ICommonDao {
         //查询当前页的数据
         List<G> resultList = this.commonDao.getOrderObjects(cl, map, orderstr, beginpos, count, rowMapper, isAsc);
 
-        final Map<String, Object> resultMap = new HashMap<>();
+        final Map<String, Object> resultMap = new HashMap<String, Object>();
         //查询总数据
         String tableName = this.commonDao.getEntityTableNameByClazz(cl);
         String countSql = "select count(*) from " + tableName;

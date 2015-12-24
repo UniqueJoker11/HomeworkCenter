@@ -22,7 +22,7 @@ public class RoleDao extends DecorateCommnDao {
      * @return
      */
     public List<String> getUserRoleInfo(String userId) {
-        Map<String, Object> searchParams = new HashMap<>();
+        Map<String, Object> searchParams = new HashMap<String, Object>();
         searchParams.put("user_id", userId);
         //根绝userId获取到所有的用户角色
         String searchSql = "select role_id from homework_user_role where user_id=:user_id";

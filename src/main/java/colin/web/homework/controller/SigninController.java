@@ -70,7 +70,7 @@ public class SigninController extends BaseController {
      */
     @RequestMapping(value = HomeworkConstants.CONTROLLER_SIGNIN_FORM, method = RequestMethod.POST)
     public String userSignin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
-        Map<String, Object> searchParams = new HashMap<>();
+        Map<String, Object> searchParams = new HashMap<String,Object>();
         searchParams.put("user_name", username);
         searchParams.put("user_password", password);
         Map<String, Object> searchResult = signinService.valdiateUserSignin(searchParams);

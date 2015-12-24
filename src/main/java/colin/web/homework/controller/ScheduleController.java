@@ -41,7 +41,7 @@ public class ScheduleController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object fetchSchedule(@RequestParam(value = "start", required = true) String start, @RequestParam(value = "end", required = true) String end, @RequestParam(value = "_") String _) {
-        Map<String, Object> searchParam = new HashMap<>();
+        Map<String, Object> searchParam = new HashMap<String,Object>();
         searchParam.put("start", start);
         searchParam.put("end", end);
         List<HomeworkScheduleVo> resultList = scheduleService.fetchUserSchedule(searchParam);
@@ -51,7 +51,7 @@ public class ScheduleController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ACTION_FETCH_TODAY_SCHEDULE, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object fetchTodaySchedule(@RequestParam(value = "start", required = true) String start, @RequestParam(value = "end", required = true) String end) {
-        Map<String, Object> searchParam = new HashMap<>();
+        Map<String, Object> searchParam = new HashMap<String, Object>();
         searchParam.put("start", start);
         searchParam.put("end", end);
         List<HomeworkScheduleVo> resultList = scheduleService.fetchUserTodaySchedule(searchParam);
@@ -66,7 +66,7 @@ public class ScheduleController extends BaseController {
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ACTION_PUBLISH_CURRENT_SCHEDULE, method = RequestMethod.POST)
     public Map<String, Object> publishCurrentTempler(@RequestParam(value = "schedule_start", required = true) String schedule_start, @RequestParam(value = "schedule_end", required = true) String schedule_end, @RequestParam(value = "schedule_title", required = true) String schedule_title) {
-        Map<String, Object> scheduleParams = new HashMap<>();
+        Map<String, Object> scheduleParams = new HashMap<String,Object>();
         scheduleParams.put("schedule_start", schedule_start);
         scheduleParams.put("schedule_end", schedule_start);
         scheduleParams.put("user_name", super.fetchUserInfo().getUser_name());
@@ -77,7 +77,7 @@ public class ScheduleController extends BaseController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("isSuccess", result);
         return resultMap;
     }

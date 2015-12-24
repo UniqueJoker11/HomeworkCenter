@@ -62,7 +62,6 @@
                                 <p class="text-center">或将图片文件拖至此处，最多添加4张图片</p>
                             </div>
                         </div>
-
                     </div>
                     <div id="uploadTemplateResourceReady" class="col-sm-10 hidden">
                         <div class="form-control colin-upload-snapshot_append">
@@ -71,16 +70,17 @@
                             </div>
                             <div id="templateSnapshotUploadForm">
                               <ul class="list-inline">
-                                  <li class="col-sm-9">
+                                  <li class="col-sm-7">
                                       <div class="progress">
                                           <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                               0%
                                           </div>
                                       </div>
                                   </li>
-                                  <li class="col-sm-3">
+                                  <li class="col-sm-5">
                                       <div id="resumeAddSnapshotBtn"></div>
                                       <button id="startUploadSnapshotBtn" type="button" class="btn btn-success">开始上传</button>
+                                      <button id="resetUploadSnapshotBtn" type="button" class="btn btn-danger">重新选择</button>
                                   </li>
                               </ul>
                             </div>
@@ -106,12 +106,13 @@
                         <div class="form-control">
                             <div id="templateResourceUpload">
                                 <ul class="list-inline">
-                                    <li class="col-sm-10">
+                                    <li class="col-sm-9">
                                         <div id="uploadZipResourceReadyFileInfo"></div>
                                     </li>
-                                    <li class="col-sm-2">
+                                    <li class="col-sm-3">
                                         <div class="text-right">
                                             <button type="button" class="btn btn-success">开始上传</button>
+                                            <button type="button" class="btn btn-danger">重新选择</button>
                                         </div>
                                     </li>
                                 </ul>
@@ -143,7 +144,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-4 text-center">
                         <button id="submitTemplateBtn" type="submit" class="btn btn-primary col-sm-5 ">提交</button>
-                        <button type="reset" class="btn btn-danger col-sm-5 col-sm-offset-1">重置</button>
+                        <button id="resetTemplateBtn" type="reset" class="btn btn-danger col-sm-5 col-sm-offset-1">重置</button>
                     </div>
                 </div>
             </div>
