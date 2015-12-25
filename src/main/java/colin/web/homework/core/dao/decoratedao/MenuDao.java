@@ -36,7 +36,7 @@ public class MenuDao extends DecorateCommnDao {
      * @return
      */
     public List<Homework_Menu_Entity> fetchUserMenuEntityByUserId(Map<String,Object> params){
-        String searchSql="select * from homework_menu WHERE menu_id in (select DISTINCT(menu_id) from homework_role_menu where role_id in (select role_id from homework_user_role where user_id=:userId));";
+        String searchSql="select * from homework_menu WHERE menu_id in (select DISTINCT(menu_id) from homework_role_menu where role_id in (select role_id from homework_user_role where user_id=:userId)) ORDER BY menu_order";
         return super.getJdbcTemplate().query(searchSql, params, new DefaultRowmapper<Homework_Menu_Entity>(Homework_Menu_Entity.class.getName()));
     }
 }
