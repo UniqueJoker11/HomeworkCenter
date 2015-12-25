@@ -2,6 +2,7 @@
  * Created by ASUS on 2015/9/30.
  */
 var aticleDatagrid;
+
 $(function(){
     //初始化文章列表
     aticleDatagrid=$("#aticleListTable").dataTable({
@@ -28,10 +29,6 @@ $(function(){
         });
 
 });
-//查看文章
-function checkAticleInfo(aticleId){
-
-}
 //开始编辑文章
 function editAticleInfo(aticleId){
 

@@ -98,7 +98,7 @@ public class AticleManageController extends BaseController {
         Map<String,Object> resultMap=new HashMap<String,Object>();
         if(result.hasErrors()){
             resultMap.put("isSucces",false);
-            Map<String, Object> errorMap = new HashMap<String, Object>();
+            Map<String, Object> errorMap = new HashMap<String,Object>();
             for (FieldError error : result.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
