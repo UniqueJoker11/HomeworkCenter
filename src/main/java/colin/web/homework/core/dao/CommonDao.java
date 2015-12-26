@@ -228,7 +228,6 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
      * @param orderstr
      * @param searchField
      * @param rowMapper
-     * @param isAsc
      * @return
      */
     @Override
@@ -243,9 +242,9 @@ public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDa
         }
         if (orderstr != null) {
             searchSql.append(" order by ").append(orderstr);
-        }
-        if (isAsc) {
-            searchSql.append(" asc");
+            if (!isAsc) {
+                searchSql.append(" desc");
+            }
         }
         return this.getNamedParameterJdbcTemplate().query(searchSql.toString(), map, rowMapper);
     }

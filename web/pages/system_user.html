@@ -12,80 +12,75 @@
     </div>
 </div>
 <div class="contentpanel">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-dark panel-alt widget-todo">
-                <div class="panel-heading">
-                    <div class="panel-btns">
-                        <a href="javascript:;" onclick="addUserInfo()" id="addUserInfoBtn" class="tooltips"
-                           data-toggle="tooltip" title="增加用户信息"
-                           data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
-                    </div>
-                    <!-- panel-btns -->
-                    <h3 class="panel-title">管理用户信息一览</h3>
+    <div class="panel panel-dark panel-alt widget-todo">
+        <div class="panel-heading">
+            <div class="panel-btns">
+                <a href="javascript:;" onclick="addUserInfo()" id="addUserInfoBtn" class="tooltips"
+                   data-toggle="tooltip" title="增加用户信息"
+                   data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
+            </div>
+            <!-- panel-btns -->
+            <h3 class="panel-title">管理用户信息一览</h3>
+        </div>
+        <div class="panel-body">
+            <div id="userInfoModal">
+                <div class="item">
+                    <table id="userInfoTable" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1">用户名</th>
+                            <th class="col-md-1">用户别称</th>
+                            <th class="col-md-1">用户邮箱</th>
+                            <th class="col-md-1">用户手机</th>
+                            <th class="col-md-1">创建时间</th>
+                            <th class="col-md-2">上次登陆时间</th>
+                            <th class="col-md-1">角色管理</th>
+                            <th class="col-md-2">用户操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for(user in userList){%>
+                        <tr id="user_${user.user_id}">
+                            <td>${user.user_name}</td>
+                            <td>${user.user_callname}</td>
+                            <td>${user.user_email}</td>
+                            <td>${user.user_phone}</td>
+                            <td>${user.user_createtime}</td>
+                            <td>${user.user_logintime}</td>
+                            <td>
+                                <button class="btn btn-success" onclick="configUserRole('${user.user_id}')">
+                                    配置角色
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" onclick="editUserInfo('${user.user_id}')">修改
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteUserInfo('${user.user_id}')">删除
+                                </button>
+                            </td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="panel-body nopadding">
-                    <div id="userInfoModal">
-                        <div class="item">
-                            <table id="userInfoTable" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-1">用户名</th>
-                                    <th class="col-md-1">用户别称</th>
-                                    <th class="col-md-1">用户邮箱</th>
-                                    <th class="col-md-1">用户手机</th>
-                                    <th class="col-md-1">创建时间</th>
-                                    <th class="col-md-2">上次登陆时间</th>
-                                    <th class="col-md-1">角色管理</th>
-                                    <th class="col-md-2">用户操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <%for(user in userList){%>
-                                <tr id="user_${user.user_id}">
-                                    <td>${user.user_name}</td>
-                                    <td>${user.user_callname}</td>
-                                    <td>${user.user_email}</td>
-                                    <td>${user.user_phone}</td>
-                                    <td>${user.user_createtime}</td>
-                                    <td>${user.user_logintime}</td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="configUserRole('${user.user_id}')">
-                                            配置角色
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary" onclick="editUserInfo('${user.user_id}')">修改
-                                        </button>
-                                        <button class="btn btn-danger" onclick="deleteUserInfo('${user.user_id}')">删除
-                                        </button>
-                                    </td>
-                                </tr>
-                                <%}%>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="item hidden">
-                            <div class="colin-return-part">
-                                <a href="javascript:;" onclick="returnLastMenu('1')"><span
-                                        class="glyphicon glyphicon-arrow-left"
-                                        aria-hidden="true"></span>&nbsp;返回用户列表</a>
-                            </div>
+                <div class="item hidden">
+                    <div class="colin-return-part">
+                        <a href="javascript:;" onclick="returnLastMenu('1')"><span
+                                class="glyphicon glyphicon-arrow-left"
+                                aria-hidden="true"></span>&nbsp;返回用户列表</a>
+                    </div>
 
-                            <table id="userRoleInfo" class="table table-bordered">
-                                <thead>
-                                <th class="col-sm-1">选择</th>
-                                <th class="col-sm-3">角色名称</th>
-                                <th class="col-sm-4">角色权限</th>
-                                <th class="col-sm-4">访问菜单</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <table id="userRoleInfo" class="table table-bordered">
+                        <thead>
+                        <th class="col-sm-1">选择</th>
+                        <th class="col-sm-3">角色名称</th>
+                        <th class="col-sm-4">角色权限</th>
+                        <th class="col-sm-4">访问菜单</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-                <!-- panel-body -->
             </div>
         </div>
     </div>

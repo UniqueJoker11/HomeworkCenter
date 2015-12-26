@@ -26,10 +26,10 @@ public interface ICommonDao {
 
     /**
      * 根据 主键 查询某个对象
-     *
-     * @param <E>
      * @param c
      * @param id
+     * @param rowMapper
+     * @param <T>
      * @return
      */
     public <T> T selectObjectById(final Class c, final String id, RowMapper<T> rowMapper);
@@ -44,24 +44,25 @@ public interface ICommonDao {
 
     /**
      * 带条件的查询.返回list集合
-     *
-     * @param <E>
      * @param c
-     * @param map 根据map里面放置的参数
-     * @return 返回一个list对象集合
+     * @param map
+     * @param rowMapper
+     * @param <T>
+     * @return
      */
     public <T> List<T> seletcObjectByMap(Class c, Map<String, Object> map, RowMapper<T> rowMapper);
 
     /**
      * 排序+分页功能+条件查询
-     *
-     * @param <E>
-     * @param cl       当前操作对象
-     * @param map      条件参数
-     * @param orderstr 排序字段 如果为null不排序
-     * @param beginpos 分页起点 如果为null不分页
-     * @param count    每页的记录总数 如果为null不分页
-     * @return 返回List集合
+     * @param cl
+     * @param map
+     * @param orderstr
+     * @param beginpos
+     * @param count
+     * @param rowMapper
+     * @param isAsc
+     * @param <T>
+     * @return
      */
     public <T> List<T> getOrderObjects(final Class cl, final Map<String, Object> map,
                                        final String orderstr, final Integer beginpos, final Integer count, RowMapper<T> rowMapper, boolean isAsc);
@@ -74,7 +75,6 @@ public interface ICommonDao {
      * @param orderstr
      * @param searchField
      * @param rowMapper
-     * @param isAsc
      * @param <T>
      * @return
      */

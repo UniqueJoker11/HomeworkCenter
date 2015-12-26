@@ -120,6 +120,10 @@ public class AticleManageController extends BaseController {
         return null;
     }
 
+    /**
+     * 返回所有的文章对象
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_ATICLE_SEARCH_ALL_ACTION,method = RequestMethod.POST)
     public Object searchAticleObjWithoutPage(){
