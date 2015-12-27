@@ -32,6 +32,8 @@ public class HomeworkConstants {
     //文章分类页面
     public static final String PAGE_ATICLE_CATEGORY_VIEW="aticle_classify";
 
+    //导航管理
+    public static final String PAGE_NAV_MANAGE_VIEW="nav_manage";
     //转载文章页面
     public static final String PAGE_REPRINT_ATICLE_VIEW = "reprint_aticle";
 
@@ -143,6 +145,17 @@ public class HomeworkConstants {
     public static final String CONTROLLER_ATICLE_CATEGORY_ADD_ACTION="/aticle_classify_add.action";
     //更新文章分类
     public static final String CONTROLLER_ATICLE_CATEGORY_UPDATE_ACTION="/aticle_classify_update.action";
+
+    //显示导航管理
+    public static final String CONTROLLER_NAV_MANAGE_SHOW_PAGE="/nav_manage.html";
+    //增加导航
+    public static final String CONTROLLER_NAV_MANAGE_ADD_ACTION="/nav_manage_add.action";
+    //删除导航
+    public static final String CONTROLLER_NAV_MANAGE_DEL_ACTION="/nav_manage_del.action";
+    //更新导航
+    public static final String CONTROLLER_NAV_MANAGE_UPDATE_ACTION="/nav_manage_update.action";
+    //获取全部导航
+    public static final String CONTROLLER_NAV_MANAGE_FETCH_ACTION="/nav_manage_fetch.action";
 
     //获取当日的行程
     public static final String CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE = "/fetch_current_schedule.action";
