@@ -35,7 +35,7 @@ $(function () {
             }
             e.nav_par = e.nav_parent_id == "root" ? "根导航" : "";
             e.nav_operation = "<button class=\"btn btn-info btn-sm\" onclick=\"editNav('" + e.nav_id + "')\">编辑 </button>" +
-            "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + e.nav_id + "\')\">删除</button>"
+            "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + e.nav_id + "\')\">删除</button>"+"&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"configNav(\'" + e.nav_id + "\')\">配置分类</button>"
         });
         return result;
     });
