@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="${ctxPath}/css/pages/aticle_classify.css"/>
+<script type="text/javascript" src="${ctxPath}/js/pages/aticle_classify.js"></script>
+<div class="pageheader">
+    <h2><i class="fa fa-book"></i> 我的文章 <span>导航管理</span></h2>
+
+    <div class="breadcrumb-wrapper">
+        <span class="label">当前位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="calendar.html">我的文章</a></li>
+            <li class="active">导航管理</li>
+        </ol>
+    </div>
+</div>
+<div class="contentpanel">
+    <div class="panel panel-dark panel-alt">
+        <div class="panel-heading">
+            <div class="panel-btns">
+                <a href="javascript:;" id="addAticleClassifyBtn" class="tooltips" data-toggle="tooltip" title=""
+                   data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
+            </div>
+            <h3 class="panel-title">导航管理</h3>
+        </div>
+        <div class="panel-body">
+            <table id="aticleClassifyTable" class="table">
+                <thead>
+                <tr>
+                    <th class="col-sm-2" name="classify_index">分类序号</th>
+                    <th class="col-sm-2" name="classify_name">分类名称</th>
+                    <th class="col-sm-3" name="classify_createtime">创建时间</th>
+                    <th class="col-sm-2" name="classify_createuser">创建人</th>
+                    <th class="col-sm-2" name="classify_operation">分类操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--增加文章分类对话框-->
+<div id="addAticleClassifyDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加文章分类</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="addAticleClassifyName">分类名称</label>
+                    <input type="text" class="form-control" id="addAticleClassifyName" placeholder="不能为空！">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addAticleClassify()">增加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑文章分类对话框-->
+<div id="editAticleClassifyDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑文章分类</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editAticleClassifyName">分类名称</label>
+                    <input type="text" class="form-control" id="editAticleClassifyName" placeholder="不能为空！">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="updateAticleClassifyInfo()">更新</button>
+            </div>
+        </div>
+    </div>
+</div>

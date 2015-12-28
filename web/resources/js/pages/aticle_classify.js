@@ -13,13 +13,13 @@ $(function () {
             {"data": "classify_operation"}
         ]
     };
-    $.extend(options, extendOptions);
-    aticleClassifyDatagrid = $("#aticleClassifyTable").DataTable(options);
+    $.extend(extendOptions, options);
+    aticleClassifyDatagrid = $("#aticleClassifyTable").DataTable(extendOptions);
     //过滤表格的显示效果
     aticleClassifyDatagrid.on('xhr', function () {
         var result = aticleClassifyDatagrid.ajax.json().data;
         $.each(result, function (i, e) {
-            e.classify_index = i;
+            e.classify_index = (i+1);
             e.classify_operation = "<button class=\"btn btn-info\" onclick=\"editAticleClassify('" + e.classify_id + "')\">编辑 </button>" +
             "&nbsp;<button class=\"btn btn-danger\" onclick=\"delAticleClassify(\'" + e.classify_id + "\')\">删除</button>"
         });
