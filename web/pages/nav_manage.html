@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="${ctxPath}/css/pages/aticle_classify.css"/>
-<script type="text/javascript" src="${ctxPath}/js/pages/aticle_classify.js"></script>
+<link rel="stylesheet" href="${ctxPath}/css/pages/nav_manage.css"/>
+<script type="text/javascript" src="${ctxPath}/js/pages/nav_manage.js"></script>
 <div class="pageheader">
     <h2><i class="fa fa-book"></i> 我的文章 <span>导航管理</span></h2>
 
@@ -15,68 +15,95 @@
     <div class="panel panel-dark panel-alt">
         <div class="panel-heading">
             <div class="panel-btns">
-                <a href="javascript:;" id="addAticleClassifyBtn" class="tooltips" data-toggle="tooltip" title=""
+                <a href="javascript:;" id="addNavBtn" class="tooltips" data-toggle="tooltip"
                    data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
             </div>
-            <h3 class="panel-title">导航管理</h3>
+            <h3 class="panel-title">首页导航管理</h3>
         </div>
         <div class="panel-body">
-            <table id="aticleClassifyTable" class="table">
-                <thead>
-                <tr>
-                    <th class="col-sm-2" name="classify_index">分类序号</th>
-                    <th class="col-sm-2" name="classify_name">分类名称</th>
-                    <th class="col-sm-3" name="classify_createtime">创建时间</th>
-                    <th class="col-sm-2" name="classify_createuser">创建人</th>
-                    <th class="col-sm-2" name="classify_operation">分类操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table id="navTable" class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-2" name="nav_index">导航序号</th>
+                        <th class="col-sm-2" name="nav_name">导航名称</th>
+                        <th class="col-sm-2" name="nav_parent">上级导航</th>
+                        <th class="col-sm-2" name="nav_createtime">创建时间</th>
+                        <th class="col-sm-2" name="nav_createuser">创建人</th>
+                        <th class="col-sm-3" name="nav_operation">分类操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 <!--增加文章分类对话框-->
-<div id="addAticleClassifyDialog" class="modal fade">
+<div id="addNavDialog" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加文章分类</h4>
+                <h4 class="modal-title">添加首页导航</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="addAticleClassifyName">分类名称</label>
-                    <input type="text" class="form-control" id="addAticleClassifyName" placeholder="不能为空！">
+                    <label for="addNavName">导航名称</label>
+                    <input type="text" class="form-control" id="addNavName" placeholder="不能为空！">
+                </div>
+                <div class="form-group">
+                    <label for="addNavLevel">导航级别</label>
+                    <select id="addNavLevel" class="form-control">
+                        <option value="0">顶级导航</option>
+                        <option value="1">二级导航</option>
+                    </select>
+                </div>
+                <div id="addParentNavDiv" class="form-group hidden">
+                    <label for="addParentNav">上级导航</label>
+                    <select id="addParentNav" class="form-control">
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="addAticleClassify()">增加</button>
+                <button type="button" class="btn btn-primary" onclick="addNav()">增加</button>
             </div>
         </div>
     </div>
 </div>
 <!--编辑文章分类对话框-->
-<div id="editAticleClassifyDialog" class="modal fade">
+<div id="editNavDialog" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">编辑文章分类</h4>
+                <h4 class="modal-title">编辑首页导航</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="editAticleClassifyName">分类名称</label>
-                    <input type="text" class="form-control" id="editAticleClassifyName" placeholder="不能为空！">
+                    <label for="editNavName">导航名称</label>
+                    <input type="text" class="form-control" id="editNavName" placeholder="不能为空！">
+                </div>
+                <div class="form-group">
+                    <label for="editNavLevel">导航级别</label>
+                    <select id="editNavLevel" class="form-control">
+                        <option value="0">顶级导航</option>
+                        <option value="1">二级导航</option>
+                    </select>
+                </div>
+                <div id="editParentNavDiv" class="form-group hidden">
+                    <label for="editParentNav">上级导航</label>
+                    <select id="editParentNav" class="form-control">
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="updateAticleClassifyInfo()">更新</button>
+                <button type="button" class="btn btn-primary" onclick="updateNav()">更新</button>
             </div>
         </div>
     </div>

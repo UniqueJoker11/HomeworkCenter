@@ -4,6 +4,8 @@ import colin.web.homework.core.dao.decoratedao.NavManageDao;
 import colin.web.homework.core.pojo.Homework_Nav_Manage_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
 import colin.web.homework.core.vo.HomeworkNavManageVo;
+import colin.web.homework.tools.DateToolsUtils;
+import colin.web.homework.tools.StringToolsUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +75,10 @@ public class NavManageService {
     }
 
     public void addNavManageEntity(Map<String, Object> params) {
-        navManageDao.addObjInfo(copyNavManageEntity(params));
+        Homework_Nav_Manage_Entity navManageEntity=copyNavManageEntity(params);
+        navManageEntity.setNav_id(StringToolsUtils.getCommonUUID());
+        navManageEntity.setNav_createtime(DateToolsUtils.getTodayCurrentTime());
+        navManageDao.addObjInfo(navManageEntity);
     }
 
     public void delNavManageEntity(String idVal) {
@@ -83,8 +89,15 @@ public class NavManageService {
         navManageDao.updateObjInfo(copyNavManageEntity(params));
     }
 
+    public List<Homework_Nav_Manage_Entity> fetchAppRootNavEntity() {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("nav_parent_id", "root");
+        return navManageDao.seletcObjectByMap(Homework_Nav_Manage_Entity.class, params, new DefaultRowmapper<Homework_Nav_Manage_Entity>(Homework_Nav_Manage_Entity.class.getName()));
+    }
+
     /**
      * 生成nav对象
+     *
      * @param params
      * @return
      */
@@ -99,4 +112,5 @@ public class NavManageService {
         }
         return navManageEntity;
     }
+
 }
