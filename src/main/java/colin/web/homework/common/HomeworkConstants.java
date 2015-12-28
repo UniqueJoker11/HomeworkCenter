@@ -156,7 +156,8 @@ public class HomeworkConstants {
     public static final String CONTROLLER_NAV_MANAGE_UPDATE_ACTION="/nav_manage_update.action";
     //获取全部导航
     public static final String CONTROLLER_NAV_MANAGE_FETCH_ACTION="/nav_manage_fetch.action";
-
+    //获取所有的根导航
+    public static final String CONTROLLER_NAV_MANAGE_ROOT_FETCH_ACTION="/nav_manage_root_fetch.action";
     //获取当日的行程
     public static final String CONTROLLER_ACTION_FETCH_CURRENT_SCHEDULE = "/fetch_current_schedule.action";
     //获取当日的行程

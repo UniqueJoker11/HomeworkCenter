@@ -1,5 +1,6 @@
 package colin.web.homework.core.pojo;
 
+import colin.web.homework.annotation.Column;
 import colin.web.homework.annotation.Id;
 import colin.web.homework.annotation.Table;
 
@@ -10,10 +11,15 @@ import colin.web.homework.annotation.Table;
 public class Homework_Nav_Manage_Entity {
 
     @Id
+    @Column(name = "nav_id")
     private String nav_id;
+    @Column(name = "nav_name")
     private String nav_name;
+    @Column(name = "nav_parent_id")
     private String nav_parent_id;
+    @Column(name = "nav_createtime")
     private String nav_createtime;
+    @Column(name = "nav_user")
     private String nav_user;
 
     public String getNav_id() {
