@@ -4,6 +4,7 @@ import colin.web.homework.common.CommonReturnResult;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;
 import colin.web.homework.core.vo.HomeworkNavManageVo;
+import colin.web.homework.service.NavClassifyService;
 import colin.web.homework.service.NavManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,6 +29,9 @@ public class NavManageController extends BaseController{
 
     @Autowired
     private NavManageService manageService;
+
+    @Autowired
+    private NavClassifyService navClassifyService;
 
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_SHOW_PAGE)
     public String showNavManagePage() {
@@ -74,5 +78,19 @@ public class NavManageController extends BaseController{
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_ROOT_FETCH_ACTION)
     public Object fetchAllRootNavManage() {
         return new CommonReturnResult(true, manageService.fetchAppRootNavEntity());
+    }
+
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_CLASSIFY_FETCH_ACTION)
+    public Object fetchNavClassifyInfo(@RequestParam String navId){
+        return new CommonReturnResult(true,navClassifyService.fetchAllNavByNavId(navId));
+    }
+    @ResponseBody
+    @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_CLASSIFY_UPDATE_ACTION)
+    public Object updateNavClassifyInfo(@RequestParam String navId,@RequestParam String[] classifyIds){
+        //先删除所有的原来的信息
+        navClassifyService.delNavClassify(navId);
+        navClassifyService.addNavClassifies(navId,classifyIds);
+        return new CommonReturnResult(true);
     }
 }
