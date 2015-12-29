@@ -21,9 +21,10 @@ function initMenuTree(data) {
     var setting = {
         treeId: "colinRoleMenuList",
         view: {
-            dblClickExpand: false,
-            showLine: true,
-            selectedMulti: false
+            dblClickExpand: true,
+            selectedMulti: true,
+            txtSelectedEnable: true
+
         },
         data: {
             simpleData: {

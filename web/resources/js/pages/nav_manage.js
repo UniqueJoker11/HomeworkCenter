@@ -29,13 +29,13 @@ $(function () {
                         "nav_par": e.nav_name,
                         "nav_createtime": childNav.nav_createtime,
                         "nav_user": childNav.nav_user,
-                        "nav_operation": "<button class=\"btn btn-info btn-sm\" onclick=\"editNav('" + childNav.nav_id + "')\">编辑 </button>" + "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + childNav.nav_id + "\')\">删除</button>"
+                        "nav_operation": "<button class=\"btn btn-info btn-sm\" onclick=\"editNav('" + childNav.nav_id + "')\">编辑 </button>" + "&nbsp;<button class=\"btn btn-primary btn-sm\" onclick=\"configNav(\'" + childNav.nav_id + "\')\">配置分类</button>" + "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + childNav.nav_id + "\')\">删除</button>"
                     });
                 });
             }
             e.nav_par = e.nav_parent_id == "root" ? "根导航" : "";
             e.nav_operation = "<button class=\"btn btn-info btn-sm\" onclick=\"editNav('" + e.nav_id + "')\">编辑 </button>" +
-            "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + e.nav_id + "\')\">删除</button>"+"&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"configNav(\'" + e.nav_id + "\')\">配置分类</button>"
+            "&nbsp;<button class=\"btn btn-primary btn-sm\" onclick=\"configNav(\'" + e.nav_id + "\')\">配置分类</button>" + "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + e.nav_id + "\')\">删除</button>"
         });
         return result;
     });
@@ -59,7 +59,7 @@ $(function () {
             $("#addParentNavDiv").addClass("hidden");
         }
     });
-    $("#editNavLevel").on("change",function(){
+    $("#editNavLevel").on("change", function () {
         var $sel = $(event.target);
         if ($sel.val() == 1) {
             //加载所有的顶级菜单
@@ -122,19 +122,19 @@ function editNav(idVal) {
 //更新导航内容
 function updateNav() {
     var $navName = $("#editNavName");
-    if($.trim($navName.val())==""){
+    if ($.trim($navName.val()) == "") {
         alert("导航名称不能为空！");
-    }else{
-        var params=new Object();
-        params.navName= $.trim($navName.val());
-        params.idVal=$("#editNavDialog").attr("data-idVal");
-        params.navParentId=$("#editNavLevel").val()==0?"root":$("#editParentNav").val();
-        $.post("./nav_manage_update.action",params,function(data){
+    } else {
+        var params = new Object();
+        params.navName = $.trim($navName.val());
+        params.idVal = $("#editNavDialog").attr("data-idVal");
+        params.navParentId = $("#editNavLevel").val() == 0 ? "root" : $("#editParentNav").val();
+        $.post("./nav_manage_update.action", params, function (data) {
             $("#editNavDialog").modal("hide");
-            if(data.success){
+            if (data.success) {
                 navTableGrid.ajax.reload();
                 alert("更新导航内容成功！");
-            }else{
+            } else {
                 alert("更新导航内容失败！");
             }
         });
@@ -150,4 +150,61 @@ function delNav(idVal) {
             }
         });
     }
+}
+
+//配置导航菜单
+var zTreeObj=null;
+function configNav(idVal) {
+    if(zTreeObj!=null){
+        zTreeObj.setting.async.otherParam= {"navId": idVal};
+        zTreeObj.reAsyncChildNodes(null, "refresh");
+    }else{
+        //初始化树结构
+        setting = {
+            async: {
+                enable: true,
+                otherParam: {"navId": idVal},
+                type: 'post',
+                url: './nav_manage_classify_fetch.action',
+                dataFilter: function (treeId, parentNode, responseData) {
+                    return responseData.data;
+                }
+            },
+            check: {
+                enable: true
+            },
+            view: {
+                selectedMulti: false,
+                txtSelectedEnable: true
+            },
+            callback: {}
+        },
+            zTreeObj = $.fn.zTree.init($("#configNavClassifyTree"), setting, null);
+    }
+    //打开对话框
+    $("#configNavClassifyDialog").attr("data-id", idVal).modal("show");
+}
+//保存导航分类配置
+function saveConfigNavClassify() {
+    var nodes = zTreeObj.getCheckedNodes(true);
+    if (nodes.length <= 0) {
+        alert("请选择要保存的配置分类");
+    } else {
+        var params = new Object();
+        params.navId = $("#configNavClassifyDialog").attr("data-id");
+        var classifyIds = new Array();
+        $.each(nodes, function (i, e) {
+            classifyIds.push(e.id);
+        });
+        params.classifyIds=classifyIds;
+        $.post("./nav_manage_classify_update.action", params, function (data) {
+            if (data.success) {
+                alert("保存导航分类成功！");
+            } else {
+                alert("保存导航分类失败！");
+            }
+            $("#configNavClassifyDialog").modal("hide");
+        });
+    }
+
 }
