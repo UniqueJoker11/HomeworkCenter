@@ -83,11 +83,11 @@ public class NavManageController extends BaseController{
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_CLASSIFY_FETCH_ACTION)
     public Object fetchNavClassifyInfo(@RequestParam String navId){
-        return new CommonReturnResult(true,navClassifyService.fetchAllNavByNavId(navId));
+        return new CommonReturnResult(true,navClassifyService.fetchNavClassifyTree(navId));
     }
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_CLASSIFY_UPDATE_ACTION)
-    public Object updateNavClassifyInfo(@RequestParam String navId,@RequestParam String[] classifyIds){
+    public Object updateNavClassifyInfo(@RequestParam String navId,@RequestParam(name = "classifyIds[]") String[] classifyIds){
         //先删除所有的原来的信息
         navClassifyService.delNavClassify(navId);
         navClassifyService.addNavClassifies(navId,classifyIds);

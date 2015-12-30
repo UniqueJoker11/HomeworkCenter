@@ -1,4 +1,6 @@
+<link rel="stylesheet" href="${ctxPath}/css/plugin/ztree/ztree.css"/>
 <link rel="stylesheet" href="${ctxPath}/css/pages/nav_manage.css"/>
+<script type="text/javascript" src="${ctxPath}/js/plugin/ztree/jquery.ztree.all-3.5.js"></script>
 <script type="text/javascript" src="${ctxPath}/js/pages/nav_manage.js"></script>
 <div class="pageheader">
     <h2><i class="fa fa-book"></i> 我的文章 <span>导航管理</span></h2>
@@ -25,12 +27,12 @@
                 <table id="navTable" class="table">
                     <thead>
                     <tr>
-                        <th class="col-sm-2" name="nav_index">导航序号</th>
-                        <th class="col-sm-2" name="nav_name">导航名称</th>
-                        <th class="col-sm-2" name="nav_parent">上级导航</th>
-                        <th class="col-sm-2" name="nav_createtime">创建时间</th>
-                        <th class="col-sm-2" name="nav_createuser">创建人</th>
-                        <th class="col-sm-3" name="nav_operation">分类操作</th>
+                        <th class="col-md-1" name="nav_index">序号</th>
+                        <th class="col-md-2" name="nav_name">导航名称</th>
+                        <th class="col-md-2" name="nav_parent">上级导航</th>
+                        <th class="col-md-2" name="nav_createtime">创建时间</th>
+                        <th class="col-md-2" name="nav_createuser">创建人</th>
+                        <th class="col-md-4" name="nav_operation">分类操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -104,6 +106,25 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary" onclick="updateNav()">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--配置导航的文章分类-->
+<div id="configNavClassifyDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">配置导航分类</h4>
+            </div>
+            <div class="modal-body">
+               <ul id="configNavClassifyTree"  class="ztree"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="saveConfigNavClassify()">保存</button>
             </div>
         </div>
     </div>

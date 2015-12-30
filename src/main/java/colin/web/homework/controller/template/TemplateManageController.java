@@ -62,7 +62,7 @@ public class TemplateManageController extends BaseController {
     @RequestMapping(value = HomeworkConstants.CONTROLLER_TEMPLATE_PAGE_LIST, method = RequestMethod.POST)
     public Object showTemplateInfoByPage(HttpServletRequest request) {
         //初始化模板列表内容
-        int currentPage = 0;
+        int currentPage = 1;
         if (request.getParameter("currentPage") != null) {
             currentPage = Integer.valueOf(request.getParameter("currentPage").toString());
         }

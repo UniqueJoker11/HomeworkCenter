@@ -1,8 +1,11 @@
 package colin.web.homework.service;
 
+import colin.web.homework.core.dao.decoratedao.AticleClassifyDao;
 import colin.web.homework.core.dao.decoratedao.NavClassifyDao;
+import colin.web.homework.core.pojo.Homework_Aticle_Classify_Entity;
 import colin.web.homework.core.pojo.Homework_Nav_Classify_Entity;
 import colin.web.homework.core.rowmapper.DefaultRowmapper;
+import colin.web.homework.core.vo.NavClassifyNodeVo;
 import colin.web.homework.tools.StringToolsUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class NavClassifyService {
     @Autowired
     private NavClassifyDao classifyDao;
 
+    @Autowired
+    private AticleClassifyDao aticleClassifyDao;
     /**
      * 添加单独的对象
      *
@@ -47,17 +52,36 @@ public class NavClassifyService {
     }
 
     public void delNavClassify(String navId) {
-        String delNavClassify = "delete from homework_mav_classify where nav_id=:navId";
+        String delNavClassify = "delete from homework_nav_classify where nav_id=:navId";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("navId", navId);
         classifyDao.getJdbcTemplate().update(delNavClassify, params);
     }
 
-    public List<Homework_Nav_Classify_Entity> fetchAllNavByNavId(String navId) {
-        String delNavClassify = "select * from homework_mav_classify where nav_id=:navId";
+    protected List<Homework_Nav_Classify_Entity> fetchAllNavByNavId(String navId) {
+        String delNavClassify = "select * from homework_nav_classify where nav_id=:navId";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("navId", navId);
         return classifyDao.getJdbcTemplate().query(delNavClassify, params, new DefaultRowmapper<Homework_Nav_Classify_Entity>(Homework_Nav_Classify_Entity.class.getName()));
+    }
+    public List<NavClassifyNodeVo> fetchNavClassifyTree(String navId){
+        List<Homework_Aticle_Classify_Entity> aticleClassifyEntities=aticleClassifyDao.fetchAll();
+        List<Homework_Nav_Classify_Entity> navClassifyEntities=this.fetchAllNavByNavId(navId);
+        List<NavClassifyNodeVo> classifyNodeVoList=new ArrayList<NavClassifyNodeVo>();
+        for(Homework_Aticle_Classify_Entity aticleClassifyEntity:aticleClassifyEntities){
+            NavClassifyNodeVo classifyNodeVo=new NavClassifyNodeVo();
+            classifyNodeVo.setId(aticleClassifyEntity.getClassify_id());
+            classifyNodeVo.setName(aticleClassifyEntity.getClassify_name());
+            classifyNodeVo.setChecked(false);
+            for(Homework_Nav_Classify_Entity navClassifyEntity:navClassifyEntities){
+                if(aticleClassifyEntity.getClassify_id().equals(navClassifyEntity.getClassify_id())){
+                    classifyNodeVo.setChecked(true);
+                    break;
+                }
+            }
+            classifyNodeVoList.add(classifyNodeVo);
+        }
+        return classifyNodeVoList;
     }
 
     /**
