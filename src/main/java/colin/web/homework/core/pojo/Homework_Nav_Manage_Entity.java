@@ -21,6 +21,16 @@ public class Homework_Nav_Manage_Entity {
     private String nav_createtime;
     @Column(name = "nav_user")
     private String nav_user;
+    @Column(name = "nav_url")
+    private String nav_url;
+
+    public String getNav_url() {
+        return nav_url;
+    }
+
+    public void setNav_url(String nav_url) {
+        this.nav_url = nav_url;
+    }
 
     public String getNav_id() {
         return nav_id;

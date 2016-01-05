@@ -3,6 +3,7 @@ package colin.web.homework.controller;
 import colin.web.homework.core.pojo.Homework_Aticle_Entity;
 import colin.web.homework.core.vo.HomeworkAticleVo;
 import colin.web.homework.service.AticleService;
+import colin.web.homework.service.NavManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ public class BlogIndexController extends BaseController {
 
     @Autowired
     private AticleService aticleService;
+    @Autowired
+    private NavManageService navManageService;
 
     /**
      * 显示博客首页

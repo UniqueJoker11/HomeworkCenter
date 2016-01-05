@@ -9,6 +9,7 @@ $(function () {
             {"data": "nav_index"},
             {"data": "nav_name"},
             {"data": "nav_par"},
+            {"data":"nav_url"},
             {"data": "nav_createtime"},
             {"data": "nav_user"},
             {"data": "nav_operation"}
@@ -27,6 +28,7 @@ $(function () {
                         "nav_index": (i + j + 2),
                         "nav_name": childNav.nav_name,
                         "nav_par": e.nav_name,
+                        "nav_url": childNav.nav_url,
                         "nav_createtime": childNav.nav_createtime,
                         "nav_user": childNav.nav_user,
                         "nav_operation": "<button class=\"btn btn-info btn-sm\" onclick=\"editNav('" + childNav.nav_id + "')\">编辑 </button>" + "&nbsp;<button class=\"btn btn-primary btn-sm\" onclick=\"configNav(\'" + childNav.nav_id + "\')\">配置分类</button>" + "&nbsp;<button class=\"btn btn-danger btn-sm\" onclick=\"delNav(\'" + childNav.nav_id + "\')\">删除</button>"
@@ -85,6 +87,7 @@ function addNav() {
         var params = new Object();
         params.navName = $.trim($navName.val());
         params.navParentId = $("#addNavLevel").val() == 1 ? $("#addParentNav").val() : "root";
+        params.navUrl=$("#addNavUrl").val();
         $.post("./nav_manage_add.action", params, function (data) {
             $("#addNavDialog").modal("hide");
             if (data.success) {
@@ -102,6 +105,7 @@ function addNav() {
 function editNav(idVal) {
     var $navObj = $(event.target).parent("td");
     $("#editNavName").val($navObj.siblings("td:eq(1)").html());
+    $("#editNavUrl").val($navObj.siblings("td:eq(3)").html());
     if ($navObj.siblings("td:eq(2)").html() != "根导航") {
         $("#editNavLevel").val("1");
         //加载所有的顶级菜单
@@ -129,6 +133,7 @@ function updateNav() {
         params.navName = $.trim($navName.val());
         params.idVal = $("#editNavDialog").attr("data-idVal");
         params.navParentId = $("#editNavLevel").val() == 0 ? "root" : $("#editParentNav").val();
+        params.navUrl=$("#editNavUrl").val();
         $.post("./nav_manage_update.action", params, function (data) {
             $("#editNavDialog").modal("hide");
             if (data.success) {
