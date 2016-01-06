@@ -1,5 +1,5 @@
 body {
-    background: #EBEBEB;
+    background: #f6f6f6;
 }
 
 .blog-header {
@@ -31,7 +31,7 @@ body {
     line-height: 58px;
 }
 
-.blog-navbar .menu li {
+.blog-navbar .menu .topnav {
     width: 110px;
     text-align: center;
     display: inline-block;
@@ -62,7 +62,7 @@ hr{
     color: #545454;
 }
 .blog-list-loading{
-    font-size: 6.6em;
+    font-size: 2.6em;
 }
 #blogInfoList .panel-body{
     height:260px;

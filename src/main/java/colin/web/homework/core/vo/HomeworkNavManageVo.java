@@ -13,6 +13,7 @@ public class HomeworkNavManageVo {
     private String nav_parent_id;
     private String nav_createtime;
     private String nav_user;
+    private String nav_url;
     private List<HomeworkNavManageVo> childNavManageVoList;
 
     public String getNav_id() {
@@ -61,5 +62,13 @@ public class HomeworkNavManageVo {
 
     public void setChildNavManageVoList(List<HomeworkNavManageVo> childNavManageVoList) {
         this.childNavManageVoList = childNavManageVoList;
+    }
+
+    public String getNav_url() {
+        return nav_url;
+    }
+
+    public void setNav_url(String nav_url) {
+        this.nav_url = nav_url;
     }
 }
