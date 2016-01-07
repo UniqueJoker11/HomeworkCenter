@@ -28,7 +28,7 @@ public class NavManageService {
     private NavManageDao navManageDao;
 
     public List<HomeworkNavManageVo> fetchAllNavManage() {
-        List<Homework_Nav_Manage_Entity> navManageEntities = navManageDao.seletcObjectByMap(Homework_Nav_Manage_Entity.class, null, new DefaultRowmapper<Homework_Nav_Manage_Entity>(Homework_Nav_Manage_Entity.class.getName()));
+        List<Homework_Nav_Manage_Entity> navManageEntities = navManageDao.fetchAllNavManageEntity();
         if (navManageEntities == null || navManageEntities.isEmpty()) {
             return null;
         } else {

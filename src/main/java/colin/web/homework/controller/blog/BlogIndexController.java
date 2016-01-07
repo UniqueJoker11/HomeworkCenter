@@ -1,5 +1,6 @@
-package colin.web.homework.controller;
+package colin.web.homework.controller.blog;
 
+import colin.web.homework.controller.BaseController;
 import colin.web.homework.core.pojo.Homework_Aticle_Entity;
 import colin.web.homework.core.vo.HomeworkAticleVo;
 import colin.web.homework.service.AticleService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -33,7 +35,8 @@ public class BlogIndexController extends BaseController {
      * @return
      */
     @RequestMapping(value = "blog_index.html", method = RequestMethod.GET)
-    public String showBlogIndex() {
+    public String showBlogIndex(HttpServletRequest request) {
+        request.setAttribute("index",1);
         return "blog_index";
     }
 
@@ -43,7 +46,8 @@ public class BlogIndexController extends BaseController {
      * @return
      */
     @RequestMapping(value = "blog_detail.html", method = RequestMethod.GET)
-    public String showBlogDetail(@RequestParam String aticleId) {
+    public String showBlogDetail(HttpServletRequest request,@RequestParam String aticleId) {
+        request.setAttribute("index",2);
         //根据id加载文章详情
         Homework_Aticle_Entity aticleEntity = aticleService.findAticleDetailInfo(aticleId);
         super.getRequestObj().setAttribute("aticle", aticleEntity);

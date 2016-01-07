@@ -23,6 +23,8 @@ public class Homework_Nav_Manage_Entity {
     private String nav_user;
     @Column(name = "nav_url")
     private String nav_url;
+    @Column(name = "nav_sort")
+    private int nav_sort;
 
     public String getNav_url() {
         return nav_url;
@@ -70,5 +72,13 @@ public class Homework_Nav_Manage_Entity {
 
     public void setNav_user(String nav_user) {
         this.nav_user = nav_user;
+    }
+
+    public int getNav_sort() {
+        return nav_sort;
+    }
+
+    public void setNav_sort(int nav_sort) {
+        this.nav_sort = nav_sort;
     }
 }

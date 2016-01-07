@@ -14,7 +14,7 @@ import java.util.List;
 public class NavManageDao extends DecorateCommnDao{
 
     public List<Homework_Nav_Manage_Entity> fetchAllNavManageEntity(){
-        return super.seletcObjectByMap(Homework_Aticle_Entity.class,null,new DefaultRowmapper<Homework_Nav_Manage_Entity>(Homework_Nav_Manage_Entity.class.getName()));
+        return super.getAmongObjectWithOrder(Homework_Nav_Manage_Entity.class, null, "nav_sort", "", new DefaultRowmapper<Homework_Nav_Manage_Entity>(Homework_Nav_Manage_Entity.class.getName()), true);
     }
 
 }

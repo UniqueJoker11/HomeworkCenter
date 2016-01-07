@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.beetl:beetl-core:2.2.5za">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/beetl/beetl-core/2.2.5za/beetl-core-2.2.5za.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/beetl/beetl-core/2.2.5za/beetl-core-2.2.5za-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/beetl/beetl-core/2.2.5za/beetl-core-2.2.5za-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
