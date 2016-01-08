@@ -31,6 +31,7 @@ public class BlogIndexController extends BaseController {
 
     /**
      * 显示博客首页
+     * 首页的显示规则，按照导航分类，然后每一个分类中显示5条内容，点击查看更多跳转至相应的页面
      *
      * @return
      */
@@ -40,29 +41,7 @@ public class BlogIndexController extends BaseController {
         return "blog_index";
     }
 
-    /**
-     * 显示博文详情页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "blog_detail.html", method = RequestMethod.GET)
-    public String showBlogDetail(HttpServletRequest request,@RequestParam String aticleId) {
-        request.setAttribute("index",2);
-        //根据id加载文章详情
-        Homework_Aticle_Entity aticleEntity = aticleService.findAticleDetailInfo(aticleId);
-        super.getRequestObj().setAttribute("aticle", aticleEntity);
-        //获取相似文章推荐列表，根绝标签进行搜索,一次性推荐最多6篇文章
-        if (aticleEntity != null) {
-            List<HomeworkAticleVo> recommondAticleList = this.aticleService.findRecommondAticleInfo(aticleEntity.getKey_words(), aticleEntity.getAticle_id());
-            super.getRequestObj().setAttribute("recommondAticles",recommondAticleList);
-        }
-        //获取该篇文章的上一篇和下一篇
-        HomeworkAticleVo prevAticle=this.aticleService.findUponAticlesInfo(aticleEntity.getAticle_createtime(),0);
-        HomeworkAticleVo nextAticle=this.aticleService.findUponAticlesInfo(aticleEntity.getAticle_createtime(),1);
-        super.getRequestObj().setAttribute("prevAticle",prevAticle);
-        super.getRequestObj().setAttribute("nextAticle",nextAticle);
-        return "blog_detail";
-    }
+
 
     /**
      * 分页查询博客内容
@@ -79,15 +58,4 @@ public class BlogIndexController extends BaseController {
         return aticleService.findAllAticleInfoByPage(pageIndex, pageSize);
     }
 
-    /**
-     * 显示博文的具体页面
-     *
-     * @param aticleId
-     * @return
-     */
-    @RequestMapping(value = "findBlogDetail.html", method = RequestMethod.GET)
-    public String findBlogInfoDetail(@RequestParam String aticleId) {
-        //加载博文详情，然后自增博文阅读次数，加载文章评论
-        return "blog_detail";
-    }
 }

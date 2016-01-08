@@ -21,7 +21,6 @@ $(function () {
     navTableGrid.on('xhr', function () {
         var result = navTableGrid.ajax.json().data;
         $.each(result, function (i, e) {
-            e.nav_index = (i + 1);
             if (e.childNavManageVoList.length > 0) {
                 $.each(e.childNavManageVoList, function (j, childNav) {
                     result.push({

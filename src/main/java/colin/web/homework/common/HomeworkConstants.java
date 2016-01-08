@@ -28,12 +28,12 @@ public class HomeworkConstants {
     //文章添加页面
     public static final String PAGE_ATICLE_ADD_VIEW = "aticle_add";
     //文章查看页面
-    public static final String PAGE_ATICLE_DETAIL_PREVIEW_VIEW="aticle_detail_preview";
+    public static final String PAGE_ATICLE_DETAIL_PREVIEW_VIEW = "aticle_detail_preview";
     //文章分类页面
-    public static final String PAGE_ATICLE_CATEGORY_VIEW="aticle_classify";
+    public static final String PAGE_ATICLE_CATEGORY_VIEW = "aticle_classify";
 
     //导航管理
-    public static final String PAGE_NAV_MANAGE_VIEW="nav_manage";
+    public static final String PAGE_NAV_MANAGE_VIEW = "nav_manage";
     //转载文章页面
     public static final String PAGE_REPRINT_ATICLE_VIEW = "reprint_aticle";
 
@@ -107,7 +107,7 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_DOWNLOAD = "/template_download.action";
 
     //收藏图片
-    public static final String CONTROLLER_COLLECT_PICTURE = "/collect_picture.html";
+    public static final String CONTROLLER_COLLECT_PICTURE = "/picture_manage.html";
 
     //服务总览
     public static final String CONTROLLER_SERVICE_OVERVIEW_SHOW = "/service_overview.html";
@@ -136,32 +136,32 @@ public class HomeworkConstants {
     //文章详情页面
     public static final String CONTROLLER_ATICLE_SHOW_DETAIL_PAGE = "/aticle_detail_preview.html";
     //文章分类页面
-    public static final String CONTROLLER_ATICLE_CATEGORY_SHOW_PAGE="/aticle_classify.html";
+    public static final String CONTROLLER_ATICLE_CATEGORY_SHOW_PAGE = "/aticle_classify.html";
     //获取所有的文章分类
-    public static final String CONTROLLER_ATICLE_CATEGORY_ALL_ACTION="/aticle_classify_all.action";
+    public static final String CONTROLLER_ATICLE_CATEGORY_ALL_ACTION = "/aticle_classify_all.action";
     //删除文章分类
-    public static final String CONTROLLER_ATICLE_CATEGORY_DEL_ACTION="/aticle_classify_del.action";
+    public static final String CONTROLLER_ATICLE_CATEGORY_DEL_ACTION = "/aticle_classify_del.action";
     //增加文章分类
-    public static final String CONTROLLER_ATICLE_CATEGORY_ADD_ACTION="/aticle_classify_add.action";
+    public static final String CONTROLLER_ATICLE_CATEGORY_ADD_ACTION = "/aticle_classify_add.action";
     //更新文章分类
-    public static final String CONTROLLER_ATICLE_CATEGORY_UPDATE_ACTION="/aticle_classify_update.action";
+    public static final String CONTROLLER_ATICLE_CATEGORY_UPDATE_ACTION = "/aticle_classify_update.action";
 
     //显示导航管理
-    public static final String CONTROLLER_NAV_MANAGE_SHOW_PAGE="/nav_manage.html";
+    public static final String CONTROLLER_NAV_MANAGE_SHOW_PAGE = "/nav_manage.html";
     //增加导航
-    public static final String CONTROLLER_NAV_MANAGE_ADD_ACTION="/nav_manage_add.action";
+    public static final String CONTROLLER_NAV_MANAGE_ADD_ACTION = "/nav_manage_add.action";
     //删除导航
-    public static final String CONTROLLER_NAV_MANAGE_DEL_ACTION="/nav_manage_del.action";
+    public static final String CONTROLLER_NAV_MANAGE_DEL_ACTION = "/nav_manage_del.action";
     //更新导航
-    public static final String CONTROLLER_NAV_MANAGE_UPDATE_ACTION="/nav_manage_update.action";
+    public static final String CONTROLLER_NAV_MANAGE_UPDATE_ACTION = "/nav_manage_update.action";
     //获取全部导航
-    public static final String CONTROLLER_NAV_MANAGE_FETCH_ACTION="/nav_manage_fetch.action";
+    public static final String CONTROLLER_NAV_MANAGE_FETCH_ACTION = "/nav_manage_fetch.action";
     //获取所有的根导航
-    public static final String CONTROLLER_NAV_MANAGE_ROOT_FETCH_ACTION="/nav_manage_root_fetch.action";
+    public static final String CONTROLLER_NAV_MANAGE_ROOT_FETCH_ACTION = "/nav_manage_root_fetch.action";
     //根据NavId获取所有的分类信息
-    public static final String CONTROLLER_NAV_MANAGE_CLASSIFY_FETCH_ACTION="/nav_manage_classify_fetch.action";
+    public static final String CONTROLLER_NAV_MANAGE_CLASSIFY_FETCH_ACTION = "/nav_manage_classify_fetch.action";
     //根据NavId更新相应的分类信息
-    public static final String CONTROLLER_NAV_MANAGE_CLASSIFY_UPDATE_ACTION="/nav_manage_classify_update.action";
+    public static final String CONTROLLER_NAV_MANAGE_CLASSIFY_UPDATE_ACTION = "/nav_manage_classify_update.action";
 
 
     //获取当日的行程
@@ -218,6 +218,19 @@ public class HomeworkConstants {
     public static final String CONTROLLER_SYSTEM_USER_AUTHORITY_PAGE = "/system_authority.html";
     //上传图片
     public static final String CONTROLLER_COMMON_UPLOAD_IMAGE = "/upload_image.action";
+
+
+    //图片一览页面
+    public static final String CONTROLLER_PICTURE_VIEW_PAGE = "/picture_view.html";
+    //图片列表一览
+    public static final String CONTROLLER_PICTURE_VIEW_LIST_ACTION = "/picture_view_list.action";
+    //上传图片页面
+    public static final String CONTROLLER_PICTURE_UPLOAD_ACTION = "/picture_upload.action";
+    //图片组内容编辑
+    public static final String CONTROLLER_PICTURE_VIEW_EDIT_ACTION="/picture_edit.action";
+    //图片组删除
+    public static final String CONTROLLER_PICTURE_VIEW_DEL_ACTION="/picture_del.action";
+
     /**
      * 模板的前台页面访问
      */
