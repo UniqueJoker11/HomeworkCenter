@@ -19,27 +19,24 @@ body {
 
 /**导航菜单**/
 .blog-navbar {
-    min-height: 58px;
+    height: 60px;
     border: 2px solid #CCCCCC;
     background: #ffffff;
 }
 
-.blog-navbar .menu {
-    width: 60%;
-    margin: 0 auto;
-    min-height: 58px;
-    line-height: 58px;
-}
 
-.blog-navbar .menu .topnav {
+.blog-navbar .topnav{
     width: 110px;
     text-align: center;
+    min-height: 56px;
+    margin-top: -1px;
     display: inline-block;
     list-style: none;
     font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
-.blog-navbar .menu li a{
+.blog-navbar .topnav a{
     font-size: 1.1em;
+    line-height: 25px;
     color: #545454;
     text-decoration: none;
 }
