@@ -40,12 +40,13 @@ public class NavManageController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_ADD_ACTION, method = RequestMethod.POST)
-    public Object addNavManage(@RequestParam String navName, @RequestParam(required = false, defaultValue = "root") String navParentId,@RequestParam(required = false,defaultValue = "#") String navUrl) {
+    public Object addNavManage(@RequestParam String navName, @RequestParam(required = false, defaultValue = "root") String navParentId,@RequestParam(required = false,defaultValue = "#") String navUrl,@RequestParam(required = false,defaultValue = "#") String navSort) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("nav_name", navName);
         params.put("nav_parent_id", navParentId);
         params.put("nav_user",super.fetchUserInfo().getUser_name());
         params.put("nav_url",navUrl);
+        params.put("nav_sort",navSort);
         manageService.addNavManageEntity(params);
         return new CommonReturnResult(true);
     }
@@ -59,12 +60,13 @@ public class NavManageController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = HomeworkConstants.CONTROLLER_NAV_MANAGE_UPDATE_ACTION, method = RequestMethod.POST)
-    public Object updateNavManage(@RequestParam String idVal,@RequestParam String navName, @RequestParam String navParentId,@RequestParam(required = false,defaultValue = "#") String navUrl) {
+    public Object updateNavManage(@RequestParam String idVal,@RequestParam String navName, @RequestParam String navParentId,@RequestParam(required = false,defaultValue = "#") String navUrl,@RequestParam(required = false,defaultValue = "#") String navSort) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("nav_id", idVal);
         params.put("nav_name", navName);
         params.put("nav_parent_id", navParentId);
         params.put("nav_url",navUrl);
+        params.put("nav_sort",navSort);
         manageService.updateMangeEntity(params);
         return new CommonReturnResult(true);
     }

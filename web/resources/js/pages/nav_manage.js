@@ -6,9 +6,9 @@ $(function () {
     var navTableOptions = {
         ajax: "./nav_manage_fetch.action",
         "columns": [
-            {"data": "nav_index"},
             {"data": "nav_name"},
             {"data": "nav_par"},
+            {"data": "nav_sort"},
             {"data":"nav_url"},
             {"data": "nav_createtime"},
             {"data": "nav_user"},
@@ -21,13 +21,12 @@ $(function () {
     navTableGrid.on('xhr', function () {
         var result = navTableGrid.ajax.json().data;
         $.each(result, function (i, e) {
-            e.nav_index = (i + 1);
             if (e.childNavManageVoList.length > 0) {
                 $.each(e.childNavManageVoList, function (j, childNav) {
                     result.push({
-                        "nav_index": (i + j + 2),
                         "nav_name": childNav.nav_name,
                         "nav_par": e.nav_name,
+                        "nav_sort": childNav.nav_sort,
                         "nav_url": childNav.nav_url,
                         "nav_createtime": childNav.nav_createtime,
                         "nav_user": childNav.nav_user,
@@ -88,6 +87,7 @@ function addNav() {
         params.navName = $.trim($navName.val());
         params.navParentId = $("#addNavLevel").val() == 1 ? $("#addParentNav").val() : "root";
         params.navUrl=$("#addNavUrl").val();
+        params.navSort=$("#addNavSort").val();
         $.post("./nav_manage_add.action", params, function (data) {
             $("#addNavDialog").modal("hide");
             if (data.success) {
@@ -104,9 +104,10 @@ function addNav() {
 //打开编辑对话框
 function editNav(idVal) {
     var $navObj = $(event.target).parent("td");
-    $("#editNavName").val($navObj.siblings("td:eq(1)").html());
+    $("#editNavName").val($navObj.siblings("td:eq(0)").html());
     $("#editNavUrl").val($navObj.siblings("td:eq(3)").html());
-    if ($navObj.siblings("td:eq(2)").html() != "根导航") {
+    $("#editNavSort").val($navObj.siblings("td:eq(2)").html());
+    if ($navObj.siblings("td:eq(1)").html() != "根导航") {
         $("#editNavLevel").val("1");
         //加载所有的顶级菜单
         $.post("./nav_manage_root_fetch.action", function (data) {
@@ -134,6 +135,7 @@ function updateNav() {
         params.idVal = $("#editNavDialog").attr("data-idVal");
         params.navParentId = $("#editNavLevel").val() == 0 ? "root" : $("#editParentNav").val();
         params.navUrl=$("#editNavUrl").val();
+        params.navSort=$("#editNavSort").val();
         $.post("./nav_manage_update.action", params, function (data) {
             $("#editNavDialog").modal("hide");
             if (data.success) {

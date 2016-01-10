@@ -73,7 +73,7 @@ public class AticleService {
      * @return
      */
     public Map<String, Object> findAllAticleInfoByPage(int pageIndex,int pageSize){
-        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class,null,"aticle_createtime",pageIndex,pageSize,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()),true);
+        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class,null,"aticle_createtime",pageIndex,pageSize,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()),false);
     }
 
     /**
@@ -85,6 +85,14 @@ public class AticleService {
         return this.transferAticleEntity(aticle_entities);
     }
 
+    public List<HomeworkAticleVo> findAticlesByNavId(String navId,int startIndex,int pageSize){
+        String searchSql="select * from homework_aticle where aticle_category in (select classify_id from homework_nav_classify where nav_id=:navId) order by aticle_createtime DESC LIMIT :startIndex,:pageSize";
+        Map<String,Object> params=new HashMap<String, Object>();
+        params.put("navId",navId);
+        params.put("startIndex",startIndex);
+        params.put("pageSize",pageSize);
+       return this.transferAticleEntity(this.aticleDao.getJdbcTemplate().query(searchSql, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName())));
+    }
     /**
      * 查询文章详情
      * @param aticleId

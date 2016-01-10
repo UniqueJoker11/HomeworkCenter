@@ -31,21 +31,30 @@
             </button>
         </div>
         <ul class="menu text-center">
-            <li class="active topnav"><a href="#">首页</a></li>
-            <li class="dropdown topnav"><a href="javascript:;" target="_self" class="dropdown-toggle" data-toggle="dropdown"
-                                    role="button" aria-haspopup="true" aria-expanded="false">博客部落 <span
-                    class="caret"></span></a>
+            <%for(nav in navList){%>
+            <%if(navLP.index==index&&isEmpty(nav.childNavManageVoList)){%>
+            <li class="active topnav">
+                <%}else if(navLP.index==index&&!isEmpty(nav.childNavManageVoList)){%>
+            <li class="active dropdown topnav">
+                <%}else if(navLP.index!=index&&isEmpty(nav.childNavManageVoList)){%>
+            <li class="topnav">
+                <%}else if(navLP.index!=index&&!isEmpty(nav.childNavManageVoList)){%>
+            <li class="dropdown topnav">
+                <%}%>
+                <%if(!isEmpty(nav.childNavManageVoList)){%>
+                <a href="javascript:;" target="_self" class="dropdown-toggle" data-toggle="dropdown"
+                   role="button" aria-haspopup="true" aria-expanded="false">${nav.nav_name}<span
+                        class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:;" target="_self">Action</a></li>
-                    <li><a href="javascript:;" target="_self">Another action</a></li>
-                    <li><a href="javascript:;" target="_self">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="javascript:;" target="_self">Separated link</a></li>
+                    <%for(subNav in nav.childNavManageVoList){%>
+                    <li><a href="${subNav.nav_url}" target="_self">${subNav.nav_name}</a></li>
+                    <%}%>
                 </ul>
             </li>
-            <li class="topnav"><a href="#">心声印记</a></li>
-            <li class="topnav"><a href="#">流光飞影</a></li>
-            <li class="topnav"><a href="#">关于我</a></li>
+            <%}else{%>
+            <a href="${nav.nav_url}">${nav.nav_name}</a></li>
+            <%}%>
+            <%}%>
         </ul>
     </div>
 </nav>

@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="${ctxPath}/css/pages/picture_manage.css"/>
+<script type="text/javascript" src="${ctxPath}/js/pages/picture_manage.js"></script>
+<div class="pageheader">
+    <h2><i class="fa fa-book"></i> 我的图片 <span>图片管理</span></h2>
+
+    <div class="breadcrumb-wrapper">
+        <span class="label">当前位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="calendar.html">我的图片</a></li>
+            <li class="active">图片管理</li>
+        </ol>
+    </div>
+</div>
+<div class="contentpanel">
+    <div class="panel panel-dark panel-alt">
+        <div class="panel-heading">
+            <div class="panel-btns">
+                <a href="javascript:;" id="addAticleClassifyBtn" class="tooltips" data-toggle="tooltip" title=""
+                   data-original-title="Add New"><i class="glyphicon glyphicon-plus"></i></a>
+            </div>
+            <h3 class="panel-title">图片管理</h3>
+        </div>
+        <div class="panel-body">
+            <table id="aticleClassifyTable" class="table">
+                <thead>
+                <tr>
+                    <th class="col-sm-2" name="classify_index">图片集名称</th>
+                    <th class="col-sm-2" name="classify_name">缩略图</th>
+                    <th class="col-sm-3" name="classify_createtime">创建时间</th>
+                    <th class="col-sm-2" name="classify_createuser">创建人</th>
+                    <th class="col-sm-2" name="classify_operation">分类操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--增加文章分类对话框-->
+<div id="addPicturesDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">上传新图片集</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="addPicturesName">图片集名称</label>
+                    <input type="text" class="form-control" id="addPicturesName" placeholder="可以为空！">
+                </div>
+                <div class="form-group">
+                    <label for="addPicturesDigest">图片集摘要</label>
+                    <input type="text" class="form-control" id="addPicturesDigest" placeholder="可以为空！">
+                </div>
+                <div class="form-group">
+                    <label for="addPicturesDigest">图片集</label>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addPictures()">增加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑文章分类对话框-->
+<div id="editPicturesDialog" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑当前图片集</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editPicturesName">分类名称</label>
+                    <input type="text" class="form-control" id="editPicturesName" placeholder="不能为空！">
+                </div>
+                <div class="form-group">
+                    <label for="editPicturesDigest">图片集摘要</label>
+                    <input type="text" class="form-control" id="editPicturesDigest" placeholder="可以为空！">
+                </div>
+                <div class="form-group">
+                    <label for="editPicturesDigest">图片集</label>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="updatePictures()">更新</button>
+            </div>
+        </div>
+    </div>
+</div>

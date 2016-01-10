@@ -10,8 +10,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
-       default-autowire="byName" default-lazy-init="true">
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
     <!-- 配置扫描包 -->
     <context:annotation-config/>
     <context:component-scan
@@ -41,18 +40,17 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="dataSource"></bean>
-    <bean id="parameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
-    </bean>
     <bean id="jdbcDaoSupport" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport"
-          p:jdbcTemplate-ref="parameterJdbcTemplate">
+          p:jdbcTemplate-ref="jdbcTemplate">
     </bean>
     <!-- 开启注解事务 只对当前配置文件有效 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
     <aop:aspectj-autoproxy/>
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <aop:config>
+        <aop:advisor advice-ref="taAdvice" pointcut="within(colin.web.homework.service.*)"></aop:advisor>
+    </aop:config>
     <tx:advice id="taAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="fetch*" propagation="REQUIRED" isolation="READ_COMMITTED"/>

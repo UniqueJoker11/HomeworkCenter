@@ -16,7 +16,7 @@ $(function () {
             data: params,
             dataType: "json",
             beforeSend: function (XMLHttpRequest) {
-                var ajaxLoadingTemplate = "<div id=\"blogListLoading\" class=\"text-center blog-list-loading\"><i class=\"fa fa-spinner fa-pulse\"></i></div>";
+                var ajaxLoadingTemplate = "<div id=\"blogListLoading\" class=\"text-center blog-list-loading\"><i class=\"fa fa-refresh fa-spin\"></i></div>";
                 $("#blogInfoList").html(ajaxLoadingTemplate);
             },
             complete: function (XMLHttpRequest) {

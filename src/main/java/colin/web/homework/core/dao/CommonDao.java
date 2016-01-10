@@ -6,8 +6,11 @@ import colin.web.homework.annotation.Table;
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.core.dao.idao.ICommonDao;
 import colin.web.homework.tools.LogOperateUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Field;
@@ -21,7 +24,15 @@ import java.util.Set;
  * Created by ASUS on 2015/7/11.
  */
 @Repository
-public class CommonDao extends NamedParameterJdbcDaoSupport implements ICommonDao {
+public class CommonDao implements ICommonDao {
+
+    private Logger logger = Logger.getLogger(CommonDao.class);
+    @Autowired
+    private NamedParameterJdbcDaoSupport namedParameterJdbcDaoSupport;
+
+    public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
+        return namedParameterJdbcDaoSupport.getNamedParameterJdbcTemplate();
+    }
 
     /**
      * 单一增加数据
