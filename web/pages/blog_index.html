@@ -19,7 +19,7 @@
         <a href="javascript:;"><img src="${ctxPath}/images/title.jpeg" alt="头像" class="img-circle"/></a>
     </div>
 </header>
-<nav class="blog-navbar" role="navigation">
+<!--<nav class="blog-navbar" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -30,34 +30,63 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <ul class="menu text-center">
-            <%for(nav in navList){%>
-            <%if(navLP.index==index&&isEmpty(nav.childNavManageVoList)){%>
-            <li class="active topnav">
-                <%}else if(navLP.index==index&&!isEmpty(nav.childNavManageVoList)){%>
-            <li class="active dropdown topnav">
-                <%}else if(navLP.index!=index&&isEmpty(nav.childNavManageVoList)){%>
-            <li class="topnav">
-                <%}else if(navLP.index!=index&&!isEmpty(nav.childNavManageVoList)){%>
-            <li class="dropdown topnav">
-                <%}%>
-                <%if(!isEmpty(nav.childNavManageVoList)){%>
-                <a href="javascript:;" target="_self" class="dropdown-toggle" data-toggle="dropdown"
-                   role="button" aria-haspopup="true" aria-expanded="false">${nav.nav_name}<span
-                        class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <%for(subNav in nav.childNavManageVoList){%>
-                    <li><a href="${subNav.nav_url}" target="_self">${subNav.nav_name}</a></li>
+
+    </div>
+</nav>-->
+<div class="blog-navbar">
+    <nav class="navbar container">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <%for(nav in navList){%>
+                    <%if(navLP.index==index&&isEmpty(nav.childNavManageVoList)){%>
+                    <li class="active topnav">
+                        <%}else if(navLP.index==index&&!isEmpty(nav.childNavManageVoList)){%>
+                    <li class="active dropdown topnav">
+                        <%}else if(navLP.index!=index&&isEmpty(nav.childNavManageVoList)){%>
+                    <li class="topnav">
+                        <%}else if(navLP.index!=index&&!isEmpty(nav.childNavManageVoList)){%>
+                    <li class="dropdown topnav">
+                        <%}%>
+                        <%if(!isEmpty(nav.childNavManageVoList)){%>
+                        <a href="javascript:;" target="_self" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-haspopup="true" aria-expanded="false">${nav.nav_name}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%for(subNav in nav.childNavManageVoList){%>
+                            <li><a href="${subNav.nav_url}" target="_self">${subNav.nav_name}</a></li>
+                            <%}%>
+                        </ul>
+                    </li>
+                    <%}else{%>
+                    <a href="${nav.nav_url}">${nav.nav_name}</a></li>
+                    <%}%>
                     <%}%>
                 </ul>
-            </li>
-            <%}else{%>
-            <a href="${nav.nav_url}">${nav.nav_name}</a></li>
-            <%}%>
-            <%}%>
-        </ul>
-    </div>
-</nav>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入关键字">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
 <div class="container-fluid blog-main-modal">
     <div id="blogInfoList" class="col-sm-offset-1 col-sm-10" data-index="1">
 
