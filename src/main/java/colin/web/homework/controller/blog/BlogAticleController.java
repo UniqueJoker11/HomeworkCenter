@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by DELL on 2016/1/8.
@@ -38,7 +41,13 @@ public class BlogAticleController extends BaseController {
     @ResponseBody
     @RequestMapping("fetch_blog_aticle_list.action")
     public Object fetchBlogAticleInfo(@RequestParam(value = "navId") String navId, @RequestParam(value = "startIndex") int startIndex, @RequestParam(value = "pageSize") int pageSize) {
-        CommonReturnResult returnResult = new CommonReturnResult(true, aticleService.findAticlesByNavId(navId, startIndex, pageSize));
+        Map<String,Object> resultMap=aticleService.findAticlesByNavId(navId, startIndex, pageSize);
+        CommonReturnResult returnResult = null;
+        if (resultMap == null || resultMap.isEmpty()) {
+            returnResult=new CommonReturnResult(false);
+        } else {
+           returnResult = new CommonReturnResult(true,resultMap);
+        }
         return returnResult;
     }
 

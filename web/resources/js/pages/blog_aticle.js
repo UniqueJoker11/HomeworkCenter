@@ -1,42 +1,44 @@
-/**
- * Created by ASUS on 2015/9/30.
- */
 $(function () {
     //初始化分页加载文章
     initBlogList();
     function initBlogList() {
         var params = new Object();
-        params.pageIndex = $("#blogInfoList").attr("data-index");
+        params.navId=$("body").attr("data-navId");
+        params.startIndex = $("#blogInfoList").attr("data-index");
+        params.pageSize=10;
         fetchRemoteBlogList(params);
     };
     function fetchRemoteBlogList(params) {
         $.ajax({
-            url: './find_blog_info_list.action',
+            url: './fetch_blog_aticle_list.action',
             type: 'post',
             data: params,
             dataType: "json",
             beforeSend: function (XMLHttpRequest) {
                 var ajaxLoadingTemplate = "<div id=\"blogListLoading\" class=\"text-center blog-list-loading\"><i class=\"fa fa-refresh fa-spin\"></i></div>";
-                $("#blogInfoList").html(ajaxLoadingTemplate);
+                $("#blogInfoList").prepend(ajaxLoadingTemplate);
             },
             complete: function (XMLHttpRequest) {
                 $("#blogInfoList").find("#blogListLoading").remove();
             },
             success: function (data, textStatus, jqXHR) {
-                if (data.totalCount == 0) {
-                    alert("已经是最后一页了");
-                } else {
+                if(!data.success&&$("#blogInfoList").find(".panel").length==0){
+                    alert("该栏目下没有内容！");
+                }else if(!data.success&& $("#blogInfoList").find(".panel").length!=0){
+                    alert("已经是最后一页了！");
+                }else{
+                    var blogList=data.data;
                     //循环展示文章内容
-                    showBlogListInfo(data.currentData);
+                    showBlogListInfo(blogList.currentData);
                     var blogTemplatePage = "<nav class=\"text-center\"><ul class='pagination pagination-lg'>"
                     //第一页，上一页不可用
-                    if (data.currentPage == 1) {
+                    if (blogList.currentPage == 1) {
                         blogTemplatePage += "<li id=\"previousPage\" class=\"disabled\"><a class=\"btn btn-default btn-lg\" href=\"javascript:;\"aria-label=\"Previous\">上一页</a></li>";
                     } else {
                         blogTemplatePage += "<li id=\"previousPage\"><a class=\"btn btn-default btn-lg\" href=\"javascript:;\"aria-label=\"Previous\">上一页</a></li>";
                     }
                     //最后一页，下一页不可用
-                    if (data.currentPage == data.totalPage) {
+                    if (blogList.currentPage == data.totalPage) {
                         blogTemplatePage += "<li id=\"nextPage\" class=\"disabled\"><a class=\"btn btn-default btn-lg\" href=\"javascript:;\"aria-label=\"Previous\">下一页</a></li>";
                     } else {
                         blogTemplatePage += "<li id=\"nextPage\"><a class=\"btn btn-default btn-lg\" href=\"javascript:;\"aria-label=\"Previous\">下一页</a></li>"

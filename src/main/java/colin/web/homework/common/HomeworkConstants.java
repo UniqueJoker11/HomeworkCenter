@@ -23,6 +23,9 @@ public class HomeworkConstants {
 
     //个人日历记事本
     public static final String PAGE_TEMPLATE_TODAY_SCHEDULE = "schedule";
+    //心情吐槽界面
+    public static final String PAGE_TEMPLAYE_PEOPLE_SPITSLOT = "people_spitslot";
+
     //文章一览页面
     public static final String PAGE_ATICLE_BROWSER_VIEW = "aticle_browser";
     //文章添加页面
@@ -112,6 +115,14 @@ public class HomeworkConstants {
     //服务总览
     public static final String CONTROLLER_SERVICE_OVERVIEW_SHOW = "/service_overview.html";
 
+    //心情吐槽
+    public static final String CONTROLLER_SERVICE_PEOPLE_SPITSLOT = "people_spitslot.html";
+    //发表心情
+    public static final String CONTROLLER_SERVICE_PEOPLE_SPITSLOT_PUBLISH_ACTION = "public_temper_spitslot.action";
+    //修改心情
+    public static final String CONTROLLER_SERVICE_PEOPLE_SPITSLOT_EDIT_ACTION = "edit_temper_spitslot.action";
+    //删除心情
+    public static final String CONTROLLER_SERVICE_PEOPLE_SPITSLOT_DEL_ACTION = "del_temper_spitslot.action";
 
     //记事本页面
     public static final String CONTROLLER_TEMPLATE_TODAY_TEMPER = "/user_schedule.html";
@@ -227,9 +238,9 @@ public class HomeworkConstants {
     //上传图片页面
     public static final String CONTROLLER_PICTURE_UPLOAD_ACTION = "/picture_upload.action";
     //图片组内容编辑
-    public static final String CONTROLLER_PICTURE_VIEW_EDIT_ACTION="/picture_edit.action";
+    public static final String CONTROLLER_PICTURE_VIEW_EDIT_ACTION = "/picture_edit.action";
     //图片组删除
-    public static final String CONTROLLER_PICTURE_VIEW_DEL_ACTION="/picture_del.action";
+    public static final String CONTROLLER_PICTURE_VIEW_DEL_ACTION = "/picture_del.action";
 
     /**
      * 模板的前台页面访问

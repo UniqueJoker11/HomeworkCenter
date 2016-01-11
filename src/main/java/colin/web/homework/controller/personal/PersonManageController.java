@@ -1,4 +1,4 @@
-package colin.web.homework.controller.system;
+package colin.web.homework.controller.personal;
 
 import colin.web.homework.common.HomeworkConstants;
 import colin.web.homework.controller.BaseController;

@@ -68,57 +68,73 @@ public class AticleService {
 
     /**
      * 分页查询文章数据
+     *
      * @param pageIndex
      * @param pageSize
      * @return
      */
-    public Map<String, Object> findAllAticleInfoByPage(int pageIndex,int pageSize){
-        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class,null,"aticle_createtime",pageIndex,pageSize,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()),false);
+    public Map<String, Object> findAllAticleInfoByPage(int pageIndex, int pageSize) {
+        return this.aticleDao.getOrderObjectsByPage(Homework_Aticle_Entity.class, null, "aticle_createtime", pageIndex, pageSize, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()), true);
     }
 
     /**
      * 获取全部的文章
+     *
      * @return
      */
-    public List<HomeworkAticleVo> findAllAticleInfo(){
-        List<Homework_Aticle_Entity> aticle_entities=aticleDao.seletcObjectByMap(Homework_Aticle_Entity.class,null,new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
+    public List<HomeworkAticleVo> findAllAticleInfo() {
+        List<Homework_Aticle_Entity> aticle_entities = aticleDao.seletcObjectByMap(Homework_Aticle_Entity.class, null, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
         return this.transferAticleEntity(aticle_entities);
     }
 
-    public List<HomeworkAticleVo> findAticlesByNavId(String navId,int startIndex,int pageSize){
-        String searchSql="select * from homework_aticle where aticle_category in (select classify_id from homework_nav_classify where nav_id=:navId) order by aticle_createtime DESC LIMIT :startIndex,:pageSize";
-        Map<String,Object> params=new HashMap<String, Object>();
-        params.put("navId",navId);
-        params.put("startIndex",startIndex);
-        params.put("pageSize",pageSize);
-       return this.transferAticleEntity(this.aticleDao.getJdbcTemplate().query(searchSql, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName())));
+    public Map<String, Object> findAticlesByNavId(String navId, int startIndex, int pageSize) {
+        String searchSql = "select * from homework_aticle where aticle_category in (select classify_id from homework_nav_classify where nav_id=:navId) order by aticle_createtime DESC LIMIT :startIndex,:pageSize";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("navId", navId);
+        params.put("startIndex", (startIndex-1)*pageSize);
+        params.put("pageSize", pageSize);
+        String searchAllSql = "select * from homework_aticle where aticle_category in (select classify_id from homework_nav_classify where nav_id=:navId) order by aticle_createtime";
+        List<Homework_Aticle_Entity> resultList = this.aticleDao.getJdbcTemplate().query(searchSql, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (resultList != null && !resultList.isEmpty()) {
+            resultMap.put("currentData", resultList);
+            List<Homework_Aticle_Entity> aticleAllList = this.aticleDao.getJdbcTemplate().query(searchAllSql, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
+            resultMap.put("totalCount", aticleAllList.size());
+            resultMap.put("currentPage", startIndex);
+            resultMap.put("totalPage", aticleAllList.size() % pageSize == 0 ? aticleAllList.size() / pageSize : (aticleAllList.size() / pageSize + 1));
+
+        }
+        return resultMap;
     }
+
     /**
      * 查询文章详情
+     *
      * @param aticleId
      * @return
      */
-    public Homework_Aticle_Entity findAticleDetailInfo(String aticleId){
-        Map<String,Object> params=new HashMap<String,Object>();
-        params.put("aticle_id",aticleId);
-        List<Homework_Aticle_Entity> aticle_entities=this.aticleDao.seletcObjectByMap(Homework_Aticle_Entity.class, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
-        if(aticle_entities!=null&&!aticle_entities.isEmpty()){
+    public Homework_Aticle_Entity findAticleDetailInfo(String aticleId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("aticle_id", aticleId);
+        List<Homework_Aticle_Entity> aticle_entities = this.aticleDao.seletcObjectByMap(Homework_Aticle_Entity.class, params, new DefaultRowmapper<Homework_Aticle_Entity>(Homework_Aticle_Entity.class.getName()));
+        if (aticle_entities != null && !aticle_entities.isEmpty()) {
             return aticle_entities.get(0);
-        }else{
+        } else {
             return null;
         }
     }
 
     /**
      * 查询推荐的文章
+     *
      * @param tips
      * @param aticleId
      * @return
      */
-    public List<HomeworkAticleVo> findRecommondAticleInfo(String tips,String aticleId){
-        List<Homework_Aticle_Entity> aticleEntityList=this.aticleDao.findRecommondAticleList(tips.split("，"),aticleId);
-        if(aticleEntityList.size()>6){
-            for(int j=5;j<aticleEntityList.size();j++){
+    public List<HomeworkAticleVo> findRecommondAticleInfo(String tips, String aticleId) {
+        List<Homework_Aticle_Entity> aticleEntityList = this.aticleDao.findRecommondAticleList(tips.split("，"), aticleId);
+        if (aticleEntityList.size() > 6) {
+            for (int j = 5; j < aticleEntityList.size(); j++) {
                 aticleEntityList.remove(j);
             }
         }
@@ -127,27 +143,30 @@ public class AticleService {
 
     /**
      * 查询上一篇或下一篇文章
+     *
      * @param createTime
      * @param nextOrPrev
      */
-    public HomeworkAticleVo findUponAticlesInfo(String createTime,int nextOrPrev){
-       List<HomeworkAticleVo> aticleVoList=this.transferAticleEntity(this.aticleDao.findUponAticles(createTime, nextOrPrev));
-        if(aticleVoList!=null&&!aticleVoList.isEmpty()){
+    public HomeworkAticleVo findUponAticlesInfo(String createTime, int nextOrPrev) {
+        List<HomeworkAticleVo> aticleVoList = this.transferAticleEntity(this.aticleDao.findUponAticles(createTime, nextOrPrev));
+        if (aticleVoList != null && !aticleVoList.isEmpty()) {
             return aticleVoList.get(0);
-        }else{
+        } else {
             return null;
         }
     }
+
     /**
      * 转换vo
+     *
      * @param aticle_entities
      * @return
      */
-    private List<HomeworkAticleVo> transferAticleEntity(List<Homework_Aticle_Entity> aticle_entities){
-        if(aticle_entities!=null&&!aticle_entities.isEmpty()){
-            List<HomeworkAticleVo> aticleVos=new ArrayList<HomeworkAticleVo>();
-            for(Homework_Aticle_Entity aticle_entity:aticle_entities){
-                HomeworkAticleVo aticleVo=new HomeworkAticleVo();
+    private List<HomeworkAticleVo> transferAticleEntity(List<Homework_Aticle_Entity> aticle_entities) {
+        if (aticle_entities != null && !aticle_entities.isEmpty()) {
+            List<HomeworkAticleVo> aticleVos = new ArrayList<HomeworkAticleVo>();
+            for (Homework_Aticle_Entity aticle_entity : aticle_entities) {
+                HomeworkAticleVo aticleVo = new HomeworkAticleVo();
                 aticleVo.setAticle_author(aticle_entity.getAticle_author());
                 aticleVo.setAticle_category(aticle_entity.getAticle_category());
                 aticleVo.setAticle_createtime(aticle_entity.getAticle_createtime());
@@ -159,7 +178,7 @@ public class AticleService {
                 aticleVos.add(aticleVo);
             }
             return aticleVos;
-        }else{
+        } else {
             return null;
         }
 

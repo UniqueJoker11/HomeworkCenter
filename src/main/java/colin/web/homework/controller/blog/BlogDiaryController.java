@@ -11,4 +11,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Scope("request")
 @RequestMapping("blog")
 public class BlogDiaryController {
+
 }

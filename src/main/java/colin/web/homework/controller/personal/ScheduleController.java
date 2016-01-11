@@ -1,6 +1,7 @@
-package colin.web.homework.controller;
+package colin.web.homework.controller.personal;
 
 import colin.web.homework.common.HomeworkConstants;
+import colin.web.homework.controller.BaseController;
 import colin.web.homework.core.vo.HomeworkScheduleVo;
 import colin.web.homework.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;

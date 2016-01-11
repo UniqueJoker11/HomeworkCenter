@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head lang="zh-CN">
+<head lang="zh_CN">
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%include("./common/blog_header.html"){}%>
+    <link rel="stylesheet" href="${ctxPath}/css/pages/blog_common.css"/>
+    <title>黑暗骑士</title>
 </head>
-<body>
+<body data-navId="${navId}">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<header class="blog-header">
+    <div class="container text-center">
+        <a href="javascript:;"><img src="${ctxPath}/images/title.jpeg" alt="头像" class="img-circle"/></a>
+    </div>
+</header>
+<%include("./common/blog_header_nav.html"){}%>
+<div class="container-fluid blog-main-modal">
+    <div id="blogInfoList" class="col-sm-offset-1 col-sm-10" data-index="1">
 
+    </div>
+</div>
+<script type="text/javascript" src="${ctxPath}/js/pages/blog_aticle.js"></script>
 </body>
 </html>
