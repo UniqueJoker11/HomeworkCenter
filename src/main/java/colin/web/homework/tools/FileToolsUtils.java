@@ -2,6 +2,7 @@ package colin.web.homework.tools;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.vfs2.*;
+import org.apache.commons.vfs2.util.FileObjectUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * Created by ASUS on 2015/7/19.
@@ -58,27 +61,30 @@ public class FileToolsUtils {
             e.printStackTrace();
         }
     }
-    public static boolean isDirectory(String path){
+
+    public static boolean isDirectory(String path) {
         try {
-            FileObject fo=fsm.resolveFile(path);
+            FileObject fo = fsm.resolveFile(path);
             return fo.getType().equals(FileType.FOLDER);
         } catch (FileSystemException e) {
             e.printStackTrace();
             return false;
         }
     }
-    public static InputStream getInputStream(String path){
+
+    public static InputStream getInputStream(String path) {
         try {
-            FileObject fo=fsm.resolveFile(path);
+            FileObject fo = fsm.resolveFile(path);
             return fo.getContent().getInputStream();
         } catch (FileSystemException e) {
             e.printStackTrace();
             return null;
         }
     }
-    public static OutputStream getOutputStream(String path){
+
+    public static OutputStream getOutputStream(String path) {
         try {
-            FileObject fo=fsm.resolveFile(path);
+            FileObject fo = fsm.resolveFile(path);
             return fo.getContent().getOutputStream();
         } catch (FileSystemException e) {
             e.printStackTrace();
@@ -86,9 +92,9 @@ public class FileToolsUtils {
         }
     }
 
-    public static boolean isFile(String path){
+    public static boolean isFile(String path) {
         try {
-            FileObject fo=fsm.resolveFile(path);
+            FileObject fo = fsm.resolveFile(path);
             return fo.getType().equals(FileType.FILE);
         } catch (FileSystemException e) {
             e.printStackTrace();
@@ -96,6 +102,7 @@ public class FileToolsUtils {
         }
 
     }
+
     /**
      * 函数描述：根据传入的文件路径创建文件夹(包括各级父文件夹)。如果路径中有文件，会自动去掉文件名。 （文件的判断是
      * 以最后一个"/"之后是否有"."为标识的，）
@@ -134,12 +141,9 @@ public class FileToolsUtils {
     /**
      * 函数描述：对文件进行copy
      *
-     * @param sourceFilePath
-     *            源文件的全部路径+文件名
-     * @param targetFilePath
-     *            目标文件的全部路径+文件名
-     * @param overWrite
-     *            如果目标文件存在，是否覆盖。true:覆盖；false:不覆盖(当源文件和目标文件都存在并且不覆盖时,返回true)。
+     * @param sourceFilePath 源文件的全部路径+文件名
+     * @param targetFilePath 目标文件的全部路径+文件名
+     * @param overWrite      如果目标文件存在，是否覆盖。true:覆盖；false:不覆盖(当源文件和目标文件都存在并且不覆盖时,返回true)。
      * @return true:成功；false:失败; (当源文件和目标文件都存在并且不覆盖时,返回true)。
      */
     public static boolean copyFile(String sourceFilePath, String targetFilePath, boolean overWrite) throws IOException {
@@ -160,9 +164,10 @@ public class FileToolsUtils {
         to.copyFrom(from, Selectors.SELECT_ALL);
         return true;
     }
+
     /**
-         * 获取属性配置文件的值
-         */
+     * 获取属性配置文件的值
+     */
     public static String fetchPropertiesResources(String fileName, String propertyName) throws IOException {
         ClassPathResource classPathResource = new ClassPathResource(fileName);
         Properties properties = new Properties();
@@ -293,4 +298,6 @@ public class FileToolsUtils {
             e.printStackTrace();
         }
     }
+
+
 }

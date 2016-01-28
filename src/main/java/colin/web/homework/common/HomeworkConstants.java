@@ -20,6 +20,8 @@ public class HomeworkConstants {
     public static final String PAGE_TEMPLATE_MANAGE = "template_view";
     //模板管理添加页面
     public static final String PAGE_TEMPLATE_ADD_MANAGE = "template_add";
+    //模板导航管理页面
+    public static final String PAGE_TEMPLATE_NAV_MANAGE="template_nav";
 
     //个人日历记事本
     public static final String PAGE_TEMPLATE_TODAY_SCHEDULE = "schedule";
@@ -90,6 +92,14 @@ public class HomeworkConstants {
     public static final String CONTROLLER_TEMPLATE_ADD_FORM = "/template_add_form.action";
     //模板上传模板截图
     public static final String CONTROLLER_TEMPLATE_UPLOAD_SNAPSHOT_PICTURE = "uploadSnapshotPic.action";
+    //模板首页导航轮播图
+    public static final String CONTROLLER_TEMPLATE_NAV_MANAGE="template_nav.html";
+    //增加轮播图
+    public static final String CONTROLLER_TEMPLATE_NAV_ADD_ACTION="template_nav_add.action";
+    //更新轮播图
+    public static final String CONTROLLER_TEMPLATE_NAV_UPDATE_ACTION="template_nav_update.action";
+    //查询轮播图
+    public static final String CONTROLLER_TEMPLATE_NAV_FETCH_ACTION="template_nav_fetch.action";
     //上传压缩文件
     public static final String CONTROLLER_TEMPLATE_UPLOAD_ZIP_FILE = "uploadTemplateZip.action";
     //返回所有的模板管理对象
@@ -256,7 +266,7 @@ public class HomeworkConstants {
     public static final String RESOURCES_STORE_DIR = "upload/resources/";
     public static final String IMAGE_STORE_DIR = "upload/images/";
     public static final String RESOURCES_COMPRESS_DIR = "upload/template/";
-
+    public static final String IMAGE_NAV_STORE_DIR="upload/nav";
     /**
      * 用户存放信息
      */
